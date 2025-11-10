@@ -1347,6 +1347,13 @@ select:hover {
   margin: 20px 0 10px 0;
   font-weight: 500;
 }
+.content-section h4 {
+  color: var(--color-font);
+  font-family: "JetBrains Mono", helvetica, sans-serif;
+  font-size: 1.05em;
+  margin: 15px 0 8px 0;
+  font-weight: 500;
+}
 .content-section p {
   line-height: 1.6;
   margin-bottom: 15px;
@@ -1374,6 +1381,9 @@ select:hover {
   }
   .content-section h3 {
     font-size: 1.1em;
+  }
+  .content-section h4 {
+    font-size: 1em;
   }
 }
 
@@ -1469,7 +1479,7 @@ select:hover {
 .example-box ul,
 .example-box li {
   overflow-x: auto;
-  white-space: nowrap;
+  white-space: normal;
   max-width: 100%;
 }
 
