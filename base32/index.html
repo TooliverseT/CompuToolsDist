@@ -6,7 +6,7 @@
   
   <meta name="computools" content="computools">
   <meta name="description" content="Free\ online\ Base32\ encoder\ decoder\ tool\.\ Convert\ text\ and\ files\ to\ Base32\ and\ decode\ Base32\ back\ to\ original\ format\.\ Supports\ Standard,\ Hex,\ and\ Crockford\ Base32\ variants\.\ Perfect\ for\ TOTP,\ 2FA\ secrets,\ and\ human\-readable\ encoding\.\ Fast,\ secure,\ and\ works\ offline\ in\ your\ browser\.">
-  <meta name="keywords" content="CompuTools, engineering tools, converter, calculator, formatter, unixtime, quaternion, crc, ascii, json, base32, base64, file hash, html encode/decode, url encode/decode, uuid generator, text case converter, password secret generator, regex, color converter, unit converter, format converter, jwt encoder/decoder, text diff comparator">
+  <meta name="keywords" content="CompuTools, engineering tools, converter, calculator, formatter, unixtime, quaternion, crc, ascii, json, base32, base64, file hash, html encode/decode, url encode/decode, uuid generator, text case converter, password secret generator, regex, color converter, unit converter, format converter, jwt encoder/decoder, text diff comparator, markdown previewer, markdown editor, gfm">
   <meta name="author" content="CompuTools">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -37,9 +37,9 @@
   <link rel="stylesheet" href="/thumbnail-5462693de6259b0c.css" integrity="sha384-BiGow/ph6jJ4GjVnzA0yBHnYK56GMRQdkHfV/rtGc/loO06F92IS2OFuhWVP/B2w">
   <link rel="stylesheet" href="/tool-947bed830a429a15.css" integrity="sha384-dFUL60/jbQGEZWhJtRj2kzhIp0Bmzz7DI+4pHZGlIbLtJKU94Ahp3MnBCzZut+sm">
   
-<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202511120101/show_ads_impl.js"></script><script type="module">
-import init, * as bindings from '/computools-da28256d1a4d0976.js';
-const wasm = await init({ module_or_path: '/computools-da28256d1a4d0976_bg.wasm' });
+<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202512020501/show_ads_impl.js"></script><script type="module">
+import init, * as bindings from '/computools-8b8b1dfead817f14.js';
+const wasm = await init({ module_or_path: '/computools-8b8b1dfead817f14_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -56,6 +56,21 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
   
 
   <link rel="icon" href="/favicon-1a8ba4d4617517ad.ico" integrity="sha384-sh+KkiOvcFXwh29z2PE6y5W6JoL/C2uPj8MHwWodi4oVC6f4XcUmhJGk6dmH2Teg">
+
+  <!-- MathJax for LaTeX math rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <script>
       (function() {
@@ -84,6 +99,395 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
 
     gtag('config', 'G-1G0CMRC310');
   </script>
-<link rel="modulepreload" href="/computools-da28256d1a4d0976.js" crossorigin="anonymous" integrity="sha384-W2jddDye04Q0v1Vk9X4/qGdfty69FJumxby5to/q7a1B8gCxfDlWX5YZfIdijThs"><link rel="preload" href="/computools-da28256d1a4d0976_bg.wasm" crossorigin="anonymous" integrity="sha384-tRMukfjSW0I2jKi8LHWtPQ9J+yjt/L7duCULQ57pNI6hxr7MWKElvgYEK6Qh7c77" as="fetch" type="application/wasm"><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"></head>
+<link rel="modulepreload" href="/computools-8b8b1dfead817f14.js" crossorigin="anonymous" integrity="sha384-h3UoTZu+RjEh5acPEyVmLWVtfwwej561XDDUrbqj1kB8acXDzZrPvXu2jQ90WMGE"><link rel="preload" href="/computools-8b8b1dfead817f14_bg.wasm" crossorigin="anonymous" integrity="sha384-vmR+D7N+YCGc6m4oYibwjtLVECcyO0HaEprTzfIpZi22w1qOT8OdEkJ1lvJi1jKL" as="fetch" type="application/wasm"><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
 
-<body><div class="navbar-wrapper"><div class="navbar-container"><a href="/" class="navbar-content">CompuTools</a><div style="justify-content: right;" class="navbar-content subtitle"><a href="/about/" class="subtitle-content">About</a><a href="/contact/" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Switch to 1-Column Layout" class="floating-icon-btn layout-toggle-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="display: block;"><rect x="2" y="2" width="20" height="9" rx="2" fill="currentColor"></rect><rect x="3.5" y="3.5" width="17" height="6" fill="currentColor" opacity="0.3"></rect><rect x="2" y="13" width="20" height="9" rx="2" fill="currentColor"></rect><rect x="3.5" y="14.5" width="17" height="6" fill="currentColor" opacity="0.3"></rect></svg></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="home-wrapper"><h1 class="tool-title">Base32 Encoder/Decoder</h1><div class="tool-wrapper"><div class="tool-intro"><div class="content-section"><h2>🔤 What is Base32?</h2><p>Base32 is a binary-to-text encoding scheme that represents binary data using 32 printable ASCII characters. It uses only uppercase letters A-Z and digits 2-7 (or digits 0-9 and letters in other variants), making it case-insensitive and more human-friendly than Base64. Base32 encoded data is approximately 40% larger than the original binary data.</p><p>Base32 encoding is primarily used in applications where case-insensitive, alphanumeric encoding is required. It's especially popular in 2FA (Two-Factor Authentication) systems, TOTP secrets, and situations where data needs to be manually typed or spoken. The encoding avoids ambiguous characters, reducing transcription errors.</p><div style="margin-top: 15px;" class="example-box"><p><strong>Real-world applications:</strong></p><ul style="margin: 5px 0; padding-left: 20px;"><li>Two-Factor Authentication (2FA) secret keys</li><li>TOTP (Time-based One-Time Password) tokens</li><li>Filenames and identifiers in case-insensitive systems</li><li>Human-readable data encoding</li></ul></div></div><div class="content-section"><h2>⚙️ How This Base32 Encoder/Decoder Works</h2><p>This comprehensive Base32 tool provides bidirectional conversion with support for multiple Base32 variants. It handles both text and binary data with intelligent processing for large files, offering real-time validation and multiple formatting options.</p><h3>🚀 Core Features:</h3><ul><li><strong>Bidirectional Conversion:</strong>Seamlessly encode any data to Base32 or decode Base32 back to original format.</li><li><strong>Multiple Base32 Variants:</strong>Support for RFC 4648 Standard, Hex, and Crockford Base32 encodings.</li><li><strong>Real-Time Processing:</strong>Instant conversion as you type with live validation feedback.</li><li><strong>Drag &amp; Drop Interface:</strong>Modern file upload with visual feedback and smart file detection.</li></ul><h3>📁 File Processing Capabilities:</h3><ul><li><strong>Universal File Support:</strong>Handle any file type including documents, images, archives, and binary files.</li><li><strong>Smart File Detection:</strong>Automatic MIME type recognition with appropriate file icons.</li><li><strong>Large File Optimization:</strong>Intelligent chunked processing for files &gt;1MB with real-time progress tracking.</li><li><strong>Size Validation:</strong>Built-in 2MB file size limit for optimal browser performance.</li></ul><h3>🔧 Base32 Variant Features:</h3><ul><li><strong>Standard Base32 (RFC 4648):</strong>Uses A-Z and 2-7, the most common Base32 format.</li><li><strong>Base32 Hex:</strong>Uses 0-9 and A-V, sortable and compatible with hexadecimal systems.</li><li><strong>Crockford Base32:</strong>Uses 0-9 and A-Z excluding ambiguous characters (I, L, O, U), optimized for human readability.</li><li><strong>Padding Options:</strong>Enable or disable '=' padding characters based on your requirements.</li></ul><h3>🎨 Output Formatting Options:</h3><ul><li><strong>Case Control:</strong>Output in uppercase or lowercase for compatibility with different systems.</li><li><strong>Flexible Formatting:</strong>Continuous string, MIME format (76 chars/line), 64 chars/line, or chunked (4/8 char) output.</li><li><strong>Readability Enhancement:</strong>Chunked formats improve readability for manual verification.</li></ul><h3>⚡ Performance &amp; User Experience:</h3><ul><li><strong>Chunked Processing:</strong>Large files processed in 64KB chunks to maintain browser responsiveness.</li><li><strong>Progress Tracking:</strong>Real-time progress bars for encoding (0-95%) and formatting (95-100%) phases.</li><li><strong>Local Processing:</strong>All operations happen in your browser - no data sent to external servers.</li><li><strong>Copy-to-Clipboard:</strong>One-click copying of results for instant workflow integration.</li></ul></div><div class="content-section"><h2>💡 Common Use Cases &amp; Examples</h2><div class="use-case"><h3>1. 🔐 Two-Factor Authentication (2FA)</h3><ul><li><strong>TOTP Secret Keys:</strong>Generate and decode Base32-encoded secrets for authenticator apps.</li><li><strong>QR Code Data:</strong>Create Base32 strings for embedding in 2FA QR codes.</li><li><strong>Manual Entry:</strong>Format secrets with spaces for easier manual typing into authenticator apps.</li><li><strong>Backup Codes:</strong>Convert and store 2FA backup codes in Base32 format.</li></ul><div class="example-box"><p><strong>Example: TOTP Secret</strong></p><ul><li>Input: random secret bytes</li><li>Standard Base32: JBSWY3DPEHPK3PXP</li><li>Chunked (4-char): JBSW Y3DP EHPK 3PXP</li></ul></div></div><div class="use-case"><h3>2. 📝 Data Encoding &amp; Identifiers</h3><ul><li><strong>Case-Insensitive IDs:</strong>Generate identifiers safe for case-insensitive file systems.</li><li><strong>Human-Readable Codes:</strong>Create codes that are easy to read, speak, and type without ambiguity.</li><li><strong>URL-Safe Tokens:</strong>Generate tokens that work in URLs without special encoding.</li><li><strong>Database Keys:</strong>Store binary data as Base32 strings in databases.</li></ul></div><div class="use-case"><h3>3. 🔑 Security &amp; Cryptography</h3><ul><li><strong>API Keys:</strong>Encode cryptographic keys in a human-friendly format.</li><li><strong>Hash Representation:</strong>Display hashes in Base32 for easier communication.</li><li><strong>Seed Phrases:</strong>Convert binary seeds to Base32 for backup and recovery.</li></ul></div><div class="use-case"><h3>4. 🔧 Development &amp; Testing</h3><ul><li><strong>Mock Data:</strong>Generate Base32 test data for development workflows.</li><li><strong>Debugging:</strong>Decode Base32 strings to inspect their content.</li><li><strong>Format Conversion:</strong>Convert between different Base32 variants for compatibility testing.</li></ul></div></div><div class="content-section"><h2>📚 Step-by-Step Tutorial</h2><div class="tutorial-step"><h3>Example 1: 📝 Encoding Text to Base32</h3><p><strong>Goal:</strong>Convert text content to Base32 with different formatting options.</p><ol><li>Ensure the tool is in 'Encode to Base32' mode (default).</li><li>Enter your text in the 'Data Input' field: 'Hello, World!'</li><li>Select your preferred Base32 variant (Standard, Hex, or Crockford).</li><li>Choose case option (Uppercase or Lowercase).</li><li>Toggle padding if needed.</li><li>Select output format (Continuous, MIME, or chunked).</li><li>View the encoded result instantly and click to copy.</li></ol><div class="example-box"><p><strong>Input:</strong>Hello, World!</p><p><strong>Standard Base32:</strong>JBSWY3DPEBLW64TMMQQQ====</p><p><strong>Without Padding:</strong>JBSWY3DPEBLW64TMMQQQ</p><p><strong>Chunked (4-char):</strong>JBSW Y3DP EBLW 64TM MQQQ ====</p></div></div><div class="tutorial-step"><h3>Example 2: 🔐 Creating TOTP Secrets</h3><p><strong>Goal:</strong>Generate Base32-encoded secrets for 2FA authenticator apps.</p><ol><li>Ensure you're in 'Encode to Base32' mode.</li><li>Enter or upload your secret key data.</li><li>Select 'Standard' Base32 mode (required for most authenticators).</li><li>Choose 'Uppercase' case option.</li><li>Enable padding (some authenticators require it).</li><li>Use '4-char chunks' format for manual entry.</li><li>Copy the result to your authenticator app.</li></ol><div class="example-box"><p><strong>Use Case:</strong>Google Authenticator, Authy, Microsoft Authenticator</p><p><strong>Format:</strong>JBSW Y3DP EHPK 3PXP (easier to type)</p><p><strong>Or Continuous:</strong>JBSWY3DPEHPK3PXP (for QR codes)</p></div></div><div class="tutorial-step"><h3>Example 3: 🔍 Decoding Base32 Strings</h3><p><strong>Goal:</strong>Decode various Base32 formats back to original text or data.</p><ol><li>Switch to 'Decode from Base32' mode by clicking the rotate icon (⟲).</li><li>Paste any Base32 string (with or without padding/spaces).</li><li>Select the correct Base32 variant used for encoding.</li><li>The tool automatically removes formatting (spaces, line breaks).</li><li>View decoded text in the output area.</li></ol><div class="example-box"><p><strong>Input Formats Supported:</strong></p><ul><li>Pure Base32: 'JBSWY3DPEBLW64TMMQQQ===='</li><li>With Spaces: 'JBSW Y3DP EBLW 64TM MQQQ ====</li><li>Multi-line: Each line up to 76 characters</li></ul><p><strong>Output:</strong>Hello, World!</p></div></div><div class="tutorial-step"><h3>Example 4: 📁 Processing Files</h3><p><strong>Goal:</strong>Encode files to Base32 for storage or transmission.</p><ol><li>Ensure you're in 'Encode to Base32' mode.</li><li>Drag and drop a file into the upload area.</li><li>Wait for file processing (progress bar for large files &gt;1MB).</li><li>Select desired Base32 variant and format.</li><li>Copy the Base32 encoded result.</li></ol><div class="example-box"><p><strong>File Example:</strong>secret.key (256 bytes)</p><p><strong>Processing:</strong>64KB chunks → Base32 encoding → Output formatting</p><p><strong>Result:</strong>Base32 string ready for storage/transmission</p></div></div></div><div class="content-section"><h2>🔧 Technical Background</h2><h3>📐 How Base32 Encoding Works</h3><p>Base32 encoding converts 5 bytes (40 bits) of binary data into 8 Base32 characters (5 bits each). Each 5-bit group maps to one of 32 characters. Standard Base32 uses A-Z (0-25) and 2-7 (26-31). Padding with '=' ensures output length is always a multiple of 8.</p><div class="example-box"><p><strong>Encoding Process Example:</strong></p><ul><li>Text: 'Hi' → ASCII: [72, 105]</li><li>Binary: 01001000 01101001</li><li>5-bit groups: 01001 00001 10100 10000 (padded)</li><li>Base32 indices: [9, 1, 20, 16]</li><li>Base32 result: 'JBKU==== (with padding)'</li></ul></div><h3>🔍 Base32 Variant Differences</h3><ul><li><strong>Standard (RFC 4648):</strong>A-Z, 2-7. Most widely used, case-insensitive.</li><li><strong>Hex:</strong>0-9, A-V. Maintains lexicographic order, sortable.</li><li><strong>Crockford:</strong>0-9, A-Z (excluding I, L, O, U). Reduces human transcription errors.</li></ul><h3>⚡ Performance Optimizations</h3><ul><li><strong>Chunked Processing:</strong>Large files (&gt;1MB) processed in 64KB chunks to prevent browser freezing.</li><li><strong>Async Operations:</strong>File reading and encoding use async processing for non-blocking UI.</li><li><strong>Memory Management:</strong>Progressive processing reduces peak memory usage.</li><li><strong>Browser Compatibility:</strong>Uses modern Web APIs with graceful fallback handling.</li></ul><h3>🛡️ Security &amp; Privacy</h3><ul><li><strong>Local Processing:</strong>All encoding/decoding happens in your browser - no external servers.</li><li><strong>No Data Persistence:</strong>Files and content processed in memory only, never saved.</li><li><strong>Size Limitations:</strong>2MB file limit prevents memory exhaustion.</li><li><strong>Input Validation:</strong>Comprehensive validation prevents malformed inputs.</li></ul></div><div class="content-section"><h2>❓ Frequently Asked Questions</h2><div class="faq-item"><h3>Q: What's the difference between Base32 and Base64?</h3><p>A: Base32 uses 32 characters (case-insensitive) vs Base64's 64 (case-sensitive). Base32 is more human-friendly and reduces transcription errors but creates ~40% larger output vs Base64's ~33%. Base32 is preferred for TOTP, 2FA, and manual entry scenarios.</p></div><div class="faq-item"><h3>Q: Which Base32 variant should I use?</h3><p>A: Standard (RFC 4648) for TOTP/2FA and general purposes. Hex for sortable data and hexadecimal compatibility. Crockford for maximum human readability and reducing transcription errors (excludes ambiguous characters).</p></div><div class="faq-item"><h3>Q: Do I need padding?</h3><p>A: It depends on your use case. Standard Base32 typically includes '=' padding. Some systems require it, others don't. For TOTP/2FA, check your authenticator app's requirements. When in doubt, try both options.</p></div><div class="faq-item"><h3>Q: Why use chunked format?</h3><p>A: Chunked formats (4 or 8 characters with spaces) make Base32 strings much easier to read and manually type. This is especially useful for 2FA secret keys that users need to enter manually into authenticator apps.</p></div><div class="faq-item"><h3>Q: Can I decode Base32 with spaces or line breaks?</h3><p>A: Yes! The tool automatically removes all whitespace (spaces, tabs, line breaks) before decoding. You can paste formatted Base32 strings and they'll decode correctly.</p></div><div class="faq-item"><h3>Q: Is there a file size limit?</h3><p>A: Yes, files are limited to 2MB maximum for optimal performance. Files over 1MB are automatically processed with chunked encoding and progress tracking to prevent browser freezing.</p></div><div class="faq-item"><h3>Q: Are my files and data secure?</h3><p>A: Absolutely! All processing happens locally in your browser. No files or data are uploaded to external servers. Everything is processed in your device's memory and nothing is stored or transmitted.</p></div><div class="faq-item"><h3>Q: What if I get validation errors?</h3><p>A: The tool provides detailed error messages with position information. Common issues: invalid characters for the selected variant, or malformed padding. Make sure you've selected the correct Base32 variant that was used for encoding.</p></div><div class="faq-item"><h3>Q: Can I use this for Google Authenticator?</h3><p>A: Yes! Google Authenticator uses Standard Base32 (RFC 4648). Encode your secret in Standard mode with uppercase, enable padding, and use 4-char chunks format for easy manual entry.</p></div><div class="faq-item"><h3>Q: Why is Base32 output larger than the original?</h3><p>A: Base32 encoding increases size by approximately 60% (5 bytes become 8 characters). This is the trade-off for using only 32 characters. The benefit is human readability and case-insensitivity.</p></div></div><div class="content-section"><h2>🎯 Best Practices &amp; Tips</h2><ul><li><strong>Choose the Right Variant:</strong>Standard for 2FA/TOTP, Hex for sortable data, Crockford for maximum human readability.</li><li><strong>Format for Readability:</strong>Use 4-char or 8-char chunks when users need to manually type the encoded data.</li><li><strong>Padding Considerations:</strong>Enable padding for strict RFC 4648 compliance. Disable if your target system doesn't support it.</li><li><strong>Case Consistency:</strong>Base32 is case-insensitive, but maintain consistent casing for professional appearance.</li><li><strong>Error Prevention:</strong>Always validate Base32 input before using in production. The tool's real-time validation helps catch issues early.</li><li><strong>2FA Best Practices:</strong>For TOTP secrets, use Standard Base32, uppercase, with padding, and 4-char chunks for manual entry.</li><li><strong>Performance:</strong>For large files, let the progress bar complete. Chunked processing prevents browser freezing.</li><li><strong>Workflow Integration:</strong>Use copy-to-clipboard for seamless integration with your development workflow.</li></ul></div><div class="content-section"><h2>🔗 Related Tools</h2><ul><li><a href="/base64/">Base64 Encoder/Decoder</a> - Encode and decode Base64 data with support for files and URLs</li><li><a href="/ascii/">ASCII Converter</a> - Convert text to ASCII codes and vice versa with multiple formats</li><li><a href="/json/">JSON Formatter &amp; Converter</a> - Format, validate, minify and beautify JSON data with error detection</li><li><a href="/html/">HTML Entity Converter</a> - Encode and decode HTML entities for safe web content display</li><li><a href="/text-case/">Text Case Converter</a> - Convert between camelCase, PascalCase, snake_case, kebab-case, and more</li><li><a href="/regex/">Regular Expression Tester</a> - Test and debug regex patterns with live matching, group capture, and replacement</li><li><a href="/format-converter/">Format Converter</a> - Convert between YAML, JSON, and TOML formats for configuration files and data exchange</li><li><a href="/diff/">Text Diff Comparator</a> - Compare two texts line by line with side-by-side, inline, and unified diff views</li></ul></div></div><div class="tool-container"><div style="display: flex; align-items: center; margin-bottom: 10px; margin-top: 5px;"><div style="width: 90%;">Encode to Base32</div><div style="width: 10%; display: flex; justify-content: center;" class="tool-change"><i class="fa-solid fa-arrows-rotate"></i></div></div><div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px;"><div style="flex: 1; min-width: 120px;"><label style="margin-right: 8px; font-size: 14px;">Base32 Mode:</label><select style="width: 100%;"><option value="standard" selected="selected">Standard</option><option value="hex">Hex</option><option value="crockford">Crockford</option></select></div><div style="flex: 1; min-width: 120px;"><label style="margin-right: 8px; font-size: 14px;">Case:</label><select style="width: 100%;"><option value="uppercase" selected="selected">Uppercase</option><option value="lowercase">Lowercase</option></select></div><div style="flex: 1; min-width: 120px;"><label style="margin-right: 8px; font-size: 14px;">Output Format:</label><select style="width: 100%;"><option value="continuous" selected="selected">Continuous</option><option value="linebreaks76">MIME (76 chars)</option><option value="linebreaks64">64 chars/line</option><option value="chunks4">4-char chunks</option><option value="chunks8">8-char chunks</option></select></div></div><div style="margin-bottom: 10px;"><label style="display: flex; align-items: center; cursor: pointer;"><input type="checkbox" style="margin-right: 8px;"><span style="font-size: 14px;">Enable Padding (=)</span></label></div><div class="tool-inner"><div><div style="margin-bottom: 5px;" class="tool-subtitle">Data Input</div><div style="margin-bottom: 10px; border: 2px dashed var(--color-border); border-radius: 8px; padding: 15px; text-align: center; transition: all 0.2s ease;"><div><div style="margin-bottom: 10px;"><i style="font-size: 24px; color: var(--color-subfont);" class="fa-solid fa-cloud-upload-alt"></i></div><div style="margin-bottom: 8px; font-weight: bold; color: var(--color-primary);">Drop files here or click to upload</div><div style="font-size: 12px; color: var(--color-subfont); margin-bottom: 10px;">Supports any file type (Max: 2.0 MB)</div><input type="file" id="file-upload" style="display: none;"><label for="file-upload" style="display: inline-block; background: var(--color-primary); color: white; padding: 8px 16px; border-radius: 4px; cursor: pointer; border: none;">Choose File</label></div></div><div style="margin-bottom: 5px; color: var(--color-subfont); font-size: 12px;">Or enter text manually:</div><textarea type="text" style="overflow-y: auto;" placeholder="Enter text..."></textarea></div></div><div style="margin-top: 10px;" class="tool-inner"><div><div class="tool-subtitle">Base32 Output</div><textarea type="text" style="overflow-y: auto; cursor: pointer;" readonly="readonly"></textarea></div></div></div></div></div></div></div><footer><p style="font-size: 0.9em;"><a href="/about/" style="margin-right: 15px;">About</a><a href="/privacy/" style="margin-right: 15px;">Privacy Policy</a><a href="/terms/" style="margin-right: 15px;">Terms of Service</a><a href="/contact/">Contact</a></p></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20251118/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+<body><div class="navbar-wrapper"><div class="navbar-container"><a href="/" class="navbar-content">CompuTools</a><div style="justify-content: right;" class="navbar-content subtitle"><a href="/about/" class="subtitle-content">About</a><a href="/contact/" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Switch to 1-Column Layout" class="floating-icon-btn layout-toggle-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="display: block;"><rect x="2" y="2" width="20" height="9" rx="2" fill="currentColor"></rect><rect x="3.5" y="3.5" width="17" height="6" fill="currentColor" opacity="0.3"></rect><rect x="2" y="13" width="20" height="9" rx="2" fill="currentColor"></rect><rect x="3.5" y="14.5" width="17" height="6" fill="currentColor" opacity="0.3"></rect></svg></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="home-wrapper"><h1 class="tool-title">Base32 Encoder/Decoder</h1><div class="tool-wrapper"><div class="tool-intro"><div class="content-section"><h2>🔤 What is Base32?</h2><p>Base32 is a binary-to-text encoding scheme that represents binary data using 32 printable ASCII characters. It uses only uppercase letters A-Z and digits 2-7 (or digits 0-9 and letters in other variants), making it case-insensitive and more human-friendly than Base64. Base32 encoded data is approximately 40% larger than the original binary data.</p><p>Base32 encoding is primarily used in applications where case-insensitive, alphanumeric encoding is required. It's especially popular in 2FA (Two-Factor Authentication) systems, TOTP secrets, and situations where data needs to be manually typed or spoken. The encoding avoids ambiguous characters, reducing transcription errors.</p><div style="margin-top: 15px;" class="example-box"><p><strong>Real-world applications:</strong></p><ul style="margin: 5px 0; padding-left: 20px;"><li>Two-Factor Authentication (2FA) secret keys</li><li>TOTP (Time-based One-Time Password) tokens</li><li>Filenames and identifiers in case-insensitive systems</li><li>Human-readable data encoding</li></ul></div></div><div class="content-section"><h2>⚙️ How This Base32 Encoder/Decoder Works</h2><p>This comprehensive Base32 tool provides bidirectional conversion with support for multiple Base32 variants. It handles both text and binary data with intelligent processing for large files, offering real-time validation and multiple formatting options.</p><h3>🚀 Core Features:</h3><ul><li><strong>Bidirectional Conversion:</strong>Seamlessly encode any data to Base32 or decode Base32 back to original format.</li><li><strong>Multiple Base32 Variants:</strong>Support for RFC 4648 Standard, Hex, and Crockford Base32 encodings.</li><li><strong>Real-Time Processing:</strong>Instant conversion as you type with live validation feedback.</li><li><strong>Drag &amp; Drop Interface:</strong>Modern file upload with visual feedback and smart file detection.</li></ul><h3>📁 File Processing Capabilities:</h3><ul><li><strong>Universal File Support:</strong>Handle any file type including documents, images, archives, and binary files.</li><li><strong>Smart File Detection:</strong>Automatic MIME type recognition with appropriate file icons.</li><li><strong>Large File Optimization:</strong>Intelligent chunked processing for files &gt;1MB with real-time progress tracking.</li><li><strong>Size Validation:</strong>Built-in 2MB file size limit for optimal browser performance.</li></ul><h3>🔧 Base32 Variant Features:</h3><ul><li><strong>Standard Base32 (RFC 4648):</strong>Uses A-Z and 2-7, the most common Base32 format.</li><li><strong>Base32 Hex:</strong>Uses 0-9 and A-V, sortable and compatible with hexadecimal systems.</li><li><strong>Crockford Base32:</strong>Uses 0-9 and A-Z excluding ambiguous characters (I, L, O, U), optimized for human readability.</li><li><strong>Padding Options:</strong>Enable or disable '=' padding characters based on your requirements.</li></ul><h3>🎨 Output Formatting Options:</h3><ul><li><strong>Case Control:</strong>Output in uppercase or lowercase for compatibility with different systems.</li><li><strong>Flexible Formatting:</strong>Continuous string, MIME format (76 chars/line), 64 chars/line, or chunked (4/8 char) output.</li><li><strong>Readability Enhancement:</strong>Chunked formats improve readability for manual verification.</li></ul><h3>⚡ Performance &amp; User Experience:</h3><ul><li><strong>Chunked Processing:</strong>Large files processed in 64KB chunks to maintain browser responsiveness.</li><li><strong>Progress Tracking:</strong>Real-time progress bars for encoding (0-95%) and formatting (95-100%) phases.</li><li><strong>Local Processing:</strong>All operations happen in your browser - no data sent to external servers.</li><li><strong>Copy-to-Clipboard:</strong>One-click copying of results for instant workflow integration.</li></ul></div><div class="content-section"><h2>💡 Common Use Cases &amp; Examples</h2><div class="use-case"><h3>1. 🔐 Two-Factor Authentication (2FA)</h3><ul><li><strong>TOTP Secret Keys:</strong>Generate and decode Base32-encoded secrets for authenticator apps.</li><li><strong>QR Code Data:</strong>Create Base32 strings for embedding in 2FA QR codes.</li><li><strong>Manual Entry:</strong>Format secrets with spaces for easier manual typing into authenticator apps.</li><li><strong>Backup Codes:</strong>Convert and store 2FA backup codes in Base32 format.</li></ul><div class="example-box"><p><strong>Example: TOTP Secret</strong></p><ul><li>Input: random secret bytes</li><li>Standard Base32: JBSWY3DPEHPK3PXP</li><li>Chunked (4-char): JBSW Y3DP EHPK 3PXP</li></ul></div></div><div class="use-case"><h3>2. 📝 Data Encoding &amp; Identifiers</h3><ul><li><strong>Case-Insensitive IDs:</strong>Generate identifiers safe for case-insensitive file systems.</li><li><strong>Human-Readable Codes:</strong>Create codes that are easy to read, speak, and type without ambiguity.</li><li><strong>URL-Safe Tokens:</strong>Generate tokens that work in URLs without special encoding.</li><li><strong>Database Keys:</strong>Store binary data as Base32 strings in databases.</li></ul></div><div class="use-case"><h3>3. 🔑 Security &amp; Cryptography</h3><ul><li><strong>API Keys:</strong>Encode cryptographic keys in a human-friendly format.</li><li><strong>Hash Representation:</strong>Display hashes in Base32 for easier communication.</li><li><strong>Seed Phrases:</strong>Convert binary seeds to Base32 for backup and recovery.</li></ul></div><div class="use-case"><h3>4. 🔧 Development &amp; Testing</h3><ul><li><strong>Mock Data:</strong>Generate Base32 test data for development workflows.</li><li><strong>Debugging:</strong>Decode Base32 strings to inspect their content.</li><li><strong>Format Conversion:</strong>Convert between different Base32 variants for compatibility testing.</li></ul></div></div><div class="content-section"><h2>📚 Step-by-Step Tutorial</h2><div class="tutorial-step"><h3>Example 1: 📝 Encoding Text to Base32</h3><p><strong>Goal:</strong>Convert text content to Base32 with different formatting options.</p><ol><li>Ensure the tool is in 'Encode to Base32' mode (default).</li><li>Enter your text in the 'Data Input' field: 'Hello, World!'</li><li>Select your preferred Base32 variant (Standard, Hex, or Crockford).</li><li>Choose case option (Uppercase or Lowercase).</li><li>Toggle padding if needed.</li><li>Select output format (Continuous, MIME, or chunked).</li><li>View the encoded result instantly and click to copy.</li></ol><div class="example-box"><p><strong>Input:</strong>Hello, World!</p><p><strong>Standard Base32:</strong>JBSWY3DPEBLW64TMMQQQ====</p><p><strong>Without Padding:</strong>JBSWY3DPEBLW64TMMQQQ</p><p><strong>Chunked (4-char):</strong>JBSW Y3DP EBLW 64TM MQQQ ====</p></div></div><div class="tutorial-step"><h3>Example 2: 🔐 Creating TOTP Secrets</h3><p><strong>Goal:</strong>Generate Base32-encoded secrets for 2FA authenticator apps.</p><ol><li>Ensure you're in 'Encode to Base32' mode.</li><li>Enter or upload your secret key data.</li><li>Select 'Standard' Base32 mode (required for most authenticators).</li><li>Choose 'Uppercase' case option.</li><li>Enable padding (some authenticators require it).</li><li>Use '4-char chunks' format for manual entry.</li><li>Copy the result to your authenticator app.</li></ol><div class="example-box"><p><strong>Use Case:</strong>Google Authenticator, Authy, Microsoft Authenticator</p><p><strong>Format:</strong>JBSW Y3DP EHPK 3PXP (easier to type)</p><p><strong>Or Continuous:</strong>JBSWY3DPEHPK3PXP (for QR codes)</p></div></div><div class="tutorial-step"><h3>Example 3: 🔍 Decoding Base32 Strings</h3><p><strong>Goal:</strong>Decode various Base32 formats back to original text or data.</p><ol><li>Switch to 'Decode from Base32' mode by clicking the rotate icon (⟲).</li><li>Paste any Base32 string (with or without padding/spaces).</li><li>Select the correct Base32 variant used for encoding.</li><li>The tool automatically removes formatting (spaces, line breaks).</li><li>View decoded text in the output area.</li></ol><div class="example-box"><p><strong>Input Formats Supported:</strong></p><ul><li>Pure Base32: 'JBSWY3DPEBLW64TMMQQQ===='</li><li>With Spaces: 'JBSW Y3DP EBLW 64TM MQQQ ====</li><li>Multi-line: Each line up to 76 characters</li></ul><p><strong>Output:</strong>Hello, World!</p></div></div><div class="tutorial-step"><h3>Example 4: 📁 Processing Files</h3><p><strong>Goal:</strong>Encode files to Base32 for storage or transmission.</p><ol><li>Ensure you're in 'Encode to Base32' mode.</li><li>Drag and drop a file into the upload area.</li><li>Wait for file processing (progress bar for large files &gt;1MB).</li><li>Select desired Base32 variant and format.</li><li>Copy the Base32 encoded result.</li></ol><div class="example-box"><p><strong>File Example:</strong>secret.key (256 bytes)</p><p><strong>Processing:</strong>64KB chunks → Base32 encoding → Output formatting</p><p><strong>Result:</strong>Base32 string ready for storage/transmission</p></div></div></div><div class="content-section"><h2>🔧 Technical Background</h2><h3>📐 How Base32 Encoding Works</h3><p>Base32 encoding converts 5 bytes (40 bits) of binary data into 8 Base32 characters (5 bits each). Each 5-bit group maps to one of 32 characters. Standard Base32 uses A-Z (0-25) and 2-7 (26-31). Padding with '=' ensures output length is always a multiple of 8.</p><div class="example-box"><p><strong>Encoding Process Example:</strong></p><ul><li>Text: 'Hi' → ASCII: [72, 105]</li><li>Binary: 01001000 01101001</li><li>5-bit groups: 01001 00001 10100 10000 (padded)</li><li>Base32 indices: [9, 1, 20, 16]</li><li>Base32 result: 'JBKU==== (with padding)'</li></ul></div><h3>🔍 Base32 Variant Differences</h3><ul><li><strong>Standard (RFC 4648):</strong>A-Z, 2-7. Most widely used, case-insensitive.</li><li><strong>Hex:</strong>0-9, A-V. Maintains lexicographic order, sortable.</li><li><strong>Crockford:</strong>0-9, A-Z (excluding I, L, O, U). Reduces human transcription errors.</li></ul><h3>⚡ Performance Optimizations</h3><ul><li><strong>Chunked Processing:</strong>Large files (&gt;1MB) processed in 64KB chunks to prevent browser freezing.</li><li><strong>Async Operations:</strong>File reading and encoding use async processing for non-blocking UI.</li><li><strong>Memory Management:</strong>Progressive processing reduces peak memory usage.</li><li><strong>Browser Compatibility:</strong>Uses modern Web APIs with graceful fallback handling.</li></ul><h3>🛡️ Security &amp; Privacy</h3><ul><li><strong>Local Processing:</strong>All encoding/decoding happens in your browser - no external servers.</li><li><strong>No Data Persistence:</strong>Files and content processed in memory only, never saved.</li><li><strong>Size Limitations:</strong>2MB file limit prevents memory exhaustion.</li><li><strong>Input Validation:</strong>Comprehensive validation prevents malformed inputs.</li></ul></div><div class="content-section"><h2>❓ Frequently Asked Questions</h2><div class="faq-item"><h3>Q: What's the difference between Base32 and Base64?</h3><p>A: Base32 uses 32 characters (case-insensitive) vs Base64's 64 (case-sensitive). Base32 is more human-friendly and reduces transcription errors but creates ~40% larger output vs Base64's ~33%. Base32 is preferred for TOTP, 2FA, and manual entry scenarios.</p></div><div class="faq-item"><h3>Q: Which Base32 variant should I use?</h3><p>A: Standard (RFC 4648) for TOTP/2FA and general purposes. Hex for sortable data and hexadecimal compatibility. Crockford for maximum human readability and reducing transcription errors (excludes ambiguous characters).</p></div><div class="faq-item"><h3>Q: Do I need padding?</h3><p>A: It depends on your use case. Standard Base32 typically includes '=' padding. Some systems require it, others don't. For TOTP/2FA, check your authenticator app's requirements. When in doubt, try both options.</p></div><div class="faq-item"><h3>Q: Why use chunked format?</h3><p>A: Chunked formats (4 or 8 characters with spaces) make Base32 strings much easier to read and manually type. This is especially useful for 2FA secret keys that users need to enter manually into authenticator apps.</p></div><div class="faq-item"><h3>Q: Can I decode Base32 with spaces or line breaks?</h3><p>A: Yes! The tool automatically removes all whitespace (spaces, tabs, line breaks) before decoding. You can paste formatted Base32 strings and they'll decode correctly.</p></div><div class="faq-item"><h3>Q: Is there a file size limit?</h3><p>A: Yes, files are limited to 2MB maximum for optimal performance. Files over 1MB are automatically processed with chunked encoding and progress tracking to prevent browser freezing.</p></div><div class="faq-item"><h3>Q: Are my files and data secure?</h3><p>A: Absolutely! All processing happens locally in your browser. No files or data are uploaded to external servers. Everything is processed in your device's memory and nothing is stored or transmitted.</p></div><div class="faq-item"><h3>Q: What if I get validation errors?</h3><p>A: The tool provides detailed error messages with position information. Common issues: invalid characters for the selected variant, or malformed padding. Make sure you've selected the correct Base32 variant that was used for encoding.</p></div><div class="faq-item"><h3>Q: Can I use this for Google Authenticator?</h3><p>A: Yes! Google Authenticator uses Standard Base32 (RFC 4648). Encode your secret in Standard mode with uppercase, enable padding, and use 4-char chunks format for easy manual entry.</p></div><div class="faq-item"><h3>Q: Why is Base32 output larger than the original?</h3><p>A: Base32 encoding increases size by approximately 60% (5 bytes become 8 characters). This is the trade-off for using only 32 characters. The benefit is human readability and case-insensitivity.</p></div></div><div class="content-section"><h2>🎯 Best Practices &amp; Tips</h2><ul><li><strong>Choose the Right Variant:</strong>Standard for 2FA/TOTP, Hex for sortable data, Crockford for maximum human readability.</li><li><strong>Format for Readability:</strong>Use 4-char or 8-char chunks when users need to manually type the encoded data.</li><li><strong>Padding Considerations:</strong>Enable padding for strict RFC 4648 compliance. Disable if your target system doesn't support it.</li><li><strong>Case Consistency:</strong>Base32 is case-insensitive, but maintain consistent casing for professional appearance.</li><li><strong>Error Prevention:</strong>Always validate Base32 input before using in production. The tool's real-time validation helps catch issues early.</li><li><strong>2FA Best Practices:</strong>For TOTP secrets, use Standard Base32, uppercase, with padding, and 4-char chunks for manual entry.</li><li><strong>Performance:</strong>For large files, let the progress bar complete. Chunked processing prevents browser freezing.</li><li><strong>Workflow Integration:</strong>Use copy-to-clipboard for seamless integration with your development workflow.</li></ul></div><div class="content-section"><h2>🔗 Related Tools</h2><ul><li><a href="/base64/">Base64 Encoder/Decoder</a> - Encode and decode Base64 data with support for files and URLs</li><li><a href="/ascii/">ASCII Converter</a> - Convert text to ASCII codes and vice versa with multiple formats</li><li><a href="/json/">JSON Formatter &amp; Converter</a> - Format, validate, minify and beautify JSON data with error detection</li><li><a href="/html/">HTML Entity Converter</a> - Encode and decode HTML entities for safe web content display</li><li><a href="/text-case/">Text Case Converter</a> - Convert between camelCase, PascalCase, snake_case, kebab-case, and more</li><li><a href="/regex/">Regular Expression Tester</a> - Test and debug regex patterns with live matching, group capture, and replacement</li><li><a href="/format-converter/">Format Converter</a> - Convert between YAML, JSON, and TOML formats for configuration files and data exchange</li><li><a href="/diff/">Text Diff Comparator</a> - Compare two texts line by line with side-by-side, inline, and unified diff views</li><li><a href="/markdown/">Markdown Previewer</a> - Live Markdown editor with GFM support, tables, task lists, footnotes, TOC, and HTML export</li></ul></div></div><div class="tool-container"><div style="display: flex; align-items: center; margin-bottom: 10px; margin-top: 5px;"><div style="width: 90%;">Encode to Base32</div><div style="width: 10%; display: flex; justify-content: center;" class="tool-change"><i class="fa-solid fa-arrows-rotate"></i></div></div><div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px;"><div style="flex: 1; min-width: 120px;"><label style="margin-right: 8px; font-size: 14px;">Base32 Mode:</label><select style="width: 100%;"><option value="standard" selected="selected">Standard</option><option value="hex">Hex</option><option value="crockford">Crockford</option></select></div><div style="flex: 1; min-width: 120px;"><label style="margin-right: 8px; font-size: 14px;">Case:</label><select style="width: 100%;"><option value="uppercase" selected="selected">Uppercase</option><option value="lowercase">Lowercase</option></select></div><div style="flex: 1; min-width: 120px;"><label style="margin-right: 8px; font-size: 14px;">Output Format:</label><select style="width: 100%;"><option value="continuous" selected="selected">Continuous</option><option value="linebreaks76">MIME (76 chars)</option><option value="linebreaks64">64 chars/line</option><option value="chunks4">4-char chunks</option><option value="chunks8">8-char chunks</option></select></div></div><div style="margin-bottom: 10px;"><label style="display: flex; align-items: center; cursor: pointer;"><input type="checkbox" style="margin-right: 8px;"><span style="font-size: 14px;">Enable Padding (=)</span></label></div><div class="tool-inner"><div><div style="margin-bottom: 5px;" class="tool-subtitle">Data Input</div><div style="margin-bottom: 10px; border: 2px dashed var(--color-border); border-radius: 8px; padding: 15px; text-align: center; transition: all 0.2s ease;"><div><div style="margin-bottom: 10px;"><i style="font-size: 24px; color: var(--color-subfont);" class="fa-solid fa-cloud-upload-alt"></i></div><div style="margin-bottom: 8px; font-weight: bold; color: var(--color-primary);">Drop files here or click to upload</div><div style="font-size: 12px; color: var(--color-subfont); margin-bottom: 10px;">Supports any file type (Max: 2.0 MB)</div><input type="file" id="file-upload" style="display: none;"><label for="file-upload" style="display: inline-block; background: var(--color-primary); color: white; padding: 8px 16px; border-radius: 4px; cursor: pointer; border: none;">Choose File</label></div></div><div style="margin-bottom: 5px; color: var(--color-subfont); font-size: 12px;">Or enter text manually:</div><textarea type="text" style="overflow-y: auto;" placeholder="Enter text..."></textarea></div></div><div style="margin-top: 10px;" class="tool-inner"><div><div class="tool-subtitle">Base32 Output</div><textarea type="text" style="overflow-y: auto; cursor: pointer;" readonly="readonly"></textarea></div></div></div></div></div></div></div><footer><p style="font-size: 0.9em;"><a href="/about/" style="margin-right: 15px;">About</a><a href="/privacy/" style="margin-right: 15px;">Privacy Policy</a><a href="/terms/" style="margin-right: 15px;">Terms of Service</a><a href="/contact/">Contact</a></p></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20251203/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>

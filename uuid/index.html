@@ -6,7 +6,7 @@
   
   <meta name="computools" content="computools">
   <meta name="description" content="This\ tool\ allows\ you\ to\ generate\ UUIDs\ \(Universally\ Unique\ Identifiers\)\ using\ version\ 4,\ which\ relies\ entirely\ on\ random\ numbers\ to\ ensure\ uniqueness\.\ UUID\ v4\ is\ one\ of\ the\ most\ commonly\ used\ types\ because\ it\ does\ not\ require\ any\ input\ like\ timestamps\ or\ names—just\ randomness\.\ The\ chance\ of\ collision\ is\ astronomically\ low,\ making\ it\ suitable\ for\ most\ practical\ applications\.">
-  <meta name="keywords" content="CompuTools, engineering tools, converter, calculator, formatter, unixtime, quaternion, crc, ascii, json, base32, base64, file hash, html encode/decode, url encode/decode, uuid generator, text case converter, password secret generator, regex, color converter, unit converter, format converter, jwt encoder/decoder, text diff comparator">
+  <meta name="keywords" content="CompuTools, engineering tools, converter, calculator, formatter, unixtime, quaternion, crc, ascii, json, base32, base64, file hash, html encode/decode, url encode/decode, uuid generator, text case converter, password secret generator, regex, color converter, unit converter, format converter, jwt encoder/decoder, text diff comparator, markdown previewer, markdown editor, gfm">
   <meta name="author" content="CompuTools">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -37,9 +37,9 @@
   <link rel="stylesheet" href="/thumbnail-5462693de6259b0c.css" integrity="sha384-BiGow/ph6jJ4GjVnzA0yBHnYK56GMRQdkHfV/rtGc/loO06F92IS2OFuhWVP/B2w">
   <link rel="stylesheet" href="/tool-947bed830a429a15.css" integrity="sha384-dFUL60/jbQGEZWhJtRj2kzhIp0Bmzz7DI+4pHZGlIbLtJKU94Ahp3MnBCzZut+sm">
   
-<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202511120101/show_ads_impl.js"></script><script type="module">
-import init, * as bindings from '/computools-da28256d1a4d0976.js';
-const wasm = await init({ module_or_path: '/computools-da28256d1a4d0976_bg.wasm' });
+<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202512020501/show_ads_impl.js"></script><script type="module">
+import init, * as bindings from '/computools-8b8b1dfead817f14.js';
+const wasm = await init({ module_or_path: '/computools-8b8b1dfead817f14_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -56,6 +56,21 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
   
 
   <link rel="icon" href="/favicon-1a8ba4d4617517ad.ico" integrity="sha384-sh+KkiOvcFXwh29z2PE6y5W6JoL/C2uPj8MHwWodi4oVC6f4XcUmhJGk6dmH2Teg">
+
+  <!-- MathJax for LaTeX math rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <script>
       (function() {
@@ -84,6 +99,395 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
 
     gtag('config', 'G-1G0CMRC310');
   </script>
-<link rel="modulepreload" href="/computools-da28256d1a4d0976.js" crossorigin="anonymous" integrity="sha384-W2jddDye04Q0v1Vk9X4/qGdfty69FJumxby5to/q7a1B8gCxfDlWX5YZfIdijThs"><link rel="preload" href="/computools-da28256d1a4d0976_bg.wasm" crossorigin="anonymous" integrity="sha384-tRMukfjSW0I2jKi8LHWtPQ9J+yjt/L7duCULQ57pNI6hxr7MWKElvgYEK6Qh7c77" as="fetch" type="application/wasm"><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"></head>
+<link rel="modulepreload" href="/computools-8b8b1dfead817f14.js" crossorigin="anonymous" integrity="sha384-h3UoTZu+RjEh5acPEyVmLWVtfwwej561XDDUrbqj1kB8acXDzZrPvXu2jQ90WMGE"><link rel="preload" href="/computools-8b8b1dfead817f14_bg.wasm" crossorigin="anonymous" integrity="sha384-vmR+D7N+YCGc6m4oYibwjtLVECcyO0HaEprTzfIpZi22w1qOT8OdEkJ1lvJi1jKL" as="fetch" type="application/wasm"><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
 
-<body><div class="navbar-wrapper"><div class="navbar-container"><a href="/" class="navbar-content">CompuTools</a><div style="justify-content: right;" class="navbar-content subtitle"><a href="/about/" class="subtitle-content">About</a><a href="/contact/" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Switch to 1-Column Layout" class="floating-icon-btn layout-toggle-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="display: block;"><rect x="2" y="2" width="20" height="9" rx="2" fill="currentColor"></rect><rect x="3.5" y="3.5" width="17" height="6" fill="currentColor" opacity="0.3"></rect><rect x="2" y="13" width="20" height="9" rx="2" fill="currentColor"></rect><rect x="3.5" y="14.5" width="17" height="6" fill="currentColor" opacity="0.3"></rect></svg></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="home-wrapper"><h1 class="tool-title">UUID Generator</h1><div class="tool-wrapper"><div class="tool-intro"><div class="content-section"><h2>🆔 What is a UUID?</h2><p>A UUID (Universally Unique Identifier) is a 128-bit value used to uniquely identify information in computer systems. UUID v4 is generated using random numbers, making collisions extremely unlikely.</p><p><strong>A typical UUID looks like: </strong></p><ul><li>123e4567-e89b-12d3-a456-426614174000</li></ul></div><div class="content-section"><h2>⚙️ How This UUID Generator Works</h2><ul><li><strong>Generate UUID v4:</strong>Create a new random UUID v4 with a single click.</li><li><strong>Copy with Notification:</strong>Click the UUID to copy it to your clipboard with visual feedback.</li><li><strong>Local Processing:</strong>All generation and copying happens in your browser for privacy and speed.</li></ul></div><div class="content-section"><h2>📚 Example</h2><div class="example-box"><p><strong>Generated UUID v4:</strong></p><ul><li>e.g. 550e8400-e29b-41d4-a716-446655440000</li></ul></div></div><div class="content-section"><h2>💡 Common Use Cases</h2><ul><li><strong>Database Keys:</strong>Assign unique IDs to database records.</li><li><strong>API Tokens:</strong>Generate unique tokens for authentication and session management.</li><li><strong>Distributed Systems:</strong>Ensure uniqueness across multiple servers or services.</li><li><strong>File Names:</strong>Create unique file names to avoid collisions.</li></ul></div><div class="content-section"><h2>❓ Frequently Asked Questions</h2><div class="faq-item"><h3>Q: Are UUIDs really unique?</h3><p>A: The probability of generating two identical UUID v4 values is astronomically low, making them unique for all practical purposes.</p></div><div class="faq-item"><h3>Q: What standard does this tool follow?</h3><p>A: All UUIDs generated conform to the RFC 4122 specification for version 4.</p></div><div class="faq-item"><h3>Q: Can I use this tool offline?</h3><p>A: Yes, all generation and copying is performed locally in your browser.</p></div></div><div class="content-section"><h2>🎯 Best Practices</h2><ul><li><strong>Use UUIDs for Uniqueness:</strong>Use UUIDs when you need a unique identifier that is hard to guess or collide.</li><li><strong>Store as Strings:</strong>Store UUIDs as strings in databases for compatibility.</li><li><strong>Validate Format:</strong>Ensure UUIDs match the standard 8-4-4-4-12 format.</li><li><strong>Security Awareness:</strong>Do not use UUIDs as secrets or passwords.</li></ul></div><div class="content-section"><h2>🔗 Related Tools</h2><ul><li><a href="/password/">Password Generator</a> - Generate secure passwords, API keys, and tokens with customizable strength</li></ul></div></div><div class="tool-container"><div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;"><div style="cursor: pointer; user-select: none; font-size: 1.3em; font-weight: bold; margin-bottom: 10px;" class="uuid-value">05a5e3f8-69cd-4036-a564-3d1c2c427cce</div><button style="width: auto; margin-top: 5px; padding-left: 50px; padding-right: 50px;" class="tool-btn">Generate</button></div></div></div></div></div></div><footer><p style="font-size: 0.9em;"><a href="/about/" style="margin-right: 15px;">About</a><a href="/privacy/" style="margin-right: 15px;">Privacy Policy</a><a href="/terms/" style="margin-right: 15px;">Terms of Service</a><a href="/contact/">Contact</a></p></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20251118/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+<body><div class="navbar-wrapper"><div class="navbar-container"><a href="/" class="navbar-content">CompuTools</a><div style="justify-content: right;" class="navbar-content subtitle"><a href="/about/" class="subtitle-content">About</a><a href="/contact/" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Switch to 1-Column Layout" class="floating-icon-btn layout-toggle-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="display: block;"><rect x="2" y="2" width="20" height="9" rx="2" fill="currentColor"></rect><rect x="3.5" y="3.5" width="17" height="6" fill="currentColor" opacity="0.3"></rect><rect x="2" y="13" width="20" height="9" rx="2" fill="currentColor"></rect><rect x="3.5" y="14.5" width="17" height="6" fill="currentColor" opacity="0.3"></rect></svg></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="home-wrapper"><h1 class="tool-title">UUID Generator</h1><div class="tool-wrapper"><div class="tool-intro"><div class="content-section"><h2>🆔 What is a UUID?</h2><p>A UUID (Universally Unique Identifier) is a 128-bit value used to uniquely identify information in computer systems. First standardized by the Open Software Foundation (OSF) and later formalized in RFC 4122, UUIDs have become the de facto standard for generating unique identifiers without requiring a central authority or coordination between systems.</p><p>UUID v4 is generated using cryptographically secure random numbers, making collisions astronomically unlikely—you'd need to generate about 2.71 quintillion UUIDs before having a 50% chance of a collision. This makes UUID v4 ideal for most applications where guaranteed uniqueness is critical.</p><p><strong>A typical UUID follows the 8-4-4-4-12 format:</strong></p><div style="background-color: var(--color-third); padding: 10px; border-radius: 5px; margin: 10px 0; font-family: monospace; text-align: center;">550e8400-e29b-41d4-a716-446655440000</div></div><div class="content-section"><h2>⚙️ How This UUID Generator Works</h2><p>This tool uses the Rust uuid crate compiled to WebAssembly, leveraging your browser's cryptographically secure random number generator (CSPRNG) to create truly random UUID v4 values. Everything runs locally in your browser—no server requests, no data collection.</p><h3>🔥 Core Capabilities:</h3><ul><li><strong>Instant Generation:</strong>Create a new random UUID v4 with a single click—no page reload needed</li><li><strong>One-Click Copy:</strong>Click directly on the UUID to copy it to your clipboard instantly</li><li><strong>RFC 4122 Compliant:</strong>All generated UUIDs strictly follow the RFC 4122 version 4 specification</li><li><strong>Cryptographically Secure:</strong>Uses your browser's CSPRNG for maximum randomness and security</li><li><strong>100% Local Processing:</strong>All generation happens in your browser—works offline too</li><li><strong>Zero Dependencies:</strong>No external APIs or services required</li></ul></div><div class="content-section"><h2>📊 UUID Structure Explained</h2><div style="background-color: var(--color-third); padding: 15px; border-radius: 5px; margin: 10px 0;"><p style="font-family: monospace; margin-bottom: 10px;">xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx</p><ul style="font-size: 12px;"><li><strong>x:</strong>Random hexadecimal digit (0-9, a-f)</li><li><strong>M:</strong>Version number (4 for UUID v4)</li><li><strong>N:</strong>Variant indicator (8, 9, a, or b for RFC 4122)</li></ul><p style="margin-top: 10px;">The 32 hexadecimal characters represent 128 bits of data, with specific positions reserved for version and variant information.</p></div></div><div class="content-section"><h2>📚 UUID Versions Overview</h2><div style="margin: 10px 0;"><div style="background-color: var(--color-third); padding: 10px; border-radius: 5px; margin-bottom: 8px;"><h4 style="margin: 0 0 5px 0; color: var(--color-secondary);">UUID v1 - Time-based</h4><p style="margin: 0; font-size: 12px;">Generated from timestamp and MAC address. Reveals creation time and hardware info.</p></div><div style="background-color: var(--color-third); padding: 10px; border-radius: 5px; margin-bottom: 8px;"><h4 style="margin: 0 0 5px 0; color: var(--color-secondary);">UUID v3 - Name-based (MD5)</h4><p style="margin: 0; font-size: 12px;">Generated from namespace and name using MD5 hash. Same input always produces same UUID.</p></div><div style="background-color: var(--color-secondary); padding: 10px; border-radius: 5px; margin-bottom: 8px; color: white;"><h4 style="margin: 0 0 5px 0;">UUID v4 - Random ⭐ (This Tool)</h4><p style="margin: 0; font-size: 12px;">Generated from cryptographically secure random numbers. Most widely used version.</p></div><div style="background-color: var(--color-third); padding: 10px; border-radius: 5px; margin-bottom: 8px;"><h4 style="margin: 0 0 5px 0; color: var(--color-secondary);">UUID v5 - Name-based (SHA-1)</h4><p style="margin: 0; font-size: 12px;">Similar to v3 but uses SHA-1 hash. Preferred over v3 for new applications.</p></div><div style="background-color: var(--color-third); padding: 10px; border-radius: 5px;"><h4 style="margin: 0 0 5px 0; color: var(--color-secondary);">UUID v7 - Time-ordered Random</h4><p style="margin: 0; font-size: 12px;">New draft standard combining timestamp prefix with random data. Database-friendly.</p></div></div></div><div class="content-section"><h2>💼 Practical Use Cases</h2><div class="use-case"><h3>1. 🗄️ Database Primary Keys</h3><p>UUIDs are perfect for distributed databases where multiple servers need to generate unique IDs independently. Unlike auto-incrementing integers, UUIDs don't require coordination between database nodes and don't reveal record counts or creation order.</p></div><div class="use-case"><h3>2. 🔐 API &amp; Session Tokens</h3><p>Generate unique tokens for API authentication, session management, password reset links, and email verification. The randomness of UUID v4 makes them impossible to guess, though they should still be combined with other security measures for sensitive operations.</p></div><div class="use-case"><h3>3. 📁 File &amp; Resource Naming</h3><p>Avoid filename collisions when users upload files or when systems generate reports. UUID-based names ensure uniqueness across all uploads without checking for existing files.</p></div><div class="use-case"><h3>4. 🌐 Distributed Systems</h3><p>Microservices, message queues, and event-driven architectures rely on UUIDs for correlation IDs, transaction tracking, and ensuring message uniqueness across distributed components.</p></div><div class="use-case"><h3>5. 📊 Analytics &amp; Tracking</h3><p>Assign unique identifiers to users, sessions, or events for analytics purposes. UUIDs work well for client-side ID generation where you can't rely on server coordination.</p></div><div class="use-case"><h3>6. 🔗 URL Shorteners &amp; Permalinks</h3><p>Create unpredictable, unique identifiers for shortened URLs or permanent links. The randomness prevents enumeration attacks where malicious users try to guess valid URLs.</p></div></div><div class="content-section"><h2>❓ Frequently Asked Questions</h2><div class="faq-item"><h3>Q: Are UUIDs really unique?</h3><p>A: Practically speaking, yes. A UUID v4 has 122 random bits, giving approximately 5.3 × 10³⁶ possible values. The probability of generating duplicate UUIDs is so low that you'd need to generate 1 billion UUIDs per second for about 85 years to have a 50% chance of a single collision.</p></div><div class="faq-item"><h3>Q: What standard does this tool follow?</h3><p>A: All UUIDs generated strictly conform to RFC 4122 version 4 specification. The version digit is always '4' and the variant bits are set correctly (8, 9, a, or b in the first position after the third hyphen).</p></div><div class="faq-item"><h3>Q: Can I use this tool offline?</h3><p>A: Absolutely! Once the page loads, all UUID generation happens locally in your browser using WebAssembly. No internet connection is needed for generating or copying UUIDs.</p></div><div class="faq-item"><h3>Q: Are UUID v4 values secure enough for passwords?</h3><p>A: No. While UUID v4 is cryptographically random, it's not designed for password use. UUIDs lack sufficient entropy density for passwords, always follow a predictable format, and are typically stored as plaintext. Use a proper password generator with mixed character types instead.</p></div><div class="faq-item"><h3>Q: How do I store UUIDs in a database?</h3><p>A: Most databases support native UUID types (PostgreSQL, MySQL 8.0+). Alternatively, store as CHAR(36) for the hyphenated string or BINARY(16) for compact storage. Native UUID types often offer better indexing performance.</p></div><div class="faq-item"><h3>Q: Why use UUIDs instead of auto-incrementing IDs?</h3><p>A: UUIDs offer several advantages: they can be generated anywhere without coordination, don't reveal record counts or creation order, work in distributed systems, and can be generated client-side. However, they use more storage space and may be slower for indexing in some databases.</p></div></div><div class="content-section"><h2>🎯 Best Practices</h2><ul><li><strong>Choose the Right Version:</strong>Use UUID v4 for general-purpose random IDs. Consider UUID v7 for database keys where time-ordering matters.</li><li><strong>Store Efficiently:</strong>Use native UUID database types when available, or BINARY(16) for compact storage instead of CHAR(36).</li><li><strong>Validate Format:</strong>Always validate UUIDs against the 8-4-4-4-12 pattern and check the version/variant bits when accepting external input.</li><li><strong>Lowercase Preference:</strong>While UUIDs are case-insensitive, prefer lowercase for consistency and better URL compatibility.</li><li><strong>Don't Rely on Security:</strong>UUIDs are unpredictable but not secret. Never use UUIDs as the sole security mechanism—combine with proper authentication.</li><li><strong>Consider Performance:</strong>For high-volume inserts, consider UUID v7 or ULID which maintain chronological ordering and are more index-friendly.</li><li><strong>Index Wisely:</strong>In some databases, random UUIDs can cause index fragmentation. Consider prefix indexing or sorted UUID variants if this becomes an issue.</li></ul></div><div class="content-section"><h2>💡 Pro Tips</h2><ul><li><strong>Quick Copy:</strong>Click directly on the UUID display to copy it instantly—no need to select text</li><li><strong>Batch Generation:</strong>Click the Generate button rapidly to create multiple UUIDs—each click creates a new unique value</li><li><strong>Regex Validation:</strong>Use this pattern to validate UUID v4: <code>^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$</code></li><li><strong>Nil UUID:</strong>The special value 00000000-0000-0000-0000-000000000000 is the nil UUID, often used as a placeholder or default value</li><li><strong>Case Sensitivity:</strong>UUIDs are case-insensitive per the spec, so 'A1B2C3D4' equals 'a1b2c3d4'—normalize to lowercase for consistency</li></ul></div><div class="content-section"><h2>🔗 Related Tools</h2><ul><li><a href="/password/">Password Generator</a> - Generate secure passwords, API keys, and tokens with customizable strength</li></ul></div></div><div class="tool-container"><div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;"><div style="cursor: pointer; user-select: none; font-size: 1.3em; font-weight: bold; margin-bottom: 10px;" class="uuid-value">04723bd8-aa4e-4e28-9d60-7cdec703f1c8</div><button style="width: auto; margin-top: 5px; padding-left: 50px; padding-right: 50px;" class="tool-btn">Generate</button></div></div></div></div></div></div><footer><p style="font-size: 0.9em;"><a href="/about/" style="margin-right: 15px;">About</a><a href="/privacy/" style="margin-right: 15px;">Privacy Policy</a><a href="/terms/" style="margin-right: 15px;">Terms of Service</a><a href="/contact/">Contact</a></p></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20251203/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>

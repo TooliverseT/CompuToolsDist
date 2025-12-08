@@ -6,7 +6,7 @@
   
   <meta name="computools" content="computools">
   <meta name="description" content="Free\ online\ JWT\ encoder\ and\ decoder\.\ Create,\ verify,\ and\ debug\ JSON\ Web\ Tokens\ with\ HMAC\ signature\ support,\ expiration\ checking,\ and\ claim\ inspection\.\ Essential\ tool\ for\ API\ authentication\ and\ security\ testing\.">
-  <meta name="keywords" content="CompuTools, engineering tools, converter, calculator, formatter, unixtime, quaternion, crc, ascii, json, base32, base64, file hash, html encode/decode, url encode/decode, uuid generator, text case converter, password secret generator, regex, color converter, unit converter, format converter, jwt encoder/decoder, text diff comparator">
+  <meta name="keywords" content="CompuTools, engineering tools, converter, calculator, formatter, unixtime, quaternion, crc, ascii, json, base32, base64, file hash, html encode/decode, url encode/decode, uuid generator, text case converter, password secret generator, regex, color converter, unit converter, format converter, jwt encoder/decoder, text diff comparator, markdown previewer, markdown editor, gfm">
   <meta name="author" content="CompuTools">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -37,9 +37,9 @@
   <link rel="stylesheet" href="/thumbnail-5462693de6259b0c.css" integrity="sha384-BiGow/ph6jJ4GjVnzA0yBHnYK56GMRQdkHfV/rtGc/loO06F92IS2OFuhWVP/B2w">
   <link rel="stylesheet" href="/tool-947bed830a429a15.css" integrity="sha384-dFUL60/jbQGEZWhJtRj2kzhIp0Bmzz7DI+4pHZGlIbLtJKU94Ahp3MnBCzZut+sm">
   
-<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202511120101/show_ads_impl.js"></script><script type="module">
-import init, * as bindings from '/computools-da28256d1a4d0976.js';
-const wasm = await init({ module_or_path: '/computools-da28256d1a4d0976_bg.wasm' });
+<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202512020501/show_ads_impl.js"></script><script type="module">
+import init, * as bindings from '/computools-8b8b1dfead817f14.js';
+const wasm = await init({ module_or_path: '/computools-8b8b1dfead817f14_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -56,6 +56,21 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
   
 
   <link rel="icon" href="/favicon-1a8ba4d4617517ad.ico" integrity="sha384-sh+KkiOvcFXwh29z2PE6y5W6JoL/C2uPj8MHwWodi4oVC6f4XcUmhJGk6dmH2Teg">
+
+  <!-- MathJax for LaTeX math rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <script>
       (function() {
@@ -84,7 +99,396 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
 
     gtag('config', 'G-1G0CMRC310');
   </script>
-<link rel="modulepreload" href="/computools-da28256d1a4d0976.js" crossorigin="anonymous" integrity="sha384-W2jddDye04Q0v1Vk9X4/qGdfty69FJumxby5to/q7a1B8gCxfDlWX5YZfIdijThs"><link rel="preload" href="/computools-da28256d1a4d0976_bg.wasm" crossorigin="anonymous" integrity="sha384-tRMukfjSW0I2jKi8LHWtPQ9J+yjt/L7duCULQ57pNI6hxr7MWKElvgYEK6Qh7c77" as="fetch" type="application/wasm"><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"></head>
+<link rel="modulepreload" href="/computools-8b8b1dfead817f14.js" crossorigin="anonymous" integrity="sha384-h3UoTZu+RjEh5acPEyVmLWVtfwwej561XDDUrbqj1kB8acXDzZrPvXu2jQ90WMGE"><link rel="preload" href="/computools-8b8b1dfead817f14_bg.wasm" crossorigin="anonymous" integrity="sha384-vmR+D7N+YCGc6m4oYibwjtLVECcyO0HaEprTzfIpZi22w1qOT8OdEkJ1lvJi1jKL" as="fetch" type="application/wasm"><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
 
 <body><div class="navbar-wrapper"><div class="navbar-container"><a href="/" class="navbar-content">CompuTools</a><div style="justify-content: right;" class="navbar-content subtitle"><a href="/about/" class="subtitle-content">About</a><a href="/contact/" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Switch to 1-Column Layout" class="floating-icon-btn layout-toggle-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="display: block;"><rect x="2" y="2" width="20" height="9" rx="2" fill="currentColor"></rect><rect x="3.5" y="3.5" width="17" height="6" fill="currentColor" opacity="0.3"></rect><rect x="2" y="13" width="20" height="9" rx="2" fill="currentColor"></rect><rect x="3.5" y="14.5" width="17" height="6" fill="currentColor" opacity="0.3"></rect></svg></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="home-wrapper"><h1 class="tool-title">JWT Encoder &amp; Decoder</h1><div class="tool-wrapper"><div class="tool-intro"><div class="content-section"><h2>🔐 What is JWT?</h2><p>JWT (JSON Web Token) is an open standard (RFC 7519) for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed. JWTs are commonly used for authentication and secure information exchange in modern web applications and APIs.</p><p>A JWT consists of three parts separated by dots: Header.Payload.Signature. Each part is Base64 URL encoded, making it safe for transmission in URLs, HTTP headers, and cookies.</p></div><div class="content-section"><h2>⚙️ How This JWT Tool Works</h2><p>This professional JWT tool provides comprehensive encoding, decoding, verification, and analysis capabilities for JSON Web Tokens. Create new JWTs with custom claims or decode existing tokens to inspect their structure and verify signatures.</p><h3>🔥 Key Features:</h3><ul><li><strong>JWT Encoding:</strong> Create JWTs with custom header and payload</li><li><strong>JWT Decoding:</strong> Automatically decode JWT structure as you paste</li><li><strong>HMAC Signature:</strong> Generate and verify signatures with HS256/HS384/HS512</li><li><strong>Three-Part Visualization:</strong> Clear separation of Header, Payload, and Signature</li><li><strong>Expiration Checking:</strong> Automatic validation of exp, iat, and nbf timestamps</li><li><strong>Claims Inspection:</strong> Display standard claims (iss, sub, aud, exp, iat, nbf)</li><li><strong>Real-time Status:</strong> Visual indicators for expired or not-yet-valid tokens</li><li><strong>One-Click Copy:</strong> Copy header, payload, signature, or generated token with a single click</li><li><strong>Client-Side Only:</strong> All processing happens in your browser for security</li></ul></div><div class="content-section"><h2>🏗️ JWT Structure Explained</h2><h3>1. Header</h3><p>The header typically consists of two parts: the token type (JWT) and the signing algorithm being used (e.g., HS256, RS256).</p><div class="example-box"><p><strong>Example Header:</strong></p><pre style="background-color: #f5f5f5; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 11px;">{
   "alg": "HS256",
@@ -99,4 +503,4 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
   base64UrlEncode(header) + "." +
   base64UrlEncode(payload),
   secret
-)</pre></div></div><div class="content-section"><h2>🔑 Supported Algorithms</h2><h3>HMAC Algorithms (Symmetric) - WASM Compatible</h3><ul><li><strong>HS256:</strong> HMAC with SHA-256 - Most commonly used, requires shared secret</li><li><strong>HS384:</strong> HMAC with SHA-384 - Stronger hash, requires shared secret</li><li><strong>HS512:</strong> HMAC with SHA-512 - Strongest HMAC variant, requires shared secret</li></ul><p><strong>When to use:</strong> Simple authentication scenarios, same secret shared between issuer and verifier. These are the most common algorithms for JWT and work perfectly in browser environments.</p><div style="margin-top: 10px;" class="example-box"><p><strong>⚠️ Note on RSA/ECDSA Algorithms:</strong></p><p>This tool currently supports HMAC algorithms only (HS256, HS384, HS512) for WebAssembly compatibility. RSA (RS256, RS384, RS512) and ECDSA (ES256, ES384) algorithms require native cryptographic libraries that are not available in browser environments.</p><p>However, you can still decode JWTs signed with any algorithm - you just won't be able to verify RSA/ECDSA signatures in the browser. The header and payload will be decoded correctly regardless of the algorithm used.</p></div></div><div class="content-section"><h2>📋 Standard JWT Claims</h2><div style="margin: 15px 0;"><h3>Registered Claims</h3><ul><li><strong>iss (Issuer):</strong> Identifies who issued the JWT (e.g., 'https://auth.example.com')</li><li><strong>sub (Subject):</strong> Identifies the subject of the JWT (e.g., user ID '1234567890')</li><li><strong>aud (Audience):</strong> Identifies the recipients the JWT is intended for</li><li><strong>exp (Expiration Time):</strong> Unix timestamp after which the JWT must not be accepted</li><li><strong>iat (Issued At):</strong> Unix timestamp when the JWT was created</li><li><strong>nbf (Not Before):</strong> Unix timestamp before which the JWT must not be accepted</li><li><strong>jti (JWT ID):</strong> Unique identifier for the JWT, prevents replay attacks</li></ul></div></div><div class="content-section"><h2>💼 Common Use Cases</h2><div class="use-case"><h3>1. 🔐 API Authentication</h3><p>JWTs are widely used for API authentication, allowing stateless authentication without session storage on the server.</p><div class="example-box"><p><strong>Workflow:</strong></p><ol><li>User logs in with credentials</li><li>Server generates JWT with user information</li><li>Client includes JWT in Authorization header for subsequent requests</li><li>Server verifies JWT signature and checks expiration</li></ol></div></div><div class="use-case"><h3>2. 🔄 Single Sign-On (SSO)</h3><p>JWTs enable SSO by allowing users to authenticate once and access multiple services without re-authentication.</p></div><div class="use-case"><h3>3. 📡 Secure Information Exchange</h3><p>JWTs provide a secure way to transmit information between parties, with signature verification ensuring data integrity.</p></div><div class="use-case"><h3>4. 🐛 Debugging &amp; Testing</h3><p>Developers use JWT tools to create test tokens, inspect tokens during development, troubleshoot authentication issues, and verify token structure.</p></div></div><div class="content-section"><h2>🎯 Best Practices</h2><ul><li><strong>Keep Secrets Secure:</strong> Never share HMAC secrets publicly or commit them to version control</li><li><strong>Use Strong Secrets:</strong> Use long, random secrets (at least 256 bits for HS256)</li><li><strong>Set Reasonable Expiration:</strong> Short-lived tokens (15-60 minutes) are more secure</li><li><strong>Always Verify Signatures:</strong> Never trust JWT payload without signature verification</li><li><strong>Check Expiration:</strong> Always validate exp, iat, and nbf claims</li><li><strong>Don't Store Sensitive Data:</strong> JWTs are not encrypted - avoid storing passwords or sensitive data</li><li><strong>Use HTTPS:</strong> Always transmit JWTs over HTTPS to prevent interception</li><li><strong>Implement Token Refresh:</strong> Use refresh tokens for long-term access</li><li><strong>Validate All Claims:</strong> Check iss, aud, and other claims beyond just signature</li><li><strong>Consider Algorithm Choice:</strong> HMAC (HS256/384/512) is sufficient for most use cases and has excellent browser support</li></ul></div><div class="content-section"><h2>🔗 Related Tools</h2><ul><li><a href="/crc/">CRC Tool</a> - Calculate CRC checksums with 100+ algorithms for data integrity verification</li><li><a href="/file-hash/">File Hash Calculator</a> - Calculate MD5, SHA-1, SHA-256, SHA-512 hashes for files and text</li></ul></div></div><div class="tool-container"><div style="display: flex; gap: 10px; margin-bottom: 15px; border-bottom: 2px solid var(--color-border); padding-bottom: 5px;"><button style="padding: 10px 20px; font-size: 14px; font-weight: bold; cursor: pointer; border: none; background: var(--color-fourth); color: white; border-radius: 8px 8px 0 0;"><i style="margin-right: 5px;" class="fa-solid fa-lock"></i>Encode JWT</button><button style="padding: 10px 20px; font-size: 14px; font-weight: bold; cursor: pointer; border: none; background: transparent; color: var(--color-font); border-radius: 8px 8px 0 0;"><i style="margin-right: 5px;" class="fa-solid fa-unlock"></i>Decode JWT</button></div><div class="tool-inner"><div style="background-color: var(--color-third); border-radius: 6px; margin-bottom: 10px;"><h3 style="margin: 0 0 8px 0; color: var(--color-secondary); font-size: 14px; border-bottom: 1px solid var(--color-secondary); padding-bottom: 3px;"><i style="margin-right: 6px; font-size: 12px;" class="fa-solid fa-gear"></i>Algorithm &amp; Secret</h3><div style="display: flex; align-items: center; margin-bottom: 6px;"><div style="width: 70%; font-size: 13px;">Algorithm: </div><select style="width: 30%; padding: 2px; font-size: 12px;"><option value="HS256" selected="selected">HS256</option><option value="HS384">HS384</option><option value="HS512">HS512</option></select></div><div style="margin-top: 8px;"><div style="font-size: 13px; margin-bottom: 3px;">Secret Key:</div><input type="text" placeholder="Enter secret key for HMAC signing" style="width: 100%; padding: 4px; font-size: 12px; box-sizing: border-box;"></div></div><div><div style="margin-bottom: 3px; font-size: 14px;" class="tool-subtitle">Header (JSON)</div><textarea style="height: 100px; resize: vertical; overflow: auto; font-family: monospace; font-size: 11px;" placeholder="{&quot;alg&quot;: &quot;HS256&quot;, &quot;typ&quot;: &quot;JWT&quot;}"></textarea></div><div style="margin-top: 10px;"><div style="margin-bottom: 3px; font-size: 14px;" class="tool-subtitle">Payload (JSON)</div><textarea style="height: 150px; resize: vertical; overflow: auto; font-family: monospace; font-size: 11px;" placeholder="{&quot;sub&quot;: &quot;1234567890&quot;, &quot;name&quot;: &quot;John Doe&quot;, &quot;iat&quot;: 1516239022}"></textarea></div><div style="margin-top: 10px; text-align: center;"><button style="padding: 10px 30px; font-size: 14px; font-weight: bold; cursor: pointer; background-color: var(--color-fourth); color: white; border: none; border-radius: 5px;"><i style="margin-right: 5px;" class="fa-solid fa-lock"></i>Generate JWT</button></div></div></div></div></div></div></div><footer><p style="font-size: 0.9em;"><a href="/about/" style="margin-right: 15px;">About</a><a href="/privacy/" style="margin-right: 15px;">Privacy Policy</a><a href="/terms/" style="margin-right: 15px;">Terms of Service</a><a href="/contact/">Contact</a></p></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20251118/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>
+)</pre></div></div><div class="content-section"><h2>🔑 Supported Algorithms</h2><h3>HMAC Algorithms (Symmetric) - WASM Compatible</h3><ul><li><strong>HS256:</strong> HMAC with SHA-256 - Most commonly used, requires shared secret</li><li><strong>HS384:</strong> HMAC with SHA-384 - Stronger hash, requires shared secret</li><li><strong>HS512:</strong> HMAC with SHA-512 - Strongest HMAC variant, requires shared secret</li></ul><p><strong>When to use:</strong> Simple authentication scenarios, same secret shared between issuer and verifier. These are the most common algorithms for JWT and work perfectly in browser environments.</p><div style="margin-top: 10px;" class="example-box"><p><strong>⚠️ Note on RSA/ECDSA Algorithms:</strong></p><p>This tool currently supports HMAC algorithms only (HS256, HS384, HS512) for WebAssembly compatibility. RSA (RS256, RS384, RS512) and ECDSA (ES256, ES384) algorithms require native cryptographic libraries that are not available in browser environments.</p><p>However, you can still decode JWTs signed with any algorithm - you just won't be able to verify RSA/ECDSA signatures in the browser. The header and payload will be decoded correctly regardless of the algorithm used.</p></div></div><div class="content-section"><h2>📋 Standard JWT Claims</h2><div style="margin: 15px 0;"><h3>Registered Claims</h3><ul><li><strong>iss (Issuer):</strong> Identifies who issued the JWT (e.g., 'https://auth.example.com')</li><li><strong>sub (Subject):</strong> Identifies the subject of the JWT (e.g., user ID '1234567890')</li><li><strong>aud (Audience):</strong> Identifies the recipients the JWT is intended for</li><li><strong>exp (Expiration Time):</strong> Unix timestamp after which the JWT must not be accepted</li><li><strong>iat (Issued At):</strong> Unix timestamp when the JWT was created</li><li><strong>nbf (Not Before):</strong> Unix timestamp before which the JWT must not be accepted</li><li><strong>jti (JWT ID):</strong> Unique identifier for the JWT, prevents replay attacks</li></ul></div></div><div class="content-section"><h2>💼 Common Use Cases</h2><div class="use-case"><h3>1. 🔐 API Authentication</h3><p>JWTs are widely used for API authentication, allowing stateless authentication without session storage on the server.</p><div class="example-box"><p><strong>Workflow:</strong></p><ol><li>User logs in with credentials</li><li>Server generates JWT with user information</li><li>Client includes JWT in Authorization header for subsequent requests</li><li>Server verifies JWT signature and checks expiration</li></ol></div></div><div class="use-case"><h3>2. 🔄 Single Sign-On (SSO)</h3><p>JWTs enable SSO by allowing users to authenticate once and access multiple services without re-authentication.</p></div><div class="use-case"><h3>3. 📡 Secure Information Exchange</h3><p>JWTs provide a secure way to transmit information between parties, with signature verification ensuring data integrity.</p></div><div class="use-case"><h3>4. 🐛 Debugging &amp; Testing</h3><p>Developers use JWT tools to create test tokens, inspect tokens during development, troubleshoot authentication issues, and verify token structure.</p></div></div><div class="content-section"><h2>🎯 Best Practices</h2><ul><li><strong>Keep Secrets Secure:</strong> Never share HMAC secrets publicly or commit them to version control</li><li><strong>Use Strong Secrets:</strong> Use long, random secrets (at least 256 bits for HS256)</li><li><strong>Set Reasonable Expiration:</strong> Short-lived tokens (15-60 minutes) are more secure</li><li><strong>Always Verify Signatures:</strong> Never trust JWT payload without signature verification</li><li><strong>Check Expiration:</strong> Always validate exp, iat, and nbf claims</li><li><strong>Don't Store Sensitive Data:</strong> JWTs are not encrypted - avoid storing passwords or sensitive data</li><li><strong>Use HTTPS:</strong> Always transmit JWTs over HTTPS to prevent interception</li><li><strong>Implement Token Refresh:</strong> Use refresh tokens for long-term access</li><li><strong>Validate All Claims:</strong> Check iss, aud, and other claims beyond just signature</li><li><strong>Consider Algorithm Choice:</strong> HMAC (HS256/384/512) is sufficient for most use cases and has excellent browser support</li></ul></div><div class="content-section"><h2>🔗 Related Tools</h2><ul><li><a href="/crc/">CRC Tool</a> - Calculate CRC checksums with 100+ algorithms for data integrity verification</li><li><a href="/file-hash/">File Hash Calculator</a> - Calculate MD5, SHA-1, SHA-256, SHA-512 hashes for files and text</li></ul></div></div><div class="tool-container"><div style="display: flex; gap: 10px; margin-bottom: 15px; border-bottom: 2px solid var(--color-border); padding-bottom: 5px;"><button style="padding: 10px 20px; font-size: 14px; font-weight: bold; cursor: pointer; border: none; background: var(--color-fourth); color: white; border-radius: 8px 8px 0 0;"><i style="margin-right: 5px;" class="fa-solid fa-lock"></i>Encode JWT</button><button style="padding: 10px 20px; font-size: 14px; font-weight: bold; cursor: pointer; border: none; background: transparent; color: var(--color-font); border-radius: 8px 8px 0 0;"><i style="margin-right: 5px;" class="fa-solid fa-unlock"></i>Decode JWT</button></div><div class="tool-inner"><div style="background-color: var(--color-third); border-radius: 6px; margin-bottom: 10px;"><h3 style="margin: 0 0 8px 0; color: var(--color-secondary); font-size: 14px; border-bottom: 1px solid var(--color-secondary); padding-bottom: 3px;"><i style="margin-right: 6px; font-size: 12px;" class="fa-solid fa-gear"></i>Algorithm &amp; Secret</h3><div style="display: flex; align-items: center; margin-bottom: 6px;"><div style="width: 70%; font-size: 13px;">Algorithm: </div><select style="width: 30%; padding: 2px; font-size: 12px;"><option value="HS256" selected="selected">HS256</option><option value="HS384">HS384</option><option value="HS512">HS512</option></select></div><div style="margin-top: 8px;"><div style="font-size: 13px; margin-bottom: 3px;">Secret Key:</div><input type="text" placeholder="Enter secret key for HMAC signing" style="width: 100%; padding: 4px; font-size: 12px; box-sizing: border-box;"></div></div><div><div style="margin-bottom: 3px; font-size: 14px;" class="tool-subtitle">Header (JSON)</div><textarea style="height: 100px; resize: vertical; overflow: auto; font-family: monospace; font-size: 11px;" placeholder="{&quot;alg&quot;: &quot;HS256&quot;, &quot;typ&quot;: &quot;JWT&quot;}"></textarea></div><div style="margin-top: 10px;"><div style="margin-bottom: 3px; font-size: 14px;" class="tool-subtitle">Payload (JSON)</div><textarea style="height: 150px; resize: vertical; overflow: auto; font-family: monospace; font-size: 11px;" placeholder="{&quot;sub&quot;: &quot;1234567890&quot;, &quot;name&quot;: &quot;John Doe&quot;, &quot;iat&quot;: 1516239022}"></textarea></div><div style="margin-top: 10px; text-align: center;"><button style="padding: 10px 30px; font-size: 14px; font-weight: bold; cursor: pointer; background-color: var(--color-fourth); color: white; border: none; border-radius: 5px;"><i style="margin-right: 5px;" class="fa-solid fa-lock"></i>Generate JWT</button></div></div></div></div></div></div></div><footer><p style="font-size: 0.9em;"><a href="/about/" style="margin-right: 15px;">About</a><a href="/privacy/" style="margin-right: 15px;">Privacy Policy</a><a href="/terms/" style="margin-right: 15px;">Terms of Service</a><a href="/contact/">Contact</a></p></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20251203/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>
