@@ -6,144 +6,154 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://www.compu-tools.com/blog/</loc>
+    <lastmod>2025-12-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.compu-tools.com/about/</loc>
     <lastmod>2025-01-27</lastmod>
-    <priority>0.9</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/contact/</loc>
     <lastmod>2025-01-27</lastmod>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/privacy/</loc>
     <lastmod>2025-01-27</lastmod>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/terms/</loc>
     <lastmod>2025-01-27</lastmod>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/quaternion/</loc>
     <lastmod>2025-01-27</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/unix-timestamp/</loc>
     <lastmod>2025-01-27</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/crc/</loc>
     <lastmod>2025-02-08</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/ascii/</loc>
     <lastmod>2025-02-08</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/json/</loc>
     <lastmod>2025-02-22</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/base64/</loc>
     <lastmod>2025-03-01</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/base/</loc>
     <lastmod>2025-03-08</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/file-hash/</loc>
     <lastmod>2025-03-15</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/html/</loc>
     <lastmod>2025-03-30</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/url/</loc>
     <lastmod>2025-04-05</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/uuid/</loc>
     <lastmod>2025-04-06</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/text-case/</loc>
     <lastmod>2025-11-09</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/password/</loc>
     <lastmod>2025-11-10</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/base32/</loc>
     <lastmod>2025-11-16</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/regex/</loc>
     <lastmod>2025-11-16</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/color-converter/</loc>
     <lastmod>2025-11-18</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/unit-converter/</loc>
     <lastmod>2025-11-26</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/format-converter/</loc>
     <lastmod>2025-11-28</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/jwt/</loc>
     <lastmod>2025-11-28</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/diff/</loc>
     <lastmod>2025-11-29</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/markdown/</loc>
     <lastmod>2025-12-08</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/xml/</loc>
     <lastmod>2025-12-09</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/qrcode/</loc>
     <lastmod>2025-12-09</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/http-code-gen/</loc>
     <lastmod>2025-12-10</lastmod>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.compu-tools.com/blog/2025-12-23-introducing-computools</loc>
+    <lastmod>2025-12-23</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.compu-tools.com/otp/</loc>
