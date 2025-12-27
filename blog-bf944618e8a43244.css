@@ -821,3 +821,24 @@ input[type=checkbox] {
 .blog-tag-list:focus {
   outline: none;
 }
+
+.blog-image {
+  text-align: center;
+  margin: 0 auto;
+  width: 50%;
+}
+@media (max-width: 1200px) {
+  .blog-image {
+    width: 70%;
+  }
+}
+@media (max-width: 1024px) {
+  .blog-image {
+    width: 80%;
+  }
+}
+@media (max-width: 768px) {
+  .blog-image {
+    width: 100%;
+  }
+}

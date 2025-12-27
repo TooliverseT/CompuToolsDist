@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="/search-46c1f0580fdfd36b.css" integrity="sha384-f2MnQfsn9m49u3bYAA90Tpn6iZXBgQZegwdLmJB66Yh4LQAwLNvhJtxTR5Ua+z7A">
   <link rel="stylesheet" href="/thumbnail-5462693de6259b0c.css" integrity="sha384-BiGow/ph6jJ4GjVnzA0yBHnYK56GMRQdkHfV/rtGc/loO06F92IS2OFuhWVP/B2w">
   <link rel="stylesheet" href="/tool-947bed830a429a15.css" integrity="sha384-dFUL60/jbQGEZWhJtRj2kzhIp0Bmzz7DI+4pHZGlIbLtJKU94Ahp3MnBCzZut+sm">
-  <link rel="stylesheet" href="/blog-c2623425ea40cb28.css" integrity="sha384-Hn8MWYtlCT9TT0r/sN4NHFWSE6ClSSlh/PIs2hlzg+1KXLT2Y/17u9bfhtibwT+q">
+  <link rel="stylesheet" href="/blog-bf944618e8a43244.css" integrity="sha384-wXfA+XVopREdYtHKxHWs5VGeYMSHK86XF6qJDTWHK4D32gzY/Eps1CHBfXu9S6Kj">
   <link rel="stylesheet" href="/post-4d756b384f72a566.css" integrity="sha384-oIYfu3+X2w+8spUkSmgkfKmCETIWjZeCkfEicKSQs5N9thYklQKqpRNUokk7bPdm">
   <link rel="stylesheet" href="/preview-a2ffadc9729ec228.css" integrity="sha384-fK2yA3oVUL8Po9q1h+mPrSDr+r3ZrEmsud9J88x0Z6bpYDBWXu5lSuo9x04wSM8l">
   <link rel="stylesheet" href="/prism-c451adb7299a4a0.css" integrity="sha384-JHfRrkWbZJu5R/8OJhxu3j19hT9BpfW1isiNYAlkF5vRzQu14JDkB4lWvJX5I4r7">
@@ -110,7 +110,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
 
     gtag('config', 'G-1G0CMRC310');
   </script>
-<link rel="modulepreload" href="/computools-eb21fda43eb48630.js" crossorigin="anonymous" integrity="sha384-OX7Ek5WubYnC4glPaL0h8aYtCJJT+BgS8HgXXsPiolnJQzg6m3Hj+lMdVrolnbA9"><link rel="preload" href="/computools-eb21fda43eb48630_bg.wasm" crossorigin="anonymous" integrity="sha384-ErYpG5H/+RcSbVt6IFe4EVbEEoVRjvWHDB5KbpnNC+nuZ9Wp/5zctOTDIrkZdrw7" as="fetch" type="application/wasm"><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+<link rel="modulepreload" href="/computools-eb21fda43eb48630.js" crossorigin="anonymous" integrity="sha384-m7MrYxqW490GclUghXVt/ZfbIi0E+19nNqk3OrwdTqm7uIgnMLWNN0YkRs3djrxt"><link rel="preload" href="/computools-eb21fda43eb48630_bg.wasm" crossorigin="anonymous" integrity="sha384-IUJXBoPfNC78no5Kfi07vFe9Fw9p1UyD6M11P9WxQBCc/Bjbsc+63s89b7YZ7LYL" as="fetch" type="application/wasm"><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
 .CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
 .CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
 .CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
@@ -506,8 +506,8 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <h2>Why Do We Need CRC?</h2>
 <p>What's most important when transmitting or storing data? <strong>Verifying that the data has been delivered accurately.</strong> Countless factors can corrupt data: noise in network cables, physical damage to storage media, electromagnetic interference, and more.</p>
 <p>CRC is an error detection algorithm designed to solve these problems. Unlike simple checksums, it's based on mathematically rigorous <strong>Polynomial Division</strong>, enabling it to detect complex errors with high probability, such as reordered bytes or specific patterns of bit flips.</p>
-<p align="center">
-  <img src="/blog/assets/crc/crc_workflow.png" alt="Flowchart showing CRC operation from data input through checksum generation, transmission, and receiver-side verification" style="width:50%;">
+<p class="blog-image">
+  <img src="/blog/assets/crc/crc_workflow.png" alt="Flowchart showing CRC operation from data input through checksum generation, transmission, and receiver-side verification">
 </p>
 <p align="center">
   <em>Basic CRC workflow illustrating how a checksum is generated from input data, appended during transmission, and verified on the receiver side.</em>
@@ -517,8 +517,8 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p>CRC is used in <a href="https://standards.ieee.org/standard/802_3-2022.html">Ethernet (IEEE 802.3)</a>, the foundation of internet communication. Every Ethernet frame contains a 32-bit FCS (Frame Check Sequence) field that includes a CRC-32/ISO-HDLC checksum. Network switches and routers automatically verify this value, discarding corrupted frames and requesting retransmission.</p>
 <h3>2. Industrial Automation Sites (MODBUS)</h3>
 <p>The <a href="https://www.modbustools.com/modbus.html">MODBUS RTU</a> protocol, a standard in factory automation systems, uses CRC-16/MODBUS for data integrity. Industrial environments have severe electromagnetic noise, making CRC essential for reliable data transmission between PLCs (Programmable Logic Controllers) and sensors.</p>
-<p align="center">
-  <img src="/blog/assets/crc/modbus_frame_structure.png" alt="MODBUS RTU frame layout with device ID, function code, data bytes, and CRC-16 checksum shown in hexadecimal" style="width:50%;">
+<p class="blog-image">
+  <img src="/blog/assets/crc/modbus_frame_structure.png" alt="MODBUS RTU frame layout with device ID, function code, data bytes, and CRC-16 checksum shown in hexadecimal">
 </p>
 <p align="center">
   <em>MODBUS RTU request frame structure showing Device ID, Function Code, Data field, and CRC-16/MODBUS checksum (01 03 00 00 00 02 C4 0B).</em>
@@ -527,8 +527,8 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p>The <a href="https://www.iso.org/standard/63648.html">CAN (Controller Area Network, ISO 11898)</a> bus, used for communication between ECUs (Electronic Control Units) in modern vehicles, employs CRC-15/CAN. Since safety-critical data like steering and braking is transmitted, functional safety standards such as <a href="https://www.iso.org/standard/68383.html">ISO 26262</a> emphasize these error detection mechanisms.</p>
 <h3>4. Embedded Sensor Communication (1-Wire)</h3>
 <p>Low-power embedded devices like temperature sensors often use <a href="https://www.analog.com/en/resources/technical-articles/understanding-and-using-cyclic-redundancy-checks-with-maxim-1wire-and-ibutton-products.html">Maxim's 1-Wire</a> protocol, which implements CRC-8/MAXIM-DOW. An 8-byte data reading from the sensor is followed by a 1-byte CRC, detecting data corruption that can occur over long cables.</p>
-<p align="center">
-  <img src="/blog/assets/crc/sensor_data_packet.png" alt="Sensor communication packet displaying multiple data bytes followed by a highlighted CRC byte for error detection" style="width:50%;">
+<p class="blog-image">
+  <img src="/blog/assets/crc/sensor_data_packet.png" alt="Sensor communication packet displaying multiple data bytes followed by a highlighted CRC byte for error detection">
 </p>
 <p align="center">
   <em>Embedded sensor data packet with the final CRC byte highlighted, demonstrating CRC-based error detection in low-power communication protocols.</em>
@@ -541,8 +541,8 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <li><strong>XOR Output</strong>: XOR value applied to the final calculation result.</li>
 <li><strong>Input/Output Reflection</strong>: Whether to reverse bit order within bytes during processing.</li>
 </ul>
-<p align="center">
-  <img src="/blog/assets/crc/crc_results.png" alt="Table comparing CRC checksum results for the string Hello using different CRC algorithms and polynomials" style="width:50%;">
+<p class="blog-image">
+  <img src="/blog/assets/crc/crc_results.png" alt="Table comparing CRC checksum results for the string Hello using different CRC algorithms and polynomials">
 </p>
 <p align="center">
   <em>Comparison of CRC results for the same input string ("Hello") across multiple CRC algorithms, highlighting how different polynomials and parameters produce different checksums.</em>
@@ -565,8 +565,8 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <li><strong>Byte Order</strong>: Little Endian (MODBUS uses Little Endian)</li>
 <li><strong>Byte Format</strong>: Byte Separated</li>
 </ul>
-<p align="center">
-  <img src="/blog/assets/crc/crc_input_computools.png" alt="CRC calculation tool interface with HEX input mode selected and a MODBUS RTU request frame entered for checksum computation in Computools." style="width:50%;">
+<p class="blog-image">
+  <img src="/blog/assets/crc/crc_input_computools.png" alt="CRC calculation tool interface with HEX input mode selected and a MODBUS RTU request frame entered for checksum computation in Computools.">
 </p>
 <p align="center">
   <em>CRC calculator interface with hexadecimal input mode selected and a MODBUS request frame entered in Computools</em>
@@ -574,8 +574,8 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <h3>Step 3: Result Verification</h3>
 <p>CRC-16/MODBUS calculation result: <strong>0xC5 0xCD</strong></p>
 <p>Since MODBUS uses little endian, it's appended to the data in <code>0xC5 0xCD</code> order during actual transmission.</p>
-<p align="center">
-  <img src="/blog/assets/crc/crc_output_computools.png" alt="CRC calculation result screen showing the computed CRC value along with little-endian representations in Computools." style="width:50%;">
+<p class="blog-image">
+  <img src="/blog/assets/crc/crc_output_computools.png" alt="CRC calculation result screen showing the computed CRC value along with little-endian representations in Computools.">
 </p>
 <p align="center">
   <em>CRC calculator output showing calculated checksum with little-endian byte order representations in Computools</em>
