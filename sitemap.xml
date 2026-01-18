@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.compu-tools.com/</loc>
     <lastmod>2025-01-27</lastmod>
@@ -190,35 +189,5 @@
     <loc>https://www.compu-tools.com/blog/2025-12-27-crc/</loc>
     <lastmod>2025-12-27</lastmod>
     <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://www.compu-tools.com/blog/assets/crc/crc_workflow.png</image:loc>
-      <image:title>CRC Workflow Diagram</image:title>
-      <image:caption>Flowchart showing CRC operation from data input through checksum generation, transmission, and receiver-side verification</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://www.compu-tools.com/blog/assets/crc/modbus_frame_structure.png</image:loc>
-      <image:title>MODBUS RTU Frame Structure</image:title>
-      <image:caption>MODBUS RTU frame layout with device ID, function code, data bytes, and CRC-16 checksum shown in hexadecimal</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://www.compu-tools.com/blog/assets/crc/sensor_data_packet.png</image:loc>
-      <image:title>Sensor Data Packet with CRC</image:title>
-      <image:caption>Sensor communication packet displaying multiple data bytes followed by a highlighted CRC byte for error detection</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://www.compu-tools.com/blog/assets/crc/crc_results.png</image:loc>
-      <image:title>CRC Algorithm Comparison Table</image:title>
-      <image:caption>Table comparing CRC checksum results for the string Hello using different CRC algorithms and polynomials</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://www.compu-tools.com/blog/assets/crc/crc_input_computools.png</image:loc>
-      <image:title>CRC Calculator Input Interface</image:title>
-      <image:caption>CRC calculation tool interface with HEX input mode selected and a MODBUS RTU request frame entered for checksum computation</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://www.compu-tools.com/blog/assets/crc/crc_output_computools.png</image:loc>
-      <image:title>CRC Calculator Output Result</image:title>
-      <image:caption>CRC calculation result screen showing the computed CRC value along with little-endian representations</image:caption>
-    </image:image>
   </url>
 </urlset>
