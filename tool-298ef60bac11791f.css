@@ -2227,6 +2227,8 @@ input[type=text] {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+  touch-action: none;
+  overscroll-behavior: contain;
 }
 
 .tool-3d-canvas {
@@ -2234,6 +2236,10 @@ input[type=text] {
   width: 100%;
   cursor: grab;
   background-color: #f8f9fa;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  overscroll-behavior: contain;
 }
 .tool-3d-canvas:active {
   cursor: grabbing;
