@@ -2423,7 +2423,6 @@ input[type=text] {
 }
 @media (min-width: 1201px) {
   html[data-layout=column] .tool-results-scroll-wrapper {
-    position: absolute;
     top: 0;
     left: 0;
     right: 4px;
