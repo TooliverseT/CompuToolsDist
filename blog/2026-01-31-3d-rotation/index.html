@@ -1,0 +1,795 @@
+<!DOCTYPE html><html lang="en" data-theme="light" data-layout="grid"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
+  <meta name="robots" content="index, follow">
+  
+  <meta name="computools" content="computools">
+  <meta name="description" content="A\ comprehensive\ guide\ to\ the\ three\ fundamental\ 3D\ rotation\ representations—Quaternions,\ Euler\ Angles,\ and\ Rotation\ Matrices\.\ Learn\ how\ to\ solve\ Gimbal\ Lock,\ implement\ SLERP\ interpolation,\ and\ apply\ these\ concepts\ in\ game\ development,\ robotics,\ and\ AR/VR\ applications\ with\ practical\ optimization\ strategies\.">
+  <meta name="keywords" content="CompuTools, engineering tools, converter, calculator, formatter, unixtime, quaternion, crc, ascii, json, base32, base64, file hash, html encode/decode, url encode/decode, uuid generator, text case converter, password secret generator, regex, color converter, unit converter, format converter, jwt encoder/decoder, text diff comparator, markdown previewer, markdown editor, gfm, xml formatter, xml viewer, qrcode generator, http request code generator, otp generator, elapsed time calculator, cron expression parser, timestamp log, time calculator, tls analyzer">
+  <meta name="author" content="CompuTools">
+
+  <meta property="og:url" content="https://www.compu-tools.com/blog/2026\-01\-31\-3d\-rotation">
+  <meta property="og:title" content="Understanding\ 3D\ Rotation:\ A\ Practical\ Guide\ to\ Quaternions,\ Euler\ Angles,\ and\ Rotation\ Matrices\ \|\ CompuTools\ Blog">
+  <meta property="og:description" content="A\ comprehensive\ guide\ to\ the\ three\ fundamental\ 3D\ rotation\ representations—Quaternions,\ Euler\ Angles,\ and\ Rotation\ Matrices\.\ Learn\ how\ to\ solve\ Gimbal\ Lock,\ implement\ SLERP\ interpolation,\ and\ apply\ these\ concepts\ in\ game\ development,\ robotics,\ and\ AR/VR\ applications\ with\ practical\ optimization\ strategies\.">
+  <meta property="og:image" content="https://www.compu-tools.com/logo.png">
+  <meta property="og:image:height" content="607">
+  <meta property="og:image:width" content="607">
+
+
+  <title>Understanding 3D Rotation: A Practical Guide to Quaternions, Euler Angles, and Rotation Matrices | CompuTools Blog</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="/index-e136cc1df3bfe45c.css" integrity="sha384-wvlwWvvjNXWWkUO1BcmkwYfnyL0CRibanbc9+AoJ8xxMf65AifiKavRUKSzmktzJ">
+  <link rel="stylesheet" href="/navbar-4619365f74ba812f.css" integrity="sha384-SQIHXnOlcle5OGPiC/tUlCJ7H9olAeqaALQAmymmvEXqKAubGBRFRfaqmpYMyyPW">
+  <link rel="stylesheet" href="/search-ab4ec101bbc4b7ba.css" integrity="sha384-zh3uJaTdZI/6upHwIiG5hoFSXmu2Jh+Z/hfRGBFkQQB++9Wt7RGtALiJn2S/CUTo">
+  <link rel="stylesheet" href="/thumbnail-7b8aa72b61658610.css" integrity="sha384-qBjxXF3ab4yfc0K551vTUvekeSP24AJqnM9tch0QU5u3DfA8LMHepC0SwFPGRsN2">
+  <link rel="stylesheet" href="/tool-c2b414a12ce903c3.css" integrity="sha384-rW6RdD465lkmz3DicNwtEzQ0ROW8Wfo/s6ZZZaro6hF3Mq/M7Y4sQ7BpZgOfYr8V">
+  <link rel="stylesheet" href="/blog-cd8593f0518b3966.css" integrity="sha384-ZROu2lIDp7CENWrTrmUVmSGvb9bgGyYfwKH2tWWE675FTVnOyaTCXdfPJopotpu/">
+  <link rel="stylesheet" href="/post-516610383ab8e551.css" integrity="sha384-GHLFcF2pNLwBN9HM2/g+oKoDn3IB1qxiuu/QT2V6s0GJtayW+VqCSVbSLhfg5lRA">
+  <link rel="stylesheet" href="/preview-78400a49ce9a044c.css" integrity="sha384-KkKhTNT93LWWYNEVOwWJ5eZY98Mv3szY2ELIssr5X0EYOI7iMHvGDIDgghObxRml">
+  <link rel="stylesheet" href="/prism-c451adb7299a4a0.css" integrity="sha384-JHfRrkWbZJu5R/8OJhxu3j19hT9BpfW1isiNYAlkF5vRzQu14JDkB4lWvJX5I4r7">
+  
+  
+<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202601270101/show_ads_impl.js?bust=31096506"></script><script type="module">
+import init, * as bindings from '/computools-5cbc80cf14105da2.js';
+const wasm = await init({ module_or_path: '/computools-5cbc80cf14105da2_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+
+  
+
+
+  
+  
+  
+  
+  
+
+  <link rel="icon" href="/favicon-1a8ba4d4617517ad.ico" integrity="sha384-sh+KkiOvcFXwh29z2PE6y5W6JoL/C2uPj8MHwWodi4oVC6f4XcUmhJGk6dmH2Teg">
+
+  <script src="/prism.js"></script>
+
+
+  <!-- MathJax for LaTeX math rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script>
+      (function() {
+          const redirect = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          if (redirect && redirect !== window.location.href) {
+              history.replaceState(null, null, redirect);
+          }
+      })();
+  </script>
+  <script>
+    // JavaScript에서 getTimeZoneOffset 함수 정의
+    function getTimeZoneOffset() {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const offset = new Date().getTimezoneOffset();
+        return { timeZone, offset };
+    }
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9424100257975478" crossorigin="anonymous" data-checked-head="true"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1G0CMRC310');
+  </script>
+<link rel="modulepreload" href="/computools-5cbc80cf14105da2.js" crossorigin="anonymous" integrity="sha384-dfuxMS11qAy7C8pJdyQUuylp19pJdZ6e6yQUMF+DqPoK+AmAr2OPHJVijUjEX0nP"><link rel="preload" href="/computools-5cbc80cf14105da2_bg.wasm" crossorigin="anonymous" integrity="sha384-SFmJ35/845Ml0oEcvzu3foGYfxrOs2znqeALDkzuagXYo9s2buMbxO61b3unIU0c" as="fetch" type="application/wasm"><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+<body><div class="navbar-wrapper"><div class="navbar-container"><a href="/" class="navbar-content">CompuTools</a><div style="justify-content: right;" class="navbar-content subtitle"><a href="/blog/" class="subtitle-content">Blog</a><a href="/about/" class="subtitle-content">About</a><a href="/contact/" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Switch to 1-Column Layout" class="floating-icon-btn layout-toggle-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="display: block;"><rect x="2" y="2" width="20" height="9" rx="2" fill="currentColor"></rect><rect x="3.5" y="3.5" width="17" height="6" fill="currentColor" opacity="0.3"></rect><rect x="2" y="13" width="20" height="9" rx="2" fill="currentColor"></rect><rect x="3.5" y="14.5" width="17" height="6" fill="currentColor" opacity="0.3"></rect></svg></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="home-wrapper"><div class="post-wrapper"><div class="post-metadata"><div class="post-title">Understanding 3D Rotation: A Practical Guide to Quaternions, Euler Angles, and Rotation Matrices</div><div class="post-date">21 January 2026</div><div class="post-excerpt">A comprehensive guide to the three fundamental 3D rotation representations—Quaternions, Euler Angles, and Rotation Matrices. Learn how to solve Gimbal Lock, implement SLERP interpolation, and apply these concepts in game development, robotics, and AR/VR applications with practical optimization strategies.</div><div class="post-tags"><div class="tag">#Mathematical</div></div></div><div class="post-content"><p>Rotating objects in 3D space. It sounds simple enough, but this is actually one of the most fundamental yet challenging problems in modern 3D technology. The reason game characters move smoothly, drones fly stably, and robotic arms precisely grasp objects all comes down to handling rotation transformations correctly. In this article, we'll explore the three core rotation representations, the real-world problems you'll encounter, and how to solve them. If you want to calculate and visualize rotation transformations yourself, check out the <a href="https://compu-tools.com/quaternion/">3D Rotation Converter tool</a>.</p>
+<h2>The Beginning: Why Is Rotation So Complicated?</h2>
+<p>When I first started 3D programming, I thought rotation was simply a matter of "rotate 30 degrees around X, then 45 degrees around Y." But when I implemented inverse kinematics for a robotic arm in a real project, reality hit hard. The arm worked perfectly in simulation, but in the real environment, it would suddenly jitter or rotate in unexpected directions when reaching certain poses. After days of debugging, I discovered the culprit: <strong>Gimbal Lock</strong>—a fundamental limitation of certain rotation representations.</p>
+<p>This experience taught me an important lesson. 3D rotation isn't just about three angles—<strong>the mathematical representation you choose completely determines stability, performance, and implementation complexity</strong>.</p>
+<p class="blog-image">
+  <img src="/blog/assets/rotation/rotation_concept.png" alt="Diagram showing the concept of 3D rotation transformation with reference coordinate axes (X, Y, Z) and rotated axes (X', Y', Z')">
+</p>
+<p align="center">
+  <em>The basic concept of 3D rotation: Reference coordinate axes (red, green, blue) and the transformed axes (X', Y', Z') after rotation</em>
+</p>
+<h2>First Encounter: The Intuitive Appeal and Hidden Pitfalls of Euler Angles</h2>
+<p><strong>Euler Angles</strong> are typically the first rotation representation developers encounter. Open any 3D software like Blender, Unity, or Maya, and the first thing you'll see are Rotation X, Y, Z input fields. This intuitiveness makes them seem like the perfect choice for beginners.</p>
+<h3>An Intuitive Representation</h3>
+<p>Think about an aircraft's orientation:</p>
+<ul>
+<li><strong>Roll (X-axis rotation)</strong>: Tilting side to side</li>
+<li><strong>Pitch (Y-axis rotation)</strong>: Nose moving up or down</li>
+<li><strong>Yaw (Z-axis rotation)</strong>: Turning left or right</li>
+</ul>
+<p>Euler Angles are easy to understand and convenient for direct manipulation. When rotating an object in a game editor, you can instantly decide "I need to rotate 90 degrees around Y" without any extra thought.</p>
+<h3>But Danger Lurks Beneath</h3>
+<p>The problems begin when you actually start computing. Euler Angles have two critical pitfalls.</p>
+<p><strong>First: Gimbal Lock</strong></p>
+<p>When certain angles are reached (typically when Pitch hits ±90 degrees), two rotation axes align and you lose one degree of freedom. This isn't just a theoretical concern—it's a documented historical event. During <a href="https://www.hq.nasa.gov/alsj/e-1344.htm">NASA's Apollo 11 mission</a>, temporary attitude control issues due to Gimbal Lock were reported.</p>
+<p>I faced this exact problem while working on a drone control project. The drone flew perfectly in level flight, but when aggressive maneuvers brought the Pitch angle close to 90 degrees, control suddenly became unstable. The sensor values were fine, but one degree of freedom had vanished in the Euler Angles calculation.</p>
+<p><strong>Second: Rotation Order Dependency</strong></p>
+<p>"90 degrees around X, then 90 degrees around Y" produces a completely different result than "90 degrees around Y, then 90 degrees around X." This is why you must always specify rotation order in practice:</p>
+<ul>
+<li><strong>Aerospace</strong>: ZYX order (Yaw → Pitch → Roll)</li>
+<li><strong>ROS Robotics</strong>: <a href="http://wiki.ros.org/geometry2">XYZ order (RPY) by default</a></li>
+<li><strong>Unity Game Engine</strong>: <a href="https://docs.unity3d.com/ScriptReference/Transform-rotation.html">ZXY internal representation</a></li>
+</ul>
+<p>The same values "30, 45, 60 degrees" yield different results depending on order. This causes major confusion during team collaboration and library integration.</p>
+<p class="blog-image">
+  <img src="/blog/assets/rotation/gimbal_lock.png" alt="Gimbal Lock diagram showing three rotation rings where two axes align, resulting in loss of one degree of freedom">
+</p>
+<p align="center">
+  <em>Gimbal Lock: When Pitch reaches 90 degrees, the Yaw and Roll axes align, losing one degree of freedom</em>
+</p>
+<h2>The Turning Point: Quaternions as the Solution</h2>
+<p>After experiencing the limitations of Euler Angles, I first encountered the concept of <strong>Quaternions</strong>. Honestly, at first, neither the idea of representing 3D rotation with four numbers nor the explanation about extending complex numbers to three dimensions made any sense. But after actually applying them, I finally understood. Quaternions aren't just another representation—they're a mathematical structure that captures the essence of rotation.</p>
+<h3>The Essence of Quaternions</h3>
+<p>Discovered by William Rowan Hamilton in 1843, Quaternions represent rotation using four values <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="0" style="font-size: 119.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D465 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="2"><mjx-c class="mjx-c1D466 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="2"><mjx-c class="mjx-c1D467 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="2"><mjx-c class="mjx-c1D464 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>,</mo><mi>z</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></math></mjx-assistive-mml></mjx-container>. Mathematically:</p>
+<p><mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" display="true" tabindex="0" ctxtmenu_counter="1" style="font-size: 119.5%; position: relative;"><mjx-math display="true" class="MJX-TEX" aria-hidden="true" style="margin-left: 0px; margin-right: 0px;"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45E TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="4"><mjx-c class="mjx-c1D464 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2B"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="3"><mjx-c class="mjx-c1D465 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D456 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2B"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="3"><mjx-c class="mjx-c1D466 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D457 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2B"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="3"><mjx-c class="mjx-c1D467 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>q</mi><mo>=</mo><mi>w</mi><mo>+</mo><mi>x</mi><mi>i</mi><mo>+</mo><mi>y</mi><mi>j</mi><mo>+</mo><mi>z</mi><mi>k</mi></math></mjx-assistive-mml></mjx-container></p>
+<p>where <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="2" style="font-size: 119.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-msup><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D456 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.363em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-script></mjx-msup><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-msup space="4"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D457 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.363em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-script></mjx-msup><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-msup space="4"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.363em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-script></mjx-msup><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="4"><mjx-c class="mjx-c1D456 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D457 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>i</mi><mn>2</mn></msup><mo>=</mo><msup><mi>j</mi><mn>2</mn></msup><mo>=</mo><msup><mi>k</mi><mn>2</mn></msup><mo>=</mo><mi>i</mi><mi>j</mi><mi>k</mi><mo>=</mo><mo>−</mo><mn>1</mn></math></mjx-assistive-mml></mjx-container>. A unit quaternion satisfies <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="3" style="font-size: 119.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mo class="mjx-n"><mjx-c class="mjx-c7C"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45E TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c7C"></mjx-c></mjx-mo></mjx-texatom><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-msqrt space="4"><mjx-sqrt><mjx-surd><mjx-mo class="mjx-sop"><mjx-c class="mjx-c221A TEX-S1"></mjx-c></mjx-mo></mjx-surd><mjx-box style="padding-top: 0.125em;"><mjx-msup><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D464 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.289em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-script></mjx-msup><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2B"></mjx-c></mjx-mo><mjx-msup space="3"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D465 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.289em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-script></mjx-msup><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2B"></mjx-c></mjx-mo><mjx-msup space="3"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D466 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.289em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-script></mjx-msup><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2B"></mjx-c></mjx-mo><mjx-msup space="3"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D467 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.289em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-script></mjx-msup></mjx-box></mjx-sqrt></mjx-msqrt><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="4"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">|</mo><mi>q</mi><mrow data-mjx-texclass="ORD"><mo stretchy="false">|</mo></mrow><mo>=</mo><msqrt><msup><mi>w</mi><mn>2</mn></msup><mo>+</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo>+</mo><msup><mi>z</mi><mn>2</mn></msup></msqrt><mo>=</mo><mn>1</mn></math></mjx-assistive-mml></mjx-container>.</p>
+<p>More intuitively, rotation by angle <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="4" style="font-size: 119.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D703 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>θ</mi></math></mjx-assistive-mml></mjx-container> around axis <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="5" style="font-size: 119.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-texatom texclass="ORD"><mjx-mover><mjx-over style="padding-bottom: 0.105em; padding-left: 0.27em; margin-bottom: -0.516em;"><mjx-mo class="mjx-n" style="width: 0px; margin-left: -0.25em;"><mjx-c class="mjx-c20D7 TEX-V"></mjx-c></mjx-mo></mjx-over><mjx-base><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D463 TEX-I"></mjx-c></mjx-mi></mjx-base></mjx-mover></mjx-texatom><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D463 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D465 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mo><mjx-msub space="2"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D463 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D466 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mo><mjx-msub space="2"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D463 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D467 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mover><mi>v</mi><mo stretchy="false">→</mo></mover></mrow><mo>=</mo><mo stretchy="false">(</mo><msub><mi>v</mi><mi>x</mi></msub><mo>,</mo><msub><mi>v</mi><mi>y</mi></msub><mo>,</mo><msub><mi>v</mi><mi>z</mi></msub><mo stretchy="false">)</mo></math></mjx-assistive-mml></mjx-container> is expressed as:</p>
+<p><mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" display="true" tabindex="0" ctxtmenu_counter="6" style="font-size: 119.5%; position: relative;"><mjx-math display="true" class="MJX-TEX" aria-hidden="true" style="margin-left: 0px; margin-right: 0px;"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45E TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="4"><mjx-c class="mjx-c63"></mjx-c><mjx-c class="mjx-c6F"></mjx-c><mjx-c class="mjx-c73"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D703 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2B"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="3"><mjx-c class="mjx-c73"></mjx-c><mjx-c class="mjx-c69"></mjx-c><mjx-c class="mjx-c6E"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D703 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D463 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D465 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D456 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2B"></mjx-c></mjx-mo><mjx-msub space="3"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D463 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D466 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D457 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2B"></mjx-c></mjx-mo><mjx-msub space="3"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D463 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D467 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>q</mi><mo>=</mo><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>θ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mo>+</mo><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>θ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mo stretchy="false">(</mo><msub><mi>v</mi><mi>x</mi></msub><mi>i</mi><mo>+</mo><msub><mi>v</mi><mi>y</mi></msub><mi>j</mi><mo>+</mo><msub><mi>v</mi><mi>z</mi></msub><mi>k</mi><mo stretchy="false">)</mo></math></mjx-assistive-mml></mjx-container></p>
+<p>It looks complex at first, but the key insight is that <strong>rotation is represented as a combination of rotation axis and rotation amount</strong>.</p>
+<h3>A Dramatic Difference in Practice</h3>
+<p>Let's return to the drone project. After switching from Euler Angles to Quaternions:</p>
+<ol>
+<li><strong>Complete elimination of Gimbal Lock</strong>: Stable control in all orientations</li>
+<li><strong>Improved sensor fusion</strong>: Implemented the <a href="https://x-io.co.uk/open-source-imu-and-ahrs-algorithms/">Madgwick filter algorithm</a> with Quaternions for more accurate IMU sensor data processing</li>
+<li><strong>Smooth animation</strong>: Used SLERP (Spherical Linear Interpolation) for the most natural rotation path when transitioning to target orientations</li>
+</ol>
+<p>SLERP in particular is revolutionary for game development. When a character turns to look behind, Euler Angles create awkward intermediate frames, but Quaternion SLERP always finds the shortest rotation path for smooth movement:</p>
+<div class="code-toolbar"><pre class="language-csharp" tabindex="0"><code class="language-csharp"><span class="token comment">// Unity C# example</span>
+<span class="token class-name">Quaternion</span> smoothRotation <span class="token operator">=</span> Quaternion<span class="token punctuation">.</span><span class="token function">Slerp</span><span class="token punctuation">(</span>
+    currentRotation<span class="token punctuation">,</span> 
+    targetRotation<span class="token punctuation">,</span> 
+    Time<span class="token punctuation">.</span>deltaTime <span class="token operator">*</span> rotationSpeed
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>C#</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<p class="blog-image">
+  <img src="/blog/assets/rotation/slerp_interpolation.png" alt="SLERP interpolation visualization showing the shortest arc path between two quaternions on the unit sphere surface">
+</p>
+<p align="center">
+  <em>SLERP (Spherical Linear Interpolation): Smooth interpolation along the shortest path on the 4D unit sphere between two rotation states</em>
+</p>
+<h3>Why It Became the Industry Standard</h3>
+<p>Today, virtually all modern 3D systems use Quaternions internally:</p>
+<ul>
+<li><strong>Game Engines</strong>: Both Unity and Unreal Engine use Quaternions for internal rotation representation</li>
+<li><strong>Robotics</strong>: <a href="http://wiki.ros.org/tf2">ROS's tf2 library</a> handles all transformations with Quaternions</li>
+<li><strong>Aerospace</strong>: The International Space Station (ISS) uses quaternion-based attitude control, NASA's standard for stable orientation control without Gimbal Lock in space environments. (<a href="https://ntrs.nasa.gov/api/citations/20080009592/downloads/20080009592.pdf">NASA ISS Attitude Control Document</a>)</li>
+<li><strong>AR/VR</strong>: Both ARKit and ARCore provide camera poses as Quaternions</li>
+</ul>
+<p>This is no coincidence. Quaternions offer overwhelming advantages in <strong>stability</strong>, <strong>efficiency</strong>, and <strong>accuracy</strong>.</p>
+<h2>The Third Option: The Practicality of Rotation Matrices</h2>
+<p>There's another way to represent rotation: the <strong>3×3 Rotation Matrix</strong>. Using 9 values seems inefficient, but in certain situations, it can be the best choice.</p>
+<h3>The Power of Linear Algebra</h3>
+<p>A rotation matrix <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="7" style="font-size: 119.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D445 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>R</mi></math></mjx-assistive-mml></mjx-container> satisfies these properties:</p>
+<p><mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" display="true" tabindex="0" ctxtmenu_counter="8" style="font-size: 119.5%; position: relative;"><mjx-math display="true" class="MJX-TEX" aria-hidden="true" style="margin-left: 0px; margin-right: 0px;"><mjx-msup><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D445 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.413em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D447 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msup><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D445 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="4"><mjx-c class="mjx-c1D43C TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mo><mjx-mstyle><mjx-mspace style="width: 1em;"></mjx-mspace></mjx-mstyle><mjx-mo class="mjx-n" space="2"><mjx-c class="mjx-c64"></mjx-c><mjx-c class="mjx-c65"></mjx-c><mjx-c class="mjx-c74"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D445 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="4"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mi>R</mi><mi>T</mi></msup><mi>R</mi><mo>=</mo><mi>I</mi><mo>,</mo><mstyle scriptlevel="0"><mspace width="1em"></mspace></mstyle><mo data-mjx-texclass="OP" movablelimits="true">det</mo><mo stretchy="false">(</mo><mi>R</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn></math></mjx-assistive-mml></mjx-container></p>
+<p>Rotating point <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="9" style="font-size: 119.5%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-texatom texclass="ORD"><mjx-mover><mjx-over style="padding-bottom: 0.105em; padding-left: 0.335em; margin-bottom: -0.516em;"><mjx-mo class="mjx-n" style="width: 0px; margin-left: -0.25em;"><mjx-c class="mjx-c20D7 TEX-V"></mjx-c></mjx-mo></mjx-over><mjx-base><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45D TEX-I"></mjx-c></mjx-mi></mjx-base></mjx-mover></mjx-texatom></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mover><mi>p</mi><mo stretchy="false">→</mo></mover></mrow></math></mjx-assistive-mml></mjx-container> is simply matrix multiplication:</p>
+<p><mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" display="true" tabindex="0" ctxtmenu_counter="10" style="font-size: 119.5%; position: relative;"><mjx-math display="true" class="MJX-TEX" aria-hidden="true" style="margin-left: 0px; margin-right: 0px;"><mjx-texatom texclass="ORD"><mjx-mover><mjx-over style="padding-bottom: 0.105em; padding-left: 0.39em; margin-bottom: -0.516em;"><mjx-mo class="mjx-n" style="width: 0px; margin-left: -0.25em;"><mjx-c class="mjx-c20D7 TEX-V"></mjx-c></mjx-mo></mjx-over><mjx-base><mjx-msup><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45D TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.289em;"><mjx-mo class="mjx-var" size="s"><mjx-c class="mjx-c2032"></mjx-c></mjx-mo></mjx-script></mjx-msup></mjx-base></mjx-mover></mjx-texatom><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="4"><mjx-c class="mjx-c1D445 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mover><mjx-over style="padding-bottom: 0.105em; padding-left: 0.335em; margin-bottom: -0.516em;"><mjx-mo class="mjx-n" style="width: 0px; margin-left: -0.25em;"><mjx-c class="mjx-c20D7 TEX-V"></mjx-c></mjx-mo></mjx-over><mjx-base><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45D TEX-I"></mjx-c></mjx-mi></mjx-base></mjx-mover></mjx-texatom></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow data-mjx-texclass="ORD"><mover><msup><mi>p</mi><mo data-mjx-alternate="1">′</mo></msup><mo stretchy="false">→</mo></mover></mrow><mo>=</mo><mi>R</mi><mrow data-mjx-texclass="ORD"><mover><mi>p</mi><mo stretchy="false">→</mo></mover></mrow></math></mjx-assistive-mml></mjx-container></p>
+<h3>When to Choose Matrices?</h3>
+<p>I was working on camera calibration for a computer vision project. OpenCV's <code>solvePnP</code> function returns rotation as a Rodriguez vector, and converting it for 3D rendering required transformation. Using Rotation Matrices as an intermediate representation made everything clean and organized.</p>
+<p><strong>When Matrices Are Advantageous:</strong></p>
+<ol>
+<li><strong>GPU Optimization</strong>: <a href="https://www.khronos.org/opengl/wiki/Transform">OpenGL</a> and <a href="https://docs.microsoft.com/en-us/windows/win32/direct3d9/transforms">DirectX</a> use 4×4 transformation matrices directly</li>
+<li><strong>Composite Transformations</strong>: Combine rotation, scale, and shear into a single matrix</li>
+<li><strong>Multiple Rotation Composition</strong>: Handle with a single matrix multiplication</li>
+</ol>
+<p>In graphics pipelines, a hybrid approach is common: compute with Quaternions on the CPU, then convert to Matrices when sending to the GPU.</p>
+<p class="blog-image">
+  <img src="/blog/assets/rotation/rotation_matrix.png" alt="Geometric meaning of a 3x3 rotation matrix where each column represents the basis vectors of the rotated coordinate system">
+</p>
+<p align="center">
+  <em>Geometric interpretation of a rotation matrix: The three column vectors represent the X', Y', Z' axis directions after rotation</em>
+</p>
+<h2>Practical Application: Converting Between the Three Representations</h2>
+<p>Now that you understand the theory, you need to know how to convert and apply them in practice. Working with different libraries and frameworks across projects made me realize just how important conversion is.</p>
+<h3>Mathematical Foundation of Conversions</h3>
+<p><strong>Euler Angles to Quaternion</strong> (ZYX order):</p>
+<p><mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" display="true" tabindex="0" ctxtmenu_counter="11" style="font-size: 119.5%; position: relative;"><mjx-math display="true" class="MJX-TEX" aria-hidden="true" style="margin-left: 0px; margin-right: 0px;"><mjx-mtable style="min-width: 26.056em;"><mjx-table><mjx-itable><mjx-mtr><mjx-mtd style="text-align: right; padding-right: 0px;"><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45E TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.014em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D464 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-tstrut></mjx-tstrut></mjx-mtd><mjx-mtd style="text-align: left; padding-left: 0px;"><mjx-mi class="mjx-n"></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="4"><mjx-c class="mjx-c63"></mjx-c><mjx-c class="mjx-c6F"></mjx-c><mjx-c class="mjx-c73"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D719 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="2"><mjx-c class="mjx-c63"></mjx-c><mjx-c class="mjx-c6F"></mjx-c><mjx-c class="mjx-c73"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D703 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="2"><mjx-c class="mjx-c63"></mjx-c><mjx-c class="mjx-c6F"></mjx-c><mjx-c class="mjx-c73"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D713 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2B"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="3"><mjx-c class="mjx-c73"></mjx-c><mjx-c class="mjx-c69"></mjx-c><mjx-c class="mjx-c6E"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D719 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="2"><mjx-c class="mjx-c73"></mjx-c><mjx-c class="mjx-c69"></mjx-c><mjx-c class="mjx-c6E"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D703 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="2"><mjx-c class="mjx-c73"></mjx-c><mjx-c class="mjx-c69"></mjx-c><mjx-c class="mjx-c6E"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D713 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-tstrut></mjx-tstrut></mjx-mtd></mjx-mtr></mjx-itable></mjx-table></mjx-mtable></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt"><mtr><mtd><msub><mi>q</mi><mi>w</mi></msub></mtd><mtd><mi></mi><mo>=</mo><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>ϕ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>θ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>ψ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mo>+</mo><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>ϕ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>θ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>ψ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo></mtd></mtr></mtable></math></mjx-assistive-mml></mjx-container>
+<mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" display="true" tabindex="0" ctxtmenu_counter="12" style="font-size: 119.5%; position: relative;"><mjx-math display="true" class="MJX-TEX" aria-hidden="true" style="margin-left: 0px; margin-right: 0px;"><mjx-mtable style="min-width: 25.954em;"><mjx-table><mjx-itable><mjx-mtr><mjx-mtd style="text-align: right; padding-right: 0px;"><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45E TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.014em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D465 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-tstrut></mjx-tstrut></mjx-mtd><mjx-mtd style="text-align: left; padding-left: 0px;"><mjx-mi class="mjx-n"></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="4"><mjx-c class="mjx-c73"></mjx-c><mjx-c class="mjx-c69"></mjx-c><mjx-c class="mjx-c6E"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D719 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="2"><mjx-c class="mjx-c63"></mjx-c><mjx-c class="mjx-c6F"></mjx-c><mjx-c class="mjx-c73"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D703 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="2"><mjx-c class="mjx-c63"></mjx-c><mjx-c class="mjx-c6F"></mjx-c><mjx-c class="mjx-c73"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D713 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="3"><mjx-c class="mjx-c63"></mjx-c><mjx-c class="mjx-c6F"></mjx-c><mjx-c class="mjx-c73"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D719 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="2"><mjx-c class="mjx-c73"></mjx-c><mjx-c class="mjx-c69"></mjx-c><mjx-c class="mjx-c6E"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D703 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="2"><mjx-c class="mjx-c73"></mjx-c><mjx-c class="mjx-c69"></mjx-c><mjx-c class="mjx-c6E"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D713 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-tstrut></mjx-tstrut></mjx-mtd></mjx-mtr></mjx-itable></mjx-table></mjx-mtable></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt"><mtr><mtd><msub><mi>q</mi><mi>x</mi></msub></mtd><mtd><mi></mi><mo>=</mo><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>ϕ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>θ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>ψ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mo>−</mo><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>ϕ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>θ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>ψ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo></mtd></mtr></mtable></math></mjx-assistive-mml></mjx-container>
+<mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" display="true" tabindex="0" ctxtmenu_counter="13" style="font-size: 119.5%; position: relative;"><mjx-math display="true" class="MJX-TEX" aria-hidden="true" style="margin-left: 0px; margin-right: 0px;"><mjx-mtable style="min-width: 25.896em;"><mjx-table><mjx-itable><mjx-mtr><mjx-mtd style="text-align: right; padding-right: 0px;"><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45E TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.014em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D466 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-tstrut></mjx-tstrut></mjx-mtd><mjx-mtd style="text-align: left; padding-left: 0px;"><mjx-mi class="mjx-n"></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="4"><mjx-c class="mjx-c63"></mjx-c><mjx-c class="mjx-c6F"></mjx-c><mjx-c class="mjx-c73"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D719 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="2"><mjx-c class="mjx-c73"></mjx-c><mjx-c class="mjx-c69"></mjx-c><mjx-c class="mjx-c6E"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D703 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="2"><mjx-c class="mjx-c63"></mjx-c><mjx-c class="mjx-c6F"></mjx-c><mjx-c class="mjx-c73"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D713 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2B"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="3"><mjx-c class="mjx-c73"></mjx-c><mjx-c class="mjx-c69"></mjx-c><mjx-c class="mjx-c6E"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D719 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="2"><mjx-c class="mjx-c63"></mjx-c><mjx-c class="mjx-c6F"></mjx-c><mjx-c class="mjx-c73"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D703 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="2"><mjx-c class="mjx-c73"></mjx-c><mjx-c class="mjx-c69"></mjx-c><mjx-c class="mjx-c6E"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D713 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-tstrut></mjx-tstrut></mjx-mtd></mjx-mtr></mjx-itable></mjx-table></mjx-mtable></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt"><mtr><mtd><msub><mi>q</mi><mi>y</mi></msub></mtd><mtd><mi></mi><mo>=</mo><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>ϕ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>θ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>ψ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mo>+</mo><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>ϕ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>θ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>ψ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo></mtd></mtr></mtable></math></mjx-assistive-mml></mjx-container>
+<mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" display="true" tabindex="0" ctxtmenu_counter="14" style="font-size: 119.5%; position: relative;"><mjx-math display="true" class="MJX-TEX" aria-hidden="true" style="margin-left: 0px; margin-right: 0px;"><mjx-mtable style="min-width: 25.878em;"><mjx-table><mjx-itable><mjx-mtr><mjx-mtd style="text-align: right; padding-right: 0px;"><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45E TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.014em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D467 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-tstrut></mjx-tstrut></mjx-mtd><mjx-mtd style="text-align: left; padding-left: 0px;"><mjx-mi class="mjx-n"></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="4"><mjx-c class="mjx-c63"></mjx-c><mjx-c class="mjx-c6F"></mjx-c><mjx-c class="mjx-c73"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D719 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="2"><mjx-c class="mjx-c63"></mjx-c><mjx-c class="mjx-c6F"></mjx-c><mjx-c class="mjx-c73"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D703 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="2"><mjx-c class="mjx-c73"></mjx-c><mjx-c class="mjx-c69"></mjx-c><mjx-c class="mjx-c6E"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D713 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="3"><mjx-c class="mjx-c73"></mjx-c><mjx-c class="mjx-c69"></mjx-c><mjx-c class="mjx-c6E"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D719 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="2"><mjx-c class="mjx-c73"></mjx-c><mjx-c class="mjx-c69"></mjx-c><mjx-c class="mjx-c6E"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D703 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="2"><mjx-c class="mjx-c63"></mjx-c><mjx-c class="mjx-c6F"></mjx-c><mjx-c class="mjx-c73"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2061"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D713 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-texatom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-tstrut></mjx-tstrut></mjx-mtd></mjx-mtr></mjx-itable></mjx-table></mjx-mtable></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt"><mtr><mtd><msub><mi>q</mi><mi>z</mi></msub></mtd><mtd><mi></mi><mo>=</mo><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>ϕ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>θ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>ψ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mo>−</mo><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>ϕ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>θ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mo stretchy="false">(</mo><mi>ψ</mi><mrow data-mjx-texclass="ORD"><mo>/</mo></mrow><mn>2</mn><mo stretchy="false">)</mo></mtd></mtr></mtable></math></mjx-assistive-mml></mjx-container></p>
+<p><strong>Quaternion to Euler Angles</strong> uses the atan2 function, but requires special handling near Gimbal Lock.</p>
+<h3>Practical Workflow Using Tools</h3>
+<p>The <a href="https://compu-tools.com/quaternion/">3D Rotation Converter</a> lets you verify these conversions in real-time. Let's walk through a real-world example.</p>
+<p><strong>Scenario: Transferring Data from a ROS Robot to Unity Simulation</strong></p>
+<p>You need to visualize a robotic arm's current pose in Unity.</p>
+<ol>
+<li>
+<p><strong>Receive data from ROS</strong>: Quaternion format (e.g., x=0.0, y=0.707, z=0.0, w=0.707)</p>
+</li>
+<li>
+<p><strong>Configure 3D Rotation Converter</strong>:</p>
+<ul>
+<li>Input settings: Select Type as "Quaternion"</li>
+<li>Output settings
+<ul>
+<li>Type: Select "Euler Angles"</li>
+<li>Unit: "Degree" (Unity uses degrees)</li>
+<li>Order: "ZXY" (Unity's internal representation)</li>
+<li>Click "Add Output" button</li>
+</ul>
+</li>
+<li>Enter the received values</li>
+</ul>
+</li>
+</ol>
+<p class="blog-image">
+  <img src="/blog/assets/rotation/converter_interface_input.png" alt="3D Rotation Converter tool interface showing input settings and input fields">
+</p>
+<p align="center">
+  <em>3D Rotation Converter tool: Input settings and interface</em>
+</p>
+<ol start="3">
+<li><strong>Verify rotation direction with 3D visualization</strong>:</li>
+</ol>
+<p class="blog-image">
+  <img src="/blog/assets/rotation/converter_interface_visualization.png" alt="3D Rotation Converter tool interface showing real-time 3D visualization of rotation">
+</p>
+<p align="center">
+  <em>3D Rotation Converter tool: Input settings and interface</em>
+</p>
+<ol start="4">
+<li><strong>Use the results</strong>:
+<ul>
+<li>Apply the converted Euler Angles directly to Unity's <code>transform.eulerAngles</code></li>
+<li>Synchronize the robotic arm simulation in real-time</li>
+</ul>
+</li>
+</ol>
+<p class="blog-image">
+  <img src="/blog/assets/rotation/converter_interface_output.png" alt="3D Rotation Converter tool interface showing conversion output results">
+</p>
+<p align="center">
+  <em>3D Rotation Converter tool: Input settings and interface</em>
+</p>
+<p>The 3D visualization is particularly important in this process. Numbers alone make it hard to verify correctness, but visually confirming the rotated coordinate axes lets you instantly judge whether the orientation is correct.</p>
+<h2>Solving Real-World Problems: Failures and Breakthroughs</h2>
+<p>Even with theory and tools, unexpected problems arise in practice. Let's examine problems developers across various fields have actually encountered and how they were solved.</p>
+<h3>Problem 1: Unnatural Rotation in Animation</h3>
+<p><strong>Situation</strong>: Implementing a feature to rotate a game character to face an enemy</p>
+<p><strong>Initial approach</strong>: Calculate Euler Angles from two direction vectors and linearly interpolate</p>
+<div class="code-toolbar"><pre class="language-python" tabindex="0"><code class="language-python"><span class="token comment"># Wrong approach</span>
+start_euler <span class="token operator">=</span> calculate_euler<span class="token punctuation">(</span>start_direction<span class="token punctuation">)</span>
+end_euler <span class="token operator">=</span> calculate_euler<span class="token punctuation">(</span>end_direction<span class="token punctuation">)</span>
+interpolated <span class="token operator">=</span> lerp<span class="token punctuation">(</span>start_euler<span class="token punctuation">,</span> end_euler<span class="token punctuation">,</span> t<span class="token punctuation">)</span>  <span class="token comment"># Problem!</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>Python</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<p><strong>Issue</strong>: When the character needs to rotate close to 180 degrees, it takes a strange path. Sometimes it even rotates a full 360 degrees.</p>
+<p><strong>Solution process</strong>:</p>
+<ol>
+<li>Recognize the limitations of Euler Angle interpolation (can't find the shortest path beyond 180 degrees)</li>
+<li>Switch to Quaternion SLERP</li>
+<li>Result: Always smooth rotation along the shortest path</li>
+</ol>
+<p>The lesson learned: <strong>Use Quaternions whenever interpolation is needed</strong></p>
+<h3>Problem 2: Unexpected Robot Arm Movement</h3>
+<p><strong>Situation</strong>: Implementing a pick-and-place task with a 6-axis robotic arm</p>
+<p><strong>Problem</strong>: Works fine in most positions, but near fully extended states, joints suddenly rotate rapidly or take strange paths</p>
+<p><strong>Root cause analysis</strong>:
+When the robot arm is fully extended, multiple joint rotation axes align. This state is called a <strong>Singularity</strong>—similar to how when you fully extend your elbow, it becomes difficult to move your fingertip in certain directions. In this state, even small fingertip movements require large joint rotations.</p>
+<p><strong>Solution</strong>:</p>
+<ol>
+<li>Replan the path before the arm becomes fully extended</li>
+<li>Smoothly interpolate intermediate waypoints to the target position using Quaternions</li>
+<li>Intentionally maintain a slightly bent posture near singularities</li>
+</ol>
+<div class="code-toolbar"><pre class="language-python" tabindex="0"><code class="language-python"><span class="token comment"># Simple singularity avoidance example</span>
+<span class="token keyword">def</span> <span class="token function">move_robot_safely</span><span class="token punctuation">(</span>current_pose<span class="token punctuation">,</span> target_pose<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># Divide the path from current to target into 10 steps</span>
+    intermediate_poses <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        t <span class="token operator">=</span> i <span class="token operator">/</span> <span class="token number">10.0</span>
+        <span class="token comment"># Smoothly interpolate with Quaternions</span>
+        interpolated <span class="token operator">=</span> slerp<span class="token punctuation">(</span>current_pose<span class="token punctuation">,</span> target_pose<span class="token punctuation">,</span> t<span class="token punctuation">)</span>
+        intermediate_poses<span class="token punctuation">.</span>append<span class="token punctuation">(</span>interpolated<span class="token punctuation">)</span>
+    
+    <span class="token comment"># Execute each intermediate pose sequentially</span>
+    <span class="token keyword">for</span> pose <span class="token keyword">in</span> intermediate_poses<span class="token punctuation">:</span>
+        move_to_pose<span class="token punctuation">(</span>pose<span class="token punctuation">)</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>Python</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<p><strong>Result</strong>: Smooth, predictable movement while avoiding the dangerous fully-extended posture</p>
+<h3>Problem 3: Object Jitter in AR Apps</h3>
+<p><strong>Situation</strong>: Placing virtual objects in real space using ARKit</p>
+<p><strong>Problem</strong>: Objects jitter slightly when the camera moves</p>
+<p><strong>Cause</strong>:</p>
+<ul>
+<li>Converting Quaternions from ARKit to Euler Angles every frame</li>
+<li>Accumulated floating-point errors</li>
+<li>Sudden value changes near Gimbal Lock</li>
+</ul>
+<p><strong>Solution</strong>:</p>
+<ol>
+<li>Modify the rendering pipeline to use Quaternions directly</li>
+<li>Add filtering (smooth with SLERP using previous values)</li>
+<li>Normalize Quaternions every frame</li>
+</ol>
+<div class="code-toolbar"><pre class="language-swift" tabindex="0"><code class="language-swift"><span class="token comment">// iOS ARKit example</span>
+<span class="token keyword">let</span> currentRotation <span class="token operator">=</span> <span class="token class-name">SCNQuaternion</span><span class="token punctuation">(</span>anchor<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation<span class="token punctuation">)</span>
+<span class="token keyword">let</span> smoothed <span class="token operator">=</span> <span class="token function">simd_slerp</span><span class="token punctuation">(</span>previousRotation<span class="token punctuation">,</span> currentRotation<span class="token punctuation">,</span> <span class="token number">0.3</span><span class="token punctuation">)</span>
+<span class="token keyword">let</span> normalized <span class="token operator">=</span> <span class="token function">simd_normalize</span><span class="token punctuation">(</span>smoothed<span class="token punctuation">)</span>
+node<span class="token punctuation">.</span>rotation <span class="token operator">=</span> normalized
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>Swift</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<p><strong>Result</strong>: Completely stable object rendering</p>
+<h2>Performance and Optimization: A Practitioner's Perspective</h2>
+<p>Even a theoretically perfect solution is useless if it has performance issues. Understanding the performance characteristics of each representation is crucial.</p>
+<h3>Computational Complexity Comparison</h3>
+<p>The computational complexity of each representation is reported in academic literature as follows:</p>
+<table><thead><tr><th>Aspect</th><th>Euler Angles</th><th>Quaternion</th><th>Rotation Matrix</th></tr></thead><tbody>
+<tr><td>Storage</td><td>3 floats (12 bytes)</td><td>4 floats (16 bytes)</td><td>9 floats (36 bytes)</td></tr>
+<tr><td>Rotation composition</td><td>Requires trig functions</td><td>16 mul + 12 add</td><td>27 mul + 18 add</td></tr>
+<tr><td>Vector rotation</td><td>Requires conversion</td><td>~30 operations</td><td>9 mul + 6 add</td></tr>
+<tr><td>Normalization cost</td><td>Not needed</td><td>4 squares + 1 sqrt</td><td>Gram-Schmidt (expensive)</td></tr>
+</tbody></table>
+<p>According to <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7218895/">PMC research "Computationally Efficient 3D Orientation Tracking"</a>, <strong>Quaternions are more computationally efficient than Matrices when composing multiple rotations in sequence</strong>. However, when only single vector transformation is needed, Matrices are more efficient with direct multiplication.</p>
+<p><strong>Key insights</strong> (from <a href="https://www.3dgep.com/understanding-quaternions/">3D Game Engine Programming</a>, <a href="https://gamemath.com/book/orient.html">Game Math</a>):</p>
+<ul>
+<li>Quaternion multiplication (28 operations) composes rotations with ~40% fewer operations than Matrix multiplication (45 operations)</li>
+<li>Matrices accumulate orthonormality distortion during repeated operations, requiring periodic re-normalization</li>
+<li>Euler Angles are the slowest due to mandatory trigonometric (sin, cos) calculations</li>
+</ul>
+<h3>Optimization Checklist</h3>
+<p><strong>1. Quaternion normalization is essential</strong></p>
+<p>Accumulated floating-point errors cause the quaternion to no longer be unit length:</p>
+<div class="code-toolbar"><pre class="language-python" tabindex="0"><code class="language-python"><span class="token keyword">def</span> <span class="token function">normalize_quaternion</span><span class="token punctuation">(</span>q<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    norm <span class="token operator">=</span> np<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span>q<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">**</span><span class="token number">2</span> <span class="token operator">+</span> q<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">**</span><span class="token number">2</span> <span class="token operator">+</span> q<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">**</span><span class="token number">2</span> <span class="token operator">+</span> q<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token operator">**</span><span class="token number">2</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> norm <span class="token operator">&lt;</span> <span class="token number">1e-10</span><span class="token punctuation">:</span>  <span class="token comment"># Handle near-zero case</span>
+        <span class="token keyword">return</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment"># Identity rotation</span>
+    <span class="token keyword">return</span> q <span class="token operator">/</span> norm
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>Python</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<p><strong>2. Eliminate unnecessary conversions</strong></p>
+<p>Round-trip conversions like Euler → Quaternion → Euler amplify errors. Maintain a single representation consistently whenever possible.</p>
+<p><strong>3. Hybrid strategy</strong></p>
+<ul>
+<li><strong>User input</strong>: Euler Angles (intuitive)</li>
+<li><strong>Internal computation</strong>: Quaternion (stable, fast)</li>
+<li><strong>GPU transfer</strong>: Matrix (hardware optimized)</li>
+</ul>
+<h2>Conclusion: A Guide to Making the Right Choice</h2>
+<p>3D rotation isn't just about memorizing mathematical formulas—it's an engineering judgment call about selecting the right tool for each situation. From my experience:</p>
+<p><strong>Use Euler Angles when</strong>:</p>
+<ul>
+<li>Building user interfaces (editors, settings screens)</li>
+<li>Humans need to directly understand and adjust values</li>
+<li>Working within limited rotation ranges where Gimbal Lock won't occur</li>
+</ul>
+<p><strong>Use Quaternions when</strong>:</p>
+<ul>
+<li>Doing real-time animation and interpolation</li>
+<li>Processing and filtering sensor data</li>
+<li>Working with game engines and physics simulations</li>
+<li>Needing stable calculations without singularities</li>
+</ul>
+<p><strong>Use Rotation Matrices when</strong>:</p>
+<ul>
+<li>Working with graphics pipelines (OpenGL, DirectX)</li>
+<li>Integrating with other transformations like scale and shear</li>
+<li>Needing linear algebra-based optimization</li>
+</ul>
+<p>Above all, <strong>use tools to verify your work</strong>. Validating conversion results with a visual tool like <a href="https://compu-tools.com/quaternion/">3D Rotation Converter</a> helps catch countless bugs before they become problems.</p>
+<h3>For Further Study</h3>
+<ol>
+<li><strong>Ken Shoemake</strong>, <a href="https://www.cs.cmu.edu/~kiranb/animation/p245-shoemake.pdf">"Animating Rotation with Quaternion Curves"</a> - The groundbreaking 1985 SIGGRAPH paper that introduced Quaternions to computer graphics</li>
+<li><strong>James Diebel</strong>, <a href="https://www.astro.rug.nl/software/kapteyn-beta/_downloads/attitude.pdf">"Representing Attitude: Euler Angles, Unit Quaternions, and Rotation Vectors"</a> - A complete reference for conversion mathematics</li>
+<li><strong>Eigen Library</strong> <a href="https://eigen.tuxfamily.org/dox/group__Geometry__Module.html">Official Documentation</a> - The standard library for C++ implementation</li>
+</ol>
+<p>Rotation transformations are an eternal companion in 3D programming. It's not something you learn once and forget—every project brings new challenges and solutions. I hope this article serves as a small milestone on your journey.</p>
+</div></div></div></div></div><footer><p style="font-size: 0.9em;"><a href="/about/" style="margin-right: 15px;">About</a><a href="/privacy/" style="margin-right: 15px;">Privacy Policy</a><a href="/terms/" style="margin-right: 15px;">Terms of Service</a><a href="/contact/">Contact</a></p></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20260129/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>
