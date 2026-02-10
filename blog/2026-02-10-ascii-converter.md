@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Everything About ASCII Conversion: How Computers Understand Characters"
-date: 03 February 2026
+date: 10 February 2026
 tags: [Text & Encoding]
 excerpt: From the historical background of ASCII (American Standard Code for Information Interchange) to modern programming practices, explore the core principles of how computers convert characters to numbers. Covers everything about ASCII conversion with real-world development experience, from network protocol debugging and serial communication to security vulnerabilities.
 ---
