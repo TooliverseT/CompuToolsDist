@@ -1,7 +1,6 @@
 .ad-display-wrapper,
 .ad-article-wrapper,
 .ad-infeed-wrapper {
-  width: 100%;
   overflow: hidden;
   min-height: 90px;
 }
