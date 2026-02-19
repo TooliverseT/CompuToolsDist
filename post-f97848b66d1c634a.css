@@ -772,9 +772,8 @@ input[type=checkbox] {
 }
 
 .post-wrapper {
-  padding-left: 55px;
-  padding-right: 55px;
   width: 100%;
+  max-width: 1200px;
 }
 @media (max-width: 1200px) {
   .post-wrapper {
