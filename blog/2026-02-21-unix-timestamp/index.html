@@ -1,0 +1,637 @@
+<!DOCTYPE html><html lang="en" data-theme="light" data-layout="grid"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
+  <meta name="robots" content="index, follow">
+  
+  <meta name="computools" content="computools">
+  <meta name="description" content="Why is the Unix Epoch January 1, 1970? What happens when 32-bit timestamps overflow in 2038? From the historical origins of Unix time to the real-world complexities of timezones, DST, and millisecond handling — a deep dive for developers. Includes practical examples using a custom-built Unix timestamp converter tool.">
+  <meta name="keywords" content="CompuTools, engineering tools, converter, calculator, formatter, unixtime, quaternion, crc, ascii, json, base32, base64, file hash, html encode/decode, url encode/decode, uuid generator, text case converter, password secret generator, regex, color converter, unit converter, format converter, jwt encoder/decoder, text diff comparator, markdown previewer, markdown editor, gfm, xml formatter, xml viewer, qrcode generator, http request code generator, otp generator, elapsed time calculator, cron expression parser, timestamp log, time calculator, tls analyzer">
+  <meta name="author" content="CompuTools">
+
+  <meta property="og:url" content="https://www.compu-tools.com/blog/2026-02-21-unix-timestamp">
+  <meta property="og:title" content="Everything About Unix Timestamps: A Developer's Guide to Handling Time as Numbers | CompuTools Blog">
+  <meta property="og:description" content="Why is the Unix Epoch January 1, 1970? What happens when 32-bit timestamps overflow in 2038? From the historical origins of Unix time to the real-world complexities of timezones, DST, and millisecond handling — a deep dive for developers. Includes practical examples using a custom-built Unix timestamp converter tool.">
+  <meta property="og:image" content="https://www.compu-tools.com/blog/assets/unix_timestamp/timezone_map.png">
+  <meta property="og:image:height" content="607">
+  <meta property="og:image:width" content="607">
+
+
+  <title>Everything About Unix Timestamps: A Developer's Guide to Handling Time as Numbers | CompuTools Blog</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="/index-e136cc1df3bfe45c.css" integrity="sha384-wvlwWvvjNXWWkUO1BcmkwYfnyL0CRibanbc9+AoJ8xxMf65AifiKavRUKSzmktzJ">
+  <link rel="stylesheet" href="/navbar-4619365f74ba812f.css" integrity="sha384-SQIHXnOlcle5OGPiC/tUlCJ7H9olAeqaALQAmymmvEXqKAubGBRFRfaqmpYMyyPW">
+  <link rel="stylesheet" href="/search-ab4ec101bbc4b7ba.css" integrity="sha384-zh3uJaTdZI/6upHwIiG5hoFSXmu2Jh+Z/hfRGBFkQQB++9Wt7RGtALiJn2S/CUTo">
+  <link rel="stylesheet" href="/thumbnail-7b8aa72b61658610.css" integrity="sha384-qBjxXF3ab4yfc0K551vTUvekeSP24AJqnM9tch0QU5u3DfA8LMHepC0SwFPGRsN2">
+  <link rel="stylesheet" href="/tool-c2b414a12ce903c3.css" integrity="sha384-rW6RdD465lkmz3DicNwtEzQ0ROW8Wfo/s6ZZZaro6hF3Mq/M7Y4sQ7BpZgOfYr8V">
+  <link rel="stylesheet" href="/blog-46268125298cc0c7.css" integrity="sha384-LZ8tCYjT9QcYhu1s5bbXvGLUsRyrgwa7M8EkKRxuanHGNuELSbBTYiHpcCU0m77y">
+  <link rel="stylesheet" href="/post-f97848b66d1c634a.css" integrity="sha384-aJSkmGMwi2XsDjtELend0HjyOb59Puq16cnFrAXiCaSQmSqioIR86QEKgEOoHR8I">
+  <link rel="stylesheet" href="/preview-78400a49ce9a044c.css" integrity="sha384-KkKhTNT93LWWYNEVOwWJ5eZY98Mv3szY2ELIssr5X0EYOI7iMHvGDIDgghObxRml">
+  <link rel="stylesheet" href="/ad-1d778f6aa17ab55e.css" integrity="sha384-U8Qz29wBMzbrsc0hlYTcOQhrqX0EbS02LddRoyBNBvhZZI0P6t7zwkstVsQMU4wW">
+  <link rel="stylesheet" href="/prism-c451adb7299a4a0.css" integrity="sha384-JHfRrkWbZJu5R/8OJhxu3j19hT9BpfW1isiNYAlkF5vRzQu14JDkB4lWvJX5I4r7">
+  
+  
+<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202602170101/show_ads_impl.js"></script><script type="module">
+import init, * as bindings from '/computools-968898e241b37495.js';
+const wasm = await init({ module_or_path: '/computools-968898e241b37495_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+
+  
+
+
+  
+  
+  
+  
+  
+
+  <link rel="icon" href="/favicon-1a8ba4d4617517ad.ico" integrity="sha384-sh+KkiOvcFXwh29z2PE6y5W6JoL/C2uPj8MHwWodi4oVC6f4XcUmhJGk6dmH2Teg">
+
+  <script src="/prism.js"></script>
+
+
+  <!-- MathJax for LaTeX math rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script>
+      (function() {
+          const redirect = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          if (redirect && redirect !== window.location.href) {
+              history.replaceState(null, null, redirect);
+          }
+      })();
+  </script>
+  <script>
+    // JavaScript에서 getTimeZoneOffset 함수 정의
+    function getTimeZoneOffset() {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const offset = new Date().getTimezoneOffset();
+        return { timeZone, offset };
+    }
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9424100257975478" crossorigin="anonymous" data-checked-head="true"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1G0CMRC310');
+  </script>
+<link rel="modulepreload" href="/computools-968898e241b37495.js" crossorigin="anonymous" integrity="sha384-c870ZbkuZB+5UNM/h5tKK5ZbMWALS0xGeb+bJg0jTfodupsjWr7qZWePj0/7Q/fr"><link rel="preload" href="/computools-968898e241b37495_bg.wasm" crossorigin="anonymous" integrity="sha384-mjFUibWKH3n/6S4wLnpO0DUvmSUT/sr9xkrNY3iAtcWk1n341mR5o0kx3XgRXvFZ" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Everything About Unix Timestamps: A Developer's Guide to Handling Time as Numbers | CompuTools Blog">
+  <meta name="twitter:description" content="Why is the Unix Epoch January 1, 1970? What happens when 32-bit timestamps overflow in 2038? From the historical origins of Unix time to the real-world complexities of timezones, DST, and millisecond handling — a deep dive for developers. Includes practical examples using a custom-built Unix timestamp converter tool.">
+  <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/unix_timestamp/timezone_map.png">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Everything About Unix Timestamps: A Developer's Guide to Handling Time as Numbers", "description": "Why is the Unix Epoch January 1, 1970? What happens when 32-bit timestamps overflow in 2038? From the historical origins of Unix time to the real-world complexities of timezones, DST, and millisecond handling — a deep dive for developers. Includes practical examples using a custom-built Unix timestamp converter tool.", "url": "https://www.compu-tools.com/blog/2026-02-21-unix-timestamp", "image": ["https://www.compu-tools.com/blog/assets/unix_timestamp/unix_history_timeline.png", "https://www.compu-tools.com/blog/assets/unix_timestamp/unix_timestamp_milestones.png", "https://www.compu-tools.com/blog/assets/unix_timestamp/timezone_map.png", "https://www.compu-tools.com/blog/assets/unix_timestamp/timestamp_to_date_time.png", "https://www.compu-tools.com/blog/assets/unix_timestamp/date_time_to_timestamp.png"], "author": {"@type": "Organization", "name": "CompuTools", "url": "https://www.compu-tools.com"}, "publisher": {"@type": "Organization", "name": "CompuTools", "logo": {"@type": "ImageObject", "url": "https://www.compu-tools.com/logo.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://www.compu-tools.com/blog/2026-02-21-unix-timestamp"}, "datePublished": "2026-02-21", "dateModified": "2026-02-21"}</script>
+  <style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+<body><div class="navbar-wrapper"><div class="navbar-container"><a href="/" class="navbar-content">CompuTools</a><div style="justify-content: right;" class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Switch to 1-Column Layout" class="floating-icon-btn layout-toggle-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="display: block;"><rect x="2" y="2" width="20" height="9" rx="2" fill="currentColor"></rect><rect x="3.5" y="3.5" width="17" height="6" fill="currentColor" opacity="0.3"></rect><rect x="2" y="13" width="20" height="9" rx="2" fill="currentColor"></rect><rect x="3.5" y="14.5" width="17" height="6" fill="currentColor" opacity="0.3"></rect></svg></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper" style="height: auto !important;"><div class="main-content" style="height: auto !important;"><div class="home-wrapper" style="height: auto !important;"><div class="post-wrapper" style="height: auto !important;"><div class="post-metadata"><div class="post-title">Everything About Unix Timestamps: A Developer's Guide to Handling Time as Numbers</div><div class="post-date">21 February 2026</div><div class="post-excerpt">Why is the Unix Epoch January 1, 1970? What happens when 32-bit timestamps overflow in 2038? From the historical origins of Unix time to the real-world complexities of timezones, DST, and millisecond handling — a deep dive for developers. Includes practical examples using a custom-built Unix timestamp converter tool.</div><div class="post-tags"><div class="tag">#Time &amp; Date</div></div></div><div class="ad-article-wrapper"><ins style="display: block; text-align: center; height: 280px;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9424100257975478" data-ad-slot="2892459749" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_0_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=2892459749&amp;adk=1332670204&amp;adf=2826711444&amp;pi=t.ma~as.2892459749&amp;w=1200&amp;fwrn=4&amp;fwrnh=0&amp;lmt=1771647468&amp;rafmt=1&amp;armr=3&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fblog%2F2026-02-21-unix-timestamp%2F&amp;fwr=0&amp;rpe=1&amp;resp_fmts=3&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTEuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1771647603473&amp;bpp=8&amp;bdt=363&amp;idt=-M&amp;shv=r20260218&amp;mjsv=m202602170101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0&amp;nras=1&amp;correlator=7399675989722&amp;frm=20&amp;pv=1&amp;rplot=4&amp;u_tz=0&amp;u_his=43&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=117&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95378429%2C95381490%2C95382852%2C42533294%2C95383669&amp;oid=2&amp;pvsid=8269549080499901&amp;tmod=665271125&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoeE%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=2&amp;uci=a!2&amp;fsb=1&amp;dtd=12" data-google-container-id="a!2" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div><div class="post-content"><p>The way computer systems handle time is fundamentally different from how we read a calendar. We say "February 21, 2026 at 3:00 PM," but a computer represents that exact moment as a single integer. That integer is the <strong>Unix Timestamp</strong>. In this post, we'll explore the historical context, technical principles, and the real-world complexities developers encounter — all hidden behind what appears to be a simple number. If you'd like to follow along hands-on, try the <a href="https://compu-tools.com/unix-timestamp/">Unix Timestamp Converter</a> I built.</p>
+<h2>Why January 1, 1970? The Birth of the Epoch</h2>
+<p>When I first learned programming and studied what the <code>time()</code> function actually returns, a natural question came to mind: "Why 1970? That's not when computers were invented."</p>
+<p>The answer lies in the history of Unix. In 1969, Ken Thompson and Dennis Ritchie at AT&amp;T Bell Labs began developing the Unix operating system. To represent time internally, they defined a single integer as the number of seconds elapsed from a fixed reference point. That reference — close enough to be practical, round enough to be elegant — was set to <strong>January 1, 1970 at 00:00:00 UTC</strong>.</p>
+<p class="blog-image">
+  <img src="/blog/assets/unix_timestamp/unix_history_timeline.png" alt="A timeline diagram showing the history of Unix development from Bell Labs to the present day. Key milestones are marked: 1969 (Unix development begins by K. Thompson and D. Ritchie), January 1 1970 (Unix Epoch defined at 00:00:00 UTC, Timestamp 0), 1973 (kernel rewritten in C for portability), 1983 (4.2 BSD Unix released with network stack), and today in 2026 with 64-bit timestamp as the modern standard.">
+</p>
+<p align="center">
+  <em>Unix Development Timeline: From Bell Labs (1969) to the Modern 64-bit Standard</em>
+</p>
+<p>According to the <a href="https://pubs.opengroup.org/onlinepubs/9699919799/">POSIX standard (IEEE Std 1003.1)</a>, a Unix timestamp is officially defined as "the number of seconds elapsed since the Epoch — January 1, 1970, 00:00:00 UTC." This deceptively simple definition has become the universal language of time across billions of devices worldwide.</p>
+<p>The original implementation used a 16-bit integer, but its range proved too limited and was quickly extended to 32 bits. That decision would leave behind a ticking time bomb — the Year 2038 Problem — which we'll explore later.</p>
+<h2>The Structure of a Timestamp: Elegance in Simplicity</h2>
+<p>The core beauty of Unix timestamps is their <strong>absolute simplicity</strong>. Representing all time as a single integer makes comparison, sorting, and arithmetic remarkably straightforward.</p>
+<div class="code-toolbar"><pre class="language-text" tabindex="0"><code class="language-text">Current time:  1740124800
+One hour later: 1740124800 + 3600   = 1740128400
+One day later:  1740124800 + 86400  = 1740211200
+One week later: 1740124800 + 604800 = 1740729600
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>Plain text</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<p>Simple addition and subtraction are all you need for date arithmetic. In databases, querying records within a time range with <code>WHERE created_at BETWEEN 1740124800 AND 1740211200</code> is a highly efficient integer comparison — no string parsing, no format conversion.</p>
+<p class="blog-image">
+  <img src="/blog/assets/unix_timestamp/unix_timestamp_milestones.png" alt="A horizontal number line diagram showing key Unix timestamp milestones. The line is color-coded by era: cyan for the epoch era, teal for the early 2000s, orange for the 2000s, and red approaching the 2038 limit. Four major points are marked: 0 (Jan 1, 1970, 00:00:00 UTC — Unix Epoch), 1,000,000,000 (Sep 9, 2001, 01:46:40 — the Billennium), 1,234,567,890 (Feb 13, 2009, 23:31:30 — Numeric Sequence), and 2,147,483,647 (Jan 19, 2038, 03:14:07 — 32-bit Signed Maximum, Year 2038 Problem).">
+</p>
+<p align="center">
+  <em>Unix Timestamp Number Line: From the Epoch (0) to the 32-bit Maximum (2,147,483,647)</em>
+</p>
+<h3>Seconds vs. Milliseconds: A Common Source of Bugs</h3>
+<p>One of the most frequent sources of confusion in practice is the <strong>mixing of second-based and millisecond-based timestamps</strong>. JavaScript's <code>Date.now()</code> returns milliseconds, while Python's <code>time.time()</code> returns seconds (as a float).</p>
+<div class="code-toolbar"><pre class="language-javascript" tabindex="0"><code class="language-javascript"><span class="token comment">// JavaScript — milliseconds</span>
+<span class="token known-class-name class-name">Date</span><span class="token punctuation">.</span><span class="token method function property-access">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span>    <span class="token comment">// e.g. 1740124800000  (13 digits)</span>
+
+<span class="token comment">// Python — seconds (float)</span>
+<span class="token keyword module">import</span> time
+time<span class="token punctuation">.</span><span class="token method function property-access">time</span><span class="token punctuation">(</span><span class="token punctuation">)</span>   <span class="token comment">// e.g. 1740124800.123456</span>
+
+<span class="token comment">// Unix standard — seconds (integer)</span>
+<span class="token comment">// e.g. 1740124800  (10 digits)</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>JavaScript</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<p>A practical rule of thumb: a 13-digit number is almost certainly in milliseconds; a 10-digit number is in seconds. Early in my career, I passed a JavaScript-generated timestamp directly into server-side Python code without dividing by 1000. The resulting date calculations were completely wrong, and it took several frustrating hours to track down the cause — a single missing division.</p>
+<h2>Timezones and DST: The Real Complexity of Timestamps</h2>
+<p>Unix timestamps are always UTC. But the real world operates on timezones, and that's where many developers encounter unexpected bugs.</p>
+<h3>The IANA Timezone Database</h3>
+<p>The world contains more than 600 named timezones registered in the <a href="https://www.iana.org/time-zones">IANA (Internet Assigned Numbers Authority) Timezone Database</a>. A simple UTC±N offset is not enough — the database tracks historically changed timezone rules, Daylight Saving Time (DST) transition dates, and the fact that different countries apply DST differently.</p>
+<p><code>America/New_York</code>, for example, transitions between EST (UTC−5) and EDT (UTC−4) twice a year. If a developer doesn't account for these transitions carefully, serious bugs can emerge — I once spent an entire debugging session on an e-commerce project because a promotion's end time fell on the exact night DST ended in the US Eastern timezone, causing the 23:00–23:59 window to occur twice.</p>
+<p class="blog-image">
+  <img src="/blog/assets/unix_timestamp/timezone_map.png" alt="A world map diagram showing major regions grouped by UTC offset and DST status. Regions where DST is applied (North America, Europe, New Zealand) are shown with a blue diagonal stripe pattern. Regions with no DST and a fixed UTC offset year-round (Russia, Middle East, Central Asia, India, East Asia, Southeast Asia, South America, Africa) are shown in solid dark green. Australia is shown with an orange stripe pattern indicating partial DST that varies by state. The legend at the bottom explains the three categories with example IANA timezone names and transition details.">
+</p>
+<p align="center">
+  <em>World Timezone Map: DST Applied Regions (blue stripes), No-DST Fixed-Offset Regions (green), and Partial/Variable DST Regions (orange stripes)</em>
+</p>
+<h2>Practical Guide: Using the Unix Timestamp Converter</h2>
+<p>When applying theory to real work, the <a href="https://compu-tools.com/unix-timestamp/">Unix Timestamp Converter</a> makes it easy to move quickly between timestamps and human-readable dates.</p>
+<h3>Example 1: Interpreting a Timestamp from an API Response</h3>
+<p>Converting a raw timestamp from a REST API response into a readable date:</p>
+<ol>
+<li><strong>Open the <a href="https://compu-tools.com/unix-timestamp/">converter</a></strong></li>
+<li><strong>Input Settings</strong>: Set Input Type → <code>Unix Timestamp</code></li>
+<li><strong>Add Output</strong>:
+<ul>
+<li>Output Type → <code>Date &amp; Time</code></li>
+<li>Timezone → select your target timezone (e.g. <code>Asia/Seoul</code>)</li>
+<li>Format → <code>Mon DD, YYYY, hh:mm:ss AM/PM</code></li>
+<li>Click <strong>Add Output</strong></li>
+</ul>
+</li>
+<li><strong>Enter input value</strong>: <code>1700000000</code></li>
+<li><strong>Read result</strong>: <code>Nov 15, 2023, 07:13:20 AM</code></li>
+</ol>
+<p class="blog-image">
+  <img src="/blog/assets/unix_timestamp/timestamp_to_date_time.png" alt="Screenshot of the Unix Timestamp Converter tool showing the conversion of timestamp 1700000000 to a human-readable date. The Input section shows Unix Timestamp mode selected with the value 1700000000 entered. The Add Output panel on the right shows Date and Time selected as output type, with Asia/Seoul timezone and the Mon DD YYYY format chosen. The result panel at the bottom displays Nov 15, 2023, 07:13:20 AM as the converted output, with a click-to-copy hint visible.">
+</p>
+<p align="center">
+  <em>Unix Timestamp Converter: Converting timestamp 1700000000 to a local date and time (Asia/Seoul)</em>
+</p>
+<p>A particularly useful feature is the ability to <strong>add multiple outputs simultaneously</strong>. When developing an international service that needs to compare times across Seoul, New York, and Tokyo, you can add separate output panels for each timezone and see all results side by side from a single input value.</p>
+<h3>Example 2: Converting a Date to a Timestamp (Deployment Scheduling)</h3>
+<p>In automated deployment pipelines, you sometimes need a Unix timestamp for a specific scheduled time:</p>
+<ol>
+<li><strong>Input Settings</strong>: Set Input Type → <code>Date &amp; Time</code></li>
+<li><strong>Timezone</strong>: In Input Settings, select <code>America/New_York</code></li>
+<li><strong>Add Output</strong>: Set Output Type → <code>Unix Timestamp</code>, then click <strong>Add Output</strong></li>
+<li><strong>Enter date/time</strong>: <code>02/20/2026, 09:00:00 PM</code></li>
+<li><strong>Read result</strong>: <code>1771639200</code> — click the result field to copy it to the clipboard</li>
+</ol>
+<p class="blog-image">
+  <img src="/blog/assets/unix_timestamp/date_time_to_timestamp.png" alt="Screenshot of the Unix Timestamp Converter tool showing Date and Time input mode. The Input Settings panel shows Date and Time selected as input type with America/New_York timezone. The datetime-local input control displays 02/20/2026, 09:00:00 PM. The result panel below shows the Unix Timestamp output as 1771639200, with a click-to-copy interaction hint. A Now button is visible at the top right of the input section for quickly inserting the current time.">
+</p>
+<p align="center">
+  <em>Unix Timestamp Converter: Converting a scheduled datetime (America/New_York) to a Unix timestamp for deployment automation</em>
+</p>
+<h2>The Year 2038 Problem: History Repeating Itself</h2>
+<p>If you remember Y2K, the Year 2038 Problem will feel familiar — though technically, it is far more straightforward.</p>
+<p>The maximum value of a <strong>signed 32-bit integer</strong> is <code>2,147,483,647</code>. That value corresponds exactly to <strong>January 19, 2038 at 03:14:07 UTC</strong>. When a 32-bit system's clock reaches this point, the timestamp overflows into a negative number, and the interpreted date wraps back to <strong>December 13, 1901</strong>.</p>
+<div class="code-toolbar"><pre class="language-text" tabindex="0"><code class="language-text">2147483647  → 2038-01-19 03:14:07 UTC  (32-bit maximum)
+2147483648  → overflows to -2147483648
+            → interpreted as 1901-12-13 20:45:52 UTC
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>Plain text</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<p>As noted by <a href="https://www.openbsd.org/">OpenBSD security advisories</a>, this is not just a legacy code problem. Embedded systems, industrial control equipment, and network device firmware with long update cycles face real risk. The solution is well-established: <strong>64-bit timestamps</strong> extend the representable range to roughly <strong>292 billion years</strong>. The Linux kernel began transitioning 32-bit platforms to 64-bit <code>time_t</code> starting around 2012 (<a href="https://kernelnewbies.org/y2038">Linux kernel time64_t transition</a>), and modern 64-bit systems are already safe. The converter tool featured in this post also uses 64-bit integers internally and is not affected by this problem.</p>
+<h2>Leap Seconds: Why Unix Timestamps Aren't Perfect</h2>
+<p>There is one lesser-known fact about Unix timestamps: they <strong>ignore leap seconds</strong>.</p>
+<p>Earth's rotation is not perfectly constant, causing a gradual divergence between astronomical time (UT1) and atomic-clock-based Coordinated Universal Time (UTC). To correct this, the <a href="https://www.iers.org/">International Earth Rotation and Reference Systems Service (IERS)</a> periodically inserts one-second adjustments called leap seconds. From 1972 through 2024, 27 leap seconds have been added in total.</p>
+<p>Unix timestamps treat every day as exactly 86,400 seconds. When a leap second is inserted, the timestamp either repeats the same value twice (leap smearing) or skips it entirely, depending on the system's implementation. This can cause subtle discrepancies in cross-system time synchronization.</p>
+<p>For most applications, a 27-second drift is insignificant. But for financial trading systems, scientific instrumentation, or any domain requiring sub-second precision across distributed systems, this distinction matters.</p>
+<h2>Timestamp Formats and International Standards</h2>
+<p>When developers exchange date and time data, two standards have emerged as the dominant choices.</p>
+<h3>ISO 8601: Readable by Humans and Machines Alike</h3>
+<p><a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> is the international standard for representing dates and times, defining formats like <code>2026-02-21T15:30:00+09:00</code>. Its key advantage is that it embeds timezone offset information, and crucially, <strong>alphabetical string sorting and chronological sorting produce identical results</strong> — which makes it especially safe to use in logs and databases without additional parsing.</p>
+<h3>RFC 3339: ISO 8601 Profiled for Internet Use</h3>
+<p><a href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> is a stricter profile of ISO 8601 designed specifically for internet protocols. The Google API Design Guide, GitHub API, and AWS timestamp formats all follow RFC 3339. When designing a REST API, the choice typically comes down to RFC 3339 strings versus Unix integers. My personal preference is <strong>ISO 8601 / RFC 3339 for any field that humans will read or debug</strong>, and <strong>Unix timestamps for internal processing where performance matters</strong>.</p>
+<h2>Practical Patterns: Handling Timestamps Correctly</h2>
+<p>These are the principles I've settled on after debugging timestamp-related issues across multiple production systems.</p>
+<p><strong>Store in UTC, display in local time.</strong> This single rule prevents the majority of timezone-related bugs. Store UTC timestamps in the database and convert to local timezone only at the presentation layer.</p>
+<p><strong>Document the unit explicitly.</strong> Specify whether a timestamp field is in seconds or milliseconds in every function signature and API contract. Encoding the unit in the name — such as <code>created_at_ms</code> — is a simple, effective convention.</p>
+<p><strong>Test edge cases.</strong> DST transition times, year boundaries, and February 29 on leap years are where time-related logic most often breaks. Include these boundary values in automated tests.</p>
+<p><strong>Default to 64-bit.</strong> When designing new systems, use <code>int64</code> or <code>BIGINT</code> from the start to avoid the Year 2038 Problem entirely. In MySQL, the <code>TIMESTAMP</code> type is affected, but <code>DATETIME</code> and <code>BIGINT</code> are not.</p>
+<h2>Conclusion: The Philosophy of Time in a Single Number</h2>
+<p>Unix timestamps began with a remarkably simple idea: "how many seconds have passed since a fixed point?" Everything follows from representing that answer as a single integer.</p>
+<p>But behind that simplicity lies decades of accumulated real-world complexity — timezones, DST transitions, leap seconds, seconds-versus-milliseconds confusion, and 32-bit overflow. Developers who understand these layers debug faster and build more robust systems than those who treat timestamps as opaque numbers.</p>
+<p>The next time you encounter <code>1740124800</code> in a log file, or need to interpret a timestamp from an API response, open the <a href="https://compu-tools.com/unix-timestamp/">Unix Timestamp Converter</a> and convert it directly. As you move back and forth between numbers and dates, the computer's model of time becomes intuitive rather than abstract.</p>
+<hr>
+<h3>References</h3>
+<ol>
+<li><strong>POSIX Standard</strong> — <a href="https://pubs.opengroup.org/onlinepubs/9699919799/">IEEE Std 1003.1: System Interfaces</a> — Official definition of Unix timestamps and the <code>time()</code> function specification</li>
+<li><strong>IANA Timezone Database</strong> — <a href="https://www.iana.org/time-zones">Time Zone Database (tzdata)</a> — Global timezone rules and DST transition date database</li>
+<li><strong>RFC 3339</strong> — <a href="https://tools.ietf.org/html/rfc3339">Date and Time on the Internet</a> — Standard date/time format for internet protocols</li>
+<li><strong>Linux Kernel Newbies</strong> — <a href="https://kernelnewbies.org/y2038">Y2038 time_t transition</a> — Documentation of the Linux kernel's migration to 64-bit timestamps</li>
+<li><strong>Python Official Docs</strong> — <a href="https://docs.python.org/3/library/time.html">time — Time access and conversions</a> — Standard library reference for handling Unix timestamps in Python</li>
+</ol>
+</div><div class="ad-display-wrapper post-ad" style="height: auto !important; min-height: 0px !important;"><ins style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7315862436" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_1_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7315862436&amp;adk=3322714490&amp;adf=1159817851&amp;pi=t.ma~as.7315862436&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1771647468&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fblog%2F2026-02-21-unix-timestamp%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTEuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1771647603473&amp;bpp=2&amp;bdt=363&amp;idt=2&amp;shv=r20260218&amp;mjsv=m202602170101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0%2C1200x280&amp;nras=1&amp;correlator=7399675989722&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=43&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=502&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95378429%2C95381490%2C95382852%2C42533294%2C95383669&amp;oid=2&amp;pvsid=8269549080499901&amp;tmod=665271125&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoeE%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=3&amp;uci=a!3&amp;fsb=1&amp;dtd=14" data-google-container-id="a!3" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div></div></div></div></div><footer><p style="font-size: 0.9em;"><a href="/about/" style="margin-right: 15px;">About</a><a href="/privacy/" style="margin-right: 15px;">Privacy Policy</a><a href="/terms/" style="margin-right: 15px;">Terms of Service</a><a href="/contact/">Contact</a></p></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20260218/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>
