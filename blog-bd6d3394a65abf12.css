@@ -2184,6 +2184,7 @@ input[type=checkbox] {
 .blog-popular-item {
   display: flex;
   align-items: center;
+  color: var(--color-font);
 }
 
 .blog-popular-link {
@@ -2587,6 +2588,7 @@ input[type=checkbox] {
   flex-direction: column;
   gap: 6px;
   width: 100%;
+  color: var(--color-font);
 }
 
 .blog-recent-item-link {
