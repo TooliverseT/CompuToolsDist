@@ -1,0 +1,662 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
+  <meta name="robots" content="index, follow">
+  
+  <meta name="computools" content="computools">
+  <meta name="description" content="Why Base32 is used in 2FA and TOTP instead of Base64, what distinguishes the three variants—Standard, Hex, and Crockford—and where unexpected pitfalls like DST conflicts lurk. We dive into the world of binary encoding alongside a hands-on Base32 encoder/decoder tool built from scratch.">
+  <meta name="keywords" content="CompuTools, engineering tools, converter, calculator, formatter, unixtime, quaternion, crc, ascii, json, base32, base64, file hash, html encode/decode, url encode/decode, uuid generator, text case converter, password secret generator, regex, color converter, unit converter, format converter, jwt encoder/decoder, text diff comparator, markdown previewer, markdown editor, gfm, xml formatter, xml viewer, qrcode generator, http request code generator, otp generator, elapsed time calculator, cron expression parser, timestamp log, time calculator, tls analyzer">
+  <meta name="author" content="CompuTools">
+
+  <meta property="og:url" content="https://www.compu-tools.com/blog/2026-03-01-base32">
+  <meta property="og:title" content="Mastering Base32 Encoding and Decoding: From 2FA Secrets to File Encoding | CompuTools Blog">
+  <meta property="og:description" content="Why Base32 is used in 2FA and TOTP instead of Base64, what distinguishes the three variants—Standard, Hex, and Crockford—and where unexpected pitfalls like DST conflicts lurk. We dive into the world of binary encoding alongside a hands-on Base32 encoder/decoder tool built from scratch.">
+  <meta property="og:image" content="https://www.compu-tools.com/blog/assets/base32/base32_encoding_process.png">
+  <meta property="og:image:height" content="607">
+  <meta property="og:image:width" content="607">
+
+
+  <title>Mastering Base32 Encoding and Decoding: From 2FA Secrets to File Encoding | CompuTools Blog</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="/index-67ecb5ab415d9933.css" integrity="sha384-MNY82UHAqpYnaguMn2ooqXXOBVcsMd2YoN7xVzJurKoASI96hnqcUA8PrvRCfKLd">
+  <link rel="stylesheet" href="/navbar-cad7648ab9df4b4f.css" integrity="sha384-VTRTHBI1ItQaxALdK8YlNvaZ3MPtW96QEnPHrjamJ0bsjLWyZZzogeH6copA1Fp/">
+  <link rel="stylesheet" href="/search-2faf0955842da936.css" integrity="sha384-9Wj20My1Eb/ThjafElwjia5lPNzwPOTxNdV9O85niKUuyc6fU0EorqZhIyo+IG1S">
+  <link rel="stylesheet" href="/thumbnail-1fd25b2c845b1346.css" integrity="sha384-HnqRKTVeHShdfcqwNw3w8P8paW9Os7OPAkQmXhvQS7CQDdlh5mRCKpHjrUs8Ynpu">
+  <link rel="stylesheet" href="/tool-1ccfa7ec9a6e5725.css" integrity="sha384-M1plGvKGPqFVyBEvGe24dif3DUBaREaHSTuWLF5XrvO6MLGGmzDr8V6ncQmZNcjS">
+  <link rel="stylesheet" href="/blog-4fecd0bc2c7096e6.css" integrity="sha384-k61ONcei+JAMDHfY/2rc2sO2qAQtfN+CUlJ/ic38FgGfiKQfYj2X37FnoGk+41DC">
+  <link rel="stylesheet" href="/post-753c7206094e5318.css" integrity="sha384-a1TI/GqJJsgGRGjc03es3I7vOIghGCVC6u5rKBWtggv7o1yaSCE41kx5YgY23ODC">
+  <link rel="stylesheet" href="/preview-145202bedf84463d.css" integrity="sha384-Zz5sVYmWB+jtcFnkl+kB4w+zbAsWN09IwPO2/bC7H2kb6X1McJu3KBZJgfo4I+kl">
+  <link rel="stylesheet" href="/ad-8a234a142934983d.css" integrity="sha384-9nFe62LVg0a3Y4qzbES8GdTK09AVLj+wmi4qDNGj0CpxQicChknwir1v5o0dEwKH">
+  <link rel="stylesheet" href="/prism-c451adb7299a4a0.css" integrity="sha384-JHfRrkWbZJu5R/8OJhxu3j19hT9BpfW1isiNYAlkF5vRzQu14JDkB4lWvJX5I4r7">
+  
+  
+<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202602250101/show_ads_impl.js?bust=31096974"></script><script type="module">
+import init, * as bindings from '/computools-701bdafba34284bb.js';
+const wasm = await init({ module_or_path: '/computools-701bdafba34284bb_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+
+  
+
+
+  
+  
+  
+  
+  
+
+  <link rel="icon" href="/favicon-1a8ba4d4617517ad.ico" integrity="sha384-sh+KkiOvcFXwh29z2PE6y5W6JoL/C2uPj8MHwWodi4oVC6f4XcUmhJGk6dmH2Teg">
+
+  <script src="/prism.js"></script>
+
+
+  <!-- MathJax for LaTeX math rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script>
+      (function() {
+          const redirect = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          if (redirect && redirect !== window.location.href) {
+              history.replaceState(null, null, redirect);
+          }
+      })();
+  </script>
+  <script>
+    // JavaScript에서 getTimeZoneOffset 함수 정의
+    function getTimeZoneOffset() {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const offset = new Date().getTimezoneOffset();
+        return { timeZone, offset };
+    }
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9424100257975478" crossorigin="anonymous" data-checked-head="true"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1G0CMRC310');
+  </script>
+<link rel="modulepreload" href="/computools-701bdafba34284bb.js" crossorigin="anonymous" integrity="sha384-qC3Uhpu+iAnGcF+YQh2iHNiL9tKxAseIU/ebWFXBBbVFJDY15kF+WsrScI8BDAIW"><link rel="preload" href="/computools-701bdafba34284bb_bg.wasm" crossorigin="anonymous" integrity="sha384-TzCPcW27OtbulM0nP85f0/r/D7elBulVOhVTyuGlkMXixKlEv++XUpthzbyTXOn/" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mastering Base32 Encoding and Decoding: From 2FA Secrets to File Encoding | CompuTools Blog">
+  <meta name="twitter:description" content="Why Base32 is used in 2FA and TOTP instead of Base64, what distinguishes the three variants—Standard, Hex, and Crockford—and where unexpected pitfalls like DST conflicts lurk. We dive into the world of binary encoding alongside a hands-on Base32 encoder/decoder tool built from scratch.">
+  <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/base32/base32_encoding_process.png">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Mastering Base32 Encoding and Decoding: From 2FA Secrets to File Encoding", "description": "Why Base32 is used in 2FA and TOTP instead of Base64, what distinguishes the three variants—Standard, Hex, and Crockford—and where unexpected pitfalls like DST conflicts lurk. We dive into the world of binary encoding alongside a hands-on Base32 encoder/decoder tool built from scratch.", "url": "https://www.compu-tools.com/blog/2026-03-01-base32", "image": ["https://www.compu-tools.com/blog/assets/base32/base64_vs_base32_comparison.png", "https://www.compu-tools.com/blog/assets/base32/base32_encoding_process.png", "https://www.compu-tools.com/blog/assets/base32/tool_encode_totp_secret.png", "https://www.compu-tools.com/blog/assets/base32/tool_three_variants_comparison.png"], "author": {"@type": "Organization", "name": "CompuTools", "url": "https://www.compu-tools.com"}, "publisher": {"@type": "Organization", "name": "CompuTools", "logo": {"@type": "ImageObject", "url": "https://www.compu-tools.com/logo.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://www.compu-tools.com/blog/2026-03-01-base32"}, "datePublished": "2026-03-01", "dateModified": "2026-03-01"}</script>
+  <style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+<body><div class="navbar-wrapper"><div class="navbar-container"><a href="/" class="navbar-content">CompuTools</a><div style="justify-content: right;" class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper" style="height: auto !important;"><div class="main-content" style="height: auto !important;"><div class="page-with-sidebar" style="height: auto !important;"><aside class="sidebar-left"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper sidebar-ad"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside><div class="page-main" style="height: auto !important;"><div class="home-wrapper" style="height: auto !important;"><div class="post-wrapper" style="height: auto !important;"><div class="post-metadata"><div class="post-title">Mastering Base32 Encoding and Decoding: From 2FA Secrets to File Encoding</div><div class="post-date">01 March 2026</div><div class="post-excerpt">Why Base32 is used in 2FA and TOTP instead of Base64, what distinguishes the three variants—Standard, Hex, and Crockford—and where unexpected pitfalls like DST conflicts lurk. We dive into the world of binary encoding alongside a hands-on Base32 encoder/decoder tool built from scratch.</div><div class="post-tags"><div class="tag">Encoding &amp; Decoding</div></div></div><div class="ad-article-wrapper"><ins style="display: block; text-align: center; height: 280px;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9424100257975478" data-ad-slot="2892459749" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_0_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=2892459749&amp;adk=2691950054&amp;adf=2584940624&amp;pi=t.ma~as.2892459749&amp;w=1200&amp;fwrn=4&amp;fwrnh=0&amp;lmt=1772348587&amp;rafmt=1&amp;armr=3&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fblog%2F2026-03-01-base32%2F&amp;fwr=0&amp;rpe=1&amp;resp_fmts=3&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTQuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1772348734645&amp;bpp=1&amp;bdt=420&amp;idt=0&amp;shv=r20260225&amp;mjsv=m202602250101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0&amp;nras=1&amp;correlator=5071030851931&amp;frm=20&amp;pv=1&amp;rplot=4&amp;u_tz=0&amp;u_his=45&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=122&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95366177%2C95378425%2C95381340%2C95381490%2C95382852%2C95383859%2C31096974&amp;oid=2&amp;pvsid=4922214987433582&amp;tmod=1356490428&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=2&amp;uci=a!2&amp;fsb=1&amp;dtd=16" data-google-container-id="a!2" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div><div class="post-content"><p>I still remember the day I had to manually enter a Google Authenticator secret key. In an era where scanning a QR code is the norm, the environment I was in had no camera. The string on the screen was <code>JBSWY3DPEBLW64TM</code> — a mixture of letters and digits that had to be entered exactly right for the OTP to work. That was the first time I wondered: <em>Why not just use numbers? Why no lowercase letters? And why this particular format?</em></p>
+<p>The answer was <strong>Base32</strong>. In this post, I'll walk through the origins of Base32, its mathematical principles, the differences between its three variants, and the real-world pitfalls you'll encounter. If you want to follow along hands-on, the <a href="https://compu-tools.com/base32/">Base32 encoder/decoder</a> I built will make the concepts click much faster.</p>
+<h2>The Birth of Base32: A Compromise Between Humans and Machines</h2>
+<p>Computers process data as binary (0s and 1s), but humans struggle to read or type raw binary. To bridge this gap, <strong>binary-to-text encoding</strong> techniques have evolved to convert binary data into a human-friendly text format.</p>
+<p>The first widely adopted standard was <strong>Base64</strong>, formalized in <a href="https://www.rfc-editor.org/rfc/rfc2045">RFC 2045</a> as part of the MIME specification. It uses 64 characters — A–Z, a–z, 0–9, +, and / — and encodes 3 bytes into 4 characters, resulting in only about 33% overhead. It's used extensively in email attachments, HTTP headers, JWT tokens, and more.</p>
+<p>So why was Base32 needed? Base64's biggest drawback is that it's <strong>case-sensitive</strong>: <code>ABC</code> and <code>abc</code> represent completely different values. In environments like file systems, DNS records, and legacy terminals that treat uppercase and lowercase as identical, this causes serious problems. Human error is another factor — over the phone or when writing by hand, people frequently confuse <code>O</code> (the letter) with <code>0</code> (zero), <code>I</code> with <code>1</code>, and so on.</p>
+<p>Base32 was designed to address exactly these issues. Standard Base32, defined in <a href="https://www.rfc-editor.org/rfc/rfc4648">RFC 4648</a>, uses only 32 characters — A–Z and 2–7 — all <strong>uppercase letters and digits</strong>. This eliminates case sensitivity, and by excluding the digits 0, 1, and 8 (which can be confused with O, I, and B respectively), it reduces ambiguity. The trade-off is a higher encoding overhead of roughly 60%, since each character represents only 5 bits instead of Base64's 6.</p>
+<p class="blog-image">
+  <img src="/blog/assets/base32/base64_vs_base32_comparison.png" alt="Comparison diagram of Base64 (64 characters, 33% overhead) vs Base32 (32 characters, 60% overhead), highlighting character sets and key properties">
+</p>
+<p align="center">
+  <em>Base64 vs Base32: Base32 accepts greater overhead in exchange for case-insensitivity and minimal character ambiguity.</em>
+</p>
+<h2>The Encoding Principle: Slicing into 5-Bit Groups and Mapping to 32 Characters</h2>
+<p>To truly understand Base32, you need to follow the conversion process at the bit level. The core idea is that <strong>5 bytes (40 bits) map to 8 Base32 characters</strong>, because each Base32 character represents 5 bits (2⁵ = 32).</p>
+<p>Let's trace through encoding the string "Hi" in Standard Base32.</p>
+<div class="code-toolbar"><pre class="language-text" tabindex="0"><code class="language-text">'H' = 0x48 = 01001000
+'i' = 0x69 = 01101001
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>Plain text</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<p>Concatenating the two bytes gives 16 bits: <code>01001000 01101001</code></p>
+<p>Split into 5-bit groups: <code>01001</code> <code>00001</code> <code>10100</code> <code>10000</code> (last group zero-padded)</p>
+<p>Converting each 5-bit group to decimal: 9, 1, 20, 16</p>
+<p>Mapping to the Standard Base32 alphabet (A=0, B=1, …, Z=25, 2=26, …, 7=31): <code>J</code>, <code>B</code>, <code>U</code>, <code>Q</code></p>
+<p>The final result is <code>JBUQ====</code>. Since 2 bytes (16 bits) produce only 4 groups of 5 bits, four <code>=</code> padding characters are appended to complete the block.</p>
+<p class="blog-image">
+  <img src="/blog/assets/base32/base32_encoding_process.png" alt="Five-step Base32 encoding process for 'Hi': ASCII → binary → 5-bit groups → index lookup → character mapping">
+</p>
+<p align="center">
+  <em>Step-by-step Base32 encoding: splitting input bytes into 5-bit groups and mapping each to one of 32 characters.</em>
+</p>
+<h2>Three Faces of Base32: Standard, Hex, and Crockford</h2>
+<p>The fact that Base32 is not a single standard often causes confusion in practice. The same input can produce different outputs depending on which variant is used.</p>
+<h3>Standard Base32 (RFC 4648)</h3>
+<p>The most widely used variant, defined in <a href="https://www.rfc-editor.org/rfc/rfc4648#section-6">RFC 4648 §6</a>. Its alphabet is <code>A–Z</code> (values 0–25) and <code>2–7</code> (values 26–31). The digits 0, 1, 8, and 9 are absent — in practice, only six digits (2–7) are used to represent the 32 values. The digits 0, 1, and 8 were excluded because they can be confused with the letters O, I, and B.</p>
+<p>Most TOTP implementations — including Google Authenticator and Microsoft Authenticator — use this variant. If you've ever handled a 2FA secret key directly, a string like <code>JBSWY3DP...</code> is the output of Standard Base32.</p>
+<h3>Base32 Hex (RFC 4648 Extended Hex)</h3>
+<p>Defined in <a href="https://www.rfc-editor.org/rfc/rfc4648#section-7">RFC 4648 §7</a>, this variant uses <code>0–9</code> (values 0–9) and <code>A–V</code> (values 10–31). Its defining characteristic is that it <strong>preserves bit-order sorting</strong>: if you encode two pieces of data in Base32 Hex and compare them lexicographically, the result matches what you'd get from comparing the original binary values directly. Because ASCII character codes align with bit ordering, a simple string sort gives the correct binary order. This makes it useful for database indexing and generating sortable identifiers.</p>
+<h3>Crockford Base32</h3>
+<p>Designed by <a href="https://www.crockford.com/base32.html">Douglas Crockford</a> — yes, the same Crockford who defined the JSON specification — this variant focuses on minimizing human error. It uses <code>0–9</code> and <code>A–Z</code>, but excludes the easily confused characters <code>I</code>, <code>L</code>, <code>O</code>, and <code>U</code>. During decoding, it's lenient: lowercase input is accepted, and <code>i</code>/<code>l</code> are automatically mapped to <code>1</code>, while <code>o</code> maps to <code>0</code>. It's well-suited to short IDs, coupon codes, and tokens that people read and type directly.</p>
+<p>Crockford Base32 also does not use padding characters.</p>
+<table><thead><tr><th></th><th>Standard</th><th>Hex</th><th>Crockford</th></tr></thead><tbody>
+<tr><td>Alphabet</td><td>A–Z, 2–7</td><td>0–9, A–V</td><td>0–9, A–Z (excl. I, L, O, U)</td></tr>
+<tr><td>Padding</td><td>Optional</td><td>Optional</td><td>None</td></tr>
+<tr><td>Sort-preserving</td><td>❌</td><td>✅</td><td>❌</td></tr>
+<tr><td>Ambiguous char handling</td><td>Limited</td><td>❌</td><td>✅ (auto-converts)</td></tr>
+<tr><td>Primary use cases</td><td>TOTP, 2FA</td><td>DB indexing, identifiers</td><td>Human-input tokens, coupons</td></tr>
+</tbody></table>
+<h2>Base32 in Practice: From 2FA to File Encoding</h2>
+<h3>TOTP and 2FA Secret Keys</h3>
+<p>The most common place to encounter Base32 in the wild is undoubtedly <strong>Time-based One-Time Passwords (TOTP)</strong>, defined in <a href="https://www.rfc-editor.org/rfc/rfc6238">RFC 6238</a>. TOTP generates a 6-digit OTP by combining a secret key shared between server and client with the current timestamp. The standard representation format for this secret key is Standard Base32.</p>
+<p>Why Base32? Because secret keys may need to be entered manually by users, or written down when QR code scanning isn't available. A format like Base64 — with <code>+</code>, <code>/</code>, and mixed case — would cause frequent input errors. Standard Base32's uppercase-only, digit-only character set dramatically reduces these mistakes.</p>
+<p>Grouping the key into 4-character chunks (<code>JBSW Y3DP EBLW 64TM</code>) makes it far easier to read aloud over the phone or transcribe by hand.</p>
+<h3>File and Binary Data Encoding</h3>
+<p>When you need to safely transmit binary files through a text-only system, Base32 is a valid option. For instance, while Base64 is the norm in email, certain legacy systems process data in a case-insensitive way that corrupts Base64 output. Base32 provides a safe alternative in such cases.</p>
+<h3>DNS and Case-Insensitive Systems</h3>
+<p>DNS treats labels as case-insensitive: <code>EXAMPLE.COM</code> and <code>example.com</code> are identical. For this reason, DNS-based systems that need to encode data as DNS labels — such as DNSSEC and NSEC3 hashes — use Base32 Hex. <a href="https://www.rfc-editor.org/rfc/rfc5155">NSEC3 (RFC 5155)</a> is a prominent example.</p>
+<h2>Tool Walkthrough: Using the Base32 Encoder/Decoder</h2>
+<p>The scenario I personally use most often is validating TOTP system implementations. When I need to quickly confirm that a server-generated secret key matches what an authenticator app expects, the <a href="https://compu-tools.com/base32/">Base32 encoder/decoder</a> is my go-to verification tool.</p>
+<h3>Exercise 1: Converting a TOTP Secret Key Format</h3>
+<p>This walkthrough converts a TOTP secret key into a form that's easy to enter manually into an authenticator app.</p>
+<ol>
+<li>Under <strong>Input Settings</strong>, set Direction to <code>Encode</code> and Input Type to <code>Text</code></li>
+<li>Enter your secret source text in the input field (e.g., <code>mySecretKey</code>)</li>
+<li>Configure <strong>Add Output</strong> settings:
+<ul>
+<li>Mode: <code>Standard (RFC 4648)</code></li>
+<li>Case: <code>Uppercase</code></li>
+<li>Format: <code>4-char chunks</code></li>
+<li>Padding: <code>Enabled</code></li>
+</ul>
+</li>
+<li>Click <code>Add Output</code> → confirm output like <code>NV4V GZLD OJSX IS3F PE== ====</code></li>
+<li>Presenting the key in this format to users significantly reduces manual input errors in authenticator apps.</li>
+</ol>
+<p class="blog-image">
+  <img src="/blog/assets/base32/tool_encode_totp_secret.png" alt="Base32 encoder tool screen showing a TOTP secret key being encoded in Standard Base32 with 4-char chunk formatting">
+</p>
+<p align="center">
+  <em>Tool walkthrough: encoding a TOTP secret key in Standard Base32 with 4-character chunk formatting for human-friendly manual entry.</em>
+</p>
+<h3>Exercise 2: Comparing the Three Variants</h3>
+<p>Viewing all three variant outputs side by side for the same input is one of the tool's core features.</p>
+<ol>
+<li>Set direction to Encode and enter "Hello, World!"</li>
+<li>Click Add Output three times, configuring Standard, Hex, and Crockford modes respectively</li>
+<li>Compare the results:
+<ul>
+<li>Standard: <code>JBSWY3DPFQQFO33SNRSCC===</code></li>
+<li>Hex: <code>91IMOR3F5GG5ERRIDHI22===</code></li>
+<li>Crockford: <code>91JPRV3F5GG5EVVJDHJ22</code></li>
+</ul>
+</li>
+</ol>
+<p>You can see directly that Crockford has no padding, and Hex uses a digit-first alphabet to enable sort preservation.</p>
+<p class="blog-image">
+  <img src="/blog/assets/base32/tool_three_variants_comparison.png" alt="Base32 tool screen comparing simultaneous output of Standard, Hex, and Crockford variants for the same input 'Hello, World!'">
+</p>
+<p align="center">
+  <em>Comparing three Base32 variant outputs for the same input: differences in character sets and padding rules are immediately visible.</em>
+</p>
+<h3>Exercise 3: Decoding When You Don't Know the Variant</h3>
+<p>Sometimes you receive a Base32 string with no information about which variant was used to encode it. Adding multiple decode outputs simultaneously lets you verify all possibilities at once.</p>
+<ol>
+<li>Switch Direction to <code>Decode</code></li>
+<li>Paste the Base32 string to decode</li>
+<li>Click Add Output three times → add Standard, Hex, and Crockford respectively</li>
+<li>Identify which variant produces meaningful text</li>
+</ol>
+<h2>The Padding Dilemma: Should You Include <code>=</code>?</h2>
+<p>Padding handling is a surprisingly common source of real-world issues. RFC 4648 recommends padding but does not require it, and the right choice depends on context.</p>
+<p><strong>When padding is necessary:</strong></p>
+<ul>
+<li>Streaming or concatenation scenarios where multiple Base32-encoded results are chained together</li>
+<li>System integrations requiring strict RFC 4648 compliance</li>
+</ul>
+<p><strong>When to omit padding:</strong></p>
+<ul>
+<li>When including in URL parameters or cookies, since <code>=</code> can cause URL encoding issues</li>
+<li>Most TOTP implementations — including Google Authenticator — work correctly without padding</li>
+<li>Crockford Base32 uses no padding by specification</li>
+</ul>
+<p>When implementing your own system, I recommend coding your decoder defensively to handle input with or without padding.</p>
+<h2>Lessons from the Trenches: Pitfalls and Takeaways</h2>
+<h3>Pitfall 1: Variant Mismatch</h3>
+<p>If the server generates a secret using Crockford Base32 but the client library tries to interpret it as Standard Base32, decoding will fail — the character sets are different. Crockford doesn't use <code>U</code>, but Standard does. In one real project integrating a legacy system with a newer one, I spent considerable time debugging because one side used Python's <code>base64.b32encode()</code> while the other used an older Java library. Always check the exact Base32 variant in your specification first — it's step one of any debugging process.</p>
+<h3>Pitfall 2: Case Handling</h3>
+<p>RFC 4648 states that Standard Base32 should be case-insensitive. However, not every implementation follows this. Some strict decoders will reject lowercase input outright. It's safest to always normalize user input to uppercase before Base32 decoding.</p>
+<h3>Pitfall 3: Whitespace Handling</h3>
+<p>If you take a human-friendly Base32 string that uses spaces to separate 4-character groups and feed it directly into a decoder, it will fail. Always strip spaces, line breaks, hyphens, and other delimiters before decoding. This tool automatically removes whitespace during decoding, so you don't need to worry about it.</p>
+<h2>The Limits of Base32: Encoding Is Not Encryption</h2>
+<p>There's one critical point that must be addressed. Base32 — and all encoding schemes including Base64 and Hex — is <strong>not encryption</strong>. Just as a CRC is an error detection tool rather than a security tool, the same is true of Base32.</p>
+<p>Anyone can decode Base32-encoded data trivially. The reason TOTP secret keys are stored in Base32 is interoperability, not security. The confidentiality of the secret key itself must be protected through access controls and encrypted storage (e.g., AES-256). Base32 is a representation format — it is not a mechanism to hide or protect data.</p>
+<p>In practice, I regularly encounter the misconception that "it's encoded in Base32, so it's secure." If you're dealing with sensitive data, you must add appropriate encryption layers on top.</p>
+<h2>Base32 Implementation Landscape by Platform</h2>
+<p>When working with Base32 in real systems, you need to verify the specifics of each platform's implementation.</p>
+<ul>
+<li><strong>Python</strong>: <code>base64.b32encode()</code> / <code>b32decode()</code> in the <code>base64</code> module supports Standard Base32. Crockford and Hex require third-party libraries.</li>
+<li><strong>Java</strong>: Apache Commons Codec's <code>Base32</code> class supports both Standard and Hex. Widely used in Quartz and Spring-based systems.</li>
+<li><strong>Go</strong>: The standard library's <code>encoding/base32</code> package supports both Standard and Hex.</li>
+<li><strong>JavaScript/Node.js</strong>: No Base32 in the standard library — third-party modules like <code>hi-base32</code> or <code>thirty-two</code> are needed.</li>
+<li><strong>RFC compliance</strong>: Libraries vary in padding handling, lowercase acceptance, and streaming behavior. When implementing cross-platform systems, always validate with edge cases to catch interoperability issues early.</li>
+</ul>
+<h2>Wrapping Up: One Concept, Not Five Sections</h2>
+<p>I opened this post with the memory of manually typing a Google Authenticator secret key. Behind that unfamiliar string lay decades of thought about how to make binary data manageable for humans. Like Base32's philosophy — trading away Base64's efficiency for the safety of a smaller, unambiguous character set — good engineering design often begins with clearly understanding trade-offs and making deliberate choices.</p>
+<p>Whether you're encountering Base32 in code for the first time, implementing a TOTP system, or trying to reconcile data formats between legacy and modern systems, I recommend using the <a href="https://compu-tools.com/base32/">Base32 encoder/decoder</a> to see the results with your own eyes first. The moment you see all three variant outputs side by side, abstract concepts crystallize into concrete understanding.</p>
+<h3>References</h3>
+<ol>
+<li><strong>IETF</strong> — <a href="https://www.rfc-editor.org/rfc/rfc4648">RFC 4648: The Base16, Base32, and Base64 Data Encodings</a> — Official specification for Standard and Hex Base32 variants</li>
+<li><strong>Douglas Crockford</strong> — <a href="https://www.crockford.com/base32.html">Base32 Encoding</a> — Design philosophy and official definition of the Crockford Base32 variant</li>
+<li><strong>IETF</strong> — <a href="https://www.rfc-editor.org/rfc/rfc6238">RFC 6238: TOTP: Time-Based One-Time Password Algorithm</a> — TOTP standard using Base32-encoded secret keys</li>
+<li><strong>IETF</strong> — <a href="https://www.rfc-editor.org/rfc/rfc5155">RFC 5155: DNS Security (DNSSEC) Hashed Authenticated Denial of Existence</a> — Base32 Hex usage in DNS</li>
+<li><strong>IETF</strong> — <a href="https://www.rfc-editor.org/rfc/rfc2045">RFC 2045: MIME Part One: Format of Internet Message Bodies</a> — MIME specification that standardized Base64 Content-Transfer-Encoding</li>
+</ol>
+</div><div class="post-popular-section"><div class="section-header"><div class="section-title"><i class="fa-solid fa-fire"></i>Popular Posts</div></div><div class="post-popular-list"><a href="/blog/2026-02-10-ascii-converter/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">Everything About ASCII Conversion: How Computers Understand Characters</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>10 February 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Text &amp; Encoding</span></div></a><a href="/blog/2026-01-31-3d-rotation/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">Understanding 3D Rotation: A Practical Guide to Quaternions, Euler Angles, and Rotation Matrices</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>21 January 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Mathematical</span></div></a><a href="/blog/2026-02-25-cron/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">The Complete Guide to Cron Expressions: Everything a Developer Must Know About Scheduling</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>25 February 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Time &amp; Date</span></div></a><a href="/blog/2026-02-05-number-base/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">The Language of Numbers: Principles and Practical Guide to Number Base Conversion</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>05 February 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Mathematical</span></div></a><a href="/blog/2025-12-27-crc/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">Data Integrity Verification with CRC: A Practical Guide</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>27 December 2025</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Security &amp; Hash</span></div></a></div></div><div class="ad-display-wrapper post-ad" style="height: auto !important; min-height: 0px !important;"><ins style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7315862436" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_1_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7315862436&amp;adk=3048900072&amp;adf=3067865478&amp;pi=t.ma~as.7315862436&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1772348587&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fblog%2F2026-03-01-base32%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTQuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1772348734645&amp;bpp=3&amp;bdt=420&amp;idt=3&amp;shv=r20260225&amp;mjsv=m202602250101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0%2C1200x280&amp;nras=1&amp;correlator=5071030851931&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=45&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=507&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95366177%2C95378425%2C95381340%2C95381490%2C95382852%2C95383859%2C31096974&amp;oid=2&amp;pvsid=4922214987433582&amp;tmod=1356490428&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=3&amp;uci=a!3&amp;fsb=1&amp;dtd=19" data-google-container-id="a!3" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div></div></div></div><aside class="sidebar-right"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper sidebar-ad"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Tool</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/json/">JSON Formatter &amp; Converter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regular Expression Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Previewer</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Timestamp Log Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter &amp; Palette Generator</a></li><li><a href="/http-code-gen/">HTTP Request Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20260225/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>
