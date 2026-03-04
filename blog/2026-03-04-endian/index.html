@@ -1,0 +1,595 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
+  <meta name="robots" content="index, follow">
+  
+  <meta name="computools" content="computools">
+  <meta name="description" content="A single byte order mismatch can cost you days of debugging. This article draws on real-world experience to thoroughly explain the difference between big endian and little endian, and why endianness is critical in networking, MODBUS, and CRC calculations.">
+  <meta name="keywords" content="CompuTools, engineering tools, converter, calculator, formatter, unixtime, quaternion, crc, ascii, json, base32, base64, file hash, html encode/decode, url encode/decode, uuid generator, text case converter, password secret generator, regex, color converter, unit converter, format converter, jwt encoder/decoder, text diff comparator, markdown previewer, markdown editor, gfm, xml formatter, xml viewer, qrcode generator, http request code generator, otp generator, elapsed time calculator, cron expression parser, timestamp log, time calculator, tls analyzer">
+  <meta name="author" content="CompuTools">
+
+  <meta property="og:url" content="https://www.compu-tools.com/blog/2026-03-04-endian">
+  <meta property="og:title" content="Understanding Endianness: Byte Order Defines Your System | CompuTools Blog">
+  <meta property="og:description" content="A single byte order mismatch can cost you days of debugging. This article draws on real-world experience to thoroughly explain the difference between big endian and little endian, and why endianness is critical in networking, MODBUS, and CRC calculations.">
+  <meta property="og:image" content="https://www.compu-tools.com/blog/assets/endian/big_little_endian_memory.png">
+  <meta property="og:image:height" content="607">
+  <meta property="og:image:width" content="607">
+
+
+  <title>Understanding Endianness: Byte Order Defines Your System | CompuTools Blog</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="/index-67ecb5ab415d9933.css" integrity="sha384-MNY82UHAqpYnaguMn2ooqXXOBVcsMd2YoN7xVzJurKoASI96hnqcUA8PrvRCfKLd">
+  <link rel="stylesheet" href="/navbar-cad7648ab9df4b4f.css" integrity="sha384-VTRTHBI1ItQaxALdK8YlNvaZ3MPtW96QEnPHrjamJ0bsjLWyZZzogeH6copA1Fp/">
+  <link rel="stylesheet" href="/search-2faf0955842da936.css" integrity="sha384-9Wj20My1Eb/ThjafElwjia5lPNzwPOTxNdV9O85niKUuyc6fU0EorqZhIyo+IG1S">
+  <link rel="stylesheet" href="/thumbnail-1fd25b2c845b1346.css" integrity="sha384-HnqRKTVeHShdfcqwNw3w8P8paW9Os7OPAkQmXhvQS7CQDdlh5mRCKpHjrUs8Ynpu">
+  <link rel="stylesheet" href="/tool-1ccfa7ec9a6e5725.css" integrity="sha384-M1plGvKGPqFVyBEvGe24dif3DUBaREaHSTuWLF5XrvO6MLGGmzDr8V6ncQmZNcjS">
+  <link rel="stylesheet" href="/blog-4fecd0bc2c7096e6.css" integrity="sha384-k61ONcei+JAMDHfY/2rc2sO2qAQtfN+CUlJ/ic38FgGfiKQfYj2X37FnoGk+41DC">
+  <link rel="stylesheet" href="/post-753c7206094e5318.css" integrity="sha384-a1TI/GqJJsgGRGjc03es3I7vOIghGCVC6u5rKBWtggv7o1yaSCE41kx5YgY23ODC">
+  <link rel="stylesheet" href="/preview-145202bedf84463d.css" integrity="sha384-Zz5sVYmWB+jtcFnkl+kB4w+zbAsWN09IwPO2/bC7H2kb6X1McJu3KBZJgfo4I+kl">
+  <link rel="stylesheet" href="/ad-8a234a142934983d.css" integrity="sha384-9nFe62LVg0a3Y4qzbES8GdTK09AVLj+wmi4qDNGj0CpxQicChknwir1v5o0dEwKH">
+  <link rel="stylesheet" href="/prism-c451adb7299a4a0.css" integrity="sha384-JHfRrkWbZJu5R/8OJhxu3j19hT9BpfW1isiNYAlkF5vRzQu14JDkB4lWvJX5I4r7">
+  
+  
+<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202603020101/show_ads_impl.js?bust=31097040"></script><script type="module">
+import init, * as bindings from '/computools-764e2413ab479cd2.js';
+const wasm = await init({ module_or_path: '/computools-764e2413ab479cd2_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+
+  
+
+
+  
+  
+  
+  
+  
+
+  <link rel="icon" href="/favicon-1a8ba4d4617517ad.ico" integrity="sha384-sh+KkiOvcFXwh29z2PE6y5W6JoL/C2uPj8MHwWodi4oVC6f4XcUmhJGk6dmH2Teg">
+
+  <script src="/prism.js"></script>
+
+
+  <!-- MathJax for LaTeX math rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script>
+      (function() {
+          const redirect = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          if (redirect && redirect !== window.location.href) {
+              history.replaceState(null, null, redirect);
+          }
+      })();
+  </script>
+  <script>
+    // JavaScript에서 getTimeZoneOffset 함수 정의
+    function getTimeZoneOffset() {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const offset = new Date().getTimezoneOffset();
+        return { timeZone, offset };
+    }
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9424100257975478" crossorigin="anonymous" data-checked-head="true"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1G0CMRC310');
+  </script>
+<link rel="modulepreload" href="/computools-764e2413ab479cd2.js" crossorigin="anonymous" integrity="sha384-tuO3jA18BxSV+kWQko8qENssAsmhdyvSJOqT152jFgnJQaSFxfo5yDH4sunSVhVR"><link rel="preload" href="/computools-764e2413ab479cd2_bg.wasm" crossorigin="anonymous" integrity="sha384-S7Bb3Zo4x82H0NOIz2zZ7sYDBWBnND6g9ceDJDJWMLDzSm1XWXyeqlm6DtdjGjKh" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Understanding Endianness: Byte Order Defines Your System | CompuTools Blog">
+  <meta name="twitter:description" content="A single byte order mismatch can cost you days of debugging. This article draws on real-world experience to thoroughly explain the difference between big endian and little endian, and why endianness is critical in networking, MODBUS, and CRC calculations.">
+  <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/endian/big_little_endian_memory.png">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding Endianness: Byte Order Defines Your System", "description": "A single byte order mismatch can cost you days of debugging. This article draws on real-world experience to thoroughly explain the difference between big endian and little endian, and why endianness is critical in networking, MODBUS, and CRC calculations.", "url": "https://www.compu-tools.com/blog/2026-03-04-endian", "image": ["https://www.compu-tools.com/blog/assets/endian/big_little_endian_memory.png", "https://www.compu-tools.com/blog/assets/endian/crc_tool_endian_comparison.png"], "author": {"@type": "Organization", "name": "CompuTools", "url": "https://www.compu-tools.com"}, "publisher": {"@type": "Organization", "name": "CompuTools", "logo": {"@type": "ImageObject", "url": "https://www.compu-tools.com/logo.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://www.compu-tools.com/blog/2026-03-04-endian"}, "datePublished": "2026-03-04", "dateModified": "2026-03-04"}</script>
+  <style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+<body><div class="navbar-wrapper"><div class="navbar-container"><a href="/" class="navbar-content">CompuTools</a><div style="justify-content: right;" class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper" style="height: auto !important;"><div class="main-content" style="height: auto !important;"><div class="page-with-sidebar" style="height: auto !important;"><aside class="sidebar-left"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper sidebar-ad"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside><div class="page-main" style="height: auto !important;"><div class="home-wrapper" style="height: auto !important;"><div class="post-wrapper" style="height: auto !important;"><div class="post-metadata"><div class="post-title">Understanding Endianness: Byte Order Defines Your System</div><div class="post-date">04 March 2026</div><div class="post-excerpt">A single byte order mismatch can cost you days of debugging. This article draws on real-world experience to thoroughly explain the difference between big endian and little endian, and why endianness is critical in networking, MODBUS, and CRC calculations.</div><div class="post-tags"><div class="tag">Security &amp; Hash</div></div></div><div class="ad-article-wrapper"><ins style="display: block; text-align: center; height: 280px;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9424100257975478" data-ad-slot="2892459749" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_0_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=2892459749&amp;adk=2691950054&amp;adf=2584940624&amp;pi=t.ma~as.2892459749&amp;w=1200&amp;fwrn=4&amp;fwrnh=0&amp;lmt=1772634511&amp;rafmt=1&amp;armr=3&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fblog%2F2026-03-04-endian%2F&amp;fwr=0&amp;rpe=1&amp;resp_fmts=3&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTQuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1772634664215&amp;bpp=1&amp;bdt=419&amp;idt=-M&amp;shv=r20260303&amp;mjsv=m202603020101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0&amp;nras=1&amp;correlator=4404147575194&amp;frm=20&amp;pv=1&amp;rplot=4&amp;u_tz=0&amp;u_his=47&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=122&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95384223%2C31096885%2C95378429%2C95381340%2C95381489%2C95382853%2C95383701%2C95384612%2C31097040%2C95381976%2C95379824&amp;oid=2&amp;pvsid=279079405500052&amp;tmod=416661745&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=2&amp;uci=a!2&amp;fsb=1&amp;dtd=17" data-google-container-id="a!2" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div><div class="post-content"><p>When I first started embedded development, I wrote code to communicate with a PLC device over MODBUS RTU protocol and got the CRC calculation perfectly right. Yet the device kept refusing to respond. After days of troubleshooting, I found the culprit: the byte order of the 2-byte CRC value was reversed. I was sending <code>0x2B 0xA1</code> when I should have been sending <code>0xA1 0x2B</code>. That is the <strong>endianness</strong> problem.</p>
+<p>Endianness is far from a textbook abstraction. It exists quietly but lethally everywhere bytes are handled — network communication, file formats, embedded systems, cryptography, databases. If you ever need to compute a CRC value, you can use the <a href="https://compu-tools.com/crc/">CRC Tool</a>.</p>
+<h2>What Is Endianness?</h2>
+<p><strong>Endianness</strong> refers to the order in which a computer stores the bytes of multi-byte data in memory. When storing an integer that spans two or more bytes, there are two approaches depending on which byte goes first.</p>
+<p>Consider storing the hexadecimal value <code>0x12345678</code> (a 4-byte integer) starting at memory address <code>0x1000</code>.</p>
+<p class="blog-image">
+  <img src="/blog/assets/endian/big_little_endian_memory.png" alt="Diagram comparing big endian and little endian memory storage">
+</p>
+<p align="center">
+  <em>Byte layout comparison for storing 0x12345678: big endian (left) vs. little endian (right).</em>
+</p>
+<h3>Big Endian</h3>
+<p><strong>The most significant byte (MSB) is stored at the lowest memory address first.</strong> This matches the way humans naturally read numbers. <code>0x12345678</code> is stored in order: <code>12 → 34 → 56 → 78</code>.</p>
+<p>The <a href="https://www.rfc-editor.org/rfc/rfc1700">TCP/IP network standard (RFC 1700, now superseded by RFC 3232)</a> defines big endian as the <strong>network byte order</strong>. Motorola 68000, SPARC, and PowerPC processors use this convention.</p>
+<h3>Little Endian</h3>
+<p><strong>The least significant byte (LSB) is stored at the lowest memory address first.</strong> <code>0x12345678</code> is stored as <code>78 → 56 → 34 → 12</code>.</p>
+<p>This is the approach used by Intel x86, x86-64, and ARM (in its default configuration) — the architectures that power the vast majority of modern PCs and smartphones. Storing the low byte at the lowest address offers structural advantages for certain arithmetic operations.</p>
+<h2>Why Do Both Conventions Coexist?</h2>
+<p>Historically, the two approaches evolved independently in different camps. In 1980, Danny Cohen formally raised the debate in his paper <a href="https://www.ietf.org/rfc/ien/ien137.txt">"On Holy Wars and a Plea for Peace"</a>, drawing an analogy to Jonathan Swift's <em>Gulliver's Travels</em>, where wars are fought over which end of a boiled egg to crack first. His point: this is not a question of which side is superior, but a difference in design philosophy.</p>
+<p>Most modern processors today support <strong>Bi-Endian</strong> mode, allowing software to select either convention. The ARM architecture, starting from ARMv3, is a prominent example.</p>
+<h2>When Endianness Problems Arise in Real Development</h2>
+<h3>1. Network Communication (Socket Programming)</h3>
+<p>The reason C/C++ socket code uses <code>htons()</code>, <code>htonl()</code>, <code>ntohs()</code>, and <code>ntohl()</code> is precisely to perform endian conversion. You must convert the host byte order to network byte order (big endian).</p>
+<div class="code-toolbar"><pre class="language-c" tabindex="0"><code class="language-c"><span class="token class-name">uint16_t</span> port <span class="token operator">=</span> <span class="token number">8080</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">sockaddr_in</span> addr<span class="token punctuation">;</span>
+addr<span class="token punctuation">.</span>sin_port <span class="token operator">=</span> <span class="token function">htons</span><span class="token punctuation">(</span>port<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Host → Network byte order conversion</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>C</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<p>Skip this conversion on a little-endian x86 system and <code>0x1F90</code> (8080) gets transmitted as <code>0x901F</code>, which the receiver interprets as a completely different port number.</p>
+<h3>2. File Format Parsing</h3>
+<p>Every file format has its own endianness convention. PNG uses big endian; BMP uses little endian. Ignore this when parsing files directly and metadata like file size, width, and height will be read as entirely wrong values.</p>
+<h3>3. MODBUS and Industrial Protocols</h3>
+<p>The <a href="https://www.modbustools.com/modbus.html">MODBUS RTU protocol</a> is fundamentally big endian — with one exception: <strong>the CRC field is transmitted in little endian (LSB first)</strong>. Furthermore, how 32-bit registers are word-swapped can vary between devices, making endianness-related communication errors extremely common in industrial environments.</p>
+<h2>Why Endianness Is Critical in CRC Calculations</h2>
+<p>When computing a CRC checksum and inserting it into a communication frame, endianness is one of the most important factors to get right. For CRCs whose result spans two or more bytes — such as CRC-16 or CRC-32 — <strong>the order in which those bytes are placed in the frame</strong> completely determines whether the receiver's validation succeeds or fails.</p>
+<p>For example, if the CRC-16/MODBUS result is <code>0x2BA1</code>:</p>
+<ul>
+<li><strong>Big endian</strong>: insert <code>0x2B 0xA1</code> into the frame</li>
+<li><strong>Little endian</strong>: insert <code>0xA1 0x2B</code> into the frame</li>
+</ul>
+<p>The MODBUS RTU standard mandates little-endian CRC transmission. Misunderstanding this and sending big endian means the frame may be perfectly formed in every other way, yet the device will reject it as an invalid packet.</p>
+<p>The CRC algorithm itself also handles endianness differently depending on whether <strong>bit reflection</strong> is applied. The <a href="https://reveng.sourceforge.io/crc-catalogue/">CRC Algorithm Catalogue</a> explicitly defines <code>RefIn</code> (reflect input bits) and <code>RefOut</code> (reflect output bits) parameters for each algorithm — essential reading during implementation.</p>
+<p>To verify these endian behaviors hands-on, the <a href="https://compu-tools.com/crc/">CRC Tool</a> is a practical resource. It supports over 100 CRC algorithms and lets you compare big endian and little endian results in real time, view byte-separated output, and switch between HEX, binary, and octal formats. It's particularly useful for validating protocol-specific CRC algorithms — MODBUS, CAN, Bluetooth, and more — by tweaking inputs and observing results immediately.</p>
+<p class="blog-image">
+  <img src="/blog/assets/endian/crc_tool_endian_comparison.png" alt="CRC tool screen showing big endian and little endian results side by side for the same input">
+</p>
+<p align="center">
+  <em>CRC Tool displaying CRC-16/MODBUS results in both big endian and little endian. The byte order reversal is clearly visible.</em>
+</p>
+<h2>Practical Tips for Working with Endianness</h2>
+<h3>Use Your Language's Built-In Facilities</h3>
+<p>Every major language provides standard tools for endian conversion. Using them is safer and more readable than rolling your own bit-manipulation logic.</p>
+<div class="code-toolbar"><pre class="language-python" tabindex="0"><code class="language-python"><span class="token keyword">import</span> struct
+
+value <span class="token operator">=</span> <span class="token number">0x12345678</span>
+
+<span class="token comment"># Pack as big endian</span>
+big <span class="token operator">=</span> struct<span class="token punctuation">.</span>pack<span class="token punctuation">(</span><span class="token string">'&gt;I'</span><span class="token punctuation">,</span> value<span class="token punctuation">)</span>     <span class="token comment"># b'\x12\x34\x56\x78'</span>
+
+<span class="token comment"># Pack as little endian</span>
+little <span class="token operator">=</span> struct<span class="token punctuation">.</span>pack<span class="token punctuation">(</span><span class="token string">'&lt;I'</span><span class="token punctuation">,</span> value<span class="token punctuation">)</span>  <span class="token comment"># b'\x78\x56\x34\x12'</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>Python</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<div class="code-toolbar"><pre class="language-c" tabindex="0"><code class="language-c"><span class="token comment">// C: network byte order conversion</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;arpa/inet.h&gt;</span></span>
+<span class="token class-name">uint16_t</span> host_val <span class="token operator">=</span> <span class="token number">8080</span><span class="token punctuation">;</span>
+<span class="token class-name">uint16_t</span> net_val  <span class="token operator">=</span> <span class="token function">htons</span><span class="token punctuation">(</span>host_val<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Little → Big Endian</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>C</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<div class="code-toolbar"><pre class="language-rust" tabindex="0"><code class="language-rust"><span class="token comment">// Rust: explicit endian conversion</span>
+<span class="token keyword">let</span> value<span class="token punctuation">:</span> <span class="token keyword">u32</span> <span class="token operator">=</span> <span class="token number">0x12345678</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> be_bytes <span class="token operator">=</span> value<span class="token punctuation">.</span><span class="token function">to_be_bytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [0x12, 0x34, 0x56, 0x78]</span>
+<span class="token keyword">let</span> le_bytes <span class="token operator">=</span> value<span class="token punctuation">.</span><span class="token function">to_le_bytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [0x78, 0x56, 0x34, 0x12]</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>Rust</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<h3>Debug at the Byte Level</h3>
+<p>When a communication error is suspected, always use Wireshark, a logic analyzer, or a custom HEX dump to inspect <strong>the actual byte sequence being transmitted</strong>. A value may look correct at a high level, yet be interpreted as something entirely different on the receiving end if the byte order is wrong.</p>
+<h3>Document Byte Order Explicitly</h3>
+<p>When designing a protocol or defining an interface, always specify byte order explicitly — for example, "this field is a big-endian 2-byte unsigned integer." Implicit assumptions will inevitably cause problems down the line.</p>
+<h2>Closing Thoughts</h2>
+<p>Endianness can seem like a trivial convention, but when two systems from different worlds exchange data and that convention breaks down, everything falls apart. In environments where devices from different manufacturers and architectures coexist — IoT sensors, industrial controllers, network equipment — a solid understanding of endianness is an essential skill.</p>
+<p>After losing days to that first MODBUS communication bug, I now check byte order first whenever I design or analyze a protocol. Errors that arise at the intersection of CRC and endianness are especially hard to reproduce and diagnose. Tools like the <a href="https://compu-tools.com/crc/">CRC Tool</a>, which let you flip endian settings and instantly see the effect on results, can dramatically speed up that diagnosis.</p>
+<h2>References and Further Reading</h2>
+<ol>
+<li><strong>Danny Cohen</strong>, <a href="https://www.ietf.org/rfc/ien/ien137.txt">"On Holy Wars and a Plea for Peace"</a>, IEN 137, 1980 — The foundational paper that sparked the endianness debate. Later published in IEEE Computer Magazine (1981).</li>
+<li><strong>IETF RFC 1700</strong>, <a href="https://www.rfc-editor.org/rfc/rfc1700">"Assigned Numbers"</a> — Defines network byte order (big endian) as the standard. Superseded by RFC 3232.</li>
+<li><strong>Modbus Organization</strong>, <a href="https://www.modbus.org/file/secure/modbusprotocolspecification.pdf">"MODBUS Application Protocol Specification V1.1b3"</a> — Official specification for MODBUS CRC and byte order.</li>
+<li><strong>Ross Williams</strong>, <a href="http://www.ross.net/crc/download/crc_v3.txt">"A PAINLESS GUIDE TO CRC ERROR DETECTION ALGORITHMS"</a> — The definitive reference on CRC parameters and bit reflection.</li>
+<li><strong>CRC Catalogue</strong>, <a href="https://reveng.sourceforge.io/crc-catalogue/">"Catalogue of parametrised CRC algorithms"</a> — Per-algorithm parameter reference including RefIn/RefOut.</li>
+</ol>
+</div><div class="post-popular-section"><div class="section-header"><div class="section-title"><i class="fa-solid fa-fire"></i>Popular Posts</div></div><div class="post-popular-list"><a href="/blog/2026-02-10-ascii-converter/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">Everything About ASCII Conversion: How Computers Understand Characters</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>10 February 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Text &amp; Encoding</span></div></a><a href="/blog/2026-02-25-cron/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">The Complete Guide to Cron Expressions: Everything a Developer Must Know About Scheduling</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>25 February 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Time &amp; Date</span></div></a><a href="/blog/2026-01-31-3d-rotation/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">Understanding 3D Rotation: A Practical Guide to Quaternions, Euler Angles, and Rotation Matrices</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>21 January 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Mathematical</span></div></a><a href="/blog/2026-02-05-number-base/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">The Language of Numbers: Principles and Practical Guide to Number Base Conversion</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>05 February 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Mathematical</span></div></a><a href="/blog/2026-02-21-unix-timestamp/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">Everything About Unix Timestamps: A Developer's Guide to Handling Time as Numbers</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>21 February 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Time &amp; Date</span></div></a></div></div><div class="ad-display-wrapper post-ad" style="height: auto !important; min-height: 0px !important;"><ins style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7315862436" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_1_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7315862436&amp;adk=3048900072&amp;adf=3067865478&amp;pi=t.ma~as.7315862436&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1772634511&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fblog%2F2026-03-04-endian%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTQuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1772634664215&amp;bpp=3&amp;bdt=419&amp;idt=3&amp;shv=r20260303&amp;mjsv=m202603020101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0%2C1200x280&amp;nras=1&amp;correlator=4404147575194&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=47&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=507&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95384223%2C31096885%2C95378429%2C95381340%2C95381489%2C95382853%2C95383701%2C95384612%2C31097040%2C95381976%2C95379824&amp;oid=2&amp;pvsid=279079405500052&amp;tmod=416661745&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=3&amp;uci=a!3&amp;fsb=1&amp;dtd=19" data-google-container-id="a!3" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div></div></div></div><aside class="sidebar-right"><div class="sidebar-sticky"><div class="sidebar-section"><div class="sidebar-title"><i class="fa-solid fa-link sidebar-title-icon"></i>Related Posts</div><div class="blog-recent-list"><a href="/blog/2025-12-27-crc/" class="blog-recent-item-link"><span class="blog-recent-title">Data Integrity Verification with CRC: A Practical Guide</span></a></div></div><div class="sidebar-ad-space"><div class="ad-display-wrapper sidebar-ad"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Tool</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/json/">JSON Formatter &amp; Converter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regular Expression Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Previewer</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Timestamp Log Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter &amp; Palette Generator</a></li><li><a href="/http-code-gen/">HTTP Request Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20260303/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>
