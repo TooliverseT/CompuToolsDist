@@ -33,7 +33,7 @@
 }
 
 .ad-infeed-wrapper {
-  min-height: 120px;
+  height: 150px;
   margin: 0;
   border-radius: 8px;
   overflow: hidden;
