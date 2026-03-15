@@ -1,0 +1,615 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
+  <meta name="robots" content="index, follow">
+  
+  <meta name="computools" content="computools">
+  <meta name="description" content="Checksum, CRC, and cryptographic hashes (SHA-256, MD5) are all tools for verifying data integrity, but their design goals and security strength are fundamentally different. This post compares the mathematical principles and real-world use cases of each algorithm, and provides clear criteria for choosing the right one for your situation.">
+  <meta name="keywords" content="CompuTools, engineering tools, converter, calculator, formatter, unixtime, quaternion, crc, ascii, json, base32, base64, file hash, html encode/decode, url encode/decode, uuid generator, text case converter, password secret generator, regex, color converter, unit converter, format converter, jwt encoder/decoder, text diff comparator, markdown previewer, markdown editor, gfm, xml formatter, xml viewer, qrcode generator, http request code generator, otp generator, elapsed time calculator, cron expression parser, timestamp log, time calculator, tls analyzer">
+  <meta name="author" content="CompuTools">
+
+  <meta property="og:url" content="https://www.compu-tools.com/blog/2026-03-15-crc-comparison">
+  <meta property="og:title" content="Checksum vs CRC vs Hash: Which Should You Use for Data Integrity Verification? | CompuTools Blog">
+  <meta property="og:description" content="Checksum, CRC, and cryptographic hashes (SHA-256, MD5) are all tools for verifying data integrity, but their design goals and security strength are fundamentally different. This post compares the mathematical principles and real-world use cases of each algorithm, and provides clear criteria for choosing the right one for your situation.">
+  <meta property="og:image" content="https://www.compu-tools.com/blog/assets/crc/algorithm_comparison_table.png">
+  <meta property="og:image:height" content="607">
+  <meta property="og:image:width" content="607">
+
+
+  <title>Checksum vs CRC vs Hash: Which Should You Use for Data Integrity Verification? | CompuTools Blog</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="/index-67ecb5ab415d9933.css" integrity="sha384-MNY82UHAqpYnaguMn2ooqXXOBVcsMd2YoN7xVzJurKoASI96hnqcUA8PrvRCfKLd">
+  <link rel="stylesheet" href="/navbar-cad7648ab9df4b4f.css" integrity="sha384-VTRTHBI1ItQaxALdK8YlNvaZ3MPtW96QEnPHrjamJ0bsjLWyZZzogeH6copA1Fp/">
+  <link rel="stylesheet" href="/search-2faf0955842da936.css" integrity="sha384-9Wj20My1Eb/ThjafElwjia5lPNzwPOTxNdV9O85niKUuyc6fU0EorqZhIyo+IG1S">
+  <link rel="stylesheet" href="/thumbnail-1fd25b2c845b1346.css" integrity="sha384-HnqRKTVeHShdfcqwNw3w8P8paW9Os7OPAkQmXhvQS7CQDdlh5mRCKpHjrUs8Ynpu">
+  <link rel="stylesheet" href="/tool-65a1b26f323919c2.css" integrity="sha384-ySI+JsvMZV9KSSemrZ7XuqEXoCvdEld1mVtttEJ+DwYNV9uhqtsyBz303GnIUauo">
+  <link rel="stylesheet" href="/blog-4fecd0bc2c7096e6.css" integrity="sha384-k61ONcei+JAMDHfY/2rc2sO2qAQtfN+CUlJ/ic38FgGfiKQfYj2X37FnoGk+41DC">
+  <link rel="stylesheet" href="/post-753c7206094e5318.css" integrity="sha384-a1TI/GqJJsgGRGjc03es3I7vOIghGCVC6u5rKBWtggv7o1yaSCE41kx5YgY23ODC">
+  <link rel="stylesheet" href="/preview-145202bedf84463d.css" integrity="sha384-Zz5sVYmWB+jtcFnkl+kB4w+zbAsWN09IwPO2/bC7H2kb6X1McJu3KBZJgfo4I+kl">
+  <link rel="stylesheet" href="/ad-bc2975c16b7a5e3a.css" integrity="sha384-cZ+6J5XDBX7PXVZtk1lMo2KV9ooNhzR8+bvJKDcTdLwagg9H6beP7ZSrSdA8O1xv">
+  <link rel="stylesheet" href="/prism-c451adb7299a4a0.css" integrity="sha384-JHfRrkWbZJu5R/8OJhxu3j19hT9BpfW1isiNYAlkF5vRzQu14JDkB4lWvJX5I4r7">
+  
+  
+<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202603090101/show_ads_impl.js?bust=31097164"></script><script type="module">
+import init, * as bindings from '/computools-ca1847b0ecf67cd4.js';
+const wasm = await init({ module_or_path: '/computools-ca1847b0ecf67cd4_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+
+  
+
+
+  
+  
+  
+  
+  
+
+  <link rel="icon" href="/favicon-1a8ba4d4617517ad.ico" integrity="sha384-sh+KkiOvcFXwh29z2PE6y5W6JoL/C2uPj8MHwWodi4oVC6f4XcUmhJGk6dmH2Teg">
+
+  <script src="/prism.js"></script>
+
+
+  <!-- MathJax for LaTeX math rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script>
+      (function() {
+          const redirect = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          if (redirect && redirect !== window.location.href) {
+              history.replaceState(null, null, redirect);
+          }
+      })();
+  </script>
+  <script>
+    // JavaScript에서 getTimeZoneOffset 함수 정의
+    function getTimeZoneOffset() {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const offset = new Date().getTimezoneOffset();
+        return { timeZone, offset };
+    }
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9424100257975478" crossorigin="anonymous" data-checked-head="true"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1G0CMRC310');
+  </script>
+<link rel="modulepreload" href="/computools-ca1847b0ecf67cd4.js" crossorigin="anonymous" integrity="sha384-jgsGYUqHnlaTEACROsQ7WtyqAZkXs8QCkD6pBWfAIQyyDHVlTfpOdYcJvVj3WLdW"><link rel="preload" href="/computools-ca1847b0ecf67cd4_bg.wasm" crossorigin="anonymous" integrity="sha384-ePxaSmBKQf/ZjBx8QWOljNrspi5B1vV3Ghdo3HtVtact2BWqluI9q7EuRZsOdjBW" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Checksum vs CRC vs Hash: Which Should You Use for Data Integrity Verification? | CompuTools Blog">
+  <meta name="twitter:description" content="Checksum, CRC, and cryptographic hashes (SHA-256, MD5) are all tools for verifying data integrity, but their design goals and security strength are fundamentally different. This post compares the mathematical principles and real-world use cases of each algorithm, and provides clear criteria for choosing the right one for your situation.">
+  <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/crc/algorithm_comparison_table.png">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Checksum vs CRC vs Hash: Which Should You Use for Data Integrity Verification?", "description": "Checksum, CRC, and cryptographic hashes (SHA-256, MD5) are all tools for verifying data integrity, but their design goals and security strength are fundamentally different. This post compares the mathematical principles and real-world use cases of each algorithm, and provides clear criteria for choosing the right one for your situation.", "url": "https://www.compu-tools.com/blog/2026-03-15-crc-comparison", "image": ["https://www.compu-tools.com/blog/assets/crc/checksum_weakness.png", "https://www.compu-tools.com/blog/assets/crc/algorithm_comparison_table.png", "https://www.compu-tools.com/blog/assets/crc/decision_tree.png"], "author": {"@type": "Organization", "name": "CompuTools", "url": "https://www.compu-tools.com"}, "publisher": {"@type": "Organization", "name": "CompuTools", "logo": {"@type": "ImageObject", "url": "https://www.compu-tools.com/logo.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://www.compu-tools.com/blog/2026-03-15-crc-comparison"}, "datePublished": "2026-03-15", "dateModified": "2026-03-15"}</script>
+  <style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+<body><div class="navbar-wrapper"><div class="navbar-container"><a href="/" class="navbar-content">CompuTools</a><div style="justify-content: right;" class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper" style="height: auto !important;"><div class="main-content" style="height: auto !important;"><div class="page-with-sidebar" style="height: auto !important;"><aside class="sidebar-left"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper sidebar-ad"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside><div class="page-main" style="height: auto !important;"><div class="home-wrapper" style="height: auto !important;"><div class="post-wrapper" style="height: auto !important;"><div class="post-metadata"><h1 class="post-title">Checksum vs CRC vs Hash: Which Should You Use for Data Integrity Verification?</h1><div class="post-date">15 March 2026</div><div class="post-excerpt">Checksum, CRC, and cryptographic hashes (SHA-256, MD5) are all tools for verifying data integrity, but their design goals and security strength are fundamentally different. This post compares the mathematical principles and real-world use cases of each algorithm, and provides clear criteria for choosing the right one for your situation.</div><div class="post-tags"><div class="tag">Security &amp; Hash</div></div></div><div class="ad-display-wrapper post-ad" style="height: auto !important; min-height: 0px !important;"><ins style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="5198951087" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_0_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=5198951087&amp;adk=456125646&amp;adf=2584940624&amp;pi=t.ma~as.5198951087&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1773549793&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fblog%2F2026-03-15-crc-comparison%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTQuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1773549961198&amp;bpp=1&amp;bdt=435&amp;idt=0&amp;shv=r20260312&amp;mjsv=m202603090101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0&amp;nras=1&amp;correlator=526269399090&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=50&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=159&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95385580%2C31097123%2C95378425%2C95381489%2C95383702%2C95384193%2C95384744%2C95385283%2C31097164%2C95379823&amp;oid=2&amp;pvsid=7477325877571441&amp;tmod=1876918913&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=2&amp;uci=a!2&amp;fsb=1&amp;dtd=20" data-google-container-id="a!2" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div><div class="post-content" style="height: auto !important;"><p>Anyone who has worked on an embedded project has inevitably faced this question: "What's the best way to verify that data was transmitted correctly?" It often starts with a simple summation (Checksum), then you realize the error detection isn't sufficient and switch to CRC, only to later find yourself confronted with security requirements you hadn't considered.</p>
+<p>Checksum, CRC (Cyclic Redundancy Check), and cryptographic hashes (SHA-256, MD5) — all three share the common goal of data integrity verification, but their mathematical structure, security strength, and appropriate use cases are entirely different. Choosing the wrong one either wastes performance or, worse, introduces a security vulnerability.</p>
+<h2>Checksum, CRC, Hash — The Essence of Three Approaches</h2>
+<p>The fastest way to understand these three algorithms is to view them through the lens of: "How easily can an attacker bypass detection if they tamper with the data?"</p>
+<h3>Simple Checksum</h3>
+<p>This is the most basic form of integrity verification. It simply sums all bytes of the data and appends the result to the end of the frame; the receiver performs the same calculation and compares the values.</p>
+<div class="code-toolbar"><pre class="language-python" tabindex="0"><code class="language-python"><span class="token keyword">def</span> <span class="token function">simple_checksum</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> <span class="token builtin">bytes</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token builtin">sum</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">0xFF</span>  <span class="token comment"># 8-bit checksum</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>Python</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<p>The calculation is simple and fast, but because simple summation-based checksums have a <strong>linear structure</strong>, they cannot detect permutation errors (swapped byte order) or bit changes that cancel each other out (+x / −x). For example, <code>0x01 0x02</code> and <code>0x02 0x01</code> produce the same sum. The IPv4 Header Checksum is a representative example of this approach — more precisely, it uses a <strong>16-bit one's complement summation</strong>, yet still shares the same fundamental limitation of failing to detect reordering or cancellation errors. This is precisely why it is used in combination with upper-layer (TCP/UDP) checksums.</p>
+<p class="blog-image">
+  <img src="/blog/assets/crc/checksum_weakness.png" alt="Simple checksum weakness: diagram showing how swapped byte order produces the same checksum value">
+</p>
+<p align="center">
+  <em>A simple Checksum cannot detect byte-reordering errors. Two completely different data sequences produce the same checksum value.</em>
+</p>
+<h3>CRC (Cyclic Redundancy Check)</h3>
+<p>CRC adopts <strong>polynomial division</strong> as its mathematical foundation to overcome the limitations of simple summation. It represents data as a binary polynomial and uses the remainder from dividing by a predetermined generator polynomial as the checksum.</p>
+<p>Thanks to this mathematical structure, CRC can detect complex error patterns with high probability — such as burst errors and data reordering — that simple checksums cannot catch. Additionally, many CRC generator polynomials include the <strong>(x+1)</strong> factor, meaning they can <strong>detect all odd numbers of bit errors</strong> (CRC-32, CRC-16/IBM, etc.). Since CRC-32's generator polynomial has degree 32, it <strong>detects 100% of burst errors up to 32 bits</strong>, with detection becoming probabilistic for longer burst errors.</p>
+<div class="code-toolbar"><pre class="language-c" tabindex="0"><code class="language-c"><span class="token comment">// CRC-16/MODBUS calculation example</span>
+<span class="token class-name">uint16_t</span> <span class="token function">calculate_modbus_crc</span><span class="token punctuation">(</span><span class="token class-name">uint8_t</span> <span class="token operator">*</span>data<span class="token punctuation">,</span> <span class="token class-name">size_t</span> length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">uint16_t</span> crc <span class="token operator">=</span> <span class="token number">0xFFFF</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">size_t</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        crc <span class="token operator">^=</span> data<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> <span class="token number">8</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>crc <span class="token operator">&amp;</span> <span class="token number">0x0001</span><span class="token punctuation">)</span>
+                crc <span class="token operator">=</span> <span class="token punctuation">(</span>crc <span class="token operator">&gt;&gt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token number">0xA001</span><span class="token punctuation">;</span>
+            <span class="token keyword">else</span>
+                crc <span class="token operator">&gt;&gt;=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> crc<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>C</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<p>CRC is used in various industry standards including Ethernet (CRC-32/ISO-HDLC), MODBUS RTU (CRC-16/MODBUS), CAN Bus (CRC-15/CAN), and file formats like ZIP and PNG. However, there is an important constraint: CRC is a tool for detecting <strong>accidental errors</strong>, not a security tool for preventing <strong>intentional tampering</strong>. A malicious attacker can reverse-engineer a way to alter data while maintaining the same CRC value.</p>
+<h3>Cryptographic Hash Function</h3>
+<p>Cryptographic hashes like SHA-256, SHA-3, and MD5 are designed to go beyond simple error detection and <strong>defend against intentional data manipulation</strong>. SHA-256, defined by <a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final">NIST FIPS 180-4</a>, guarantees the <strong>Avalanche Effect</strong> — a single bit change in the input causes more than half of the output hash to change completely.</p>
+<div class="code-toolbar"><pre class="language-python" tabindex="0"><code class="language-python"><span class="token keyword">import</span> hashlib
+
+data <span class="token operator">=</span> <span class="token string">b"Hello, World!"</span>
+sha256_hash <span class="token operator">=</span> hashlib<span class="token punctuation">.</span>sha256<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment"># Output: dffd6021bb2bd5b0af676290809ec3a53191dd81c7f70a4b28688a362182986f</span>
+
+<span class="token comment"># Change just one character</span>
+data2 <span class="token operator">=</span> <span class="token string">b"Hello, world!"</span>  <span class="token comment"># 'W' → 'w'</span>
+sha256_hash2 <span class="token operator">=</span> hashlib<span class="token punctuation">.</span>sha256<span class="token punctuation">(</span>data2<span class="token punctuation">)</span><span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment"># Output: 315f5bdb76d078c43b8ac0064e4a0164612b1fce77c869345bfc94c75894edd3</span>
+<span class="token comment"># → A completely different hash value</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>Python</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<p>Cryptographic hashes have three core security properties. First, <strong>Preimage Resistance</strong> — recovering the original data from a hash value is computationally infeasible. Second, <strong>Second Preimage Resistance</strong> — finding a different input that produces the same hash value is computationally infeasible. Third, <strong>Collision Resistance</strong> — finding any two inputs that share the same hash value within practical time is computationally infeasible.</p>
+<p class="blog-image">
+  <img src="/blog/assets/crc/algorithm_comparison_table.png" alt="Comparison table of Checksum, CRC, and cryptographic hash algorithms covering mathematical basis, error detection capability, security, and use cases">
+</p>
+<p align="center">
+  <em>Key characteristics comparison of the three algorithms. CRC is appropriate for communication protocols without security requirements; cryptographic hashes are appropriate for digital signatures and file authentication.</em>
+</p>
+<div class="ad-article-wrapper">
+                <ins class="adsbygoogle" style="display: block; text-align: center; height: 280px;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9424100257975478" data-ad-slot="2892459749" data-adsbygoogle-status="done"><div id="aswift_2_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"></div></ins>
+            </div><h2>MD5 Is No Longer Secure</h2>
+<p>When discussing cryptographic hashes, the security lifespan of MD5 must be addressed. MD5 has been used for file integrity verification and digital signatures since it was defined in <a href="https://www.rfc-editor.org/rfc/rfc1321.html">RFC 1321</a> in 1992. However, a 2004 paper by Wang et al. demonstrated that practical collision attacks against MD5 were possible, and as attack techniques continued to advance, modern chosen-prefix collision attacks made it possible to <strong>generate MD5 collisions within practical time even on ordinary computers</strong>.</p>
+<p>This was formally documented in the 2011 IETF <a href="https://www.rfc-editor.org/rfc/rfc6151">RFC 6151</a>, which states that MD5 is no longer acceptable for applications requiring collision resistance, such as digital signatures.</p>
+<p>There is only one use case where MD5 remains acceptable: detecting simple transmission errors in environments free from malicious tampering — for example, file transfer checks between internal systems. However, adopting MD5 in new system designs is not recommended.</p>
+<p>The current choices are SHA-256 (SHA-2 family) or SHA-3. SHA-256 produces a 256-bit output, has no known collisions to date, and underpins modern security infrastructure including TLS, Git, and Docker image signing.</p>
+<h2>Decision Criteria in Practice</h2>
+<p>Here is a summary of when to use each algorithm.</p>
+<p><strong>Use Simple Checksum when</strong>: computing resources are severely constrained (ultra-small microcontrollers), integrity verification is already handled by a separate upper layer, or speed is overwhelmingly more important than error detection.</p>
+<p><strong>Use CRC when</strong>: the purpose is <strong>accidental error detection</strong> in environments without security threats — such as industrial communication protocols (MODBUS, CAN Bus), file format error detection (ZIP, PNG), or memory integrity checks in embedded systems.</p>
+<p><strong>Use a Cryptographic Hash when</strong>: any situation requires <strong>defending against data manipulation by external attackers</strong> — including software distribution file integrity verification, digital signatures, password hashing (combined with bcrypt/Argon2), and TLS certificates.</p>
+<p class="blog-image">
+  <img src="/blog/assets/crc/decision_tree.png" alt="Decision tree flowchart for choosing between Checksum, CRC, and cryptographic hash algorithms">
+</p>
+<p align="center">
+  <em>A decision tree for algorithm selection. The presence or absence of a security threat is the most critical branching criterion.</em>
+</p>
+<h2>Calculating and Verifying CRC Values</h2>
+<p>When implementing or debugging CRC-based communication protocols, you need a tool to quickly verify the computed result of a specific algorithm. <a href="https://compu-tools.com/crc/">CRC Tool</a> supports over 100 algorithms from CRC-8 to CRC-64, and lets you instantly switch byte order to match protocols like MODBUS RTU that require little-endian output. With options such as HEX input, byte-separated output, and endianness settings that come up frequently in practice, it is especially useful during the verification phase of CRC implementations.</p>
+<h2>Latest Trends: SHA-3 and the Future of Hashing</h2>
+<p>The SHA-2 family (SHA-256, SHA-512) is currently considered secure, but NIST additionally standardized SHA-3 (based on the Keccak algorithm) in 2015 (Keccak was selected through the SHA-3 competition in 2012). SHA-3 has a completely different internal structure from SHA-2, providing strategic independence — even if a theoretical weakness were discovered in SHA-2, SHA-3 would remain unaffected.</p>
+<p>For password storage specifically, using SHA-256 alone is insufficient. Because it is vulnerable to GPU-based parallel attacks, it must be used alongside intentionally compute-intensive <strong>key derivation functions (KDFs)</strong> such as <strong>bcrypt</strong>, <strong>Argon2</strong>, or <strong>scrypt</strong>.</p>
+<p><strong>Post-Quantum Cryptography</strong> is actively being discussed in preparation for advances in quantum computing. For hash functions, the quantum <strong>Grover's algorithm</strong> roughly halves effective security strength. For example, SHA-256 provides 128-bit security against classical computers, but drops to approximately 64-bit under Grover's algorithm. The proposed countermeasure is to double the output length (SHA-512, SHA3-512) — SHA-512 maintains 128-bit security strength even in a quantum environment.</p>
+<div class="ad-article-wrapper">
+                <ins class="adsbygoogle" style="display: block; text-align: center; height: 280px;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9424100257975478" data-ad-slot="2892459749" data-adsbygoogle-status="done"><div id="aswift_3_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"></div></ins>
+            </div><h2>CRC vs MD5: Why Can't CRC Be Used for Security?</h2>
+<p>In practice, the two are sometimes conflated or people wonder, "Isn't CRC good enough?" Understanding the fundamental difference between the two algorithms answers this question definitively.</p>
+<p><strong>CRC was never designed with security in mind.</strong> The output of CRC-32 is only 32 bits (approximately 4.3 billion possible values), and because the generator polynomial and algorithm are public, an attacker can mathematically reverse-engineer a way to manipulate data while preserving the target CRC value. This is called <strong>CRC forgery</strong> — meaning a maliciously modified file can have the same CRC value as the original.</p>
+<p>MD5, on the other hand, has a 128-bit output and a one-way compression structure designed to make inversion computationally infeasible. Of course, as explained above, MD5 is also vulnerable to collision attacks, so SHA-256 should be used for security purposes.</p>
+<div class="code-toolbar"><pre class="language-text" tabindex="0"><code class="language-text">[Data Integrity Verification for Security Purposes]
+
+CRC-32:  32-bit output  →  reversible      →  unsuitable for security ✗
+MD5:    128-bit output  →  not reversible  →  collision vulnerability △
+SHA-256: 256-bit output  →  not reversible  →  currently secure ✓
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>Plain text</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<p>In summary, CRC is a tool for catching accidental errors such as <strong>channel noise or physical damage</strong>, while cryptographic hashes are tools for stopping <strong>attackers with intent</strong>. The two serve fundamentally different purposes, so they should be understood as complementary rather than interchangeable.</p>
+<h2>Conclusion: Purpose Determines the Tool</h2><div class="ad-article-wrapper">
+                <ins class="adsbygoogle" style="display: block; text-align: center; height: 280px;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9424100257975478" data-ad-slot="2892459749" data-adsbygoogle-status="done"><div id="aswift_4_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"></div></ins>
+            </div>
+<p>Using SHA-256 for error detection in an embedded communication frame is an excessive waste of resources. Conversely, verifying the integrity of a software distribution file with only CRC is a serious security hole. <strong>The key is to first understand the security properties each algorithm guarantees — not just its name — and then choose the one that fits your situation.</strong></p>
+<p>If you need a CRC calculation tool or want to verify a CRC implementation, check out <a href="https://compu-tools.com/crc/">CRC Tool</a>. It lets you instantly compare multiple algorithms against the same input, helping you identify the exact algorithm your protocol specification requires.</p>
+<h2>References</h2>
+<ol>
+<li><strong>R. Rivest</strong>, <a href="https://www.rfc-editor.org/rfc/rfc1321.html">"The MD5 Message-Digest Algorithm"</a>, RFC 1321, IETF, April 1992.</li>
+<li><strong>S. Turner, L. Chen</strong>, <a href="https://www.rfc-editor.org/rfc/rfc6151">"Updated Security Considerations for the MD5 Message-Digest and the HMAC-MD5 Algorithms"</a>, RFC 6151, IETF, March 2011 — The document that formally codified MD5's security vulnerabilities and usage restrictions.</li>
+<li><strong>NIST</strong>, <a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final">"Secure Hash Standard (SHS), FIPS 180-4"</a>, 2015 — The official standard specification for the SHA-2 family of algorithms including SHA-256 (SHA-224, SHA-256, SHA-384, SHA-512, etc.).</li>
+<li><strong>NIST</strong>, <a href="https://csrc.nist.gov/projects/hash-functions">"Hash Functions"</a>, CSRC — List of NIST-approved hash algorithms and security strength comparison table.</li>
+<li><strong>Ross Williams</strong>, <a href="http://www.ross.net/crc/download/crc_v3.txt">"A Painless Guide to CRC Error Detection Algorithms"</a> — An essential reference explaining CRC parameters and operating principles in detail.</li>
+</ol>
+</div><div class="post-popular-section"><div class="section-header"><div class="section-title"><i class="fa-solid fa-fire"></i>Popular Posts</div></div><div class="post-popular-list"><a href="/blog/2026-02-10-ascii-converter/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">Everything About ASCII Conversion: How Computers Understand Characters</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>10 February 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Text &amp; Encoding</span></div></a><a href="/blog/2026-02-25-cron/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">The Complete Guide to Cron Expressions: Everything a Developer Must Know About Scheduling</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>25 February 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Time &amp; Date</span></div></a><a href="/blog/2026-03-07-gimbal-lock/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">The Mathematical Cause of Gimbal Lock and How to Avoid It: A Complete Guide to Euler Angles vs Quaternions</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>07 March 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Mathematical</span></div></a><a href="/blog/2026-01-31-3d-rotation/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">Understanding 3D Rotation: A Practical Guide to Quaternions, Euler Angles, and Rotation Matrices</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>21 January 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Mathematical</span></div></a><a href="/blog/2026-02-21-unix-timestamp/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">Everything About Unix Timestamps: A Developer's Guide to Handling Time as Numbers</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>21 February 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Time &amp; Date</span></div></a></div></div><div class="ad-display-wrapper post-ad" style="height: auto !important; min-height: 0px !important;"><ins style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7315862436" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_1_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7315862436&amp;adk=3048900072&amp;adf=3067865478&amp;pi=t.ma~as.7315862436&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1773549793&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fblog%2F2026-03-15-crc-comparison%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTQuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1773549961198&amp;bpp=4&amp;bdt=435&amp;idt=4&amp;shv=r20260312&amp;mjsv=m202603090101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0%2C1200x280&amp;nras=1&amp;correlator=526269399090&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=50&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=536&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95385580%2C31097123%2C95378425%2C95381489%2C95383702%2C95384193%2C95384744%2C95385283%2C31097164%2C95379823&amp;oid=2&amp;pvsid=7477325877571441&amp;tmod=1876918913&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=3&amp;uci=a!3&amp;fsb=1&amp;dtd=22" data-google-container-id="a!3" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div></div></div></div><aside class="sidebar-right"><div class="sidebar-sticky"><div class="sidebar-section"><div class="sidebar-title"><i class="fa-solid fa-link sidebar-title-icon"></i>Related Posts</div><div class="blog-recent-list"><a href="/blog/2026-03-04-endian/" class="blog-recent-item-link"><span class="blog-recent-title">Understanding Endianness: Byte Order Defines Your System</span></a><a href="/blog/2025-12-27-crc/" class="blog-recent-item-link"><span class="blog-recent-title">Data Integrity Verification with CRC: A Practical Guide</span></a></div></div><div class="sidebar-ad-space"><div class="ad-display-wrapper sidebar-ad"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/json/">JSON Formatter &amp; Converter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regular Expression Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Previewer</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Timestamp Log Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter &amp; Palette Generator</a></li><li><a href="/http-code-gen/">HTTP Request Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20260312/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>

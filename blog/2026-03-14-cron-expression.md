@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Cron Expression Practical Guide: Special Character Combinations, Domain-Specific Examples, and Debugging Patterns"
-date: 12 March 2026
+date: 14 March 2026
 tags: [Time & Date]
 excerpt: "Cron Expression special character (*, ,, -, /, ?, L, W, #) combination rules and pitfalls, 30 real-world examples across system operations, data, backend, and CI/CD domains, plus misreading patterns and a debugging checklist — a practical Cron Expression reference you must know before deployment."
 ---
