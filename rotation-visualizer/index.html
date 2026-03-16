@@ -1,0 +1,604 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
+  <meta name="robots" content="index, follow">
+  
+  <meta name="computools" content="computools">
+  <meta name="description" content="Free online 3D rotation visualizer. Visualize 3D rotations using Quaternions, Euler Angles, and Rotation Matrices. Features real-time 3D preview, all 6 rotation orders (XYZ, XZY, YXZ, YZX, ZXY, ZYX), radian/degree support. Essential tool for game development, robotics, aerospace, and 3D graphics.">
+  <meta name="keywords" content="quaternion, euler, 3d, rotation, math, animation, game, graphics">
+  <meta name="author" content="CompuTools">
+
+  <meta property="og:url" content="https://www.compu-tools.com/rotation-visualizer/">
+  <meta property="og:title" content="3D Rotation Visualizer – Quaternion, Euler, Rotation Matrix | CompuTools">
+  <meta property="og:description" content="Free online 3D rotation visualizer. Visualize 3D rotations using Quaternions, Euler Angles, and Rotation Matrices. Features real-time 3D preview, all 6 rotation orders (XYZ, XZY, YXZ, YZX, ZXY, ZYX), radian/degree support. Essential tool for game development, robotics, aerospace, and 3D graphics.">
+  <meta property="og:image" content="https://www.compu-tools.com/logo.png">
+  <meta property="og:image:height" content="607">
+  <meta property="og:image:width" content="607">
+
+
+  <title>3D Rotation Visualizer – Quaternion, Euler, Rotation Matrix | CompuTools</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="/index-79a08ccf9002a4a5.css" integrity="sha384-t7zswRUUIx9xJPk9UISIqnAaiIy/uZFpMOuU+yGUUbjA5HvrL9/aiacnUXk1hY4W">
+  <link rel="stylesheet" href="/navbar-75873082cccbe031.css" integrity="sha384-rpT1uQGvuXLrSAzeXYhu5BBNLPwm2bYlHPewr/e9oqnQrkuULi+8W3uEshX/y6W2">
+  <link rel="stylesheet" href="/search-c1e28b4bb1564c88.css" integrity="sha384-9ZX0K1e1rZI0UdyLAi5KGYVB1DA0QK4oeqCCOdz13SxNL350NAE3kaq5IUuzgDPz">
+  <link rel="stylesheet" href="/thumbnail-d38c787f2ad634dd.css" integrity="sha384-TKjGmTTJRTJRlZ1AwBIKosmdrzHqJemuI3ayQOeXyZA8QxlmSdbLFVESpFEJIbd/">
+  <link rel="stylesheet" href="/tool-7dfe1b6756af81ad.css" integrity="sha384-ITHS1qsac11BpKtJ1QlElIxeUHPYWgMzJPuKqllSh/IHzlDSRf2dwOIf73rwwjWX">
+  <link rel="stylesheet" href="/blog-f2d2cc4d2980f6f2.css" integrity="sha384-OvbSSfktaQB37yQpdpv6ltyOKdlLZRqBqRcT7+0Dnv3lkPE8hBbHGzvaZOGeo1Mj">
+  <link rel="stylesheet" href="/post-3e53627841e859e.css" integrity="sha384-eaJvQGnE0KtaWyOmR82vaTsFrC8q2pJdH3rn0AttszG5JsSfF/dHOF3rnZwCkRPt">
+  <link rel="stylesheet" href="/preview-f40c5b910ffb9c47.css" integrity="sha384-4WRw7idd+Q+y0eS2b414FCjKXzv+kSQ1jIBZ/e2XT0M0N9FRi8sD/b1YCm6zlwGl">
+  <link rel="stylesheet" href="/ad-bc2975c16b7a5e3a.css" integrity="sha384-cZ+6J5XDBX7PXVZtk1lMo2KV9ooNhzR8+bvJKDcTdLwagg9H6beP7ZSrSdA8O1xv">
+  <link rel="stylesheet" href="/prism-c451adb7299a4a0.css" integrity="sha384-JHfRrkWbZJu5R/8OJhxu3j19hT9BpfW1isiNYAlkF5vRzQu14JDkB4lWvJX5I4r7">
+  
+  
+<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202603120101/show_ads_impl.js"></script><script type="module">
+import init, * as bindings from '/computools-cf9244143e1c47f9.js';
+const wasm = await init({ module_or_path: '/computools-cf9244143e1c47f9_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+
+  
+
+
+  
+  
+  
+  
+  
+
+  <link rel="icon" href="/favicon-1a8ba4d4617517ad.ico" integrity="sha384-sh+KkiOvcFXwh29z2PE6y5W6JoL/C2uPj8MHwWodi4oVC6f4XcUmhJGk6dmH2Teg">
+
+  <script src="/prism.js"></script>
+
+
+  <!-- MathJax for LaTeX math rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script>
+      (function() {
+          const redirect = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          if (redirect && redirect !== window.location.href) {
+              history.replaceState(null, null, redirect);
+          }
+      })();
+  </script>
+  <script>
+    // JavaScript에서 getTimeZoneOffset 함수 정의
+    function getTimeZoneOffset() {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const offset = new Date().getTimezoneOffset();
+        return { timeZone, offset };
+    }
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9424100257975478" crossorigin="anonymous" data-checked-head="true"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1G0CMRC310');
+  </script>
+<link rel="modulepreload" href="/computools-cf9244143e1c47f9.js" crossorigin="anonymous" integrity="sha384-SPGWd7x45uEEmeFxmwKSVowhRwbXBOqoPp9HmJ6eUqDRQ4dBLm1QiE94yefLGReB"><link rel="preload" href="/computools-cf9244143e1c47f9_bg.wasm" crossorigin="anonymous" integrity="sha384-BqsnmgHqVHWcaYB5sryMnK+XBbIznCRxM6Wj/9MP9txxOsfE2RhAKmgwuQaAYfPk" as="fetch" type="application/wasm"><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+<body><div class="navbar-wrapper"><div class="navbar-container"><a href="/" class="navbar-content">CompuTools</a><div style="justify-content: right;" class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper" style="height: auto !important;"><div class="main-content" style="height: auto !important;"><div class="page-with-sidebar" style="height: auto !important;"><aside class="sidebar-left"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper sidebar-ad"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside><div class="page-main" style="height: auto !important;"><div class="home-wrapper" style="height: auto !important;"><h1 class="tool-title">3D Rotation Visualizer – Quaternion, Euler, Rotation Matrix</h1><div class="tool-description">Visualize 3D rotations using Quaternions, Euler Angles, and Rotation Matrices with interactive 3D visualization</div><div class="ad-display-wrapper tool-title-ad"><ins style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7315862436" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_0_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7315862436&amp;adk=1964690608&amp;adf=1054769236&amp;pi=t.ma~as.7315862436&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1773673009&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Frotation-visualizer%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTQuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1773673116157&amp;bpp=1&amp;bdt=472&amp;idt=1&amp;shv=r20260312&amp;mjsv=m202603120101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0&amp;nras=1&amp;correlator=6432621017191&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=33&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=202&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=31097123%2C31097125%2C95378425%2C95383701%2C95384194%2C95384535%2C95385301%2C95372614&amp;oid=2&amp;pvsid=305295969978556&amp;tmod=850457426&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=2&amp;uci=a!2&amp;fsb=1&amp;dtd=16" data-google-container-id="a!2" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div><script type="application/ld+json">{
+                    "@context": "https://schema.org",
+                    "@graph": [
+                        {
+                            "@type": "SoftwareApplication",
+                            "name": "3D Rotation Visualizer — Quaternion, Euler Angles, Rotation Matrix",
+                            "url": "https://www.compu-tools.com/rotation-visualizer/",
+                            "applicationCategory": "DeveloperApplication",
+                            "operatingSystem": "Web Browser",
+                            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+                            "description": "Free online 3D rotation visualizer. Enter a quaternion, Euler angles, or a 3×3 rotation matrix and see in real time how the X, Y, Z axes are rotated in 3D. Supports all 6 intrinsic rotation orders (XYZ, ZYX, etc.), radians/degrees, and interactive orbit & zoom.",
+                            "featureList": [
+                                "Quaternion 3D rotation visualizer (x, y, z, w)",
+                                "Euler angle visualizer with XYZ, ZYX, YXZ and all other rotation orders",
+                                "3×3 rotation matrix visualizer with orthogonality validation",
+                                "Interactive 3D axes viewer with orbit, pan-like tilt, and zoom",
+                                "Radian and degree support for Euler angles",
+                                "Quaternion normalization and rotation matrix consistency check",
+                                "Compatible with Unity, Unreal, ROS, Three.js rotation conventions",
+                                "Local, client-side rendering with no data sent to any server"
+                            ]
+                        },
+                        {
+                            "@type": "FAQPage",
+                            "mainEntity": [
+                                {
+                                    "@type": "Question",
+                                    "name": "What is this 3D rotation visualizer used for?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "This 3D rotation visualizer helps you understand how a given quaternion, Euler angle triple, or 3×3 rotation matrix actually rotates the coordinate axes in 3D. It is ideal for debugging game engine rotations, robotics orientation (ROS), aerospace yaw-pitch-roll, and graphics libraries such as Three.js or OpenGL."
+                                    }
+                                },
+                                {
+                                    "@type": "Question",
+                                    "name": "Which rotation representations does this tool support?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "The tool supports three rotation representations: unit quaternions (x, y, z, w), Euler angles (X, Y, Z rotations with configurable order and unit), and 3×3 rotation matrices. You can switch the input mode at any time and see the same rotation visualized as a transformed set of axes."
+                                    }
+                                },
+                                {
+                                    "@type": "Question",
+                                    "name": "Does this visualizer support different rotation orders like XYZ and ZYX?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "Yes. When you choose Euler Angles as input, you can select any of the six intrinsic rotation orders: XYZ, XZY, YXZ, YZX, ZXY, and ZYX. This allows you to match the exact rotation order used by engines such as Unity (YXZ), ROS (ZYX), and Three.js (XYZ)."
+                                    }
+                                },
+                                {
+                                    "@type": "Question",
+                                    "name": "How does quaternion normalization work in this tool?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "Whenever you enter a quaternion, the visualizer automatically normalizes it before using it to build the rotation matrix. This prevents drift from non-unit quaternions and ensures the visualization always corresponds to a valid 3D rotation on the unit 4D hypersphere."
+                                    }
+                                },
+                                {
+                                    "@type": "Question",
+                                    "name": "Can I verify my own quaternion or rotation matrix implementation?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "Yes. You can paste your quaternion or rotation matrix and visually confirm whether the resulting orientation matches what your own code or engine produces. If the axes do not line up as expected, that is a strong hint that there is a sign, order, or convention mismatch in your implementation."
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "@type": "HowTo",
+                            "name": "How to visualize a 3D rotation online",
+                            "description": "Use the 3D rotation visualizer to see how quaternions, Euler angles, or rotation matrices affect the coordinate axes.",
+                            "totalTime": "PT1M",
+                            "step": [
+                                {
+                                    "@type": "HowToStep",
+                                    "position": 1,
+                                    "name": "Select input type",
+                                    "text": "Choose Quaternion, Euler Angles, or Rotation Matrix from the Input Type dropdown."
+                                },
+                                {
+                                    "@type": "HowToStep",
+                                    "position": 2,
+                                    "name": "Configure units and order",
+                                    "text": "If using Euler angles, select radians or degrees and the desired rotation order such as XYZ or ZYX."
+                                },
+                                {
+                                    "@type": "HowToStep",
+                                    "position": 3,
+                                    "name": "Enter rotation values",
+                                    "text": "Fill in the quaternion components, Euler angles, or 3×3 matrix elements. The tool validates and normalizes the input where necessary."
+                                },
+                                {
+                                    "@type": "HowToStep",
+                                    "position": 4,
+                                    "name": "Inspect the 3D axes",
+                                    "text": "Use the mouse or touch gestures to orbit and zoom the 3D view. Compare the faded reference axes (x, y, z) with the rotated axes (X', Y', Z')."
+                                }
+                            ]
+                        }
+                    ]
+                }</script><div class="tool-wrapper"><div class="tool-intro"><div id="rotation-visualizer" class="content-section"><h2>3D Rotation Visualizer — Quaternion, Euler, Rotation Matrix</h2><p>This 3D rotation visualizer shows how any rotation transforms the coordinate axes in real time. Enter a unit quaternion, Euler angles, or a 3×3 rotation matrix and the tool renders both the original reference axes (x, y, z) and the rotated axes (X', Y', Z') so you can immediately see the effect of your values.</p><p>Mathematical conversions are identical to the full quaternion/Euler/matrix converter used elsewhere in CompuTools, but this page focuses purely on visual intuition: no numeric outputs, just a clean, interactive 3D viewer for understanding and debugging rotations.</p></div><div class="content-section"><h2>Supported Rotation Representations</h2><div class="example-box"><ul><li><strong>Quaternion (x, y, z, w)</strong> — Compact, gimbal‑lock‑free representation ideal for animation, interpolation (SLERP), and composition. The tool automatically normalizes your quaternion before use.</li><li><strong>Euler Angles (X, Y, Z)</strong> — Human‑readable roll/pitch/yaw style angles. You can choose radians or degrees and select any intrinsic rotation order to match engines like Unity, Unreal, ROS, or Three.js.</li><li><strong>3×3 Rotation Matrix</strong> — Orthogonal matrix with det = 1, perfect for seeing how basis vectors are mapped. The tool validates orthogonality and determinant within a numeric tolerance and flags matrices that drift away from SO(3).</li></ul></div></div><div class="content-section"><h2>How to Use the 3D Rotation Visualizer</h2><ul><li><strong>1. Choose Input Type</strong>: Select Quaternion, Euler Angles, or Rotation Matrix from the Input Settings panel.</li><li><strong>2. Configure Units &amp; Order (for Euler)</strong>: Pick radians or degrees, then select the rotation order (XYZ, ZYX, YXZ, etc.) that matches your engine or math convention.</li><li><strong>3. Enter Values</strong>: Type your quaternion components, Euler angles, or matrix elements. Invalid values (NaN, non‑orthogonal matrices, out‑of‑range angles) trigger inline error messages.</li><li><strong>4. Explore the View</strong>: Drag horizontally to spin around the Z axis, drag vertically to tilt the camera, and scroll or pinch to zoom in and out.</li><li><strong>5. Compare Reference vs Rotated Axes</strong>: The faded x, y, z axes show the original basis; the bold X', Y', Z' axes show where those basis vectors end up after applying your rotation.</li></ul></div><div class="content-section"><h2>Typical Use Cases</h2><div class="use-case"><h3>Game Development &amp; Graphics</h3><p>Visualize character or camera rotations coming from Unity, Unreal, or custom engines. Paste quaternions from your debug logs and confirm whether the rotation order and handedness match what you expect in the scene.</p></div><div class="use-case"><h3>Robotics &amp; Aerospace</h3><p>Inspect IMU orientations and attitude control rotations from ROS, drones, or satellite software. Switch to ZYX yaw‑pitch‑roll convention and verify that sensor quaternions and control matrices produce the intended orientation.</p></div><div class="use-case"><h3>Library &amp; Engine Integration Debugging</h3><p>When porting code between libraries (e.g., from a robotics stack to a WebGL/Three.js viewer), use this tool to catch sign flips, transposed matrices, or mismatched rotation orders by visually comparing expected vs actual axes.</p></div></div><div class="content-section"><h2>Engine &amp; Framework Rotation Conventions</h2><div class="example-box"><p><strong>Rotation order and coordinate system conventions vary by engine. This visualizer helps you line them up precisely:</strong></p><ul><li><strong>Unity</strong>: Left‑handed, default Euler order <code>YXZ</code> (Yaw‑Pitch‑Roll). Use Euler input with YXZ order and degrees to mirror <code>transform.eulerAngles</code>.</li><li><strong>Unreal Engine</strong>: Right‑handed, often YXZ in editor. Make sure to match both order and handedness when comparing with this tool.</li><li><strong>Three.js / WebGL</strong>: Right‑handed, default Euler order <code>XYZ</code>. Use XYZ + radians to match <code>THREE.Euler</code> defaults.</li><li><strong>ROS / Robotics</strong>: Typically ZYX (Yaw‑Pitch‑Roll) for Euler representation; orientations are distributed as unit quaternions in <code>geometry_msgs/Quaternion</code>.</li></ul></div></div><div class="content-section"><h2>Rotation Math &amp; Best Practices</h2><div class="example-box"><p><strong>Core recommendations when working with 3D rotations:</strong></p><ul><li><strong>Prefer quaternions for storage &amp; interpolation:</strong> Avoid gimbal lock and discontinuities; use SLERP or normalized LERP between orientations.</li><li><strong>Normalize regularly:</strong> After repeated composition, renormalize quaternions to avoid numerical drift; this tool always visualizes the normalized version.</li><li><strong>Check matrix orthogonality:</strong> If the rotation matrix columns are not orthonormal, re‑orthogonalize or regenerate from a quaternion.</li><li><strong>Explicitly document rotation order:</strong> Treat XYZ/ZYX/YXZ as part of your API contract; mismatched orders are a top cause of visual bugs.</li></ul></div></div><div class="content-section"><h2>FAQ — 3D Rotation Visualizer</h2><div class="faq-item"><h3>Why do my Euler angles not match what Unity or Unreal shows?</h3><p>Most discrepancies come from rotation order and unit mismatches. Unity and Unreal often use YXZ with degrees, while this tool lets you choose any order and radians or degrees independently. Set the Euler order and unit here to mirror your engine, then compare the visualized axes instead of raw angle triples.</p></div><div class="faq-item"><h3>Why does the same orientation sometimes produce different Euler angles?</h3><p>Euler angles are non‑unique: many different triples represent the same 3D orientation, especially near gimbal‑lock configurations. This tool always visualizes the unique underlying rotation matrix; even if Euler numbers differ, identical axes in the viewer mean the orientation is the same.</p></div><div class="faq-item"><h3>How can I tell if my rotation matrix is valid?</h3><p>Enter the 3×3 matrix and watch for validation errors. Internally, the tool checks that columns are orthonormal and that det = 1 within a small tolerance. If the matrix fails, it is not a member of SO(3) and should be recomputed from a quaternion or re‑orthogonalized.</p></div><div class="faq-item"><h3>Can I use this to debug left‑handed vs right‑handed issues?</h3><p>Yes. If an object appears mirrored or spins in the wrong direction, compare the rotated axes here with those in your engine. Flipped handedness typically shows up as Z' pointing the opposite way or rotations appearing clockwise instead of counter‑clockwise.</p></div><div class="faq-item"><h3>How do I visualize a pure yaw, pitch, or roll?</h3><p>Use Euler input, set the order to match your convention (for example ZYX for yaw‑pitch‑roll), then set a single axis angle while keeping the others at zero. The viewer will show how that elementary rotation moves the axes, which is useful for building an intuition for composition.</p></div></div><div class="content-section"><h2>Related Tools</h2><ul><li><a href="/base/">Number Base Converter</a> - Convert numbers between binary, decimal, hexadecimal, and octal with precision</li><li><a href="/unit-converter/">Unit Converter</a> - Convert between length, weight, temperature, pressure, speed, area, volume, data size, time, and energy units</li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a> - Visualize 3D rotations using Quaternions, Euler Angles, and Rotation Matrices with interactive 3D visualization</li></ul></div></div><div class="tool-container"><div class="tool-visualization-results-container tool-visualization-results-container--rotation"><div class="tool-visualization-column"><div class="tool-result-section"><div><div style="margin-bottom: 10px;" class="tool-title-row"><div class="tool-result-title"><span class="tool-icon-badge-lg"><i class="fa-solid fa-cube"></i></span>3D Visualization</div><button class="tool-reset-button"><i class="fa-solid fa-rotate-left"></i>Reset View</button></div><div class="tool-canvas-container"><canvas width="800" height="800" style="touch-action: none;" class="tool-3d-canvas"></canvas></div><div class="tool-canvas-legend-result"><div class="tool-legend-row"><span class="tool-legend-item ref-x">x</span><span class="tool-legend-item ref-y">y</span><span class="tool-legend-item ref-z">z</span><span class="tool-legend-label-result">Reference</span></div><div class="tool-legend-row"><span class="tool-legend-item rot-x">X'</span><span class="tool-legend-item rot-y">Y'</span><span class="tool-legend-item rot-z">Z'</span><span class="tool-legend-label-result">Rotated</span></div></div><div class="tool-hint-text-result"><i class="fa-solid fa-circle-info"></i>Drag to rotate view • Scroll / pinch to zoom</div></div></div></div><div style="margin: 0 auto; width: 100%;" class="tool-input-section"><div><div class="tool-title-row"><div class="tool-section-title"><i class="fa-solid fa-pen-to-square"></i>Input</div><span class="tool-mode-badge">Quaternion (x, y, z, w)</span></div><div style="margin-top: 10px;" class="tool-settings-section"><div class="tool-settings-content"><div class="tool-settings-row"><label class="tool-settings-label"><i class="fa-solid fa-cube"></i>Type</label><select class="tool-settings-select"><option value="quaternion" selected="selected">Quaternion</option><option value="euler">Euler Angles</option><option value="matrix">Rotation Matrix</option></select></div></div></div><div style="margin-top: 12px;" class="tool-input-grid-4"><div class="tool-input-field"><label class="tool-input-label">X</label><input type="number" inputmode="decimal" name="x" placeholder="0" autocomplete="off" step="any" class="tool-number-input"></div><div class="tool-input-field"><label class="tool-input-label">Y</label><input type="number" inputmode="decimal" name="y" placeholder="0" autocomplete="off" step="any" class="tool-number-input"></div><div class="tool-input-field"><label class="tool-input-label">Z</label><input type="number" inputmode="decimal" name="z" placeholder="0" autocomplete="off" step="any" class="tool-number-input"></div><div class="tool-input-field"><label class="tool-input-label">W</label><input type="number" inputmode="decimal" name="w" placeholder="1" autocomplete="off" step="any" class="tool-number-input"></div></div><div style="margin-top: 10px;" class="tool-hint-text"><i class="fa-solid fa-circle-info"></i>Quaternion will be normalized automatically before visualization</div></div></div></div></div></div></div></div><aside class="sidebar-right"><div class="sidebar-sticky"><div class="sidebar-section"><div class="sidebar-title">Related Tools</div><a href="/unit-converter/" class="sidebar-tool-link">Unit Converter</a><a href="/base/" class="sidebar-tool-link">Number Base Converter</a><a href="/quaternion/" class="sidebar-tool-link">3D Rotation Converter</a></div><div class="sidebar-ad-space"><div class="ad-display-wrapper sidebar-ad"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/json/">JSON Formatter &amp; Converter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regular Expression Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Previewer</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Timestamp Log Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter &amp; Palette Generator</a></li><li><a href="/http-code-gen/">HTTP Request Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20260312/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>

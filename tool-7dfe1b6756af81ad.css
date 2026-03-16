@@ -4116,6 +4116,22 @@ input[type=text] {
   }
 }
 
+.tool-visualization-results-container--rotation {
+  grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+}
+@media (max-width: 1200px) {
+  .tool-visualization-results-container--rotation {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+}
+@media (max-width: 768px) {
+  .tool-visualization-results-container--rotation {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+}
+
 .tool-visualization-column {
   min-width: 0;
   height: fit-content;
