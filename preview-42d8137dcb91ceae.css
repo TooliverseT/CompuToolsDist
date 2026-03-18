@@ -612,7 +612,6 @@ body {
   box-shadow: var(--card-shadow);
 }
 .quick-tool-card:hover {
-  transform: translateY(-3px);
   box-shadow: var(--card-shadow-hover);
   border-color: var(--color-fifth);
   background-color: var(--color-third);
@@ -718,6 +717,105 @@ body {
   .quick-tool-desc {
     font-size: 11px;
     -webkit-line-clamp: 1;
+  }
+}
+
+.tool-card-wrap {
+  position: relative;
+  transition: transform 0.3s ease;
+  border-radius: 10px;
+}
+.tool-card-wrap:hover {
+  transform: translateY(-3px);
+}
+
+.fav-star {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--color-subfont);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  opacity: 0;
+}
+.fav-star:hover {
+  background: rgba(245, 166, 35, 0.15);
+  color: #f5a623;
+}
+.fav-star.active {
+  opacity: 1;
+  color: #f5a623;
+}
+.fav-star:focus {
+  outline: none;
+}
+@media (max-width: 768px) {
+  .fav-star {
+    opacity: 0.3;
+  }
+  .fav-star.active {
+    opacity: 1;
+  }
+}
+
+.tool-card-wrap:hover .fav-star {
+  opacity: 0.6;
+}
+.tool-card-wrap:hover .fav-star.active {
+  opacity: 1;
+}
+
+.hero-favorites {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fav-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  background-color: var(--color-second);
+  border: 1px solid rgba(245, 166, 35, 0.3);
+  border-radius: 16px;
+  text-decoration: none !important;
+  color: var(--color-font);
+  font-family: "JetBrains Mono", helvetica, sans-serif;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+.fav-tag i {
+  color: #f5a623;
+  font-size: 10px;
+}
+.fav-tag:hover {
+  background-color: var(--color-third);
+  border-color: #f5a623;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  text-decoration: none !important;
+  color: var(--color-font);
+}
+@media (max-width: 480px) {
+  .fav-tag {
+    font-size: 11px;
+    padding: 4px 10px;
   }
 }
 
