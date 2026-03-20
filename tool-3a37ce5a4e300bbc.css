@@ -3655,7 +3655,7 @@ input[type=text] {
   align-items: center;
   gap: 12px;
   margin: 0;
-  color: var(--color-first);
+  color: var(--color-font);
 }
 @media (max-width: 1024px) {
   .tool-result-title {
@@ -3808,7 +3808,7 @@ input[type=text] {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  color: var(--color-first);
+  color: var(--color-error);
   font-size: 10px;
   margin-top: 8px;
   padding: 8px 12px;
@@ -3882,6 +3882,53 @@ input[type=text] {
   .tool-input-grid-4 {
     gap: 8px;
   }
+}
+
+.result-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.result-metric-card {
+  background: var(--color-second);
+  border: 1px solid var(--color-fourth);
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.result-metric-card:hover {
+  background: var(--color-third);
+}
+.result-metric-card.result-metric-card--wide {
+  grid-column: span 2;
+}
+
+.result-metric-label {
+  font-size: 11px;
+  color: var(--color-subfont);
+  margin-bottom: 4px;
+}
+.result-metric-label i {
+  margin-right: 4px;
+  color: var(--color-fourth);
+}
+
+.result-metric-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-font);
+}
+.result-metric-value--safe {
+  color: #22c55e;
+}
+.result-metric-value--warning {
+  color: #f59e0b;
+}
+.result-metric-value--danger {
+  color: #ef4444;
 }
 
 .tool-output-grid-3 {
