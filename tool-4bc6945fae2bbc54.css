@@ -4338,3 +4338,536 @@ input[type=text] {
     padding-right: 0;
   }
 }
+
+.tool-tab-bar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--color-fourth);
+  padding-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.tool-tab-button {
+  padding: 8px 16px;
+  border-radius: 6px 6px 0 0;
+  border: 1px solid var(--color-fourth);
+  border-bottom: none;
+  background: var(--color-second);
+  color: var(--color-subfont);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.tool-tab-button:hover {
+  background: var(--color-third);
+  color: var(--color-font);
+}
+.tool-tab-button.active {
+  background: var(--color-main);
+  color: #fff;
+  border-color: var(--color-main);
+}
+
+.bezier-editor-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(260px, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 768px) {
+  .bezier-editor-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bezier-compare-layout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 768px) {
+  .bezier-compare-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bezier-canvas {
+  display: block;
+  border-radius: 10px;
+  width: 100%;
+  aspect-ratio: 1/1;
+  cursor: crosshair;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.bezier-canvas-hint {
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-subfont);
+  margin-top: 8px;
+}
+
+.bezier-right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 260px;
+}
+
+.bezier-cp-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.bezier-cp-label {
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+.bezier-preview-string {
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  color: #00d4ff;
+  background: #1a1a2e;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  word-break: break-all;
+}
+
+.bezier-anim-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.bezier-progress-bar {
+  height: 4px;
+  background: var(--color-fourth);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.bezier-progress-fill {
+  height: 100%;
+  background: #00d4ff;
+  border-radius: 2px;
+  transition: width 0.016s linear;
+}
+
+.bezier-export-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.bezier-export-tab {
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--color-fourth);
+  background: var(--color-second);
+  color: var(--color-subfont);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+.bezier-export-tab:hover {
+  background: var(--color-third);
+}
+.bezier-export-tab.active {
+  background: var(--color-main);
+  color: #fff;
+  border-color: var(--color-main);
+}
+
+.bezier-code-block {
+  position: relative;
+  background: #1a1a2e;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+.bezier-code-block pre {
+  margin: 0;
+  padding: 12px 40px 12px 12px;
+  overflow-x: auto;
+  font-size: 11px;
+  line-height: 1.6;
+}
+.bezier-code-block pre code {
+  color: #e0e0e0;
+  font-family: "Courier New", monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.bezier-copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: #aaa;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.1s;
+}
+.bezier-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.bezier-presets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  padding: 4px;
+}
+
+.bezier-preset-card {
+  background: var(--color-second);
+  border: 1px solid var(--color-fourth);
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+}
+.bezier-preset-card:hover {
+  border-color: var(--color-main);
+  background: var(--color-third);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.bezier-preset-card:active {
+  transform: translateY(0);
+}
+
+.bezier-preset-canvas {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+  background: #1a1a2e;
+  margin-bottom: 8px;
+}
+
+.bezier-preset-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-font);
+  margin-bottom: 4px;
+}
+
+.bezier-preset-values {
+  font-size: 10px;
+  font-family: "Courier New", monospace;
+  color: var(--color-subfont);
+}
+
+.bezier-compare-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 220px;
+}
+
+.bezier-compare-empty {
+  color: var(--color-subfont);
+  font-size: 13px;
+  padding: 12px;
+  background: var(--color-second);
+  border-radius: 6px;
+  border: 1px dashed var(--color-fourth);
+}
+
+.bezier-compare-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bezier-compare-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  background: var(--color-second);
+  border-radius: 6px;
+  border: 1px solid var(--color-fourth);
+}
+
+.bezier-compare-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.bezier-compare-label {
+  font-size: 11px;
+  font-family: "Courier New", monospace;
+  color: var(--color-font);
+  flex: 1;
+  word-break: break-all;
+}
+
+.bezier-compare-remove {
+  padding: 2px 6px;
+  border: none;
+  background: none;
+  color: var(--color-subfont);
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 12px;
+}
+.bezier-compare-remove:hover {
+  background: rgba(255, 80, 80, 0.15);
+  color: #ff5050;
+}
+
+.bezier-compare-legend {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-fourth);
+}
+
+.tool-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  background: var(--color-main);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.tool-button:hover {
+  opacity: 0.85;
+}
+.tool-button:active {
+  opacity: 0.7;
+}
+
+.tool-button-secondary {
+  background: var(--color-third);
+  color: var(--color-font);
+  border: 1px solid var(--color-fourth);
+}
+.tool-button-secondary:hover {
+  background: var(--color-fourth);
+}
+
+.tool-input-type-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 4px;
+  background: var(--color-second);
+  border-radius: 10px;
+  border: 1px solid var(--color-fourth);
+  margin-bottom: 0;
+}
+@media (max-width: 480px) {
+  .tool-input-type-tabs {
+    gap: 4px;
+    padding: 3px;
+  }
+}
+
+.tool-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  justify-content: center;
+  padding: 9px 16px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--color-subfont);
+  font-family: "JetBrains Mono", helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.tool-tab-btn i {
+  font-size: 12px;
+}
+.tool-tab-btn:hover {
+  background: var(--color-third);
+  color: var(--color-font);
+}
+.tool-tab-btn.active {
+  background: var(--color-fourth);
+  color: var(--color-first);
+  font-weight: 600;
+}
+.tool-tab-btn.active i {
+  color: var(--color-first);
+}
+@media (max-width: 1024px) {
+  .tool-tab-btn {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+}
+@media (max-width: 480px) {
+  .tool-tab-btn {
+    font-size: 11px;
+    padding: 7px 10px;
+    gap: 4px;
+  }
+  .tool-tab-btn i {
+    font-size: 10px;
+  }
+}
+
+.tool-action-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 7px;
+  border: 1px solid var(--color-fourth);
+  background: var(--color-fourth);
+  color: var(--color-first);
+  font-family: "JetBrains Mono", helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.tool-action-button i {
+  font-size: 11px;
+}
+.tool-action-button:hover {
+  background: var(--color-fifth);
+  border-color: var(--color-fifth);
+}
+.tool-action-button--active {
+  background: var(--color-fifth);
+  border-color: var(--color-fifth);
+}
+.tool-action-button--secondary {
+  background: var(--color-third);
+  color: var(--color-font);
+  border-color: var(--color-fourth);
+}
+.tool-action-button--secondary:hover {
+  background: var(--color-second);
+  border-color: var(--color-fifth);
+}
+@media (max-width: 1024px) {
+  .tool-action-button {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+  .tool-action-button i {
+    font-size: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .tool-action-button {
+    font-size: 10px;
+    padding: 5px 10px;
+    gap: 4px;
+  }
+}
+
+.bezier-canvas-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.bezier-cp-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.bezier-cp-row:last-of-type {
+  margin-bottom: 0;
+}
+
+.bezier-cp-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.bezier-cp-p1 {
+  background: #ffb400;
+}
+
+.bezier-cp-p2 {
+  background: #ff5050;
+}
+
+.bezier-cp-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.bezier-preview-fn {
+  color: #64b5f6;
+  font-weight: 600;
+}
+
+.bezier-presets-header {
+  font-size: 12px;
+  color: var(--color-subfont);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--color-fourth);
+}
+@media (max-width: 480px) {
+  .bezier-presets-header {
+    font-size: 11px;
+    margin-bottom: 10px;
+  }
+}
+
+.bezier-compare-current {
+  border-color: #00d4ff !important;
+  background: rgba(0, 212, 255, 0.06) !important;
+}
+.bezier-compare-current .bezier-compare-label {
+  color: #00d4ff;
+}
+
+.bezier-clear-btn {
+  margin-top: 8px;
+  width: 100%;
+}
