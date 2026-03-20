@@ -1,0 +1,626 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
+  <meta name="robots" content="index, follow">
+  
+  <meta name="computools" content="computools">
+  <meta name="description" content="Interactive cubic Bezier curve editor with real-time animation preview, 35 easing presets, side-by-side comparison, and code export for CSS, Unity C#, C++, and JavaScript.">
+  <meta name="keywords" content="bezier, easing, animation, curve, css, unity, cubic-bezier, ease-in, ease-out, bounce, elastic, interpolation, tween, game dev, animation timing, spring, javascript, c#, gsap, anime.js, motion">
+  <meta name="author" content="CompuTools">
+
+  <meta property="og:url" content="https://www.compu-tools.com/bezier/">
+  <meta property="og:title" content="Bezier Curve Editor & Easing Function Visualizer – CSS, Unity, C++, JS | CompuTools">
+  <meta property="og:description" content="Interactive cubic Bezier curve editor with real-time animation preview, 35 easing presets, side-by-side comparison, and code export for CSS, Unity C#, C++, and JavaScript.">
+  <meta property="og:image" content="https://www.compu-tools.com/logo.png">
+  <meta property="og:image:height" content="607">
+  <meta property="og:image:width" content="607">
+
+
+  <title>Bezier Curve Editor & Easing Function Visualizer – CSS, Unity, C++, JS | CompuTools</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="/index-7b0e0b49b7fc5f3c.css" integrity="sha384-uwnuEl4oCEAEjCWrouS5zybN4csJd6NIGLnJEkQ7zM5q7zqFc8Hago2WI5BgZupX">
+  <link rel="stylesheet" href="/navbar-644b8d09c284b2de.css" integrity="sha384-zOFSVLltN1f7GoRWMRHTn9kEprmz08pStdCm1HUwCkNQxdN8A++d47RO3NEB8rh/">
+  <link rel="stylesheet" href="/search-a5c7a8ea7eec2136.css" integrity="sha384-GOh3JCT05+TPZDwzDcA33daf2FEBygHWgkCYB0mNac6hJpQUP9Ot4VjY7qF9hYBb">
+  <link rel="stylesheet" href="/thumbnail-c2aae26c3f2c275.css" integrity="sha384-WSEHjOpQPtTdurvpRKoDQ+t9rEEUy6FP2I/TpLz/r2AupIXZyfBAIdw9p7abaSaq">
+  <link rel="stylesheet" href="/tool-4bc6945fae2bbc54.css" integrity="sha384-iI9NJwePpi0RdLeXHWVWE/FsWSG/LCGyC14QbE77LCDKYLOlN0bRvXn82NZXkEpi">
+  <link rel="stylesheet" href="/blog-6e0f7e8c2f0dd943.css" integrity="sha384-2zVuHwpfTkFq2lYeQM7Y7HJzDBIxt2Yo/3yLL9G/exOb/jmY/fZcbUn+tQKg1qCa">
+  <link rel="stylesheet" href="/post-e2397fdbf0847e09.css" integrity="sha384-pKpkzeVPK4waUKSgpYhmcjBSu4PNxfxW05SQVlSEsZA5fZ57ZfNHPgskPRiS0Avd">
+  <link rel="stylesheet" href="/preview-42d8137dcb91ceae.css" integrity="sha384-rRG337SALH9Fixz0/M9k+g73uo5u0Q3tYzIC7J+RWwy66EhZ3X2aKfah5Z2xQLYI">
+  <link rel="stylesheet" href="/ad-bc2975c16b7a5e3a.css" integrity="sha384-cZ+6J5XDBX7PXVZtk1lMo2KV9ooNhzR8+bvJKDcTdLwagg9H6beP7ZSrSdA8O1xv">
+  <link rel="stylesheet" href="/prism-c451adb7299a4a0.css" integrity="sha384-JHfRrkWbZJu5R/8OJhxu3j19hT9BpfW1isiNYAlkF5vRzQu14JDkB4lWvJX5I4r7">
+  
+  
+<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202603190101/show_ads_impl.js?bust=31097349"></script><script type="module">
+import init, * as bindings from '/computools-ca65a2a299d2981.js';
+const wasm = await init({ module_or_path: '/computools-ca65a2a299d2981_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+
+  
+
+
+  
+  
+  
+  
+  
+
+  <link rel="icon" href="/favicon-1a8ba4d4617517ad.ico" integrity="sha384-sh+KkiOvcFXwh29z2PE6y5W6JoL/C2uPj8MHwWodi4oVC6f4XcUmhJGk6dmH2Teg">
+
+  <script src="/prism.js"></script>
+
+
+  <!-- MathJax for LaTeX math rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script>
+      (function() {
+          const redirect = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          if (redirect && redirect !== window.location.href) {
+              history.replaceState(null, null, redirect);
+          }
+      })();
+  </script>
+  <script>
+    // JavaScript에서 getTimeZoneOffset 함수 정의
+    function getTimeZoneOffset() {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const offset = new Date().getTimezoneOffset();
+        return { timeZone, offset };
+    }
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9424100257975478" crossorigin="anonymous" data-checked-head="true"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1G0CMRC310');
+  </script>
+<link rel="modulepreload" href="/computools-ca65a2a299d2981.js" crossorigin="anonymous" integrity="sha384-FPnH/Bjb5l+qLTZERcSq/NE6SumzCZMwIsS3v3wfGypquebWFz2prmAICE7/AiKR"><link rel="preload" href="/computools-ca65a2a299d2981_bg.wasm" crossorigin="anonymous" integrity="sha384-XBWFHNarakaDmMGFMJsp2bc24o79oZKCjNOMHHMyfqJZpvah91089Th0GotxDMwR" as="fetch" type="application/wasm"><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+<body><div class="navbar-wrapper"><div class="navbar-container"><a href="/" class="navbar-content">CompuTools</a><div style="justify-content: right;" class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper" style="height: auto !important;"><div class="main-content" style="height: auto !important;"><div class="page-with-sidebar" style="height: auto !important;"><aside class="sidebar-left"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper sidebar-ad"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside><div class="page-main" style="height: auto !important;"><div class="home-wrapper" style="height: auto !important;"><h1 class="tool-title">Bezier Curve Editor &amp; Easing Function Visualizer – CSS, Unity, C++, JS</h1><div class="tool-description">Interactive cubic Bezier curve editor with real-time animation preview, 35 easing presets, side-by-side comparison, and code export for CSS, Unity C#, C++, and JavaScript.</div><div class="ad-display-wrapper tool-title-ad"><ins style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7315862436" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_0_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7315862436&amp;adk=1964690608&amp;adf=1054769236&amp;pi=t.ma~as.7315862436&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1774005619&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fbezier%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTQuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1774005732691&amp;bpp=1&amp;bdt=477&amp;idt=1&amp;shv=r20260318&amp;mjsv=m202603190101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0&amp;nras=1&amp;correlator=279803410949&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=36&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=228&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95378425%2C95384193%2C31097349&amp;oid=2&amp;pvsid=6341306559344516&amp;tmod=1745986606&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=2&amp;uci=a!2&amp;fsb=1&amp;dtd=13" data-google-container-id="a!2" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div><script type="application/ld+json">{
+                    "@context": "https://schema.org",
+                    "@graph": [
+                        {
+                            "@type": "SoftwareApplication",
+                            "name": "Bezier Curve Editor & Easing Function Visualizer",
+                            "url": "https://www.compu-tools.com/bezier/",
+                            "applicationCategory": "DeveloperApplication",
+                            "operatingSystem": "Web Browser",
+                            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+                            "description": "Free online cubic Bezier curve editor and easing function visualizer. Drag control points interactively, choose from 35 easing presets, preview real-time animation, compare multiple curves, and export code for CSS, Unity C#, C++, and JavaScript/GSAP.",
+                            "featureList": [
+                                "Interactive cubic Bezier curve editor",
+                                "35 easing presets (Sine, Quad, Cubic, Quart, Quint, Expo, Circ, Back, Elastic, Bounce)",
+                                "Real-time animation preview",
+                                "Side-by-side curve comparison (up to 4)",
+                                "CSS cubic-bezier code export",
+                                "Unity AnimationCurve C# code export",
+                                "C++ cubic Bezier code export",
+                                "JavaScript / GSAP / Anime.js code export"
+                            ]
+                        },
+                        {
+                            "@type": "FAQPage",
+                            "mainEntity": [
+                                {
+                                    "@type": "Question",
+                                    "name": "What is a cubic Bezier curve?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "A cubic Bezier curve is defined by four control points: P0 (start), P1 (first handle), P2 (second handle), and P3 (end). The curve passes through P0 and P3, and is shaped by P1 and P2. In CSS cubic-bezier(), P0 is always (0,0) and P3 is always (1,1), so you only specify P1 and P2."
+                                    }
+                                },
+                                {
+                                    "@type": "Question",
+                                    "name": "How do I use cubic-bezier in CSS?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "Use cubic-bezier(p1x, p1y, p2x, p2y) as the value for transition-timing-function or animation-timing-function. For example: transition: all 300ms cubic-bezier(0.25, 0.1, 0.25, 1.0). This tool generates ready-to-use CSS code from your curve."
+                                    }
+                                },
+                                {
+                                    "@type": "Question",
+                                    "name": "What is the difference between ease, ease-in, ease-out, and ease-in-out?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "ease = cubic-bezier(0.25, 0.1, 0.25, 1.0): starts fast, slows at end. ease-in = cubic-bezier(0.42, 0, 1, 1): starts slow, ends fast. ease-out = cubic-bezier(0, 0, 0.58, 1): starts fast, ends slow. ease-in-out = cubic-bezier(0.42, 0, 0.58, 1): slow at both ends. linear = cubic-bezier(0, 0, 1, 1): constant speed."
+                                    }
+                                },
+                                {
+                                    "@type": "Question",
+                                    "name": "Can control points go outside the 0-1 range?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "Yes. The X values of P1 and P2 must stay in [0, 1] (the CSS spec requires this), but the Y values can go outside [0, 1]. Values below 0 or above 1 create 'overshoot' effects — the animated property temporarily goes beyond its start or end value. This is what creates Elastic and Back easing effects."
+                                    }
+                                },
+                                {
+                                    "@type": "Question",
+                                    "name": "How do I export a Bezier curve to Unity?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "Select the 'Unity C#' export tab. The tool generates an AnimationCurve with Keyframe tangents derived from your P1 and P2 Y values, compatible with both Unity's built-in animation system and DOTween (SetEase with AnimationCurve)."
+                                    }
+                                },
+                                {
+                                    "@type": "Question",
+                                    "name": "How do I use a Bezier easing curve in GSAP or Anime.js?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "Select the 'JavaScript' export tab. The tool generates ready-to-use code for CSS, GSAP (gsap.to with cubic-bezier ease string), and Anime.js (anime with cubicBezier easing). GSAP accepts CSS cubic-bezier strings directly."
+                                    }
+                                },
+                                {
+                                    "@type": "Question",
+                                    "name": "What is the Newton-Raphson method used for in Bezier easing?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "In CSS animation, time (x-axis) maps to progress (y-axis) through the Bezier curve. Because the Bezier parameter t does not directly equal x, we must solve for t given x — this tool uses Newton-Raphson iteration (8 steps) to find t accurately, then evaluates the y coordinate for smooth animation previews."
+                                    }
+                                },
+                                {
+                                    "@type": "Question",
+                                    "name": "How do I compare multiple easing curves?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "In the Bezier Editor tab, configure a curve and click '+ Compare'. Switch to the Compare tab to see all saved curves overlaid on the same canvas. Up to 4 curves can be compared simultaneously. The current editor curve always appears in cyan."
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "@type": "HowTo",
+                            "name": "How to create a custom CSS easing animation with the Bezier Curve Editor",
+                            "step": [
+                                {
+                                    "@type": "HowToStep",
+                                    "name": "Open the Bezier Editor tab",
+                                    "text": "Click the 'Bezier Editor' tab at the top. You will see the interactive canvas with two control points (P1 in orange, P2 in red)."
+                                },
+                                {
+                                    "@type": "HowToStep",
+                                    "name": "Drag the control points",
+                                    "text": "Click and drag P1 or P2 on the canvas to reshape the curve. Or type exact values in the P1 X/Y and P2 X/Y input fields on the right."
+                                },
+                                {
+                                    "@type": "HowToStep",
+                                    "name": "Preview the animation",
+                                    "text": "Click the Play button to see a ball animate along the curve in real time. The ball's position shows how the easing feels."
+                                },
+                                {
+                                    "@type": "HowToStep",
+                                    "name": "Export the code",
+                                    "text": "Choose CSS, Unity C#, C++, or JavaScript in the Export Code section. Copy the generated code and paste it directly into your project."
+                                }
+                            ]
+                        }
+                    ]
+                }</script><div class="tool-wrapper"><div style="order: 1;" class="tool-input-type-tabs"><button class="tool-tab-btn active"><i class="fa-solid fa-pen-to-square"></i> Bezier Editor</button><button class="tool-tab-btn"><i class="fa-solid fa-layer-group"></i> Easing Presets</button><button class="tool-tab-btn"><i class="fa-solid fa-code-compare"></i> Compare</button></div><div style="order: 2; min-width: 0;"><div class="tool-container"><div class="bezier-editor-layout"><div class="bezier-canvas-wrap"><canvas width="685" height="685" class="bezier-canvas"></canvas><div class="bezier-canvas-hint">Drag <span style="color:#ffb400">● P1</span> and <span style="color:#ff5050">● P2</span> to reshape the curve</div></div><div class="bezier-right-panel"><div class="tool-settings-section"><h3 class="tool-section-header"><span class="tool-icon-badge"><i class="fa-solid fa-sliders"></i></span>Control Points</h3><div class="bezier-cp-row"><span class="bezier-cp-badge bezier-cp-p1">P1</span><div class="bezier-cp-inputs"><div class="tool-settings-row"><label class="tool-settings-label">X</label><input type="number" min="0" max="1" step="0.01" class="tool-number-input"></div><div class="tool-settings-row"><label class="tool-settings-label">Y</label><input type="number" step="0.01" class="tool-number-input"></div></div></div><div class="bezier-cp-row"><span class="bezier-cp-badge bezier-cp-p2">P2</span><div class="bezier-cp-inputs"><div class="tool-settings-row"><label class="tool-settings-label">X</label><input type="number" min="0" max="1" step="0.01" class="tool-number-input"></div><div class="tool-settings-row"><label class="tool-settings-label">Y</label><input type="number" step="0.01" class="tool-number-input"></div></div></div><div style="cursor: pointer;" title="Click to copy" class="bezier-preview-string"><span class="bezier-preview-fn">cubic-bezier</span>(0.2500, 0.1000, 0.2500, 1.0000)</div><span style="margin-top: 6px;" class="tool-copy-hint"><i class="fa-solid fa-copy"></i>Click to copy</span></div><div class="tool-settings-section"><h3 class="tool-section-header"><span class="tool-icon-badge"><i class="fa-solid fa-play"></i></span>Animation Preview</h3><div class="bezier-anim-controls"><button class="tool-action-button"><i class="fa-solid fa-play"></i> Play</button><button class="tool-action-button tool-action-button--secondary"><i class="fa-solid fa-rotate-left"></i> Reset</button><button title="Save to Compare tab" class="tool-action-button tool-action-button--secondary"><i class="fa-solid fa-plus"></i> Save</button></div></div><div class="tool-settings-section"><h3 class="tool-section-header"><span class="tool-icon-badge"><i class="fa-solid fa-code"></i></span>Export Code</h3><div class="bezier-export-tabs"><button class="bezier-export-tab active">CSS</button><button class="bezier-export-tab">Unity C#</button><button class="bezier-export-tab">C++</button><button class="bezier-export-tab">JS</button></div><div style="margin-bottom: 6px;" class="tool-title-row"><span class="tool-copy-hint"><i class="fa-solid fa-copy"></i>Click to copy</span></div><div style="cursor: pointer;" title="Click to copy" class="bezier-code-block"><pre><code>/* CSS transition */
+transition: all 300ms cubic-bezier(0.2500, 0.1000, 0.2500, 1.0000);
+
+/* CSS animation */
+animation-timing-function: cubic-bezier(0.2500, 0.1000, 0.2500, 1.0000);</code></pre></div></div></div></div></div></div><div style="order: 3;" class="tool-intro"><div id="what-is-bezier" class="content-section"><h2>What Is a Cubic Bezier Curve Editor?</h2><p>A cubic Bezier curve editor is an interactive tool for designing easing functions — the timing curves that control how an animated value changes over time. This free online editor lets you drag two control handles (P1 and P2) directly on a canvas, preview the resulting motion with a real-time animation, and export ready-to-paste code for CSS, Unity C#, Unreal Engine C++, GSAP, and Anime.js.</p><p>Easing functions are used everywhere animated motion appears: UI transitions in web apps, character animations in games, camera movements in film, industrial robot motion profiles, and simulation physics. A poorly chosen easing makes motion feel mechanical or jarring; a well-designed Bezier curve makes it feel natural, responsive, and polished.</p><p>This tool runs entirely in your browser using WebAssembly (Rust compiled to WASM). No data leaves your machine — all curve computation, Newton-Raphson solving, and code generation happen locally.</p></div><div id="cubic-bezier-math" class="content-section"><h2>Cubic Bezier Curve — Mathematics and CSS Mapping</h2><p>A cubic Bezier curve is a parametric polynomial of degree 3 defined by four control points. The general form is:</p><div class="example-box"><p><strong>General Bezier formula:</strong></p><code>B(t) = (1−t)³·P0 + 3(1−t)²t·P1 + 3(1−t)t²·P2 + t³·P3,   t ∈ [0, 1]</code><p style="margin-top: 10px;">In the CSS <code>cubic-bezier()</code> timing function:</p><ul><li>P0 = (0, 0) — fixed start anchor (t=0, progress=0)</li><li>P3 = (1, 1) — fixed end anchor (t=1, progress=1)</li><li>P1 = (x1, y1) — first adjustable control point (orange handle)</li><li>P2 = (x2, y2) — second adjustable control point (red handle)</li></ul><p>The x-axis represents animation time (0 = start, 1 = end); the y-axis represents the animated property's progress. The curve maps time → progress.</p></div><h3>The t-to-x Problem and Newton-Raphson Solving</h3><p>In CSS, the browser needs to answer: given a time fraction <em>x</em>, what is the progress <em>y</em>? But the Bezier parameter <em>t</em> is not the same as <em>x</em> — B(t).x = x must be solved for t first, then y = B(t).y. This tool uses 8-iteration Newton-Raphson to find t, which is exactly how V8 (Chrome), SpiderMonkey (Firefox), and WebKit (Safari) implement <code>cubic-bezier()</code>.</p><div class="example-box"><p><strong>Newton-Raphson iteration (x → t):</strong></p><code>t_{n+1} = t_n − (B_x(t_n) − x) / B_x′(t_n)</code><p style="margin-top: 8px;">where B_x(t) = 3(1−t)²t·x1 + 3(1−t)t²·x2 + t³  and  B_x′(t) = its derivative.</p></div><h3>Y-Value Overshoot</h3><p>The CSS spec requires P1.x and P2.x to remain in [0, 1] to keep the time mapping monotonic. However, P1.y and P2.y are unrestricted — values outside [0, 1] create <em>overshoot</em>, where the animated property temporarily exceeds its target (Back easing) or oscillates (Elastic easing). This tool allows full Y drag beyond the graph box boundary for these effects.</p></div><div id="css-easing-reference" class="content-section"><h2>CSS Easing Functions — cubic-bezier() Reference</h2><p>The CSS <code>transition-timing-function</code> and <code>animation-timing-function</code> properties accept <code>cubic-bezier(x1, y1, x2, y2)</code> directly. The five CSS keywords are Bezier shorthands:</p><div style="background-color: var(--color-third); padding: 10px; border-radius: 5px; margin: 10px 0; overflow-x: auto;"><table style="width: 100%; border-collapse: collapse; font-size: 12px;"><thead style="background-color: var(--color-fourth); color: white;"><tr><th style="padding: 8px; border: 1px solid var(--color-fourth); text-align: left;">CSS Keyword</th><th style="padding: 8px; border: 1px solid var(--color-fourth); text-align: left;">cubic-bezier() equivalent</th><th style="padding: 8px; border: 1px solid var(--color-fourth); text-align: left;">Character</th></tr></thead><tbody><tr style="background-color: var(--color-second);"><td style="padding: 6px 8px; border: 1px solid var(--color-fourth);"><code>linear</code></td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-family: monospace; font-size: 11px;">cubic-bezier(0, 0, 1, 1)</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth);">Constant speed</td></tr><tr style=""><td style="padding: 6px 8px; border: 1px solid var(--color-fourth);"><code>ease</code></td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-family: monospace; font-size: 11px;">cubic-bezier(0.25, 0.1, 0.25, 1)</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth);">Fast start, gentle deceleration (default)</td></tr><tr style="background-color: var(--color-second);"><td style="padding: 6px 8px; border: 1px solid var(--color-fourth);"><code>ease-in</code></td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-family: monospace; font-size: 11px;">cubic-bezier(0.42, 0, 1, 1)</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth);">Slow start, accelerates to end</td></tr><tr style=""><td style="padding: 6px 8px; border: 1px solid var(--color-fourth);"><code>ease-out</code></td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-family: monospace; font-size: 11px;">cubic-bezier(0, 0, 0.58, 1)</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth);">Fast start, decelerates to end</td></tr><tr style="background-color: var(--color-second);"><td style="padding: 6px 8px; border: 1px solid var(--color-fourth);"><code>ease-in-out</code></td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-family: monospace; font-size: 11px;">cubic-bezier(0.42, 0, 0.58, 1)</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth);">Slow at both ends, fast in middle</td></tr></tbody></table></div><h3>How to Use cubic-bezier() in CSS</h3><div class="example-box"><p><strong>Transition timing:</strong></p><code>transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1);</code><p style="margin-top: 8px;"><strong>Animation timing:</strong></p><code>animation: slide 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;</code><p style="margin-top: 8px;"><strong>CSS custom property (reusable):</strong></p><code>--ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);</code><br><code>transition: transform 400ms var(--ease-spring);</code></div></div><div id="easing-families" class="content-section"><h2>Easing Preset Families — 35 Named Curves</h2><p>The Easing Presets tab organises 35 curves into 9 mathematical families. Each family has Ease In (accelerates), Ease Out (decelerates), and Ease In-Out (symmetric) variants. Click any card to apply it immediately to the editor.</p><div style="background-color: var(--color-third); padding: 10px; border-radius: 5px; margin: 10px 0; overflow-x: auto;"><table style="width: 100%; border-collapse: collapse; font-size: 12px;"><thead style="background-color: var(--color-fourth); color: white;"><tr><th style="padding: 8px; border: 1px solid var(--color-fourth); text-align: left;">Family</th><th style="padding: 8px; border: 1px solid var(--color-fourth); text-align: left;">Ease In</th><th style="padding: 8px; border: 1px solid var(--color-fourth); text-align: left;">Ease Out</th><th style="padding: 8px; border: 1px solid var(--color-fourth); text-align: left;">Ease In-Out</th><th style="padding: 8px; border: 1px solid var(--color-fourth); text-align: left;">Character</th></tr></thead><tbody><tr style="background-color: var(--color-second);"><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-weight: 600;">Sine</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.12, 0.00, 0.39, 0.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.61, 1.00, 0.88, 1.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.37, 0.00, 0.63, 1.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px;">Gentle sinusoidal — subtle, natural</td></tr><tr style=""><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-weight: 600;">Quad</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.11, 0.00, 0.50, 0.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.50, 1.00, 0.89, 1.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.45, 0.00, 0.55, 1.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px;">Quadratic — smooth UI transitions</td></tr><tr style="background-color: var(--color-second);"><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-weight: 600;">Cubic</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.32, 0.00, 0.67, 0.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.33, 1.00, 0.68, 1.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.65, 0.00, 0.35, 1.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px;">Cubic — pronounced but smooth</td></tr><tr style=""><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-weight: 600;">Quart</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.50, 0.00, 0.75, 0.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.25, 1.00, 0.50, 1.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.76, 0.00, 0.24, 1.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px;">Quartic — snappy with strong contrast</td></tr><tr style="background-color: var(--color-second);"><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-weight: 600;">Expo</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.70, 0.00, 0.84, 0.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.16, 1.00, 0.30, 1.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.87, 0.00, 0.13, 1.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px;">Exponential — dramatic, high-contrast</td></tr><tr style=""><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-weight: 600;">Circ</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.55, 0.00, 1.00, 0.45</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.00, 0.55, 0.45, 1.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.85, 0.00, 0.15, 1.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px;">Circular — sharp change near endpoints</td></tr><tr style="background-color: var(--color-second);"><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-weight: 600;">Back</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.36, 0.00, 0.66,-0.56</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.34, 1.56, 0.64, 1.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.68,-0.60, 0.32, 1.60</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px;">Overshoot — spring-like anticipation</td></tr><tr style=""><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-weight: 600;">Elastic</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.50, 0.00, 0.75,-0.50</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.25, 1.50, 0.50, 1.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.68,-0.55, 0.27, 1.55</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px;">Elastic oscillation — rubber-band feel</td></tr><tr style="background-color: var(--color-second);"><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-weight: 600;">Bounce</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.30, 0.00, 0.70, 0.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.30, 1.00, 0.70, 1.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px; font-family: monospace;">0.50, 0.00, 0.50, 1.00</td><td style="padding: 6px 8px; border: 1px solid var(--color-fourth); font-size: 11px;">Bounce approximation — ball impact</td></tr></tbody></table></div><h3>Which Easing Should I Use?</h3><div class="example-box"><ul><li><strong>Entering UI elements (slide in, fade in):</strong> Ease Out (Cubic or Expo) — starts fast, settles smoothly</li><li><strong>Exiting UI elements (slide out, fade out):</strong> Ease In (Cubic or Expo) — starts gentle, exits cleanly</li><li><strong>Continuous / looping animations:</strong> Ease In-Out (Sine or Quad) — symmetric, no jarring ends</li><li><strong>Button press / click feedback:</strong> Back Out or Elastic Out — spring overshoot feels responsive</li><li><strong>Object landing / impact:</strong> Bounce Out — simulates physical collision</li><li><strong>Loading spinners, morphing shapes:</strong> Linear — constant speed avoids visual rhythm disruption</li><li><strong>Game UI popups:</strong> Back In-Out — anticipation before movement, settle with overshoot</li><li><strong>Drag-and-drop drop feedback:</strong> Elastic Out — communicates successful drop with spring</li></ul></div></div><div id="export-targets" class="content-section"><h2>Export Targets — CSS, Unity, C++, JavaScript</h2><h3>CSS — transition-timing-function and animation-timing-function</h3><p>The CSS export generates two ready-to-use declarations. Paste into any stylesheet:</p><div class="example-box"><code>/* For CSS transitions */</code><br><code>transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);</code><br><br><code>/* For CSS animations */</code><br><code>animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);</code></div><h3>Unity C# — AnimationCurve and DOTween</h3><p>Unity's <code>AnimationCurve</code> uses Hermite spline tangents. The export approximates the Bezier curve by deriving in/out tangents from P1.y and P2.y, compatible with both the built-in Animator and DOTween's <code>SetEase(AnimationCurve)</code>.</p><div class="example-box"><code>AnimationCurve curve = new AnimationCurve(</code><br><code>    new Keyframe(0f, 0f, 0f, 3f * p1y),</code><br><code>    new Keyframe(1f, 1f, 3f * (1f - p2y), 0f)</code><br><code>);</code><br><br><code>// DOTween</code><br><code>transform.DOMove(target, 1f).SetEase(curve);</code><br><br><code>// Animator override</code><br><code>animator.SetFloat("SpeedMultiplier", curve.Evaluate(t));</code></div><h3>JavaScript — GSAP and Anime.js</h3><p>GSAP accepts CSS cubic-bezier strings directly as the <code>ease</code> value. Anime.js uses a dedicated <code>cubicBezier()</code> helper.</p><div class="example-box"><code>// GSAP 3</code><br><code>gsap.to(el, { duration: 0.6, ease: 'cubic-bezier(0.34,1.56,0.64,1)' });</code><br><br><code>// Anime.js</code><br><code>anime({ targets: el, translateX: 250, easing: 'cubicBezier(0.34,1.56,0.64,1)' });</code><br><br><code>// Web Animations API</code><br><code>el.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(250px)' }],</code><br><code>  { duration: 600, easing: 'cubic-bezier(0.34,1.56,0.64,1)' });</code></div><h3>C++ — Unreal Engine and Custom Engines</h3><p>The C++ export provides a self-contained evaluation function with no dependencies. For Unreal Engine, wrap in a <code>UCurveFloat</code> or call directly in a <code>Tick()</code> function:</p><div class="example-box"><code>float CubicBezierEase(float t, float p1x, float p1y, float p2x, float p2y) {</code><br><code>    // Solve for Bezier t parameter given x using Newton-Raphson</code><br><code>    float bt = t;</code><br><code>    for (int i = 0; i &lt; 8; ++i) {</code><br><code>        float x = 3*(1-bt)*(1-bt)*bt*p1x + 3*(1-bt)*bt*bt*p2x + bt*bt*bt - t;</code><br><code>        float dx = 3*(1-bt)*(1-3*bt)*p1x + 3*bt*(2-3*bt)*p2x + 3*bt*bt;</code><br><code>        bt -= x / dx;</code><br><code>    }</code><br><code>    float u = 1.0f - bt;</code><br><code>    return 3*u*u*bt*p1y + 3*u*bt*bt*p2y + bt*bt*bt;</code><br><code>}</code></div></div><div id="how-to-use" class="content-section"><h2>How to Use This Bezier Curve Editor</h2><ol><li><strong>Drag P1 / P2 on the canvas:</strong> Click the orange (P1) or red (P2) handle and drag. P1 and P2 X values are clamped to [0, 1] automatically; Y values can go beyond the box boundary for overshoot effects. The curve, arms, and cubic-bezier() output update instantly.</li><li><strong>Type exact coordinates:</strong> Use the X / Y number inputs to enter precise values. The input accepts any float — type freely, the canvas updates when the value is valid. Useful for reproducing a specific preset or protocol-specified timing.</li><li><strong>Preview the animation:</strong> Click Play to see a ball animate from (0,0) to (1,1) along the curve. The progress bar at the bottom of the canvas tracks time (x-axis). The ball's height shows how the easing feels — overshoot is clearly visible for Back and Elastic curves.</li><li><strong>Apply a preset:</strong> Switch to the Easing Presets tab and click any card. The editor immediately applies that curve's P1 and P2 values and switches back to the Editor tab. Use this as a starting point before fine-tuning.</li><li><strong>Compare multiple curves:</strong> Click + Save in the Animation Preview section to snapshot the current curve. Switch to the Compare tab to see all saved curves overlaid on the same canvas — useful for deciding between similar easings (e.g., Back Out vs Elastic Out).</li><li><strong>Copy the export code:</strong> In the Export Code section, select the target (CSS / Unity C# / C++ / JS), then click the code block to copy it to clipboard. The cubic-bezier() string below the control-point inputs is also click-to-copy.</li></ol></div><div id="faq" class="content-section"><h2>Frequently Asked Questions — Bezier Curve Editor</h2><div class="faq-item"><h3>What is a cubic Bezier curve?</h3><p>A cubic Bezier curve is a parametric polynomial of degree 3 defined by four control points: P0 (start), P1 (first tangent handle), P2 (second tangent handle), and P3 (end). The curve passes through P0 and P3, and is attracted toward — but does not pass through — P1 and P2. In CSS <code>cubic-bezier()</code>, P0 is fixed at (0, 0) and P3 at (1, 1), so you specify only P1 and P2.</p></div><div class="faq-item"><h3>How do I use cubic-bezier() in CSS?</h3><p>Assign it to <code>transition-timing-function</code> or <code>animation-timing-function</code>.</p><div class="example-box"><code>transition: opacity 300ms cubic-bezier(0.25, 0.1, 0.25, 1.0);</code><br><code>animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);</code></div><p>This tool generates the exact string in the Export Code section — click CSS, then click the code block to copy.</p></div><div class="faq-item"><h3>What is the difference between ease, ease-in, ease-out, and ease-in-out?</h3><p>All four are shorthand keywords for specific cubic-bezier values:</p><ul><li><code>ease</code> = <code>cubic-bezier(0.25, 0.1, 0.25, 1.0)</code> — fast start, gentle deceleration (CSS default)</li><li><code>ease-in</code> = <code>cubic-bezier(0.42, 0, 1, 1)</code> — slow start, accelerates to end — use for exit transitions</li><li><code>ease-out</code> = <code>cubic-bezier(0, 0, 0.58, 1)</code> — fast start, decelerates — use for enter transitions</li><li><code>ease-in-out</code> = <code>cubic-bezier(0.42, 0, 0.58, 1)</code> — slow at both ends — use for looping or cross-fades</li></ul></div><div class="faq-item"><h3>Can control point Y values go outside the 0–1 range?</h3><p>Yes — and intentionally. The CSS spec requires P1.x and P2.x to stay in [0, 1] to ensure the time mapping is monotonic (otherwise a single time value could map to multiple progress values). But P1.y and P2.y are unrestricted. Values above 1 or below 0 create overshoot — the animated property temporarily exceeds its start or end value. This is what gives Back easing its anticipation spring and Elastic easing its oscillation. This editor allows free Y drag well beyond the graph box boundary to design these curves.</p></div><div class="faq-item"><h3>How do I export a Bezier curve to Unity?</h3><p>Select the Unity C# tab in the Export Code section. The tool generates an <code>AnimationCurve</code> with <code>Keyframe</code> tangents derived from P1.y and P2.y using the relation: outTangent = 3·P1.y, inTangent = 3·(1−P2.y). This is compatible with the Unity Animation window, Animator Controller, and DOTween's <code>SetEase(AnimationCurve)</code>.</p></div><div class="faq-item"><h3>How do I use a Bezier easing curve in GSAP or Anime.js?</h3><p>Select the JavaScript tab. GSAP 3 accepts CSS cubic-bezier strings directly as the <code>ease</code> option. Anime.js provides a <code>cubicBezier(x1, y1, x2, y2)</code> easing factory. The export code shows both, ready to paste:</p><div class="example-box"><code>gsap.to(el, { duration: 0.6, ease: 'cubic-bezier(0.34,1.56,0.64,1)' });</code><br><code>anime({ targets: el, easing: 'cubicBezier(0.34,1.56,0.64,1)' });</code></div></div><div class="faq-item"><h3>What is the Newton-Raphson method used for in Bezier easing?</h3><p>The Bezier parameter t is not the same as animation time x. To find the progress y at a given time x, we must solve B_x(t) = x for t, then evaluate B_y(t). Newton-Raphson iteration solves this in 8 steps to machine precision, which is the same algorithm used by all major browser CSS engines. Without it, the animation preview would be inaccurate — especially for steep curves with Expo or Circ easing.</p></div><div class="faq-item"><h3>How do I compare multiple easing curves?</h3><p>Configure a curve in the Bezier Editor, then click the <strong>+ Save</strong> button in the Animation Preview section. Repeat for other curves. Then switch to the <strong>Compare</strong> tab — all saved curves are overlaid on the same canvas in distinct colours, alongside the current editor curve (always shown in cyan). Up to 4 curves can be saved simultaneously. Click the × icon next to any saved curve to remove it.</p></div></div><div id="related-tools" class="content-section"><h2>Related Tools</h2><ul><li><a href="/drone-calc/">Drone Motor/Battery Calculator</a> - Calculate drone thrust, TWR, hover throttle, flight time, and battery C-rating safety. Compare up to 4 motor/battery/propeller configurations side by side.</li></ul></div></div></div></div></div><aside class="sidebar-right"><div class="sidebar-sticky"><div class="sidebar-section"><div class="sidebar-title">Related Tools</div><a href="/drone-calc/" class="sidebar-tool-link">Drone Motor/Battery Calculator</a></div><div class="sidebar-ad-space"><div class="ad-display-wrapper sidebar-ad"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/json/">JSON Formatter &amp; Converter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regular Expression Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Previewer</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/endian/">Endian Converter</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/drone-calc/">Drone Motor/Battery Calculator</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Timestamp Log Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter &amp; Palette Generator</a></li><li><a href="/http-code-gen/">HTTP Request Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20260318/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>
