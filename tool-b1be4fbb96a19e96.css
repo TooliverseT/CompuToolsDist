@@ -3171,6 +3171,57 @@ input[type=text] {
   }
 }
 
+.tool-settings-inline-toggle-wrap {
+  flex: 0 0 45%;
+  min-width: 0;
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+}
+@media (max-width: 480px) {
+  .tool-settings-inline-toggle-wrap {
+    gap: 4px;
+  }
+}
+.tool-settings-inline-toggle-wrap > .tool-tab-btn {
+  flex: 1;
+  min-width: 0;
+  justify-content: center;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid var(--color-fourth);
+  background: var(--color-first);
+  color: var(--color-font);
+}
+@media (max-width: 1024px) {
+  .tool-settings-inline-toggle-wrap > .tool-tab-btn {
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .tool-settings-inline-toggle-wrap > .tool-tab-btn {
+    padding: 4px 6px;
+    font-size: 9px;
+  }
+}
+.tool-settings-inline-toggle-wrap > .tool-tab-btn:hover {
+  border-color: var(--color-fifth) !important;
+  background: var(--color-first);
+  color: var(--color-font);
+}
+.tool-settings-inline-toggle-wrap > .tool-tab-btn.active {
+  background: var(--color-fourth);
+  color: var(--color-first);
+  font-weight: 600;
+  border-color: var(--color-fourth) !important;
+}
+.tool-settings-inline-toggle-wrap > .tool-tab-btn.active i {
+  color: var(--color-first);
+}
+
 .tool-input-section {
   background: var(--color-third);
   border-radius: 10px;
