@@ -1,0 +1,656 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
+  <meta name="robots" content="index, follow">
+  
+  <meta name="computools" content="computools">
+  <meta name="description" content="A complete practical guide to understanding robot arm forward kinematics (FK) and inverse kinematics (IK) using DH parameters and the Jacobian matrix. Covers SCARA, 6-axis vertical articulated, and custom DH models — with step-by-step calculations you can verify instantly using a browser-based IK calculator and 3D robot arm simulator.">
+  <meta name="keywords" content="CompuTools, engineering tools, converter, calculator, formatter, unixtime, quaternion, crc, ascii, json, base32, base64, file hash, html encode/decode, url encode/decode, uuid generator, text case converter, password secret generator, regex, color converter, unit converter, format converter, jwt encoder/decoder, text diff comparator, markdown previewer, markdown editor, gfm, xml formatter, xml viewer, qrcode generator, http request code generator, otp generator, elapsed time calculator, cron expression parser, timestamp log, time calculator, tls analyzer, rotation visualizer, endian converter, drone calc, bezier curve generator, robot kinematics">
+  <meta name="author" content="CompuTools">
+
+  <meta property="og:url" content="https://www.compu-tools.com/blog/2026-03-24-robot-kinematics">
+  <meta property="og:title" content="Mastering Robot Arm Kinematics: A Practical Guide to Forward Kinematics, Inverse Kinematics, and DH Parameters | CompuTools Blog">
+  <meta property="og:description" content="A complete practical guide to understanding robot arm forward kinematics (FK) and inverse kinematics (IK) using DH parameters and the Jacobian matrix. Covers SCARA, 6-axis vertical articulated, and custom DH models — with step-by-step calculations you can verify instantly using a browser-based IK calculator and 3D robot arm simulator.">
+  <meta property="og:image" content="https://www.compu-tools.com/blog/assets/robot-kinematics/robot_types_comparison.png">
+  <meta property="og:image:height" content="607">
+  <meta property="og:image:width" content="607">
+
+
+  <title>Mastering Robot Arm Kinematics: A Practical Guide to Forward Kinematics, Inverse Kinematics, and DH Parameters | CompuTools Blog</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="/index-7b0e0b49b7fc5f3c.css" integrity="sha384-uwnuEl4oCEAEjCWrouS5zybN4csJd6NIGLnJEkQ7zM5q7zqFc8Hago2WI5BgZupX">
+  <link rel="stylesheet" href="/navbar-644b8d09c284b2de.css" integrity="sha384-zOFSVLltN1f7GoRWMRHTn9kEprmz08pStdCm1HUwCkNQxdN8A++d47RO3NEB8rh/">
+  <link rel="stylesheet" href="/search-a5c7a8ea7eec2136.css" integrity="sha384-GOh3JCT05+TPZDwzDcA33daf2FEBygHWgkCYB0mNac6hJpQUP9Ot4VjY7qF9hYBb">
+  <link rel="stylesheet" href="/thumbnail-c2aae26c3f2c275.css" integrity="sha384-WSEHjOpQPtTdurvpRKoDQ+t9rEEUy6FP2I/TpLz/r2AupIXZyfBAIdw9p7abaSaq">
+  <link rel="stylesheet" href="/tool-b1be4fbb96a19e96.css" integrity="sha384-mjzKXw5p37ihqEY7ShzCrmRN9bvEpPfqOVhDvLX9ucn9x/H4UBFxekWBJoBxM/XA">
+  <link rel="stylesheet" href="/blog-6e0f7e8c2f0dd943.css" integrity="sha384-2zVuHwpfTkFq2lYeQM7Y7HJzDBIxt2Yo/3yLL9G/exOb/jmY/fZcbUn+tQKg1qCa">
+  <link rel="stylesheet" href="/post-e2397fdbf0847e09.css" integrity="sha384-pKpkzeVPK4waUKSgpYhmcjBSu4PNxfxW05SQVlSEsZA5fZ57ZfNHPgskPRiS0Avd">
+  <link rel="stylesheet" href="/preview-42d8137dcb91ceae.css" integrity="sha384-rRG337SALH9Fixz0/M9k+g73uo5u0Q3tYzIC7J+RWwy66EhZ3X2aKfah5Z2xQLYI">
+  <link rel="stylesheet" href="/ad-bc2975c16b7a5e3a.css" integrity="sha384-cZ+6J5XDBX7PXVZtk1lMo2KV9ooNhzR8+bvJKDcTdLwagg9H6beP7ZSrSdA8O1xv">
+  <link rel="stylesheet" href="/prism-c451adb7299a4a0.css" integrity="sha384-JHfRrkWbZJu5R/8OJhxu3j19hT9BpfW1isiNYAlkF5vRzQu14JDkB4lWvJX5I4r7">
+  
+  
+<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202603190101/show_ads_impl.js"></script><script type="module">
+import init, * as bindings from '/computools-e3b847d0bba1ca56.js';
+const wasm = await init({ module_or_path: '/computools-e3b847d0bba1ca56_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+
+  
+
+
+  
+  
+  
+  
+  
+
+  <link rel="icon" href="/favicon-1a8ba4d4617517ad.ico" integrity="sha384-sh+KkiOvcFXwh29z2PE6y5W6JoL/C2uPj8MHwWodi4oVC6f4XcUmhJGk6dmH2Teg">
+
+  <script src="/prism.js"></script>
+
+
+  <!-- MathJax for LaTeX math rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script>
+      (function() {
+          const redirect = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          if (redirect && redirect !== window.location.href) {
+              history.replaceState(null, null, redirect);
+          }
+      })();
+  </script>
+  <script>
+    // JavaScript에서 getTimeZoneOffset 함수 정의
+    function getTimeZoneOffset() {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const offset = new Date().getTimezoneOffset();
+        return { timeZone, offset };
+    }
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9424100257975478" crossorigin="anonymous" data-checked-head="true"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1G0CMRC310');
+  </script>
+<link rel="modulepreload" href="/computools-e3b847d0bba1ca56.js" crossorigin="anonymous" integrity="sha384-Nyo2a9gTCZdw+r4ZQ28GNG9t9fkx3YI+U00z/nXhOLMLKKjO5sTZcCTleV/tAeGa"><link rel="preload" href="/computools-e3b847d0bba1ca56_bg.wasm" crossorigin="anonymous" integrity="sha384-v3n2d5L/pPFKhYcXaqsyJcWpyB2Xwwj5Kg6Gxr1h9vpm8+p4JYBmO75gaFAag2i/" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mastering Robot Arm Kinematics: A Practical Guide to Forward Kinematics, Inverse Kinematics, and DH Parameters | CompuTools Blog">
+  <meta name="twitter:description" content="A complete practical guide to understanding robot arm forward kinematics (FK) and inverse kinematics (IK) using DH parameters and the Jacobian matrix. Covers SCARA, 6-axis vertical articulated, and custom DH models — with step-by-step calculations you can verify instantly using a browser-based IK calculator and 3D robot arm simulator.">
+  <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/robot-kinematics/robot_types_comparison.png">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Mastering Robot Arm Kinematics: A Practical Guide to Forward Kinematics, Inverse Kinematics, and DH Parameters", "description": "A complete practical guide to understanding robot arm forward kinematics (FK) and inverse kinematics (IK) using DH parameters and the Jacobian matrix. Covers SCARA, 6-axis vertical articulated, and custom DH models — with step-by-step calculations you can verify instantly using a browser-based IK calculator and 3D robot arm simulator.", "url": "https://www.compu-tools.com/blog/2026-03-24-robot-kinematics", "image": ["https://www.compu-tools.com/blog/assets/robot-kinematics/dh_parameter_table.png", "https://www.compu-tools.com/blog/assets/robot-kinematics/ik_elbow_up_down.png", "https://www.compu-tools.com/blog/assets/robot-kinematics/singularity_and_manipulability.png", "https://www.compu-tools.com/blog/assets/robot-kinematics/robot_types_comparison.png", "https://www.compu-tools.com/blog/assets/robot-kinematics/tool_parameters_tab.png", "https://www.compu-tools.com/blog/assets/robot-kinematics/tool_fk_tab.png"], "author": {"@type": "Organization", "name": "CompuTools", "url": "https://www.compu-tools.com"}, "publisher": {"@type": "Organization", "name": "CompuTools", "logo": {"@type": "ImageObject", "url": "https://www.compu-tools.com/logo.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://www.compu-tools.com/blog/2026-03-24-robot-kinematics"}, "datePublished": "2026-03-24", "dateModified": "2026-03-24"}</script>
+  <style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/input/tex/extensions/boldsymbol.js" charset="UTF-8"></script></head>
+
+<body><div class="navbar-wrapper"><div class="navbar-container"><a href="/" class="navbar-content">CompuTools</a><div style="justify-content: right;" class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper" style="height: auto !important;"><div class="main-content" style="height: auto !important;"><div class="page-with-sidebar" style="height: auto !important;"><aside class="sidebar-left"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper sidebar-ad"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside><div class="page-main" style="height: auto !important;"><div class="home-wrapper" style="height: auto !important;"><div class="post-wrapper" style="height: auto !important;"><div class="post-metadata"><h1 class="post-title">Mastering Robot Arm Kinematics: A Practical Guide to Forward Kinematics, Inverse Kinematics, and DH Parameters</h1><div class="post-date">24 March 2026</div><div class="post-excerpt">A complete practical guide to understanding robot arm forward kinematics (FK) and inverse kinematics (IK) using DH parameters and the Jacobian matrix. Covers SCARA, 6-axis vertical articulated, and custom DH models — with step-by-step calculations you can verify instantly using a browser-based IK calculator and 3D robot arm simulator.</div><div class="post-tags"><div class="tag">Engineering</div></div></div><div class="ad-display-wrapper post-ad" style="height: auto !important; min-height: 0px !important;"><ins style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="5198951087" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_0_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=5198951087&amp;adk=456125646&amp;adf=2584940624&amp;pi=t.ma~as.5198951087&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1774355836&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fblog%2F2026-03-24-robot-kinematics%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTQuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1774356026665&amp;bpp=1&amp;bdt=429&amp;idt=0&amp;shv=r20260323&amp;mjsv=m202603190101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0&amp;nras=1&amp;correlator=1646062451678&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=50&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=159&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95385581%2C95386178%2C95386195&amp;oid=2&amp;pvsid=942784685205098&amp;tmod=1055301479&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=2&amp;uci=a!2&amp;fsb=1&amp;dtd=21" data-google-container-id="a!2" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div><div class="post-content" style="height: auto !important;"><p>Have you ever watched a robot arm in an industrial setting precisely pick up a component with fluid, seamless motion? Behind that elegance lies a mathematical framework called <strong>Kinematics</strong>. Calculating the end-effector (EE) position from each joint angle is called forward kinematics; working backwards from a desired position to find the joint angles is inverse kinematics. In this article, we explain DH parameters, the Jacobian matrix, and the concept of singularity with concrete examples, and introduce how to use the <a href="https://www.compu-tools.com/robot-kinematics/">Robot Arm FK/IK Calculator</a> — a tool you can run directly in your browser.</p>
+<div class="ad-article-wrapper">
+                <ins class="adsbygoogle" style="display: block; text-align: center; height: 280px;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9424100257975478" data-ad-slot="2892459749" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_2_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=2892459749&amp;adk=1458197379&amp;adf=2496579566&amp;pi=t.ma~as.2892459749&amp;w=1200&amp;fwrn=4&amp;fwrnh=0&amp;lmt=1774355836&amp;rafmt=1&amp;armr=3&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fblog%2F2026-03-24-robot-kinematics%2F&amp;fwr=0&amp;rpe=1&amp;resp_fmts=3&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTQuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1774356028006&amp;bpp=9&amp;bdt=1771&amp;idt=-M&amp;shv=r20260323&amp;mjsv=m202603190101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280&amp;nras=1&amp;correlator=1646062451678&amp;frm=20&amp;pv=1&amp;rplot=4&amp;u_tz=0&amp;u_his=50&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=813&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95385581%2C95386178%2C95386195&amp;oid=2&amp;pvsid=942784685205098&amp;tmod=1055301479&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEebr%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=60&amp;uci=a!1o&amp;btvi=16&amp;fsb=1&amp;dtd=10" data-google-container-id="a!1o" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins>
+            </div><h2>Why Is Robot Kinematics Hard?</h2>
+<p>The most disorienting thing when first studying robot kinematics is that the formulas themselves seem simple, yet applying them in practice rarely goes as expected. When I first worked on path planning for a 6-axis vertical articulated robot, the forward kinematics came together quickly — but the inverse kinematics would sometimes spin joints by 1000 degrees, or diverge entirely for positions that were clearly reachable. The culprit turned out to be <strong>numerical instability near singularities</strong>, and that was the moment I understood that kinematics is far more than matrix multiplication.</p>
+<p>There are three main reasons robot kinematics is difficult. First, <strong>coordinate transformations stack sequentially</strong>. For a 6-DOF robot, you must multiply six 4×4 homogeneous transformation matrices in order to obtain the final EE pose. Second, <strong>inverse kinematics can yield multiple solutions or no solution at all</strong>. For the same target position, there may simultaneously exist an Elbow Up solution and an Elbow Down solution. Third, <strong>near singularities</strong>, the problem becomes numerically unstable, causing serious control issues.</p>
+<div class="ad-article-wrapper">
+                <ins class="adsbygoogle" style="display: block; text-align: center; height: 280px;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9424100257975478" data-ad-slot="2892459749" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_3_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_3" name="aswift_3" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=2892459749&amp;adk=1458197379&amp;adf=4280474192&amp;pi=t.ma~as.2892459749&amp;w=1200&amp;fwrn=4&amp;fwrnh=0&amp;lmt=1774355836&amp;rafmt=1&amp;armr=3&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fblog%2F2026-03-24-robot-kinematics%2F&amp;fwr=0&amp;rpe=1&amp;resp_fmts=3&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTQuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1774356028006&amp;bpp=1&amp;bdt=1771&amp;idt=0&amp;shv=r20260323&amp;mjsv=m202603190101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280&amp;nras=1&amp;correlator=1646062451678&amp;frm=20&amp;pv=1&amp;rplot=4&amp;u_tz=0&amp;u_his=50&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=1449&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95385581%2C95386178%2C95386195&amp;oid=2&amp;pvsid=942784685205098&amp;tmod=1055301479&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEebr%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=61&amp;uci=a!1p&amp;btvi=17&amp;fsb=1&amp;dtd=12" data-google-container-id="a!1p" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins>
+            </div><h2>Denavit–Hartenberg Parameters: The Starting Point of All Kinematics</h2>
+<p>The most standard way to mathematically describe the structure of a robot arm is via <a href="https://en.wikipedia.org/wiki/Denavit%E2%80%93Hartenberg_parameters">Denavit–Hartenberg (DH) parameters</a>. Proposed by Denavit and Hartenberg in 1955, this representation defines each link using four parameters.</p>
+<table><thead><tr><th>Parameter</th><th>Symbol</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>Link length</td><td>a</td><td>Length of the common normal between adjacent joint Z-axes</td></tr>
+<tr><td>Link twist</td><td>α</td><td>Angle between adjacent joint Z-axes</td></tr>
+<tr><td>Joint angle</td><td>θ</td><td>Angle between common normals (variable for revolute joints, fixed for prismatic joints)</td></tr>
+<tr><td>Link offset</td><td>d</td><td>Distance between common normals (variable for prismatic joints, fixed for revolute joints)</td></tr>
+</tbody></table>
+<p>Applying these four parameters to a single link yields a 4×4 homogeneous transformation matrix:</p>
+<div class="math-block"><mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" display="true" tabindex="0" ctxtmenu_counter="70" style="font-size: 119.6%; position: relative;"><mjx-math display="true" class="MJX-TEX" aria-hidden="true" style="margin-left: 0px; margin-right: 0px;"><mjx-msup><mjx-texatom texclass="ORD"></mjx-texatom><mjx-script style="vertical-align: 0.413em;"><mjx-texatom size="s" texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D456 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-texatom></mjx-script></mjx-msup><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D447 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.12em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D456 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-msub space="4"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D445 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D467 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D703 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D456 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c22C5"></mjx-c></mjx-mo><mjx-msub space="3"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D447 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.12em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D467 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D451 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D456 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c22C5"></mjx-c></mjx-mo><mjx-msub space="3"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D447 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.12em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D465 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D44E TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D456 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c22C5"></mjx-c></mjx-mo><mjx-msub space="3"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D445 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D465 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D6FC TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D456 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mrow data-mjx-texclass="ORD"></mrow><mrow data-mjx-texclass="ORD"><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup><msub><mi>T</mi><mi>i</mi></msub><mo>=</mo><msub><mi>R</mi><mi>z</mi></msub><mo stretchy="false">(</mo><msub><mi>θ</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mo>⋅</mo><msub><mi>T</mi><mi>z</mi></msub><mo stretchy="false">(</mo><msub><mi>d</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mo>⋅</mo><msub><mi>T</mi><mi>x</mi></msub><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mo>⋅</mo><msub><mi>R</mi><mi>x</mi></msub><mo stretchy="false">(</mo><msub><mi>α</mi><mi>i</mi></msub><mo stretchy="false">)</mo></math></mjx-assistive-mml></mjx-container></div>
+<p>The full forward kinematics of a robot is obtained by multiplying these matrices in sequence from the base to the EE:</p>
+<div class="math-block"><mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" display="true" tabindex="0" ctxtmenu_counter="71" style="font-size: 119.6%; position: relative;"><mjx-math display="true" class="MJX-TEX" aria-hidden="true" style="margin-left: 0px; margin-right: 0px;"><mjx-msup><mjx-texatom texclass="ORD"></mjx-texatom><mjx-script style="vertical-align: 0.413em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c30"></mjx-c></mjx-mn></mjx-script></mjx-msup><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D447 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.12em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D45B TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-msup space="4"><mjx-texatom texclass="ORD"></mjx-texatom><mjx-script style="vertical-align: 0.413em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c30"></mjx-c></mjx-mn></mjx-script></mjx-msup><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D447 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.12em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-script></mjx-msub><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c22C5"></mjx-c></mjx-mo><mjx-msup space="3"><mjx-texatom texclass="ORD"></mjx-texatom><mjx-script style="vertical-align: 0.413em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-script></mjx-msup><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D447 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.12em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-script></mjx-msub><mjx-mo class="mjx-n" space="2"><mjx-c class="mjx-c22EF"></mjx-c></mjx-mo><mjx-msup space="2"><mjx-texatom texclass="ORD"></mjx-texatom><mjx-script style="vertical-align: 0.413em;"><mjx-texatom size="s" texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45B TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-texatom></mjx-script></mjx-msup><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D447 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.12em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D45B TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mrow data-mjx-texclass="ORD"></mrow><mn>0</mn></msup><msub><mi>T</mi><mi>n</mi></msub><mo>=</mo><msup><mrow data-mjx-texclass="ORD"></mrow><mn>0</mn></msup><msub><mi>T</mi><mn>1</mn></msub><mo>⋅</mo><msup><mrow data-mjx-texclass="ORD"></mrow><mn>1</mn></msup><msub><mi>T</mi><mn>2</mn></msub><mo>⋯</mo><msup><mrow data-mjx-texclass="ORD"></mrow><mrow data-mjx-texclass="ORD"><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><msub><mi>T</mi><mi>n</mi></msub></math></mjx-assistive-mml></mjx-container></div>
+<p class="blog-image">
+  <img src="/blog/assets/robot-kinematics/dh_parameter_table.png" alt="Example DH parameter table for a 3-DOF planar robot. Columns are Joint, Type (Rev/Pri), a, d, α, θ offset, with rows J1, J2, J3.">
+</p>
+<!-- Image description: DH parameter table example. Clean tabular format with header "Joint | Type | a(mm) | d(mm) | α(°) | θ(°)". Values filled in for J1, J2, J3, with each joint distinguished by a different color. -->
+<p align="center">
+  <em>DH parameter table example: 3-DOF planar robot. Each row defines one link; both revolute (Rev) and prismatic (Pri) joints can be represented.</em>
+</p>
+<p>The strength of DH parameters is that <strong>any serial robot structure can be expressed in the same format</strong>. SCARA, 6-axis vertical articulated, Cartesian robots, and even custom structures of your own design can all be described with a DH table. Universal Robots' publicly available <a href="https://www.universal-robots.com/articles/ur/application-installation/dh-parameters-for-calculations-of-kinematics-and-dynamics/">UR series DH parameter documentation</a> is an excellent reference for seeing how DH parameters are applied to real industrial robots.</p>
+<h2>Forward Kinematics (FK): Computing EE Pose from Joint Angles</h2>
+<p>Forward kinematics is the problem of <strong>finding the position and pose of the EE given the variables of each joint (θ or d)</strong>. Mathematically, it is completely solved by the matrix multiplication described above, and the solution always exists and is unique. The upper-left 3×3 submatrix of the resulting 4×4 matrix gives the rotation matrix (EE orientation), while the top three elements of the last column give the position vector (X, Y, Z).</p>
+<p>One important practical note: maintain consistent units for angles (radians vs. degrees) and lengths (mm vs. m). Mixing them causes unexpected scaling errors in the DH matrix computation.</p>
+<h3>FK Use Cases</h3>
+<p><strong>Education and verification</strong>: When checking simulation results against hand calculations. For example, compute the EE position for a 2-DOF planar robot at θ₁=30°, θ₂=45° directly via DH matrices and compare against the simulator output.</p>
+<p><strong>Path planning</strong>: When performing joint-space linear interpolation and tracking the actual EE trajectory. A straight line in joint space traces a curve in Cartesian space.</p>
+<h2>Inverse Kinematics (IK): Back-Calculating Joint Angles from a Target Position</h2>
+<p>Inverse kinematics is the problem of <strong>finding the joint angles that achieve a desired EE position (and orientation)</strong>. Unlike forward kinematics, there may be multiple solutions, no solution at all, and the problem is numerically far more demanding. Solution methods fall into two broad categories.</p>
+<p class="blog-image">
+  <img src="/blog/assets/robot-kinematics/ik_elbow_up_down.png" alt="Two IK solutions reaching the same target position shown side by side. Left: Elbow Up — elbow pointing upward. Right: Elbow Down — elbow pointing downward. Both configurations reach the same end-effector position.">
+</p>
+<!-- Image description: Image contrasting Elbow Up and Elbow Down solutions for a 3-DOF planar or 6-axis robot. Two robot arm configurations both reach the same target point (red dot), with arrows emphasizing the opposite elbow directions. -->
+<p align="center">
+  <em>Two inverse kinematics solutions for the same target position: Elbow Up and Elbow Down. In practice, joint limits and collision avoidance must be considered when selecting one.</em>
+</p>
+<h3>Analytical vs. Numerical Solutions</h3>
+<p><strong>Analytical (closed-form) solutions</strong> use geometric relationships to directly derive joint angles in explicit mathematical form. They are only possible for 2-DOF/3-DOF planar robots or specific 6-axis robots with simple wrist structures. The advantages are fast computation and the ability to enumerate all solutions explicitly.</p>
+<p><strong>Numerical solutions</strong> converge to a solution through iteration. The most widely used method is the <strong>Damped Least Squares (DLS) Jacobian method</strong>. It can be applied to any robot structure and is practical because joint limits and collision avoidance can be added as constraints. Middleware like <a href="https://moveit.ai/">MoveIt!</a> internally uses iterative IK solvers of this kind.</p>
+<div class="math-block"><mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" display="true" tabindex="0" ctxtmenu_counter="72" style="font-size: 119.6%; position: relative;"><mjx-math display="true" class="MJX-TEX" aria-hidden="true" style="margin-left: 0px; margin-right: 0px;"><mjx-mi class="mjx-n"><mjx-c class="mjx-c394"></mjx-c></mjx-mi><mjx-mi class="mjx-b mjx-i"><mjx-c class="mjx-c1D73D TEX-BI"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-msup space="4"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43D TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.413em; margin-left: 0.054em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D447 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msup><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43D TEX-I"></mjx-c></mjx-mi><mjx-msup><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43D TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.413em; margin-left: 0.054em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D447 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msup><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2B"></mjx-c></mjx-mo><mjx-msup space="3"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D706 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.413em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-script></mjx-msup><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43C TEX-I"></mjx-c></mjx-mi><mjx-msup><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-script style="vertical-align: 0.413em;"><mjx-texatom size="s" texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-texatom></mjx-script></mjx-msup><mjx-mi class="mjx-n"><mjx-c class="mjx-c394"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mi class="mjx-b"><mjx-c class="mjx-c1D431 TEX-B"></mjx-c></mjx-mi></mjx-texatom></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi mathvariant="normal">Δ</mi><mi mathvariant="bold-italic">θ</mi><mo>=</mo><msup><mi>J</mi><mi>T</mi></msup><mo stretchy="false">(</mo><mi>J</mi><msup><mi>J</mi><mi>T</mi></msup><mo>+</mo><msup><mi>λ</mi><mn>2</mn></msup><mi>I</mi><msup><mo stretchy="false">)</mo><mrow data-mjx-texclass="ORD"><mo>−</mo><mn>1</mn></mrow></msup><mi mathvariant="normal">Δ</mi><mrow data-mjx-texclass="ORD"><mi mathvariant="bold">x</mi></mrow></math></mjx-assistive-mml></mjx-container></div>
+<p>Here, λ is the damping factor. When the determinant of (JJ^T) approaches zero near a singularity, λ prevents the matrix inverse from diverging. If λ is too large, the step toward the target becomes small and convergence is slow; if too small, joint velocities explode near singularities. In practice, adaptive methods that adjust λ based on current error magnitude or manipulability are commonly used.</p>
+<h3>The Importance of Initial Value Strategy</h3>
+<p>With numerical IK, the solution that the algorithm converges to depends on the initial joint angles (the seed). Common strategies include:</p>
+<ul>
+<li><strong>Current joint angles</strong>: Favorable for maintaining smooth continuity in real-time control</li>
+<li><strong>Zero seed</strong>: Searches from a reference pose, yielding high reproducibility</li>
+<li><strong>Random initial values</strong>: Broadens the search space when multiple solutions exist</li>
+</ul>
+<p>In practice, a <strong>multi-seed</strong> strategy — computing solutions from several initial values and selecting the one with the smallest position error — is frequently used.</p>
+<h2>Jacobian Matrix and Singularity: The Most Critical Concept</h2>
+<p>The <a href="https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant">Jacobian matrix</a> is a central tool in robot kinematics. Mathematically, it is a 6×N matrix that linearly relates EE velocity to joint velocity (6 rows: 3 for linear velocity + 3 for angular velocity; N: number of joints):</p>
+<div class="math-block"><mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" display="true" tabindex="0" ctxtmenu_counter="73" style="font-size: 119.6%; position: relative;"><mjx-math display="true" class="MJX-TEX" aria-hidden="true" style="margin-left: 0px; margin-right: 0px;"><mjx-texatom texclass="ORD"><mjx-mover><mjx-over style="padding-bottom: 0.105em; padding-left: 0.314em; margin-bottom: -0.549em;"><mjx-mo class="mjx-n" style="width: 0px; margin-left: -0.25em;"><mjx-c class="mjx-c2D9"></mjx-c></mjx-mo></mjx-over><mjx-base><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D465 TEX-I"></mjx-c></mjx-mi></mjx-base></mjx-mover></mjx-texatom><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="4"><mjx-c class="mjx-c1D43D TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D703 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-texatom texclass="ORD"><mjx-mover><mjx-over style="padding-bottom: 0.105em; padding-left: 0.318em; margin-bottom: -0.549em;"><mjx-mo class="mjx-n" style="width: 0px; margin-left: -0.25em;"><mjx-c class="mjx-c2D9"></mjx-c></mjx-mo></mjx-over><mjx-base><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D703 TEX-I"></mjx-c></mjx-mi></mjx-base></mjx-mover></mjx-texatom></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow data-mjx-texclass="ORD"><mover><mi>x</mi><mo>˙</mo></mover></mrow><mo>=</mo><mi>J</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mrow data-mjx-texclass="ORD"><mover><mi>θ</mi><mo>˙</mo></mover></mrow></math></mjx-assistive-mml></mjx-container></div>
+<p>The Jacobian has two key applications.</p>
+<p><strong>Inverse kinematics computation</strong>: In the DLS method described above, J transforms the EE position error into a joint angle correction.</p>
+<p><strong>Manipulability evaluation</strong>: Based on the <a href="https://en.wikipedia.org/wiki/Manipulability_ellipsoid">Manipulability Ellipsoid</a> concept proposed by Yoshikawa in 1985, this quantifies how freely the EE can be moved from the current pose:</p>
+<div class="math-block"><mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" display="true" tabindex="0" ctxtmenu_counter="74" style="font-size: 119.6%; position: relative;"><mjx-math display="true" class="MJX-TEX" aria-hidden="true" style="margin-left: 0px; margin-right: 0px;"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D464 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-msqrt space="4"><mjx-sqrt><mjx-surd><mjx-mo class="mjx-lop"><mjx-c class="mjx-c221A TEX-S2"></mjx-c></mjx-mo></mjx-surd><mjx-box style="padding-top: 0.446em;"><mjx-mo class="mjx-n"><mjx-c class="mjx-c64"></mjx-c><mjx-c class="mjx-c65"></mjx-c><mjx-c class="mjx-c74"></mjx-c></mjx-mo><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43D TEX-I"></mjx-c></mjx-mi><mjx-msup><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43D TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.289em; margin-left: 0.054em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D447 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msup><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo></mjx-box></mjx-sqrt></mjx-msqrt></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>w</mi><mo>=</mo><msqrt><mo data-mjx-texclass="OP" movablelimits="true">det</mo><mo stretchy="false">(</mo><mi>J</mi><msup><mi>J</mi><mi>T</mi></msup><mo stretchy="false">)</mo></msqrt></math></mjx-assistive-mml></mjx-container></div>
+<p>As w approaches 0, the robot is close to a <strong>singularity</strong>. At a singularity, the Jacobian's determinant is zero, its inverse does not exist, EE motion in certain directions becomes impossible, and IK fails to converge.</p>
+<p class="blog-image">
+  <img src="/blog/assets/robot-kinematics/singularity_and_manipulability.png" alt="Left: high-manipulability pose with a nearly spherical ellipsoid around the EE. Right: near-singularity pose with a flattened ellipsoid. Both shown alongside their respective robot arm silhouettes.">
+</p>
+<!-- Image description: Visualization of the manipulability ellipsoid concept. Left: "good pose" with a moderately bent elbow, showing a nearly spherical ellipsoid (green) around the EE. Right: "near-singularity pose" with the arm fully extended, showing a flat, squashed ellipsoid (red). Each shown alongside the corresponding robot arm silhouette. -->
+<p align="center">
+  <em>Manipulability ellipsoid: the left (good pose) allows free EE movement in all directions; the right (near singularity) makes movement in certain directions practically impossible.</em>
+</p>
+<p>In industrial settings, singularity issues can lead to serious accidents. If a robot's path is configured to pass near a singularity, joints may instantaneously rotate at extreme velocities, causing mechanical damage or collisions. For this reason, <a href="https://www.iso.org/standard/22244.html">ISO 9283</a> (Manipulating industrial robots — Performance criteria and related test methods) prescribes robot performance testing procedures and recommends singularity avoidance within the working space, serving as a benchmark for workplace safety design alongside functional safety standards such as IEC 62061 and ISO 13849.</p>
+<div class="ad-article-wrapper">
+                <ins class="adsbygoogle" style="display: block; text-align: center; height: 280px;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9424100257975478" data-ad-slot="2892459749" data-adsbygoogle-status="done"><div id="aswift_4_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"></div></ins>
+            </div><h2>Joint Limits and Practical IK</h2>
+<p>There is a significant gap between theoretical inverse kinematics and real-world application. The first problem you encounter is <strong>joint limits</strong>. Real robots have a mechanically defined range of motion for each joint (e.g., J1: ±180°, J2: -90° to +90°).</p>
+<p>If joint limits are not incorporated into the IK solver, you end up with poses that are mathematically valid but physically impossible. There are two main approaches to applying joint limits in numerical IK.</p>
+<p><strong>Clamping</strong>: At each iteration step, if a joint angle exceeds its limit, it is forced back to the boundary value. Simple to implement, but affects convergence speed.</p>
+<p><strong>Constrained optimization</strong>: Joint limits are formulated as inequality constraints and the problem is solved as a constrained optimization. Theoretically more accurate but significantly more complex to implement.</p>
+<p>Angle normalization is also important. Due to accumulated numerical error during iteration, joint angles can grow beyond the -180° to 180° range and reach values like 1000° or more. Applying <code>(θ + 180°) mod 360° − 180°</code> normalization at every step prevents this.</p>
+<h2>Kinematic Characteristics by Robot Type</h2>
+<h3>2-DOF / 3-DOF Planar Robots</h3>
+<p>These move only within a plane, so the Z coordinate is always 0. The inverse kinematics can be solved analytically using the law of cosines. The 3-DOF planar robot additionally controls the tool angle (φ). This is the best model to study first for educational purposes.</p>
+<h3>SCARA Robots</h3>
+<p>SCARA stands for Selective Compliance Assembly Robot Arm. The structure is compliant in the horizontal direction but rigid in the vertical direction. It was developed by the research team of Professor Hiroshi Makino at the University of Yamanashi in 1978 and commercialized in 1981. It remains widely used today for electronic component assembly and pick-and-place operations. XY-plane positioning is solved analytically in the same way as a 2-DOF planar robot, while the Z height is independently controlled via a prismatic joint (d).</p>
+<h3>6-DOF Vertical Articulated Robots</h3>
+<p>The most versatile industrial robot structure. Three main joints determine position; three wrist joints determine orientation. For ideal structures (Spherical Wrist), position and orientation can be decoupled and solved analytically. In the general case, numerical methods are used.</p>
+<p class="blog-image">
+  <img src="/blog/assets/robot-kinematics/robot_types_comparison.png" alt="Comparison of four robot types in a 2×2 grid. Top-left: 2-DOF planar (two simple links). Top-right: 3-DOF planar (three links). Bottom-left: SCARA (two horizontal links + vertical prismatic). Bottom-right: 6-DOF vertical articulated (human arm-like form).">
+</p>
+<!-- Image description: Infographic comparing four robot arm types in one image. Shows structural differences for each type and briefly notes primary applications (education, assembly, general industrial use) in text. Each type distinguished by a different color. -->
+<p align="center">
+  <em>Structural comparison by robot type. Each structure has distinct kinematic properties, leading to different application domains and IK solution methods.</em>
+</p>
+<h2>Using an Online IK Calculator: Calculate Directly in the Browser</h2><div class="ad-article-wrapper">
+                <ins class="adsbygoogle" style="display: block; text-align: center; height: 280px;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9424100257975478" data-ad-slot="2892459749" data-adsbygoogle-status="done"><div id="aswift_5_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"></div></ins>
+            </div>
+<p>Once you understand the theory, the fastest way to solidify that understanding is to compute actual numbers yourself. The <a href="https://www.compu-tools.com/robot-kinematics/">Robot Arm FK/IK Calculator</a> is an <strong>online inverse kinematics calculator</strong> and <strong>3D robot arm simulator</strong> that runs directly in the browser with no installation required. You can enter DH parameters directly, verify forward kinematics using joint sliders, and input or drag a target position to solve inverse kinematics in real time.</p>
+<p><strong>Step 1: Robot Type and Unit Setup</strong></p>
+<p>In the Parameters tab, select a robot type (2-DOF planar, 3-DOF planar, SCARA, 4–6 axis articulated, or custom DH) and set link lengths and global units (mm/m/in, degrees/radians). In custom DH mode, you can specify the DOF (2–6) directly and enter a, d, α, θ offset, and joint type (revolute/prismatic) for each link.</p>
+<p class="blog-image">
+  <img src="/blog/assets/robot-kinematics/tool_parameters_tab.png" alt="Screenshot of the Parameters tab in the Robot Arm FK/IK Calculator. Shows a robot type dropdown, link length input fields, unit selection toggle, and a Joint Limits configuration panel.">
+</p>
+<!-- Image description: Full screenshot of the tool's Parameters tab. Left panel: "Robot Type" dropdown (currently showing "Articulated 6-DOF"), link length fields L1–L6, "Length Unit" / "Angle Unit" toggles, "Joint Limits" section (ON/OFF buttons and min/max fields for J1–J6). Right side: 3D canvas. -->
+<p align="center">
+  <em>Parameters tab: configure robot type, link lengths, units, and joint limits.</em>
+</p>
+<p><strong>Step 2: Forward Kinematics</strong></p>
+<p>Switching to the FK tab reveals per-joint sliders and numeric input fields. Moving a slider updates the 3D canvas in real time, and the result card displays the EE's X, Y, Z position and Roll, Pitch, Yaw orientation. Individual values can be copied to the clipboard using the copy button next to each entry.</p>
+<p>Enabling the "Path Trace" feature displays a ghost trail of the EE trajectory on the canvas as you move the sliders. This is particularly useful for directly observing what kind of curve a straight line in joint space traces in Cartesian space.</p>
+<p class="blog-image">
+  <img src="/blog/assets/robot-kinematics/tool_fk_tab.png" alt="Screenshot of the FK tab in the Robot Arm FK/IK Calculator. Left panel shows J1–J6 sliders with angle input fields. The right 3D canvas displays the robot arm and a blue dashed Path Trace trail.">
+</p>
+<!-- Image description: Screenshot of the tool's FK tab. Left panel: color-coded J1–J6 sliders (each a different color), numeric angle inputs, EE result card (X/Y/Z, Roll/Pitch/Yaw values with copy icons). Right: 3D canvas showing the robot arm in a particular pose, with Path Trace displayed as a blue dashed line. -->
+<p align="center">
+  <em>FK tab: moving each joint slider updates the 3D canvas and EE position/orientation results in real time. The Path Trace feature lets you visualize the EE trajectory.</em>
+</p>
+<p><strong>Step 3: Inverse Kinematics and IK Drag</strong></p>
+<p>In the IK tab, entering target X, Y, Z values triggers automatic IK computation. Alternatively, you can drag the T marker (target position indicator) on the 3D canvas directly with the mouse. Hovering over the marker reveals a semi-transparent filled circle indicating it is draggable.</p>
+<p>Toggling the Jacobian panel button displays the numerical values of the 6×N Jacobian matrix for the current pose. The manipulability indicator bar turns red near singularities, providing an intuitive visual warning about the current pose's risk level.</p>
+<h2>Latest Trends in Robot Kinematics: Deep Learning IK, Collaborative Robots, and ROS 2</h2>
+<p>Once you understand the kinematics of each robot type, it is worth knowing how industry is evolving on top of these foundations. Kinematics is a decades-old field, but the way it is applied is changing rapidly.</p>
+<p>First, <strong>deep learning-based inverse kinematics</strong> is being actively researched. Training a neural network to learn complex IK mappings can yield solutions quickly without iterative computation. However, generalization outside the training data distribution and the challenge of enforcing joint limits remain open problems.</p>
+<p>Second, <strong>the proliferation of collaborative robots (cobots)</strong>. Cobots such as Universal Robots, FANUC CRX, and ABB GoFa operate in shared spaces with humans, which means kinematic computation must be integrated with real-time safety assessment. Collision detection, force control, and safety zone configuration all operate on top of kinematic calculations.</p>
+<p>Third, <strong>the maturation of the ROS 2 and MoveIt 2 ecosystem</strong> is standardizing kinematic libraries. <a href="https://moveit.ai/">MoveIt!</a> supports a variety of IK plugins including IKFast, KDL, and TRAC-IK, and can use robot models described in URDF (<a href="https://wiki.ros.org/urdf">ROS URDF documentation</a>) directly.</p>
+<h2>Practical IK Problems for 6-Axis Robots: Singularity, Workspace Limits, and Joint Discontinuity</h2>
+<p>Here are three problems that frequently arise when implementing pick-and-place tasks with a 6-axis robot.</p>
+<p><strong>Problem 1: Wrist Singularity</strong>
+Occurs when J5 (the middle wrist joint) approaches 0°, causing the J4 and J6 axes to align. In this configuration, rotations of J4 and J6 produce identical EE orientation changes, making it impossible to determine their absolute angles independently — the Jacobian loses rank. The solution is to avoid paths that pass through the 0° neighborhood of J5; if unavoidable, apply a small offset to J5 to move away from the singularity.</p>
+<p><strong>Problem 2: Workspace Boundary</strong>
+When a target position is very close to the robot's maximum reach or corresponds to an elbow singularity, IK diverges. Workspace boundaries should be visualized during task planning and targets constrained to remain within the reachable region.</p>
+<p><strong>Problem 3: Joint Angle Discontinuity</strong>
+When computing IK sequentially for the same target, the solution may abruptly switch from Elbow Up to Elbow Down, causing a large jump in joint angles. Using the previous step's solution as the initial seed (current joint angle seed strategy) makes it easier to maintain continuity.</p>
+<h2>Closing: Kinematics Is the Language of Robotics</h2>
+<p>Understanding kinematics thoroughly is like learning the language in which you speak to robots. Forward kinematics reads the robot's current state; inverse kinematics instructs it to perform a desired motion; the Jacobian evaluates how safe and precise that motion is. DH parameters are the common grammar underlying all of this.</p>
+<p>I strongly recommend using the <a href="https://www.compu-tools.com/robot-kinematics/">Robot Arm FK/IK Calculator</a> alongside your theoretical study to compute real numbers. Enter your own robot structure in custom DH mode, set joint limits, and directly observe how IK converges. In the moment when the manipulability indicator bar turns red near a singularity, the equations in the textbook connect to physical intuition in a way that no lecture can replicate.</p>
+<h2>References</h2>
+<ol>
+<li><strong>Wikipedia</strong>, <a href="https://en.wikipedia.org/wiki/Denavit%E2%80%93Hartenberg_parameters">Denavit–Hartenberg parameters</a> — Mathematical definition of DH parameters and derivation of the transformation matrix</li>
+<li><strong>Universal Robots</strong>, <a href="https://www.universal-robots.com/articles/ur/application-installation/dh-parameters-for-calculations-of-kinematics-and-dynamics/">DH Parameters for Calculations of Kinematics and Dynamics</a> — Publicly available DH parameters for actual industrial robots (UR3/UR5/UR10)</li>
+<li><strong>Wikipedia</strong>, <a href="https://en.wikipedia.org/wiki/Inverse_kinematics">Inverse kinematics</a> — Mathematical background and overview of various IK solution methods</li>
+<li><strong>Wikipedia</strong>, <a href="https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant">Jacobian matrix and determinant</a> — Mathematical definition of the Jacobian matrix</li>
+<li><strong>Wikipedia</strong>, <a href="https://en.wikipedia.org/wiki/Manipulability_ellipsoid">Manipulability ellipsoid</a> — The manipulability ellipsoid concept and Yoshikawa's manipulability measure</li>
+<li><strong>ISO</strong>, <a href="https://www.iso.org/standard/22244.html">ISO 9283:1998</a> — International standard for manipulating industrial robot performance criteria and test methods</li>
+<li><strong>MoveIt!</strong>, <a href="https://moveit.ai/">moveit.ai</a> — ROS-based robot motion planning framework with support for various IK plugins</li>
+<li><strong>ROS Wiki</strong>, <a href="https://wiki.ros.org/urdf">URDF</a> — Official documentation for the Unified Robot Description Format</li>
+</ol>
+</div><div class="post-popular-section"><div class="section-header"><div class="section-title"><i class="fa-solid fa-fire"></i>Popular Posts</div></div><div class="post-popular-list"><a href="/blog/2026-03-07-gimbal-lock/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">The Mathematical Cause of Gimbal Lock and How to Avoid It: A Complete Guide to Euler Angles vs Quaternions</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>07 March 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Mathematical</span></div></a><a href="/blog/2026-02-25-cron/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">The Complete Guide to Cron Expressions: Everything a Developer Must Know About Scheduling</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>25 February 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Time &amp; Date</span></div></a><a href="/blog/2026-01-31-3d-rotation/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">Understanding 3D Rotation: A Practical Guide to Quaternions, Euler Angles, and Rotation Matrices</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>21 January 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Mathematical</span></div></a><a href="/blog/2026-03-04-endian/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">Understanding Endianness: Byte Order Defines Your System</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>04 March 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Security &amp; Hash</span></div></a><a href="/blog/2025-12-23-introducing-computools/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">Introducing CompuTools: Your All-in-One Engineering Toolkit</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>23 December 2025</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Guide</span></div></a></div></div><div class="ad-display-wrapper post-ad" style="height: auto !important; min-height: 0px !important;"><ins style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7315862436" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_1_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7315862436&amp;adk=3048900072&amp;adf=3067865478&amp;pi=t.ma~as.7315862436&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1774355836&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fblog%2F2026-03-24-robot-kinematics%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTQuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1774356026665&amp;bpp=4&amp;bdt=429&amp;idt=4&amp;shv=r20260323&amp;mjsv=m202603190101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0%2C1200x280&amp;nras=1&amp;correlator=1646062451678&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=50&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=536&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95385581%2C95386178%2C95386195&amp;oid=2&amp;pvsid=942784685205098&amp;tmod=1055301479&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=3&amp;uci=a!3&amp;fsb=1&amp;dtd=23" data-google-container-id="a!3" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div></div></div></div><aside class="sidebar-right"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper sidebar-ad"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/json/">JSON Formatter &amp; Converter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regular Expression Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Previewer</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/endian/">Endian Converter</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/drone-calc/">Drone Motor/Battery Calculator</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Timestamp Log Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter &amp; Palette Generator</a></li><li><a href="/http-code-gen/">HTTP Request Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20260323/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>
