@@ -2199,6 +2199,10 @@ input[type=checkbox] {
   }
 }
 
+.tool-mid-ad-injector-host {
+  width: 100%;
+}
+
 .tool-wrapper {
   display: flex;
   flex-direction: column;
