@@ -2206,11 +2206,14 @@ input[type=checkbox] {
   width: 100%;
   align-items: stretch;
 }
-.tool-wrapper > :first-child {
-  order: 2;
+.tool-wrapper > .tool-container {
+  order: 1 !important;
 }
-.tool-wrapper > :nth-child(2) {
-  order: 1;
+.tool-wrapper > .tool-intro {
+  order: 3 !important;
+}
+.tool-wrapper > .tool-page-mid-ad {
+  order: 2 !important;
 }
 @media (max-width: 480px) {
   .tool-wrapper {
