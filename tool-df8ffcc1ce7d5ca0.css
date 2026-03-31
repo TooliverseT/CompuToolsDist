@@ -4099,6 +4099,26 @@ input[type=text] {
   }
 }
 
+.tool-otp-field-input.tool-number-input {
+  font-size: 11px;
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  line-height: 1.35;
+}
+@media (max-width: 1024px) {
+  .tool-otp-field-input.tool-number-input {
+    font-size: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .tool-otp-field-input.tool-number-input {
+    font-size: 9px;
+  }
+}
+
+.tool-otp-field-input.tool-number-input.tool-otp-secret-field {
+  font-family: "Consolas", "Monaco", monospace;
+}
+
 .tool-copy-button {
   width: 100%;
   padding: 8px 14px;
@@ -4131,6 +4151,54 @@ input[type=text] {
   }
 }
 
+.tool-inline-copy-row {
+  display: flex;
+  align-items: stretch;
+  gap: 5px;
+}
+.tool-inline-copy-row .tool-number-input {
+  flex: 1;
+  min-width: 0;
+  align-self: center;
+  line-height: 1.25;
+}
+.tool-inline-copy-row .tool-number-input.tool-otp-field-input {
+  line-height: 1.35;
+}
+.tool-inline-copy-row .tool-copy-button {
+  width: auto;
+  flex-shrink: 0;
+  align-self: stretch;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  padding: 8px 12px;
+  font-size: 12px;
+  line-height: 1.25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 1024px) {
+  .tool-inline-copy-row .tool-copy-button {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+}
+@media (max-width: 480px) {
+  .tool-inline-copy-row .tool-copy-button {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+}
+.tool-inline-copy-row .tool-reset-button {
+  flex-shrink: 0;
+  align-self: stretch;
+  justify-content: center;
+  width: auto;
+  min-width: 44px;
+  box-sizing: border-box;
+}
+
 .tool-reset-button {
   padding: 5px 10px;
   cursor: pointer;
@@ -4142,6 +4210,7 @@ input[type=text] {
   font-weight: 500;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
   transition: all 0.2s ease;
 }
