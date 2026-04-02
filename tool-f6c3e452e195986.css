@@ -3249,6 +3249,27 @@ input[type=text] {
   }
 }
 
+.tool-after-result-gap {
+  margin-top: 14px;
+}
+@media (max-width: 1024px) {
+  .tool-after-result-gap {
+    margin-top: 12px;
+  }
+}
+@media (max-width: 480px) {
+  .tool-after-result-gap {
+    margin-top: 10px;
+  }
+}
+
+.md-editor-split {
+  align-items: stretch;
+}
+.md-editor-split > .tool-input-section {
+  margin-bottom: 0;
+}
+
 .tool-operation-row {
   display: flex;
   align-items: center;
@@ -3870,7 +3891,8 @@ input[type=text] {
   font-size: 10px;
   margin-top: 8px;
   padding: 8px 12px;
-  background: var(--color-error);
+  background: color-mix(in srgb, var(--color-error) 14%, var(--color-first));
+  border: 1px solid color-mix(in srgb, var(--color-error) 42%, transparent);
   border-radius: 6px;
 }
 .tool-error-message i {
