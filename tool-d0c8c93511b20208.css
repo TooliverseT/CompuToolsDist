@@ -2474,7 +2474,9 @@ input[type=checkbox] {
   -webkit-overflow-scrolling: touch;
 }
 
-.tool-container.tool-container--kinematics-fullscreen:fullscreen, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen {
+.tool-container.tool-container--kinematics-fullscreen:fullscreen, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen,
+.tool-container.tool-container--rotation-viz-fullscreen:fullscreen,
+.tool-container.tool-container--rotation-viz-fullscreen:-webkit-full-screen {
   height: 100vh;
   height: 100dvh;
   max-height: 100vh;
@@ -2485,13 +2487,25 @@ input[type=checkbox] {
   box-sizing: border-box;
   margin-bottom: 0;
 }
-.tool-container.tool-container--kinematics-fullscreen:fullscreen > .tool-visualization-results-container--rotation, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen > .tool-visualization-results-container--rotation {
+.tool-container.tool-container--kinematics-fullscreen:fullscreen > .tool-visualization-results-container--rotation, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen > .tool-visualization-results-container--rotation,
+.tool-container.tool-container--rotation-viz-fullscreen:fullscreen > .tool-visualization-results-container--rotation,
+.tool-container.tool-container--rotation-viz-fullscreen:-webkit-full-screen > .tool-visualization-results-container--rotation {
   flex: 1 1 auto;
   min-height: 0;
   overflow: hidden;
   align-self: stretch;
 }
-.tool-container.tool-container--kinematics-fullscreen:fullscreen .tool-visualization-column, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-visualization-column {
+@media (max-width: 1200px) {
+  .tool-container.tool-container--kinematics-fullscreen:fullscreen > .tool-visualization-results-container--rotation, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen > .tool-visualization-results-container--rotation,
+  .tool-container.tool-container--rotation-viz-fullscreen:fullscreen > .tool-visualization-results-container--rotation,
+  .tool-container.tool-container--rotation-viz-fullscreen:-webkit-full-screen > .tool-visualization-results-container--rotation {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(160px, 2fr) minmax(120px, 1fr);
+  }
+}
+.tool-container.tool-container--kinematics-fullscreen:fullscreen .tool-visualization-column, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-visualization-column,
+.tool-container.tool-container--rotation-viz-fullscreen:fullscreen .tool-visualization-column,
+.tool-container.tool-container--rotation-viz-fullscreen:-webkit-full-screen .tool-visualization-column {
   min-height: 0;
   height: 100%;
   max-height: 100%;
@@ -2500,7 +2514,9 @@ input[type=checkbox] {
   flex-direction: column;
   align-self: stretch;
 }
-.tool-container.tool-container--kinematics-fullscreen:fullscreen .tool-visualization-column .tool-result-section, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-visualization-column .tool-result-section {
+.tool-container.tool-container--kinematics-fullscreen:fullscreen .tool-visualization-column .tool-result-section, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-visualization-column .tool-result-section,
+.tool-container.tool-container--rotation-viz-fullscreen:fullscreen .tool-visualization-column .tool-result-section,
+.tool-container.tool-container--rotation-viz-fullscreen:-webkit-full-screen .tool-visualization-column .tool-result-section {
   flex: 1 1 auto;
   min-height: 0;
   display: flex;
@@ -2508,17 +2524,23 @@ input[type=checkbox] {
   overflow: hidden;
   margin-top: 0;
 }
-.tool-container.tool-container--kinematics-fullscreen:fullscreen .tool-visualization-column .tool-result-section > div, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-visualization-column .tool-result-section > div {
+.tool-container.tool-container--kinematics-fullscreen:fullscreen .tool-visualization-column .tool-result-section > div, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-visualization-column .tool-result-section > div,
+.tool-container.tool-container--rotation-viz-fullscreen:fullscreen .tool-visualization-column .tool-result-section > div,
+.tool-container.tool-container--rotation-viz-fullscreen:-webkit-full-screen .tool-visualization-column .tool-result-section > div {
   flex: 1 1 auto;
   min-height: 0;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
-.tool-container.tool-container--kinematics-fullscreen:fullscreen .tool-visualization-column .tool-title-row, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-visualization-column .tool-title-row {
+.tool-container.tool-container--kinematics-fullscreen:fullscreen .tool-visualization-column .tool-title-row, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-visualization-column .tool-title-row,
+.tool-container.tool-container--rotation-viz-fullscreen:fullscreen .tool-visualization-column .tool-title-row,
+.tool-container.tool-container--rotation-viz-fullscreen:-webkit-full-screen .tool-visualization-column .tool-title-row {
   flex-shrink: 0;
 }
-.tool-container.tool-container--kinematics-fullscreen:fullscreen .tool-visualization-column .tool-canvas-container, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-visualization-column .tool-canvas-container {
+.tool-container.tool-container--kinematics-fullscreen:fullscreen .tool-visualization-column .tool-canvas-container, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-visualization-column .tool-canvas-container,
+.tool-container.tool-container--rotation-viz-fullscreen:fullscreen .tool-visualization-column .tool-canvas-container,
+.tool-container.tool-container--rotation-viz-fullscreen:-webkit-full-screen .tool-visualization-column .tool-canvas-container {
   flex: 1 1 0;
   min-height: 0;
   aspect-ratio: unset;
@@ -2526,7 +2548,9 @@ input[type=checkbox] {
   align-items: stretch;
   justify-content: stretch;
 }
-.tool-container.tool-container--kinematics-fullscreen:fullscreen .tool-visualization-column .tool-3d-canvas, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-visualization-column .tool-3d-canvas {
+.tool-container.tool-container--kinematics-fullscreen:fullscreen .tool-visualization-column .tool-3d-canvas, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-visualization-column .tool-3d-canvas,
+.tool-container.tool-container--rotation-viz-fullscreen:fullscreen .tool-visualization-column .tool-3d-canvas,
+.tool-container.tool-container--rotation-viz-fullscreen:-webkit-full-screen .tool-visualization-column .tool-3d-canvas {
   width: 100% !important;
   height: 100% !important;
   max-width: 100%;
@@ -2534,10 +2558,14 @@ input[type=checkbox] {
   flex: 1 1 auto;
   min-height: 0;
 }
-.tool-container.tool-container--kinematics-fullscreen:fullscreen .tool-visualization-column .tool-hint-text-result, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-visualization-column .tool-hint-text-result {
+.tool-container.tool-container--kinematics-fullscreen:fullscreen .tool-visualization-column .tool-hint-text-result, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-visualization-column .tool-hint-text-result,
+.tool-container.tool-container--rotation-viz-fullscreen:fullscreen .tool-visualization-column .tool-hint-text-result,
+.tool-container.tool-container--rotation-viz-fullscreen:-webkit-full-screen .tool-visualization-column .tool-hint-text-result {
   flex-shrink: 0;
 }
-.tool-container.tool-container--kinematics-fullscreen:fullscreen .tool-input-section, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-input-section {
+.tool-container.tool-container--kinematics-fullscreen:fullscreen .tool-input-section, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-input-section,
+.tool-container.tool-container--rotation-viz-fullscreen:fullscreen .tool-input-section,
+.tool-container.tool-container--rotation-viz-fullscreen:-webkit-full-screen .tool-input-section {
   margin-bottom: 0;
   min-height: 0;
   height: 100%;
@@ -2548,13 +2576,15 @@ input[type=checkbox] {
   -webkit-overflow-scrolling: touch;
 }
 
-.tool-container.tool-container--kinematics-fullscreen .tool-visualization-column .tool-canvas-container {
+.tool-container.tool-container--kinematics-fullscreen .tool-visualization-column .tool-canvas-container,
+.tool-container.tool-container--rotation-viz-fullscreen .tool-visualization-column .tool-canvas-container {
   width: 100%;
   aspect-ratio: 1/1;
   min-height: 240px;
 }
 
-.tool-container.tool-container--kinematics-fullscreen .tool-visualization-column .tool-canvas-container .tool-3d-canvas {
+.tool-container.tool-container--kinematics-fullscreen .tool-visualization-column .tool-canvas-container .tool-3d-canvas,
+.tool-container.tool-container--rotation-viz-fullscreen .tool-visualization-column .tool-canvas-container .tool-3d-canvas {
   width: 100% !important;
   height: 100% !important;
   max-width: 100%;
@@ -4369,7 +4399,8 @@ input[type=text] {
   overscroll-behavior: contain;
 }
 
-.tool-canvas-hud--kinematics {
+.tool-canvas-hud--kinematics,
+.tool-canvas-hud--rotation-viz {
   position: absolute;
   right: 3px;
   bottom: 3px;
@@ -4386,7 +4417,8 @@ input[type=text] {
   color: var(--color-font);
 }
 @media (max-width: 480px) {
-  .tool-canvas-hud--kinematics {
+  .tool-canvas-hud--kinematics,
+  .tool-canvas-hud--rotation-viz {
     font-size: 8px;
     max-width: min(100% - 6px, 15rem);
     right: 2px;
@@ -4657,7 +4689,9 @@ input[type=text] {
 
 @media (min-width: 1201px) {
   .tool-container.tool-container--kinematics-fullscreen:fullscreen .tool-visualization-results-container--rotation,
-  .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-visualization-results-container--rotation {
+  .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-visualization-results-container--rotation,
+  .tool-container.tool-container--rotation-viz-fullscreen:fullscreen .tool-visualization-results-container--rotation,
+  .tool-container.tool-container--rotation-viz-fullscreen:-webkit-full-screen .tool-visualization-results-container--rotation {
     grid-template-columns: minmax(0, 3.25fr) minmax(400px, 0.62fr);
     gap: 16px;
   }
