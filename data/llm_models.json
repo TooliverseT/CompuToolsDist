@@ -1,5 +1,5 @@
 {
-  "catalog_as_of": "2026-04-13",
+  "catalog_as_of": "2026-04-20",
   "pricing_note": "Sourced from LiteLLM model_prices_and_context_window.json (see scripts/update_llm_models.py). Reference $/M; verify on provider dashboards.",
   "models": [
     {
@@ -305,6 +305,30 @@
     {
       "id": "claude-opus-4-6-20260205-a28f718b65",
       "label": "claude-opus-4-6-20260205",
+      "provider": "Anthropic",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 5.0,
+      "input_cached_per_mtok_usd": 0.5,
+      "output_per_mtok_usd": 25.0,
+      "pricing_url": "https://www.anthropic.com/pricing",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "claude-opus-4-7-4d82753d8b",
+      "label": "claude-opus-4-7",
+      "provider": "Anthropic",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 5.0,
+      "input_cached_per_mtok_usd": 0.5,
+      "output_per_mtok_usd": 25.0,
+      "pricing_url": "https://www.anthropic.com/pricing",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "claude-opus-4-7-20260416-12751fa25b",
+      "label": "claude-opus-4-7-20260416",
       "provider": "Anthropic",
       "context_window": 1048576,
       "context_display": "1M",
@@ -1397,6 +1421,18 @@
     {
       "id": "gemini-veo-3.1-generate-preview-9b4452763b",
       "label": "gemini/veo-3.1-generate-preview",
+      "provider": "Google",
+      "context_window": 1024,
+      "context_display": "1K",
+      "input_per_mtok_usd": null,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": null,
+      "pricing_url": "https://ai.google.dev/pricing",
+      "heuristic_only": true
+    },
+    {
+      "id": "gemini-veo-3.1-lite-generate-preview-413eeacaec",
+      "label": "gemini/veo-3.1-lite-generate-preview",
       "provider": "Google",
       "context_window": 1024,
       "context_display": "1K",
