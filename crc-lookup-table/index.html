@@ -1,0 +1,835 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
+  <meta name="robots" content="index, follow">
+  
+  <meta name="computools" content="computools">
+  <meta name="description" content="Browse CRC parameters and generate 256-entry lookup tables for 100+ CRC algorithms">
+  <meta name="keywords" content="crc lookup table, crc table generator, crc32 table, crc16 modbus table, crc8 table, crc polynomial, crc reflected table, crc export script">
+  <meta name="author" content="CompuTools">
+
+  <meta property="og:url" content="https://www.compu-tools.com/crc-lookup-table/">
+  <meta property="og:title" content="CRC Lookup Table Generator – CRC32, CRC16, CRC8 Table Viewer & Export | CompuTools">
+  <meta property="og:description" content="Browse CRC parameters and generate 256-entry lookup tables for 100+ CRC algorithms">
+  <meta property="og:image" content="https://www.compu-tools.com/logo.png">
+  <meta property="og:image:height" content="607">
+  <meta property="og:image:width" content="607">
+
+
+  <title>CRC Lookup Table Generator – CRC32, CRC16, CRC8 Table Viewer & Export | CompuTools</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="/index-c31540c35bf2ca38.css" integrity="sha384-bYJx14yqJrLilVmKxON2HpLywjRz2RtggzA9InSC5+EoCdArkd7YmkFG36bN++NY">
+  <link rel="stylesheet" href="/navbar-e5f9e40d7bb334b7.css" integrity="sha384-Xpd9BMQGahihQzlY9Rj35/Yf0SJsS8M9s6iCpIshjEUiAGqz2L8vERbJzzuPV78a">
+  <link rel="stylesheet" href="/search-8da376dd0065e9a1.css" integrity="sha384-EcGpkfjrK/THz4btA2hqA2klFD1JvVPwkCMnRR9/Jqp8MW2koZgNQUrjur72LXF0">
+  <link rel="stylesheet" href="/tool-60b8aef8abb81e6f.css" integrity="sha384-JXHnm7XGUaSJwtZINI75jr7zny1DhcEUCbaVJ+MH4Q+22wNcraJXVYvEh3sHv2Rf">
+  <link rel="stylesheet" href="/blog-356e0c13048b70ba.css" integrity="sha384-v9yscrd+FAjKNcTbC59affc9AAh6IJPk54qa0cvssPn4oipXi+4VDLkRbdg834SU">
+  <link rel="stylesheet" href="/post-3b08d659c0c6c04e.css" integrity="sha384-aF1Xnrd2gUpXf24khH9BbsY2e5Hu4NJZvdl9NddIYwtMxBgNB9ZI1h+5dkC1t8mV">
+  <link rel="stylesheet" href="/preview-2f450eb564382c9c.css" integrity="sha384-BkTZZpPaBdXfjfzl8zG+KPDN/JtOB44cOs9EjnyLErKrXEng0HrUbV7K6ubCM9JR">
+  <link rel="stylesheet" href="/ad-bc2975c16b7a5e3a.css" integrity="sha384-cZ+6J5XDBX7PXVZtk1lMo2KV9ooNhzR8+bvJKDcTdLwagg9H6beP7ZSrSdA8O1xv">
+  <link rel="stylesheet" href="/prism-c451adb7299a4a0.css" integrity="sha384-JHfRrkWbZJu5R/8OJhxu3j19hT9BpfW1isiNYAlkF5vRzQu14JDkB4lWvJX5I4r7">
+  
+  
+<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202604160101/show_ads_impl.js"></script><script type="module">
+import init, * as bindings from '/computools-db51e3d4e243338.js';
+const wasm = await init({ module_or_path: '/computools-db51e3d4e243338_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+
+  
+  
+
+
+  
+  
+  
+  
+  
+
+  <link rel="icon" href="/favicon-1a8ba4d4617517ad.ico" integrity="sha384-sh+KkiOvcFXwh29z2PE6y5W6JoL/C2uPj8MHwWodi4oVC6f4XcUmhJGk6dmH2Teg">
+
+  <script src="/prism.js"></script>
+
+
+  <!-- MathJax for LaTeX math rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script>
+      (function() {
+          const redirect = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          if (redirect && redirect !== window.location.href) {
+              history.replaceState(null, null, redirect);
+          }
+      })();
+  </script>
+  <script>
+    // JavaScript에서 getTimeZoneOffset 함수 정의
+    function getTimeZoneOffset() {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const offset = new Date().getTimezoneOffset();
+        return { timeZone, offset };
+    }
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9424100257975478" crossorigin="anonymous" data-checked-head="true"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1G0CMRC310');
+  </script>
+<link rel="modulepreload" href="/computools-db51e3d4e243338.js" crossorigin="anonymous" integrity="sha384-KOC49gyT6kFSVILcfyrAKvfLw5/XjWl1Yw+B4d/YG7aWn7YQB22a4ROdR5xbCYl5"><link rel="preload" href="/computools-db51e3d4e243338_bg.wasm" crossorigin="anonymous" integrity="sha384-hxUZK7J9byOwSAZLe/LyFrSU3UllszIF8jG0NjuwkKzymDzH5v6aSI0fe8vujP8I" as="fetch" type="application/wasm"><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+<body><div class="navbar-wrapper"><div class="navbar-container"><a href="/" class="navbar-content">CompuTools</a><div style="justify-content: right;" class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper" style="height: auto !important;"><div class="main-content" style="height: auto !important;"><div class="page-with-sidebar" style="height: auto !important;"><aside class="sidebar-left"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper sidebar-ad"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside><div class="page-main" style="height: auto !important;"><div class="home-wrapper" style="height: auto !important;"><h1 class="tool-title">CRC Lookup Table Generator – CRC32, CRC16, CRC8 Table Viewer &amp; Export</h1><div class="tool-description">Browse CRC parameters and generate 256-entry lookup tables for 100+ CRC algorithms</div><div class="ad-display-wrapper tool-title-ad"><ins style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7315862436" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_0_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7315862436&amp;adk=1964690608&amp;adf=1054769236&amp;pi=t.ma~as.7315862436&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1776759132&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fcrc-lookup-table%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;aiof=9&amp;asro=0&amp;aiapmid=0.0001&amp;aiactd=0&amp;aicctd=0&amp;ailctd=0&amp;aimartd=4&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTcuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1776759143481&amp;bpp=1&amp;bdt=526&amp;idt=-M&amp;shv=r20260420&amp;mjsv=m202604160101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0&amp;nras=1&amp;correlator=68536677364&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=4&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=202&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=42531705%2C95384087%2C95387625%2C95386362%2C95386957&amp;oid=2&amp;pvsid=7713328875823375&amp;tmod=720011434&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=2&amp;uci=a!2&amp;fsb=1&amp;dtd=11" data-google-container-id="a!2" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div><div class="tool-mid-ad-injector-host" style="height: auto !important;"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "CRC Lookup Table Generator",
+      "url": "https://www.compu-tools.com/crc-lookup-table/",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web Browser",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Generate and export 256-entry CRC lookup tables for CRC-32, CRC-16/MODBUS, CRC-8/MAXIM-DOW, CRC-64, and 100+ other CRC algorithms. View algorithm parameters, inspect individual table entries, and export ready-to-use array declarations for Rust, C, C++, Python, JavaScript, TypeScript, Go, Java, Swift, and Kotlin — all in your browser.",
+      "featureList": [
+        "256-entry CRC lookup table generation for 100+ algorithms",
+        "Table output in Hex, Decimal, and Binary formats",
+        "Script export for Rust, C, C++, Python, JavaScript, TypeScript, Go, Java, Swift, Kotlin",
+        "Entry Inspector: look up any table[0x00]–table[0xFF] value instantly",
+        "Algorithm parameter summary: poly, init, xorout, refin, refout, check, residue",
+        "One-click copy for table, script, or summary",
+        "Supports CRC-3 through CRC-64 with correct reflection and normalization",
+        "All computation runs locally in WebAssembly — no data sent to server"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a CRC lookup table and why is it used?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A CRC lookup table is a precomputed array of 256 values that accelerates byte-wise CRC calculation. Instead of processing all 8 bits of each input byte individually, an implementation XORs the current byte with the CRC accumulator, uses the result as an index into the table, and combines the table value with the shifted accumulator in a single step. This reduces the inner loop from 8 iterations to one table lookup, making CRC computation significantly faster in embedded and systems code."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is the CRC-32/ISO-HDLC (Ethernet, ZIP, gzip) lookup table generated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The CRC-32/ISO-HDLC table uses the reflected polynomial 0xEDB88320 (the bit-reversal of 0x04C11DB7). Each of the 256 entries is computed by treating the index as an 8-bit input, running the standard 8-step bit-wise CRC loop with the reflected polynomial, and recording the result. Entry [1] is 0x77073096 and entry [255] is 0x2D02EF8D. The resulting table is used with init=0xFFFFFFFF and a final XOR of 0xFFFFFFFF."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the byte-wise CRC loop for a reflected (RefIn=true) algorithm?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For reflected algorithms like CRC-32/ISO-HDLC or CRC-16/MODBUS, the standard table-driven loop is: crc = init; for each byte: crc = table[(crc XOR byte) AND 0xFF] XOR (crc >> 8); then crc XOR= xorout. The table is indexed by the low byte of the accumulator XORed with the input byte, and the accumulator is shifted right by 8 bits each step."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does a non-reflected (RefIn=false) CRC table loop differ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For non-reflected algorithms like CRC-32/MPEG-2 or CRC-16/IBM-3740, the input byte is XORed into the high byte of the accumulator: crc = init; for each byte: crc = table[((crc >> (width-8)) XOR byte) AND 0xFF] XOR (crc << 8); then crc AND= mask; crc XOR= xorout. The table entries are also computed without bit-reversal, positioned in the high bits of the storage type."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What storage type is used for each CRC width?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "CRC widths 1–8 use u8/uint8_t (8-bit), widths 9–16 use u16/uint16_t (16-bit), widths 17–32 use u32/uint32_t (32-bit), and widths 33–64 use u64/uint64_t (64-bit). Narrower CRC values are right-aligned within the storage type for reflected algorithms and left-aligned (shifted to high bits) during table generation for non-reflected algorithms."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I verify that my CRC lookup table implementation is correct?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every CRC algorithm has a published check value: the CRC of the ASCII string '123456789'. Run your table-driven implementation on that string and compare the result to the check value shown in the Summary panel. For CRC-32/ISO-HDLC the check value is 0xCBF43926; for CRC-16/MODBUS it is 0x4B37; for CRC-8/MAXIM-DOW it is 0xA1. You can also use the CRC Calculator tool at compu-tools.com/crc/ to compute the reference value."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the CRC-16/MODBUS lookup table first entry?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The CRC-16/MODBUS lookup table uses the reflected polynomial 0xA001 (bit-reversal of 0x8005) with init 0xFFFF. Table entry [0] is 0x0000 and entry [1] is 0xC0C1. The byte-wise loop for Modbus RTU is: crc = 0xFFFF; for each byte: crc = table[(crc XOR byte) AND 0xFF] XOR (crc >> 8); the final crc (no XOR-out) is the 2-byte frame checksum."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which output languages are supported for CRC table export?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Script export supports ten languages: C (static const uint32_t array), C++ (std::array), Go (var slice), Java (long[] array), JavaScript (const array), Kotlin (longArrayOf), Python (list), Rust (const array with typed elements), Swift (let array with UInt type), and TypeScript (const with number[] annotation). Each export includes a comment header with the algorithm name and full parameter set."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is data sent to a server when generating CRC lookup tables?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. All table generation runs entirely in WebAssembly compiled from Rust, executing locally in your browser. No input data, algorithm selection, or table output is transmitted to any server. Settings are saved only to your browser's localStorage."
+          }
+        }
+      ]
+    }
+  ]
+}</script><style>
+                        .example-box pre {
+                            margin: 0;
+                            padding: 0;
+                            background: transparent;
+                            border: none;
+                            white-space: pre;
+                        }
+                        .example-box pre code {
+                            display: block;
+                            white-space: pre;
+                            font-family: "JetBrains Mono", "Fira Code", monospace;
+                            font-size: 13px;
+                            line-height: 1.7;
+                            background: transparent;
+                            padding: 0;
+                        }
+                        .crc-lookup-result-grid {
+                            display: grid;
+                            gap: 12px;
+                            min-width: 0;
+                        }
+                        .crc-lookup-result-body {
+                            background: var(--color-second);
+                            border-radius: 12px;
+                            padding: 14px;
+                            border: 1px solid var(--color-third);
+                            min-width: 0;
+                            overflow: hidden;
+                        }
+                        .crc-lookup-compact-grid {
+                            display: grid;
+                            grid-template-columns: 2fr 1fr;
+                            gap: 12px;
+                            margin-bottom: 12px;
+                            min-width: 0;
+                        }
+                        .crc-lookup-compact-card {
+                            padding: 14px;
+                            border-radius: 12px;
+                            background: var(--color-first);
+                            border: 1px solid var(--color-third);
+                            border-left: 3px solid var(--color-fourth);
+                            min-width: 0;
+                            overflow: hidden;
+                        }
+                        .crc-lookup-compact-title {
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+                            margin-bottom: 12px;
+                            font-weight: 700;
+                            font-size: 12px;
+                            text-transform: uppercase;
+                            letter-spacing: 0.06em;
+                            color: var(--color-fourth);
+                            min-width: 0;
+                        }
+                        .crc-lookup-compact-title i {
+                            font-size: 11px;
+                            flex-shrink: 0;
+                        }
+                        .crc-lookup-summary-grid {
+                            display: grid;
+                            grid-template-columns: repeat(4, minmax(0, 1fr));
+                            gap: 8px;
+                        }
+                        .crc-lookup-summary-item {
+                            padding: 8px 10px;
+                            border-radius: 8px;
+                            background: var(--color-second);
+                            border: 1px solid var(--color-third);
+                            min-width: 0;
+                            overflow: hidden;
+                        }
+                        .crc-lookup-summary-label {
+                            display: block;
+                            margin-bottom: 4px;
+                            font-size: 10px;
+                            text-transform: uppercase;
+                            letter-spacing: 0.05em;
+                            color: var(--color-subfont);
+                            font-weight: 600;
+                        }
+                        .crc-lookup-summary-value {
+                            font-family: "JetBrains Mono", "Fira Code", monospace;
+                            font-size: 12px;
+                            font-weight: 600;
+                            color: var(--color-font);
+                            word-break: break-all;
+                        }
+                        .crc-lookup-inspector-row {
+                            display: grid;
+                            gap: 8px;
+                            min-width: 0;
+                        }
+                        .crc-lookup-inspector-value {
+                            padding: 10px 12px;
+                            border-radius: 8px;
+                            background: var(--color-second);
+                            border: 1px solid var(--color-fourth);
+                            border-left: 3px solid var(--color-fourth);
+                            font-family: "JetBrains Mono", "Fira Code", monospace;
+                            font-size: 12px;
+                            font-weight: 600;
+                            color: var(--color-font);
+                            word-break: break-all;
+                            min-width: 0;
+                        }
+                        .crc-lookup-inspector-value div:first-child {
+                            font-size: 10px;
+                            color: var(--color-subfont);
+                            text-transform: uppercase;
+                            letter-spacing: 0.04em;
+                            margin-bottom: 4px;
+                        }
+                        .crc-lookup-inspector-value div:last-child {
+                            font-size: 14px;
+                            color: var(--color-fifth);
+                        }
+                        .crc-lookup-output-header {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            gap: 8px;
+                            margin-bottom: 12px;
+                            padding-bottom: 10px;
+                            border-bottom: 1px solid var(--color-third);
+                            min-width: 0;
+                        }
+                        .crc-lookup-output-title {
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+                            font-weight: 700;
+                            font-size: 12px;
+                            text-transform: uppercase;
+                            letter-spacing: 0.06em;
+                            color: var(--color-fourth);
+                            min-width: 0;
+                            overflow: hidden;
+                        }
+                        .crc-lookup-output-title i {
+                            font-size: 11px;
+                            flex-shrink: 0;
+                        }
+                        .crc-lookup-table-wrap {
+                            border-radius: 8px;
+                            overflow: hidden;
+                            border: 1px solid var(--color-third);
+                        }
+                        .crc-lookup-table-wrap .tool-token-budget-table-scroll {
+                            border-radius: 0;
+                            border: none;
+                            overflow-x: auto;
+                        }
+                        .crc-lookup-table-wrap .token-budget-reference-table {
+                            min-width: unset;
+                        }
+                        .crc-lookup-script {
+                            margin: 0;
+                            padding: 14px;
+                            overflow-x: auto;
+                            max-width: 100%;
+                            box-sizing: border-box;
+                            border-radius: 8px;
+                            background: var(--color-fifth);
+                            color: var(--color-first);
+                            font-family: "JetBrains Mono", "Fira Code", monospace;
+                            font-size: 12px;
+                            line-height: 1.6;
+                            border: 1px solid var(--color-fourth);
+                        }
+                        .crc-lookup-copy-btn {
+                            font-size: 9px;
+                            color: var(--color-first);
+                            display: flex;
+                            align-items: center;
+                            gap: 5px;
+                            background: var(--color-fifth);
+                            padding: 5px 12px;
+                            border-radius: 6px;
+                            margin-left: auto;
+                            flex-shrink: 0;
+                            cursor: pointer;
+                            border: none;
+                            font-weight: 600;
+                            transition: background 0.15s;
+                            white-space: nowrap;
+                        }
+                        .crc-lookup-copy-btn i {
+                            font-size: 8px;
+                        }
+                        .crc-lookup-copy-btn:hover {
+                            background: var(--color-font);
+                        }
+                        @media (max-width: 900px) {
+                            .crc-lookup-compact-grid {
+                                grid-template-columns: 1fr;
+                            }
+                            .crc-lookup-summary-grid {
+                                grid-template-columns: repeat(2, minmax(0, 1fr));
+                            }
+                        }
+                        @media (max-width: 480px) {
+                            .crc-lookup-summary-grid {
+                                grid-template-columns: repeat(2, minmax(0, 1fr));
+                            }
+                            .crc-lookup-result-body {
+                                padding: 10px;
+                            }
+                            .crc-lookup-compact-card {
+                                padding: 10px;
+                            }
+                            .crc-lookup-summary-value {
+                                font-size: 11px;
+                            }
+                        }
+                    </style><div class="tool-wrapper" style="height: auto !important;"><div class="tool-intro"><div class="content-section"><h2>What is a CRC Lookup Table?</h2><p>A CRC lookup table is a precomputed array of 256 values that accelerates byte-wise CRC calculation. Instead of processing each bit individually, a byte-at-a-time implementation XORs the input byte with the current CRC, uses the result as an index into the 256-entry table, and combines the table value with the shifted accumulator — reducing an 8-step inner loop to a single table lookup.</p><p>This generator computes the authoritative 256-entry table for any supported CRC algorithm. Every entry is derived directly from the algorithm's polynomial and reflection settings, so the table matches what embedded and systems code actually uses at runtime.</p></div><div class="content-section"><h2>How to Use This Tool</h2><h3>Settings Panel</h3><p>The settings panel on the left controls what the tool generates:</p><ul><li><strong>CRC Algorithm</strong> — Select any of the 100+ CRC algorithms from the dropdown, ranging from CRC-3 through CRC-64. The list follows the Catalogue of CRC Algorithms naming convention. Popular choices include CRC-32/ISO-HDLC (Ethernet, ZIP), CRC-16/MODBUS (industrial serial), CRC-8/MAXIM-DOW (1-Wire sensors), and CRC-64/WE (storage). Changing the algorithm instantly regenerates the full table.</li><li><strong>Output Format</strong> — Switch between <strong>Table</strong> and <strong>Script</strong> views. Table mode shows all 256 entries in a grid for visual inspection. Script mode generates a ready-to-paste array declaration for your target language.</li><li><strong>Table Format</strong> (Table mode only) — Choose how numeric values are displayed: <strong>Hex</strong> (e.g. 0x77073096), <strong>Decimal</strong> (e.g. 1996959894), or <strong>Binary</strong> (e.g. 0b01110111...). Hex is the most common format for embedded development.</li><li><strong>Language</strong> (Script mode only) — Select the target programming language for the exported array declaration: C, C++, Go, Java, JavaScript, Kotlin, Python, Rust, Swift, or TypeScript. Each export includes a comment header with the algorithm name and all parameters (poly, init, refin, refout, xorout).</li></ul><h3>Result Panel</h3><p>The result panel shows three sections:</p><ul><li><strong>Summary</strong> — Displays the algorithm's key parameters at a glance: Width (bit size), Poly (generator polynomial), Init (initial CRC value), XOR-out (final XOR mask), Check (CRC of <code>"123456789"</code>), Residue (expected CRC remainder for valid frames), RefIn (whether input bytes are bit-reflected), RefOut (whether the final CRC is bit-reflected). Use the Copy button to copy all parameters as a single line of text.</li><li><strong>Entry Inspector</strong> — Type any index from 0 to 255 (decimal or hex with 0x prefix) to instantly look up that table entry. For example, entering <code>0x01</code> for CRC-32/ISO-HDLC shows <code>table[0x01] = 0x77073096</code>. The corresponding row in the table is also highlighted in the grid view.</li><li><strong>Lookup Table / Export Script</strong> — In Table mode, all 256 entries are shown in an 8-column grid with row offsets as hexadecimal labels. In Script mode, the full array declaration is displayed ready to copy. Use the Copy button to copy the entire output to your clipboard.</li></ul><h3>Typical Workflow</h3><ol><li>Select your CRC algorithm from the dropdown (e.g. CRC-32/ISO-HDLC for Ethernet or ZIP)</li><li>Check the Summary panel to confirm the parameters match your specification</li><li>Switch Output Format to Script and select your language</li><li>Click Copy to copy the array declaration and paste it into your project</li><li>Verify your implementation using the CRC Calculator: compute CRC of <code>"123456789"</code> and compare to the Check value in the Summary</li></ol></div><div class="content-section"><h2>How Byte-Wise CRC Works</h2><p>The standard table-driven CRC loop (reflected variant) looks like this:</p><div class="example-box"><pre><code>crc = init
+for byte in data:
+    crc = table[(crc ^ byte) &amp; 0xFF] ^ (crc &gt;&gt; 8)
+crc ^= xorout</code></pre></div><p>For non-reflected (normal) algorithms, the byte is shifted into the high end of the accumulator instead:</p><div class="example-box"><pre><code>crc = init
+for byte in data:
+    crc = table[((crc &gt;&gt; (width-8)) ^ byte) &amp; 0xFF] ^ (crc &lt;&lt; 8)
+crc ^= xorout</code></pre></div><p>The exported Script output includes the exact array declaration for your target language, with polynomial and parameter annotations — ready to paste directly into your project.</p></div><div class="content-section"><h2>Table Generation Method</h2><p>Each of the 256 table entries is computed by treating the index as an 8-bit input byte, running it through the standard CRC bit-by-bit loop, and recording the result. For reflected algorithms the polynomial is bit-reversed before processing; for normal algorithms the input byte is positioned in the high bits of the accumulator. The output is masked to the algorithm's actual bit width.</p><h3>Check Value Verification</h3><p>The Summary panel shows the algorithm's check value — the CRC of the ASCII string <code>"123456789"</code>. Use the <a href="/crc/">CRC Calculator</a> to verify your table-driven implementation produces the same result.</p><h3>Storage Type Selection</h3><div class="example-box"><ul><li><strong>CRC-3 through CRC-8:</strong> stored in <code>u8</code> / <code>uint8_t</code></li><li><strong>CRC-9 through CRC-16:</strong> stored in <code>u16</code> / <code>uint16_t</code></li><li><strong>CRC-17 through CRC-32:</strong> stored in <code>u32</code> / <code>uint32_t</code></li><li><strong>CRC-40 through CRC-64:</strong> stored in <code>u64</code> / <code>uint64_t</code></li></ul></div></div><div class="content-section"><h2>Commonly Used CRC Lookup Tables</h2><h3>CRC-32/ISO-HDLC (Ethernet, ZIP, gzip, PNG)</h3><div class="example-box"><ul><li>Polynomial: <code>0x04C11DB7</code> (reflected: <code>0xEDB88320</code>)</li><li>Init: <code>0xFFFFFFFF</code> | XOR-out: <code>0xFFFFFFFF</code> | RefIn/RefOut: true</li><li>Check value ("123456789"): <code>0xCBF43926</code></li><li>The first entry in the reflected table is always <code>0x00000000</code>; entry [1] is <code>0x77073096</code></li></ul></div><h3>CRC-16/MODBUS</h3><div class="example-box"><ul><li>Polynomial: <code>0x8005</code> (reflected: <code>0xA001</code>)</li><li>Init: <code>0xFFFF</code> | XOR-out: <code>0x0000</code> | RefIn/RefOut: true</li><li>Check value: <code>0x4B37</code></li><li>Widely used in Modbus RTU framing for industrial serial communication</li></ul></div><h3>CRC-8/MAXIM-DOW (1-Wire)</h3><div class="example-box"><ul><li>Polynomial: <code>0x31</code> (reflected: <code>0x8C</code>)</li><li>Init: <code>0x00</code> | XOR-out: <code>0x00</code> | RefIn/RefOut: true</li><li>Check value: <code>0xA1</code></li><li>Used in Dallas/Maxim 1-Wire sensors (DS18B20 temperature, DS2401 serial number)</li></ul></div></div><div class="content-section"><h2>Frequently Asked Questions</h2><h3>What is a CRC lookup table and why is it used?</h3><p>A CRC lookup table is a precomputed array of 256 values that accelerates byte-wise CRC calculation. Instead of processing all 8 bits of each input byte individually, an implementation XORs the current byte with the CRC accumulator, uses the result as an index into the table, and combines the table value with the shifted accumulator in a single step — reducing the inner loop from 8 iterations to one table lookup.</p><h3>How is the CRC-32/ISO-HDLC (Ethernet, ZIP, gzip) lookup table generated?</h3><p>The table uses the reflected polynomial <code>0xEDB88320</code> (bit-reversal of <code>0x04C11DB7</code>'). Each of the 256 entries is computed by treating the index as an 8-bit input, running the standard 8-step bit-wise CRC loop with the reflected polynomial. Entry [1] is <code>0x77073096</code>; entry [255] is <code>0x2D02EF8D</code>.</p><h3>What is the byte-wise CRC loop for a reflected (RefIn=true) algorithm?</h3><div class="example-box"><p>For CRC-32/ISO-HDLC, CRC-16/MODBUS, CRC-8/MAXIM-DOW and all other reflected algorithms:</p><pre><code>crc = init
+for byte in data:
+    crc = table[(crc ^ byte) &amp; 0xFF] ^ (crc &gt;&gt; 8)
+crc ^= xorout</code></pre></div><h3>How does a non-reflected (RefIn=false) CRC table loop differ?</h3><div class="example-box"><p>For CRC-32/MPEG-2, CRC-16/IBM-3740, CRC-8/SMBUS and other non-reflected algorithms:</p><pre><code>crc = init
+for byte in data:
+    crc = table[((crc &gt;&gt; (width-8)) ^ byte) &amp; 0xFF] ^ (crc &lt;&lt; 8)
+crc &amp;= mask
+crc ^= xorout</code></pre></div><h3>What storage type is used for each CRC width?</h3><div class="example-box"><ul><li>CRC-1 to CRC-8 → <code>u8</code> / <code>uint8_t</code></li><li>CRC-9 to CRC-16 → <code>u16</code> / <code>uint16_t</code></li><li>CRC-17 to CRC-32 → <code>u32</code> / <code>uint32_t</code></li><li>CRC-33 to CRC-64 → <code>u64</code> / <code>uint64_t</code></li></ul></div><h3>How can I verify that my CRC lookup table implementation is correct?</h3><p>Every CRC algorithm has a published check value — the CRC of the ASCII string <code>"123456789"</code>. Run your table-driven implementation on that string and compare the result to the check value shown in the Summary panel. For CRC-32/ISO-HDLC the check value is <code>0xCBF43926</code>; for CRC-16/MODBUS it is <code>0x4B37</code>; for CRC-8/MAXIM-DOW it is <code>0xA1</code>.</p><h3>What is the CRC-16/MODBUS lookup table first entry?</h3><p>The CRC-16/MODBUS table uses the reflected polynomial <code>0xA001</code> (bit-reversal of <code>0x8005</code>). Table entry [0] is <code>0x0000</code> and entry [1] is <code>0xC0C1</code>. Init is <code>0xFFFF</code>.</p><h3>Which output languages are supported for CRC table export?</h3><p>The Script export supports: C, C++ (<code>std::array</code>), Go, Java (<code>long[]</code>), JavaScript, Kotlin (<code>longArrayOf</code>), Python, Rust (<code>const [T; 256]</code>), Swift, and TypeScript. Each export includes a comment header with algorithm name and full parameter set.</p><h3>Is data sent to a server when generating CRC lookup tables?</h3><p>No. All table generation runs entirely in WebAssembly compiled from Rust, executing locally in your browser. No input, algorithm selection, or table output is transmitted to any server. Settings are saved only to your browser's localStorage.</p></div><div class="content-section"><h2>Related Tools</h2><ul><li><a href="/otp/">TOTP Generator</a> - Generate RFC 6238 TOTP codes from a Base32 secret: SHA-1/SHA-256/SHA-512, 15/30/60s steps, 6 or 8 digits. otpauth:// QR for authenticator apps, verify with time drift tolerance, optional HMAC debug. Client-side only.</li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a> - Decode JWT header and payload, verify HS256/HS384/HS512 signatures with your secret, inspect exp/iat/nbf/iss/sub/aud, and encode new JWTs from JSON—all in the browser. No upload; ideal for API auth debugging and learning RFC 7519.</li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a> - Decode PEM or DER X.509 certificates in the browser: subject/issuer, validity, SAN, key usage, fingerprints, and chain relationships—useful for HTTPS debugging and DevOps. No upload to a backend.</li><li><a href="/crc/">CRC Calculator</a> - Calculate CRC checksums with 100+ algorithms for data integrity verification</li><li><a href="/file-hash/">File Hash Calculator</a> - Compute cryptographic hashes for files and text in your browser: MD5, SHA-1, SHA-256, SHA-384, SHA-512, SHA3, Blake2, and more. Drag-and-drop files, hex/base64 output, side-by-side comparison. Nothing uploaded—runs locally with Web Crypto.</li></ul></div></div><div class="tool-container"><div class="tool-settings-grid"><div class="tool-settings-section"><h3 class="tool-section-header"><span class="tool-icon-badge"><i class="fa-solid fa-sliders"></i></span>Lookup Table Settings</h3><div class="tool-settings-content"><div class="tool-settings-row"><label class="tool-settings-label"><i class="fa-solid fa-microchip"></i>CRC Algorithm</label><select class="tool-settings-select"><option value="CRC-3/GSM">CRC-3/GSM</option><option value="CRC-3/ROHC">CRC-3/ROHC</option><option value="CRC-4/G-704">CRC-4/G-704</option><option value="CRC-4/INTERLAKEN">CRC-4/INTERLAKEN</option><option value="CRC-5/EPC-C1G2">CRC-5/EPC-C1G2</option><option value="CRC-5/G-704">CRC-5/G-704</option><option value="CRC-5/USB">CRC-5/USB</option><option value="CRC-6/CDMA2000-A">CRC-6/CDMA2000-A</option><option value="CRC-6/CDMA2000-B">CRC-6/CDMA2000-B</option><option value="CRC-6/DARC">CRC-6/DARC</option><option value="CRC-6/GSM">CRC-6/GSM</option><option value="CRC-6/G-704">CRC-6/G-704</option><option value="CRC-7/MMC">CRC-7/MMC</option><option value="CRC-7/ROHC">CRC-7/ROHC</option><option value="CRC-7/UMTS">CRC-7/UMTS</option><option value="CRC-8/AUTOSAR">CRC-8/AUTOSAR</option><option value="CRC-8/BLUETOOTH">CRC-8/BLUETOOTH</option><option value="CRC-8/CDMA2000">CRC-8/CDMA2000</option><option value="CRC-8/DARC">CRC-8/DARC</option><option value="CRC-8/DVB-S2">CRC-8/DVB-S2</option><option value="CRC-8/GSM-A">CRC-8/GSM-A</option><option value="CRC-8/GSM-B">CRC-8/GSM-B</option><option value="CRC-8/HITAG">CRC-8/HITAG</option><option value="CRC-8/I-432-1">CRC-8/I-432-1</option><option value="CRC-8/I-CODE">CRC-8/I-CODE</option><option value="CRC-8/LTE">CRC-8/LTE</option><option value="CRC-8/MAXIM-DOW">CRC-8/MAXIM-DOW</option><option value="CRC-8/MIFARE-MAD">CRC-8/MIFARE-MAD</option><option value="CRC-8/NRSC-5">CRC-8/NRSC-5</option><option value="CRC-8/OPENSAFETY">CRC-8/OPENSAFETY</option><option value="CRC-8/ROHC">CRC-8/ROHC</option><option value="CRC-8/SAE-J1850">CRC-8/SAE-J1850</option><option value="CRC-8/SMBUS">CRC-8/SMBUS</option><option value="CRC-8/TECH-3250">CRC-8/TECH-3250</option><option value="CRC-8/WCDMA">CRC-8/WCDMA</option><option value="CRC-10/ATM">CRC-10/ATM</option><option value="CRC-10/CDMA2000">CRC-10/CDMA2000</option><option value="CRC-10/GSM">CRC-10/GSM</option><option value="CRC-11/FLEXRAY">CRC-11/FLEXRAY</option><option value="CRC-11/UMTS">CRC-11/UMTS</option><option value="CRC-12/CDMA2000">CRC-12/CDMA2000</option><option value="CRC-12/DECT">CRC-12/DECT</option><option value="CRC-12/GSM">CRC-12/GSM</option><option value="CRC-12/UMTS">CRC-12/UMTS</option><option value="CRC-13/BBC">CRC-13/BBC</option><option value="CRC-14/DARC">CRC-14/DARC</option><option value="CRC-14/GSM">CRC-14/GSM</option><option value="CRC-15/CAN">CRC-15/CAN</option><option value="CRC-15/MPT1327">CRC-15/MPT1327</option><option value="CRC-16/ARC">CRC-16/ARC</option><option value="CRC-16/CDMA2000">CRC-16/CDMA2000</option><option value="CRC-16/CMS">CRC-16/CMS</option><option value="CRC-16/DDS-110">CRC-16/DDS-110</option><option value="CRC-16/DECT-R">CRC-16/DECT-R</option><option value="CRC-16/DECT-X">CRC-16/DECT-X</option><option value="CRC-16/DNP">CRC-16/DNP</option><option value="CRC-16/EN-13757">CRC-16/EN-13757</option><option value="CRC-16/GENIBUS">CRC-16/GENIBUS</option><option value="CRC-16/GSM">CRC-16/GSM</option><option value="CRC-16/IBM-3740">CRC-16/IBM-3740</option><option value="CRC-16/IBM-SDLC">CRC-16/IBM-SDLC</option><option value="CRC-16/ISO-IEC-14443-3-A">CRC-16/ISO-IEC-14443-3-A</option><option value="CRC-16/KERMIT">CRC-16/KERMIT</option><option value="CRC-16/LJ1200">CRC-16/LJ1200</option><option value="CRC-16/M17">CRC-16/M17</option><option value="CRC-16/MAXIM-DOW">CRC-16/MAXIM-DOW</option><option value="CRC-16/MCRF4XX">CRC-16/MCRF4XX</option><option value="CRC-16/MODBUS">CRC-16/MODBUS</option><option value="CRC-16/NRSC-5">CRC-16/NRSC-5</option><option value="CRC-16/OPENSAFETY-A">CRC-16/OPENSAFETY-A</option><option value="CRC-16/OPENSAFETY-B">CRC-16/OPENSAFETY-B</option><option value="CRC-16/PROFIBUS">CRC-16/PROFIBUS</option><option value="CRC-16/RIELLO">CRC-16/RIELLO</option><option value="CRC-16/SPI-FUJITSU">CRC-16/SPI-FUJITSU</option><option value="CRC-16/T10-DIF">CRC-16/T10-DIF</option><option value="CRC-16/TELEDISK">CRC-16/TELEDISK</option><option value="CRC-16/TMS37157">CRC-16/TMS37157</option><option value="CRC-16/UMTS">CRC-16/UMTS</option><option value="CRC-16/USB">CRC-16/USB</option><option value="CRC-16/XMODEM">CRC-16/XMODEM</option><option value="CRC-17/CAN-FD">CRC-17/CAN-FD</option><option value="CRC-21/CAN-FD">CRC-21/CAN-FD</option><option value="CRC-24/BLE">CRC-24/BLE</option><option value="CRC-24/FLEXRAY-A">CRC-24/FLEXRAY-A</option><option value="CRC-24/FLEXRAY-B">CRC-24/FLEXRAY-B</option><option value="CRC-24/INTERLAKEN">CRC-24/INTERLAKEN</option><option value="CRC-24/LTE-A">CRC-24/LTE-A</option><option value="CRC-24/LTE-B">CRC-24/LTE-B</option><option value="CRC-24/OPENPGP">CRC-24/OPENPGP</option><option value="CRC-24/OS-9">CRC-24/OS-9</option><option value="CRC-30/CDMA">CRC-30/CDMA</option><option value="CRC-31/PHILIPS">CRC-31/PHILIPS</option><option value="CRC-32/AIXM">CRC-32/AIXM</option><option value="CRC-32/AUTOSAR">CRC-32/AUTOSAR</option><option value="CRC-32/BASE91-D">CRC-32/BASE91-D</option><option value="CRC-32/BZIP2">CRC-32/BZIP2</option><option value="CRC-32/CD-ROM-EDC">CRC-32/CD-ROM-EDC</option><option value="CRC-32/CKSUM">CRC-32/CKSUM</option><option value="CRC-32/ISCSI">CRC-32/ISCSI</option><option value="CRC-32/ISO-HDLC" selected="selected">CRC-32/ISO-HDLC</option><option value="CRC-32/JAMCRC">CRC-32/JAMCRC</option><option value="CRC-32/MEF">CRC-32/MEF</option><option value="CRC-32/MPEG-2">CRC-32/MPEG-2</option><option value="CRC-32/XFER">CRC-32/XFER</option><option value="CRC-40/GSM">CRC-40/GSM</option><option value="CRC-64/ECMA-182">CRC-64/ECMA-182</option><option value="CRC-64/GO-ISO">CRC-64/GO-ISO</option><option value="CRC-64/MS">CRC-64/MS</option><option value="CRC-64/REDIS">CRC-64/REDIS</option><option value="CRC-64/WE">CRC-64/WE</option><option value="CRC-64/XZ">CRC-64/XZ</option></select></div><div class="tool-settings-row"><label class="tool-settings-label"><i class="fa-solid fa-layer-group"></i>Output Format</label><select class="tool-settings-select"><option value="Table" selected="selected">Table</option><option value="Script">Script</option></select></div><div class="tool-settings-row"><label class="tool-settings-label"><i class="fa-solid fa-table-cells"></i>Table Format</label><select class="tool-settings-select"><option value="Hex" selected="selected">Hex</option><option value="Decimal">Decimal</option><option value="Binary">Binary</option></select></div></div></div></div><div class="tool-result-section"><div><div style="margin-bottom: 14px;" class="tool-title-row"><div class="tool-result-title"><span class="tool-icon-badge-lg"><i class="fa-solid fa-check-double"></i></span>CRC-32/ISO-HDLC Result</div></div><div class="crc-lookup-result-body"><div class="crc-lookup-result-grid"><div class="crc-lookup-compact-grid"><div class="crc-lookup-compact-card"><div class="crc-lookup-compact-title"><i class="fa-solid fa-circle-info"></i>Summary<button class="crc-lookup-copy-btn"><i class="fa-solid fa-copy"></i> Copy</button></div><div class="crc-lookup-summary-grid"><div class="crc-lookup-summary-item"><span class="crc-lookup-summary-label">Width</span><div class="crc-lookup-summary-value">CRC-32</div></div><div class="crc-lookup-summary-item"><span class="crc-lookup-summary-label">Poly</span><div class="crc-lookup-summary-value">0x04C11DB7</div></div><div class="crc-lookup-summary-item"><span class="crc-lookup-summary-label">Init</span><div class="crc-lookup-summary-value">0xFFFFFFFF</div></div><div class="crc-lookup-summary-item"><span class="crc-lookup-summary-label">XOR-out</span><div class="crc-lookup-summary-value">0xFFFFFFFF</div></div><div class="crc-lookup-summary-item"><span class="crc-lookup-summary-label">Check</span><div class="crc-lookup-summary-value">0xCBF43926</div></div><div class="crc-lookup-summary-item"><span class="crc-lookup-summary-label">Residue</span><div class="crc-lookup-summary-value">0xDEBB20E3</div></div><div class="crc-lookup-summary-item"><span class="crc-lookup-summary-label">RefIn</span><div class="crc-lookup-summary-value">true</div></div><div class="crc-lookup-summary-item"><span class="crc-lookup-summary-label">RefOut</span><div class="crc-lookup-summary-value">true</div></div></div></div><div class="crc-lookup-compact-card"><div class="crc-lookup-compact-title"><i class="fa-solid fa-magnifying-glass"></i>Entry Inspector</div><div class="crc-lookup-inspector-row"><input placeholder="0x00 or 0" class="tool-settings-input"><div class="crc-lookup-inspector-value"><div>table[0x00]</div><div>0x00000000</div></div></div></div></div><div class="crc-lookup-compact-card"><div class="crc-lookup-output-header"><div class="crc-lookup-output-title"><i class="fa-solid fa-table-cells"></i>Lookup Table (Hex, 8 columns)</div><button class="crc-lookup-copy-btn"><i class="fa-solid fa-copy"></i> Copy</button></div><div class="crc-lookup-table-wrap"><div class="tool-token-budget-table-scroll"><table class="token-budget-reference-table"><thead><tr><th>+0</th><th>+1</th><th>+2</th><th>+3</th><th>+4</th><th>+5</th><th>+6</th><th>+7</th></tr></thead><tbody><tr class="token-budget-row-selected"><td class="token-budget-cell-mono">00: 0x00000000</td><td class="token-budget-cell-mono">01: 0x77073096</td><td class="token-budget-cell-mono">02: 0xEE0E612C</td><td class="token-budget-cell-mono">03: 0x990951BA</td><td class="token-budget-cell-mono">04: 0x076DC419</td><td class="token-budget-cell-mono">05: 0x706AF48F</td><td class="token-budget-cell-mono">06: 0xE963A535</td><td class="token-budget-cell-mono">07: 0x9E6495A3</td></tr><tr><td class="token-budget-cell-mono">08: 0x0EDB8832</td><td class="token-budget-cell-mono">09: 0x79DCB8A4</td><td class="token-budget-cell-mono">0A: 0xE0D5E91E</td><td class="token-budget-cell-mono">0B: 0x97D2D988</td><td class="token-budget-cell-mono">0C: 0x09B64C2B</td><td class="token-budget-cell-mono">0D: 0x7EB17CBD</td><td class="token-budget-cell-mono">0E: 0xE7B82D07</td><td class="token-budget-cell-mono">0F: 0x90BF1D91</td></tr><tr><td class="token-budget-cell-mono">10: 0x1DB71064</td><td class="token-budget-cell-mono">11: 0x6AB020F2</td><td class="token-budget-cell-mono">12: 0xF3B97148</td><td class="token-budget-cell-mono">13: 0x84BE41DE</td><td class="token-budget-cell-mono">14: 0x1ADAD47D</td><td class="token-budget-cell-mono">15: 0x6DDDE4EB</td><td class="token-budget-cell-mono">16: 0xF4D4B551</td><td class="token-budget-cell-mono">17: 0x83D385C7</td></tr><tr><td class="token-budget-cell-mono">18: 0x136C9856</td><td class="token-budget-cell-mono">19: 0x646BA8C0</td><td class="token-budget-cell-mono">1A: 0xFD62F97A</td><td class="token-budget-cell-mono">1B: 0x8A65C9EC</td><td class="token-budget-cell-mono">1C: 0x14015C4F</td><td class="token-budget-cell-mono">1D: 0x63066CD9</td><td class="token-budget-cell-mono">1E: 0xFA0F3D63</td><td class="token-budget-cell-mono">1F: 0x8D080DF5</td></tr><tr><td class="token-budget-cell-mono">20: 0x3B6E20C8</td><td class="token-budget-cell-mono">21: 0x4C69105E</td><td class="token-budget-cell-mono">22: 0xD56041E4</td><td class="token-budget-cell-mono">23: 0xA2677172</td><td class="token-budget-cell-mono">24: 0x3C03E4D1</td><td class="token-budget-cell-mono">25: 0x4B04D447</td><td class="token-budget-cell-mono">26: 0xD20D85FD</td><td class="token-budget-cell-mono">27: 0xA50AB56B</td></tr><tr><td class="token-budget-cell-mono">28: 0x35B5A8FA</td><td class="token-budget-cell-mono">29: 0x42B2986C</td><td class="token-budget-cell-mono">2A: 0xDBBBC9D6</td><td class="token-budget-cell-mono">2B: 0xACBCF940</td><td class="token-budget-cell-mono">2C: 0x32D86CE3</td><td class="token-budget-cell-mono">2D: 0x45DF5C75</td><td class="token-budget-cell-mono">2E: 0xDCD60DCF</td><td class="token-budget-cell-mono">2F: 0xABD13D59</td></tr><tr><td class="token-budget-cell-mono">30: 0x26D930AC</td><td class="token-budget-cell-mono">31: 0x51DE003A</td><td class="token-budget-cell-mono">32: 0xC8D75180</td><td class="token-budget-cell-mono">33: 0xBFD06116</td><td class="token-budget-cell-mono">34: 0x21B4F4B5</td><td class="token-budget-cell-mono">35: 0x56B3C423</td><td class="token-budget-cell-mono">36: 0xCFBA9599</td><td class="token-budget-cell-mono">37: 0xB8BDA50F</td></tr><tr><td class="token-budget-cell-mono">38: 0x2802B89E</td><td class="token-budget-cell-mono">39: 0x5F058808</td><td class="token-budget-cell-mono">3A: 0xC60CD9B2</td><td class="token-budget-cell-mono">3B: 0xB10BE924</td><td class="token-budget-cell-mono">3C: 0x2F6F7C87</td><td class="token-budget-cell-mono">3D: 0x58684C11</td><td class="token-budget-cell-mono">3E: 0xC1611DAB</td><td class="token-budget-cell-mono">3F: 0xB6662D3D</td></tr><tr><td class="token-budget-cell-mono">40: 0x76DC4190</td><td class="token-budget-cell-mono">41: 0x01DB7106</td><td class="token-budget-cell-mono">42: 0x98D220BC</td><td class="token-budget-cell-mono">43: 0xEFD5102A</td><td class="token-budget-cell-mono">44: 0x71B18589</td><td class="token-budget-cell-mono">45: 0x06B6B51F</td><td class="token-budget-cell-mono">46: 0x9FBFE4A5</td><td class="token-budget-cell-mono">47: 0xE8B8D433</td></tr><tr><td class="token-budget-cell-mono">48: 0x7807C9A2</td><td class="token-budget-cell-mono">49: 0x0F00F934</td><td class="token-budget-cell-mono">4A: 0x9609A88E</td><td class="token-budget-cell-mono">4B: 0xE10E9818</td><td class="token-budget-cell-mono">4C: 0x7F6A0DBB</td><td class="token-budget-cell-mono">4D: 0x086D3D2D</td><td class="token-budget-cell-mono">4E: 0x91646C97</td><td class="token-budget-cell-mono">4F: 0xE6635C01</td></tr><tr><td class="token-budget-cell-mono">50: 0x6B6B51F4</td><td class="token-budget-cell-mono">51: 0x1C6C6162</td><td class="token-budget-cell-mono">52: 0x856530D8</td><td class="token-budget-cell-mono">53: 0xF262004E</td><td class="token-budget-cell-mono">54: 0x6C0695ED</td><td class="token-budget-cell-mono">55: 0x1B01A57B</td><td class="token-budget-cell-mono">56: 0x8208F4C1</td><td class="token-budget-cell-mono">57: 0xF50FC457</td></tr><tr><td class="token-budget-cell-mono">58: 0x65B0D9C6</td><td class="token-budget-cell-mono">59: 0x12B7E950</td><td class="token-budget-cell-mono">5A: 0x8BBEB8EA</td><td class="token-budget-cell-mono">5B: 0xFCB9887C</td><td class="token-budget-cell-mono">5C: 0x62DD1DDF</td><td class="token-budget-cell-mono">5D: 0x15DA2D49</td><td class="token-budget-cell-mono">5E: 0x8CD37CF3</td><td class="token-budget-cell-mono">5F: 0xFBD44C65</td></tr><tr><td class="token-budget-cell-mono">60: 0x4DB26158</td><td class="token-budget-cell-mono">61: 0x3AB551CE</td><td class="token-budget-cell-mono">62: 0xA3BC0074</td><td class="token-budget-cell-mono">63: 0xD4BB30E2</td><td class="token-budget-cell-mono">64: 0x4ADFA541</td><td class="token-budget-cell-mono">65: 0x3DD895D7</td><td class="token-budget-cell-mono">66: 0xA4D1C46D</td><td class="token-budget-cell-mono">67: 0xD3D6F4FB</td></tr><tr><td class="token-budget-cell-mono">68: 0x4369E96A</td><td class="token-budget-cell-mono">69: 0x346ED9FC</td><td class="token-budget-cell-mono">6A: 0xAD678846</td><td class="token-budget-cell-mono">6B: 0xDA60B8D0</td><td class="token-budget-cell-mono">6C: 0x44042D73</td><td class="token-budget-cell-mono">6D: 0x33031DE5</td><td class="token-budget-cell-mono">6E: 0xAA0A4C5F</td><td class="token-budget-cell-mono">6F: 0xDD0D7CC9</td></tr><tr><td class="token-budget-cell-mono">70: 0x5005713C</td><td class="token-budget-cell-mono">71: 0x270241AA</td><td class="token-budget-cell-mono">72: 0xBE0B1010</td><td class="token-budget-cell-mono">73: 0xC90C2086</td><td class="token-budget-cell-mono">74: 0x5768B525</td><td class="token-budget-cell-mono">75: 0x206F85B3</td><td class="token-budget-cell-mono">76: 0xB966D409</td><td class="token-budget-cell-mono">77: 0xCE61E49F</td></tr><tr><td class="token-budget-cell-mono">78: 0x5EDEF90E</td><td class="token-budget-cell-mono">79: 0x29D9C998</td><td class="token-budget-cell-mono">7A: 0xB0D09822</td><td class="token-budget-cell-mono">7B: 0xC7D7A8B4</td><td class="token-budget-cell-mono">7C: 0x59B33D17</td><td class="token-budget-cell-mono">7D: 0x2EB40D81</td><td class="token-budget-cell-mono">7E: 0xB7BD5C3B</td><td class="token-budget-cell-mono">7F: 0xC0BA6CAD</td></tr><tr><td class="token-budget-cell-mono">80: 0xEDB88320</td><td class="token-budget-cell-mono">81: 0x9ABFB3B6</td><td class="token-budget-cell-mono">82: 0x03B6E20C</td><td class="token-budget-cell-mono">83: 0x74B1D29A</td><td class="token-budget-cell-mono">84: 0xEAD54739</td><td class="token-budget-cell-mono">85: 0x9DD277AF</td><td class="token-budget-cell-mono">86: 0x04DB2615</td><td class="token-budget-cell-mono">87: 0x73DC1683</td></tr><tr><td class="token-budget-cell-mono">88: 0xE3630B12</td><td class="token-budget-cell-mono">89: 0x94643B84</td><td class="token-budget-cell-mono">8A: 0x0D6D6A3E</td><td class="token-budget-cell-mono">8B: 0x7A6A5AA8</td><td class="token-budget-cell-mono">8C: 0xE40ECF0B</td><td class="token-budget-cell-mono">8D: 0x9309FF9D</td><td class="token-budget-cell-mono">8E: 0x0A00AE27</td><td class="token-budget-cell-mono">8F: 0x7D079EB1</td></tr><tr><td class="token-budget-cell-mono">90: 0xF00F9344</td><td class="token-budget-cell-mono">91: 0x8708A3D2</td><td class="token-budget-cell-mono">92: 0x1E01F268</td><td class="token-budget-cell-mono">93: 0x6906C2FE</td><td class="token-budget-cell-mono">94: 0xF762575D</td><td class="token-budget-cell-mono">95: 0x806567CB</td><td class="token-budget-cell-mono">96: 0x196C3671</td><td class="token-budget-cell-mono">97: 0x6E6B06E7</td></tr><tr><td class="token-budget-cell-mono">98: 0xFED41B76</td><td class="token-budget-cell-mono">99: 0x89D32BE0</td><td class="token-budget-cell-mono">9A: 0x10DA7A5A</td><td class="token-budget-cell-mono">9B: 0x67DD4ACC</td><td class="token-budget-cell-mono">9C: 0xF9B9DF6F</td><td class="token-budget-cell-mono">9D: 0x8EBEEFF9</td><td class="token-budget-cell-mono">9E: 0x17B7BE43</td><td class="token-budget-cell-mono">9F: 0x60B08ED5</td></tr><tr><td class="token-budget-cell-mono">A0: 0xD6D6A3E8</td><td class="token-budget-cell-mono">A1: 0xA1D1937E</td><td class="token-budget-cell-mono">A2: 0x38D8C2C4</td><td class="token-budget-cell-mono">A3: 0x4FDFF252</td><td class="token-budget-cell-mono">A4: 0xD1BB67F1</td><td class="token-budget-cell-mono">A5: 0xA6BC5767</td><td class="token-budget-cell-mono">A6: 0x3FB506DD</td><td class="token-budget-cell-mono">A7: 0x48B2364B</td></tr><tr><td class="token-budget-cell-mono">A8: 0xD80D2BDA</td><td class="token-budget-cell-mono">A9: 0xAF0A1B4C</td><td class="token-budget-cell-mono">AA: 0x36034AF6</td><td class="token-budget-cell-mono">AB: 0x41047A60</td><td class="token-budget-cell-mono">AC: 0xDF60EFC3</td><td class="token-budget-cell-mono">AD: 0xA867DF55</td><td class="token-budget-cell-mono">AE: 0x316E8EEF</td><td class="token-budget-cell-mono">AF: 0x4669BE79</td></tr><tr><td class="token-budget-cell-mono">B0: 0xCB61B38C</td><td class="token-budget-cell-mono">B1: 0xBC66831A</td><td class="token-budget-cell-mono">B2: 0x256FD2A0</td><td class="token-budget-cell-mono">B3: 0x5268E236</td><td class="token-budget-cell-mono">B4: 0xCC0C7795</td><td class="token-budget-cell-mono">B5: 0xBB0B4703</td><td class="token-budget-cell-mono">B6: 0x220216B9</td><td class="token-budget-cell-mono">B7: 0x5505262F</td></tr><tr><td class="token-budget-cell-mono">B8: 0xC5BA3BBE</td><td class="token-budget-cell-mono">B9: 0xB2BD0B28</td><td class="token-budget-cell-mono">BA: 0x2BB45A92</td><td class="token-budget-cell-mono">BB: 0x5CB36A04</td><td class="token-budget-cell-mono">BC: 0xC2D7FFA7</td><td class="token-budget-cell-mono">BD: 0xB5D0CF31</td><td class="token-budget-cell-mono">BE: 0x2CD99E8B</td><td class="token-budget-cell-mono">BF: 0x5BDEAE1D</td></tr><tr><td class="token-budget-cell-mono">C0: 0x9B64C2B0</td><td class="token-budget-cell-mono">C1: 0xEC63F226</td><td class="token-budget-cell-mono">C2: 0x756AA39C</td><td class="token-budget-cell-mono">C3: 0x026D930A</td><td class="token-budget-cell-mono">C4: 0x9C0906A9</td><td class="token-budget-cell-mono">C5: 0xEB0E363F</td><td class="token-budget-cell-mono">C6: 0x72076785</td><td class="token-budget-cell-mono">C7: 0x05005713</td></tr><tr><td class="token-budget-cell-mono">C8: 0x95BF4A82</td><td class="token-budget-cell-mono">C9: 0xE2B87A14</td><td class="token-budget-cell-mono">CA: 0x7BB12BAE</td><td class="token-budget-cell-mono">CB: 0x0CB61B38</td><td class="token-budget-cell-mono">CC: 0x92D28E9B</td><td class="token-budget-cell-mono">CD: 0xE5D5BE0D</td><td class="token-budget-cell-mono">CE: 0x7CDCEFB7</td><td class="token-budget-cell-mono">CF: 0x0BDBDF21</td></tr><tr><td class="token-budget-cell-mono">D0: 0x86D3D2D4</td><td class="token-budget-cell-mono">D1: 0xF1D4E242</td><td class="token-budget-cell-mono">D2: 0x68DDB3F8</td><td class="token-budget-cell-mono">D3: 0x1FDA836E</td><td class="token-budget-cell-mono">D4: 0x81BE16CD</td><td class="token-budget-cell-mono">D5: 0xF6B9265B</td><td class="token-budget-cell-mono">D6: 0x6FB077E1</td><td class="token-budget-cell-mono">D7: 0x18B74777</td></tr><tr><td class="token-budget-cell-mono">D8: 0x88085AE6</td><td class="token-budget-cell-mono">D9: 0xFF0F6A70</td><td class="token-budget-cell-mono">DA: 0x66063BCA</td><td class="token-budget-cell-mono">DB: 0x11010B5C</td><td class="token-budget-cell-mono">DC: 0x8F659EFF</td><td class="token-budget-cell-mono">DD: 0xF862AE69</td><td class="token-budget-cell-mono">DE: 0x616BFFD3</td><td class="token-budget-cell-mono">DF: 0x166CCF45</td></tr><tr><td class="token-budget-cell-mono">E0: 0xA00AE278</td><td class="token-budget-cell-mono">E1: 0xD70DD2EE</td><td class="token-budget-cell-mono">E2: 0x4E048354</td><td class="token-budget-cell-mono">E3: 0x3903B3C2</td><td class="token-budget-cell-mono">E4: 0xA7672661</td><td class="token-budget-cell-mono">E5: 0xD06016F7</td><td class="token-budget-cell-mono">E6: 0x4969474D</td><td class="token-budget-cell-mono">E7: 0x3E6E77DB</td></tr><tr><td class="token-budget-cell-mono">E8: 0xAED16A4A</td><td class="token-budget-cell-mono">E9: 0xD9D65ADC</td><td class="token-budget-cell-mono">EA: 0x40DF0B66</td><td class="token-budget-cell-mono">EB: 0x37D83BF0</td><td class="token-budget-cell-mono">EC: 0xA9BCAE53</td><td class="token-budget-cell-mono">ED: 0xDEBB9EC5</td><td class="token-budget-cell-mono">EE: 0x47B2CF7F</td><td class="token-budget-cell-mono">EF: 0x30B5FFE9</td></tr><tr><td class="token-budget-cell-mono">F0: 0xBDBDF21C</td><td class="token-budget-cell-mono">F1: 0xCABAC28A</td><td class="token-budget-cell-mono">F2: 0x53B39330</td><td class="token-budget-cell-mono">F3: 0x24B4A3A6</td><td class="token-budget-cell-mono">F4: 0xBAD03605</td><td class="token-budget-cell-mono">F5: 0xCDD70693</td><td class="token-budget-cell-mono">F6: 0x54DE5729</td><td class="token-budget-cell-mono">F7: 0x23D967BF</td></tr><tr><td class="token-budget-cell-mono">F8: 0xB3667A2E</td><td class="token-budget-cell-mono">F9: 0xC4614AB8</td><td class="token-budget-cell-mono">FA: 0x5D681B02</td><td class="token-budget-cell-mono">FB: 0x2A6F2B94</td><td class="token-budget-cell-mono">FC: 0xB40BBE37</td><td class="token-budget-cell-mono">FD: 0xC30C8EA1</td><td class="token-budget-cell-mono">FE: 0x5A05DF1B</td><td class="token-budget-cell-mono">FF: 0x2D02EF8D</td></tr></tbody></table></div></div></div></div></div></div></div><div class="tool-tip-box"><i class="fa-solid fa-circle-info"></i> Need to compute an actual CRC checksum? Use the <a href="/crc/">CRC Calculator</a> to verify that your table-driven implementation produces the correct check value for any input.</div><div class="tool-tip-box"><i class="fa-solid fa-book-open"></i><strong> Related Reading</strong><div style="margin-top: 8px;" class="sidebar-recent-list"><a href="/blog/2025-12-27-crc/" class="sidebar-recent-item"><i class="fa-regular fa-file-lines sidebar-recent-icon"></i><span class="tip-item-body"><span class="tip-item-title">Data Integrity Verification with CRC: A Practical Guide</span><span class="tip-item-desc">Explore the mathematical foundations and practical applications of CRC algorithms. Learn how polynomial division provides superior error detection in network protocols, storage systems, and embedded applications.</span></span></a><a href="/blog/2026-03-04-endian/" class="sidebar-recent-item"><i class="fa-regular fa-file-lines sidebar-recent-icon"></i><span class="tip-item-body"><span class="tip-item-title">Understanding Endianness: Byte Order Defines Your System</span><span class="tip-item-desc">A single byte order mismatch can cost you days of debugging. This article draws on real-world experience to thoroughly explain the difference between big endian and little endian, and why endianness is critical in networking, MODBUS, and CRC calculations.</span></span></a></div></div></div><div class="ad-display-wrapper tool-page-mid-ad"><ins class="adsbygoogle" style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7541212813" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_1_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7541212813&amp;adk=1745026540&amp;adf=1734928429&amp;pi=t.ma~as.7541212813&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1776759132&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fcrc-lookup-table%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;aiof=9&amp;asro=0&amp;aiapmid=0.0001&amp;aiactd=0&amp;aicctd=0&amp;ailctd=0&amp;aimartd=4&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTcuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1776759143481&amp;bpp=1&amp;bdt=526&amp;idt=1&amp;shv=r20260420&amp;mjsv=m202604160101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0%2C1200x280&amp;nras=1&amp;correlator=68536677364&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=4&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=2394&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=42531705%2C95384087%2C95387625%2C95386362%2C95386957&amp;oid=2&amp;pvsid=7713328875823375&amp;tmod=720011434&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEebr%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=3&amp;uci=a!3&amp;btvi=1&amp;fsb=1&amp;dtd=13" data-google-container-id="a!3" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div></div></div></div></div><aside class="sidebar-right"><div class="sidebar-sticky"><div class="sidebar-section"><div class="sidebar-title">Related Tools</div><a href="/otp/" class="sidebar-tool-link">TOTP Generator</a><a href="/tls-analyzer/" class="sidebar-tool-link">TLS Certificate Analyzer</a><a href="/jwt/" class="sidebar-tool-link">JWT Encoder &amp; Decoder</a><a href="/crc/" class="sidebar-tool-link">CRC Calculator</a><a href="/file-hash/" class="sidebar-tool-link">File Hash Calculator</a></div><div class="sidebar-ad-space"><div class="ad-display-wrapper sidebar-ad"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/endian/">Endian Converter</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20260420/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>
