@@ -1,5 +1,5 @@
 {
-  "catalog_as_of": "2026-04-27",
+  "catalog_as_of": "2026-05-04",
   "pricing_note": "Sourced from LiteLLM model_prices_and_context_window.json (see scripts/update_llm_models.py). Reference $/M; verify on provider dashboards.",
   "models": [
     {
@@ -3748,9 +3748,9 @@
       "provider": "OpenAI",
       "context_window": 1048576,
       "context_display": "1M",
-      "input_per_mtok_usd": 60.0,
-      "input_cached_per_mtok_usd": 6.0,
-      "output_per_mtok_usd": 360.0,
+      "input_per_mtok_usd": 30.0,
+      "input_cached_per_mtok_usd": 3.0,
+      "output_per_mtok_usd": 180.0,
       "pricing_url": "https://openai.com/api/pricing/",
       "tiktoken_model": "gpt-5.5-pro",
       "fallback_bpe": "o200k_base"
@@ -3761,9 +3761,9 @@
       "provider": "OpenAI",
       "context_window": 1048576,
       "context_display": "1M",
-      "input_per_mtok_usd": 60.0,
-      "input_cached_per_mtok_usd": 6.0,
-      "output_per_mtok_usd": 360.0,
+      "input_per_mtok_usd": 30.0,
+      "input_cached_per_mtok_usd": 3.0,
+      "output_per_mtok_usd": 180.0,
       "pricing_url": "https://openai.com/api/pricing/",
       "tiktoken_model": "gpt-5.5-pro-2026-04-23",
       "fallback_bpe": "o200k_base"
@@ -3896,6 +3896,32 @@
       "output_per_mtok_usd": 10.0,
       "pricing_url": "https://openai.com/api/pricing/",
       "tiktoken_model": "gpt-image-1.5-2025-12-16",
+      "fallback_bpe": "o200k_base"
+    },
+    {
+      "id": "gpt-image-2-de9796887e",
+      "label": "gpt-image-2",
+      "provider": "OpenAI",
+      "context_window": 0,
+      "context_display": "Unknown",
+      "input_per_mtok_usd": 5.0,
+      "input_cached_per_mtok_usd": 1.25,
+      "output_per_mtok_usd": 10.0,
+      "pricing_url": "https://openai.com/api/pricing/",
+      "tiktoken_model": "gpt-image-2",
+      "fallback_bpe": "o200k_base"
+    },
+    {
+      "id": "gpt-image-2-2026-04-21-3e5e088e17",
+      "label": "gpt-image-2-2026-04-21",
+      "provider": "OpenAI",
+      "context_window": 0,
+      "context_display": "Unknown",
+      "input_per_mtok_usd": 5.0,
+      "input_cached_per_mtok_usd": 1.25,
+      "output_per_mtok_usd": 10.0,
+      "pricing_url": "https://openai.com/api/pricing/",
+      "tiktoken_model": "gpt-image-2-2026-04-21",
       "fallback_bpe": "o200k_base"
     },
     {
