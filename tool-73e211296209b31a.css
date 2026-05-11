@@ -2612,6 +2612,23 @@ input[type=checkbox] {
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 }
+.tool-container.tool-container--kinematics-fullscreen:fullscreen .tool-quat-add-output, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-quat-add-output,
+.tool-container.tool-container--rotation-viz-fullscreen:fullscreen .tool-quat-add-output,
+.tool-container.tool-container--rotation-viz-fullscreen:-webkit-full-screen .tool-quat-add-output {
+  flex: 0 0 auto;
+  min-height: 0;
+}
+.tool-container.tool-container--kinematics-fullscreen:fullscreen .tool-quat-results-grid, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen .tool-quat-results-grid,
+.tool-container.tool-container--rotation-viz-fullscreen:fullscreen .tool-quat-results-grid,
+.tool-container.tool-container--rotation-viz-fullscreen:-webkit-full-screen .tool-quat-results-grid {
+  flex: 0 0 auto;
+  min-height: 0;
+  max-height: 260px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  grid-template-columns: 1fr;
+}
 
 .tool-container.tool-container--kinematics-fullscreen .tool-visualization-column .tool-canvas-container,
 .tool-container.tool-container--rotation-viz-fullscreen .tool-visualization-column .tool-canvas-container {
