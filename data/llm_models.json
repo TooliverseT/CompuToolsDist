@@ -1,5 +1,5 @@
 {
-  "catalog_as_of": "2026-05-12",
+  "catalog_as_of": "2026-05-18",
   "pricing_note": "Sourced from LiteLLM model_prices_and_context_window.json (see scripts/update_llm_models.py). Reference $/M; verify on provider dashboards.",
   "models": [
     {
@@ -3948,6 +3948,19 @@
       "output_per_mtok_usd": 16.0,
       "pricing_url": "https://openai.com/api/pricing/",
       "tiktoken_model": "gpt-realtime-1.5",
+      "fallback_bpe": "o200k_base"
+    },
+    {
+      "id": "gpt-realtime-2-d88beab579",
+      "label": "gpt-realtime-2",
+      "provider": "OpenAI",
+      "context_window": 32768,
+      "context_display": "32K",
+      "input_per_mtok_usd": 4.0,
+      "input_cached_per_mtok_usd": 0.4,
+      "output_per_mtok_usd": 16.0,
+      "pricing_url": "https://openai.com/api/pricing/",
+      "tiktoken_model": "gpt-realtime-2",
       "fallback_bpe": "o200k_base"
     },
     {
