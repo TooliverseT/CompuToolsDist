@@ -1,5 +1,5 @@
 {
-  "catalog_as_of": "2026-05-18",
+  "catalog_as_of": "2026-05-25",
   "pricing_note": "Sourced from LiteLLM model_prices_and_context_window.json (see scripts/update_llm_models.py). Reference $/M; verify on provider dashboards.",
   "models": [
     {
@@ -1071,6 +1071,18 @@
       "heuristic_only": true
     },
     {
+      "id": "gemini-gemini-3.1-flash-lite-6f709429b4",
+      "label": "gemini/gemini-3.1-flash-lite",
+      "provider": "Google",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 0.25,
+      "input_cached_per_mtok_usd": 0.02,
+      "output_per_mtok_usd": 1.5,
+      "pricing_url": "https://ai.google.dev/pricing",
+      "heuristic_only": true
+    },
+    {
       "id": "gemini-gemini-3.1-flash-lite-preview-0299a626ca",
       "label": "gemini/gemini-3.1-flash-lite-preview",
       "provider": "Google",
@@ -1115,6 +1127,18 @@
       "input_per_mtok_usd": 2.0,
       "input_cached_per_mtok_usd": 0.2,
       "output_per_mtok_usd": 12.0,
+      "pricing_url": "https://ai.google.dev/pricing",
+      "heuristic_only": true
+    },
+    {
+      "id": "gemini-gemini-3.5-flash-c431675a4e",
+      "label": "gemini/gemini-3.5-flash",
+      "provider": "Google",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 1.5,
+      "input_cached_per_mtok_usd": 0.15,
+      "output_per_mtok_usd": 9.0,
       "pricing_url": "https://ai.google.dev/pricing",
       "heuristic_only": true
     },
@@ -1733,6 +1757,18 @@
     {
       "id": "mistral-ministral-3-8b-2512-f9a70896bf",
       "label": "mistral/ministral-3-8b-2512",
+      "provider": "Mistral AI",
+      "context_window": 268288,
+      "context_display": "262K",
+      "input_per_mtok_usd": 0.15,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": 0.15,
+      "pricing_url": "https://mistral.ai/pricing/",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "mistral-ministral-8b-2512-1a56f78814",
+      "label": "mistral/ministral-8b-2512",
       "provider": "Mistral AI",
       "context_window": 268288,
       "context_display": "262K",
