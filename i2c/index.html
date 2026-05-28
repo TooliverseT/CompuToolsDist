@@ -1,0 +1,843 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
+  <meta name="robots" content="index, follow">
+  
+  <meta name="computools" content="computools">
+  <meta name="description" content="Calculate I2C SCL timing parameters (t_HIGH, t_LOW, t_r, t_f) for Standard, Fast, Fast-plus, and High-speed modes. Compute AVR TWBR register value, actual SCL frequency, and error% for all 4 I2C speed modes with prescaler selection. Runs in your browser.">
+  <meta name="keywords" content="i2c calculator, i2c timing calculator, twbr calculator, i2c scl frequency, i2c standard fast mode, avr twi, i2c pull-up resistor, i2c t_high t_low, stm32 i2c, esp32 i2c, embedded i2c, i2c speed mode">
+  <meta name="author" content="CompuTools">
+
+  <meta property="og:url" content="https://www.compu-tools.com/i2c/">
+  <meta property="og:title" content="I2C Calculator – SCL Timing, TWBR Register, t_HIGH/t_LOW for AVR, STM32, ESP32 | CompuTools">
+  <meta property="og:description" content="Calculate I2C SCL timing parameters (t_HIGH, t_LOW, t_r, t_f) for Standard, Fast, Fast-plus, and High-speed modes. Compute AVR TWBR register value, actual SCL frequency, and error% for all 4 I2C speed modes with prescaler selection. Runs in your browser.">
+  <meta property="og:image" content="https://www.compu-tools.com/logo.png">
+  <meta property="og:image:height" content="607">
+  <meta property="og:image:width" content="607">
+
+
+  <title>I2C Calculator – SCL Timing, TWBR Register, t_HIGH/t_LOW for AVR, STM32, ESP32 | CompuTools</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="/index-c31540c35bf2ca38.css" integrity="sha384-bYJx14yqJrLilVmKxON2HpLywjRz2RtggzA9InSC5+EoCdArkd7YmkFG36bN++NY">
+  <link rel="stylesheet" href="/navbar-e5f9e40d7bb334b7.css" integrity="sha384-Xpd9BMQGahihQzlY9Rj35/Yf0SJsS8M9s6iCpIshjEUiAGqz2L8vERbJzzuPV78a">
+  <link rel="stylesheet" href="/search-8da376dd0065e9a1.css" integrity="sha384-EcGpkfjrK/THz4btA2hqA2klFD1JvVPwkCMnRR9/Jqp8MW2koZgNQUrjur72LXF0">
+  <link rel="stylesheet" href="/tool-73e211296209b31a.css" integrity="sha384-9H22njEBo8aEr09XEqtP3YYBVbzY/6vrmE5wmprZZmUaK2os9wkrAYjyeAayER+g">
+  <link rel="stylesheet" href="/blog-356e0c13048b70ba.css" integrity="sha384-v9yscrd+FAjKNcTbC59affc9AAh6IJPk54qa0cvssPn4oipXi+4VDLkRbdg834SU">
+  <link rel="stylesheet" href="/post-3b08d659c0c6c04e.css" integrity="sha384-aF1Xnrd2gUpXf24khH9BbsY2e5Hu4NJZvdl9NddIYwtMxBgNB9ZI1h+5dkC1t8mV">
+  <link rel="stylesheet" href="/preview-2f450eb564382c9c.css" integrity="sha384-BkTZZpPaBdXfjfzl8zG+KPDN/JtOB44cOs9EjnyLErKrXEng0HrUbV7K6ubCM9JR">
+  <link rel="stylesheet" href="/ad-bc2975c16b7a5e3a.css" integrity="sha384-cZ+6J5XDBX7PXVZtk1lMo2KV9ooNhzR8+bvJKDcTdLwagg9H6beP7ZSrSdA8O1xv">
+  <link rel="stylesheet" href="/prism-c451adb7299a4a0.css" integrity="sha384-JHfRrkWbZJu5R/8OJhxu3j19hT9BpfW1isiNYAlkF5vRzQu14JDkB4lWvJX5I4r7">
+  
+  
+<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202605220101/show_ads_impl.js?bust=31098763"></script><script type="module">
+import init, * as bindings from '/computools-74d76eaef50309d4.js';
+const wasm = await init({ module_or_path: '/computools-74d76eaef50309d4_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+
+  
+  
+
+
+  
+  
+  
+  
+  
+
+  <link rel="icon" href="/favicon-1a8ba4d4617517ad.ico" integrity="sha384-sh+KkiOvcFXwh29z2PE6y5W6JoL/C2uPj8MHwWodi4oVC6f4XcUmhJGk6dmH2Teg">
+
+  <script src="/prism.js"></script>
+
+
+  <!-- MathJax for LaTeX math rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script>
+      (function() {
+          const redirect = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          if (redirect && redirect !== window.location.href) {
+              history.replaceState(null, null, redirect);
+          }
+      })();
+  </script>
+  <script>
+    // JavaScript에서 getTimeZoneOffset 함수 정의
+    function getTimeZoneOffset() {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const offset = new Date().getTimezoneOffset();
+        return { timeZone, offset };
+    }
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9424100257975478" crossorigin="anonymous" data-checked-head="true"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1G0CMRC310');
+  </script>
+<link rel="modulepreload" href="/computools-74d76eaef50309d4.js" crossorigin="anonymous" integrity="sha384-oQ2tEXV4ku+fW3bDeV3S/K96gaiOlNL/TuHHEz9ddUN0ZdjR36juvYFMsfYOalqp"><link rel="preload" href="/computools-74d76eaef50309d4_bg.wasm" crossorigin="anonymous" integrity="sha384-btZorlG99Lk0JBlFFtH4QkvFLH3CML897WMZWMLfIHuuNppKfEhqNjVehpS4IFMZ" as="fetch" type="application/wasm"><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+<body><div class="navbar-wrapper"><div class="navbar-container"><a href="/" class="navbar-content">CompuTools</a><div style="justify-content: right;" class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper" style="height: auto !important;"><div class="main-content" style="height: auto !important;"><div class="page-with-sidebar" style="height: auto !important;"><aside class="sidebar-left"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper sidebar-ad"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside><div class="page-main" style="height: auto !important;"><div class="home-wrapper" style="height: auto !important;"><h1 class="tool-title">I2C Calculator – SCL Timing, TWBR Register, t_HIGH/t_LOW for AVR, STM32, ESP32</h1><div class="tool-description">Calculate I2C SCL timing parameters (t_HIGH, t_LOW, t_r, t_f) for Standard, Fast, Fast-plus, and High-speed modes. Compute AVR TWBR register value, actual SCL frequency, and error% for all 4 I2C speed modes with prescaler selection. Runs in your browser.</div><div class="ad-display-wrapper tool-title-ad"><ins style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7315862436" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_0_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7315862436&amp;adk=1964690608&amp;adf=1054769236&amp;pi=t.ma~as.7315862436&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1779968851&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fi2c%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;asro=0&amp;aiactd=0&amp;aicctd=0&amp;ailctd=0&amp;aimartd=4&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTcuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1779968969659&amp;bpp=1&amp;bdt=504&amp;idt=-M&amp;shv=r20260521&amp;mjsv=m202605220101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0&amp;nras=1&amp;correlator=7992389156419&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=36&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=254&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95390667%2C95390788%2C31098763%2C95391803&amp;oid=2&amp;pvsid=519376954959604&amp;tmod=1092971301&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=2&amp;uci=a!2&amp;fsb=1&amp;dtd=11" data-google-container-id="a!2" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div><div class="tool-page-analytics-scope" style="height: auto !important;"><div class="tool-mid-ad-injector-host" style="height: auto !important;"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "I2C Calculator",
+      "url": "https://www.compu-tools.com/i2c/",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web Browser",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Calculate I2C SCL timing parameters, TWBR register values, and bus throughput for Standard (100 kHz), Fast (400 kHz), Fast-plus (1 MHz), and High-speed (3.4 MHz) modes. Compute AVR TWBR register with prescaler, actual SCL frequency, and error percentage — all locally in your browser.",
+      "featureList": [
+        "SCL timing calculator: frequency, period, t_HIGH, t_LOW, bit time, max throughput",
+        "Interactive I2C frame diagram: START, 7-bit address, R/W, ACK, data byte, STOP",
+        "I2C timing spec note showing t_HIGH/t_LOW/t_r/t_f limits per mode",
+        "AVR TWBR register calculator: TWBR value, actual SCL, error%, status",
+        "Comparison table for all 4 I2C speed modes against your MCU clock",
+        "24 common MCU clock presets (1 MHz to 240 MHz) plus custom Hz input",
+        "4 AVR prescaler options: x1, x4, x16, x64 (TWPS bits)",
+        "All computation runs locally in WebAssembly — no data sent to server"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is I2C and how does it work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "I2C (Inter-Integrated Circuit) is a synchronous half-duplex serial protocol developed by Philips (now NXP) that uses only two wires: SDA (Serial Data) and SCL (Serial Clock). Both lines are open-drain with pull-up resistors, allowing multiple masters and slaves to share the same bus. The master initiates all transactions by generating the clock and a START condition, then sends a 7-bit (or 10-bit) slave address followed by a read/write bit. Each byte is acknowledged by the receiver with an ACK (SDA pulled LOW) or rejected with a NACK (SDA stays HIGH). The master terminates the transaction with a STOP condition."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between I2C Standard, Fast, Fast-plus, and High-speed modes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The four I2C speed modes differ in maximum SCL frequency and timing requirements. Standard mode (Sm) operates up to 100 kHz with t_HIGH ≥ 4 µs and t_LOW ≥ 4.7 µs. Fast mode (Fm) reaches 400 kHz with t_HIGH ≥ 0.6 µs and t_LOW ≥ 1.3 µs. Fast-plus (Fm+) extends to 1 MHz with t_HIGH ≥ 260 ns and t_LOW ≥ 500 ns, requiring stronger drive currents. High-speed (Hs) operates up to 3.4 MHz using a special master code sequence and current-source pull-ups. Most sensors and EEPROMs support Standard or Fast mode; very few consumer devices require High-speed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is the TWBR register calculated for AVR microcontrollers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The AVR TWI (Two-Wire Interface) uses the TWBR (TWI Bit Rate Register) and a prescaler set by TWPS bits in TWSR to divide the CPU clock down to the SCL frequency. The formula is: TWBR = (f_cpu / f_scl − 16) / (2 × prescaler). The actual SCL frequency is then: f_scl = f_cpu / (16 + 2 × TWBR × prescaler). For example, with f_cpu = 16 MHz, f_scl = 100 kHz, and prescaler = 1: TWBR = (16,000,000 / 100,000 − 16) / (2 × 1) = (160 − 16) / 2 = 72. The prescaler values are 1 (TWPS=00), 4 (TWPS=01), 16 (TWPS=10), and 64 (TWPS=11)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are pull-up resistors and why does I2C need them?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "I2C uses open-drain (open-collector) outputs: devices can only pull the line LOW; they rely on external pull-up resistors to pull it HIGH. This allows multiple devices to share the bus — any device can pull the line LOW without conflicting with others. The pull-up resistor value is a trade-off: too high means the line charges slowly (limiting speed), too low wastes power and may exceed device drive current. For Standard mode, 4.7 kΩ is common; for Fast mode, 1–2.2 kΩ; for Fast-plus, 1 kΩ or below. The maximum rise time allowed (t_r) at each speed mode constrains the RC time constant of the pull-up with bus capacitance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between 7-bit and 10-bit I2C addressing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most I2C devices use 7-bit addressing, giving 128 possible addresses (though 16 are reserved). The first byte transmitted is the 7-bit address shifted left by one with the R/W bit in bit 0. 10-bit addressing extends this to 1024 addresses using a two-byte sequence: the first byte is a reserved prefix (11110xx where xx are the two MSBs of the 10-bit address), followed by a second byte with the remaining 8 bits. 10-bit addressing is backward-compatible — Standard-mode masters and slaves can share the bus with 10-bit-addressed devices."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is clock stretching in I2C?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Clock stretching is an I2C feature that allows a slave device to hold the SCL line LOW to pause the transaction when it needs more time to process data or prepare a response. Since both SDA and SCL are open-drain, the slave simply holds SCL LOW after the master releases it. The master detects this and waits until SCL goes HIGH before continuing. Not all I2C slaves support clock stretching — fast slaves without internal processing latency typically do not need it. Some I2C masters (especially bit-banged implementations) do not support clock stretching and may malfunction with slaves that use it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is an ACK and NACK in I2C?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "After each 8-bit byte is transmitted on I2C, the receiver must send an acknowledgement bit on SDA during the 9th clock pulse. ACK (Acknowledge) means SDA is pulled LOW — the receiver has accepted the byte and is ready for more. NACK (Not Acknowledge) means SDA stays HIGH — either the slave address was not recognized, the receiver cannot accept more data, or a master reading data has received all the bytes it needs and is signalling the end of the read. A NACK after the address byte usually means no device responded to that address."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I2C be used for long-distance communication?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "I2C is designed for short-distance on-board communication, typically within a PCB or between boards within a small enclosure. The bus capacitance limit is 400 pF for Standard and Fast modes, which constrains cable length to roughly 1–2 metres at most for Standard mode and less for faster modes. For longer distances, protocols like RS-485, CAN, or LIN are more appropriate. Some devices (such as the PCA9600 bus buffer) can extend I2C range by driving the bus with stronger currents and reducing the effective capacitance seen by the master."
+          }
+        }
+      ]
+    }
+  ]
+}</script><style>
+                        .i2c-result-body {
+                            background: var(--color-second);
+                            border-radius: 12px;
+                            padding: 14px;
+                            border: 1px solid var(--color-third);
+                            min-width: 0;
+                            overflow: hidden;
+                        }
+                        .i2c-result-grid {
+                            display: grid;
+                            gap: 12px;
+                            min-width: 0;
+                        }
+                        .i2c-compact-card {
+                            padding: 14px;
+                            border-radius: 12px;
+                            background: var(--color-first);
+                            border: 1px solid var(--color-third);
+                            border-left: 3px solid var(--color-fourth);
+                            min-width: 0;
+                            overflow: hidden;
+                        }
+                        .i2c-compact-title {
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+                            margin-bottom: 12px;
+                            font-weight: 700;
+                            font-size: 12px;
+                            text-transform: uppercase;
+                            letter-spacing: 0.06em;
+                            color: var(--color-fourth);
+                            min-width: 0;
+                        }
+                        .i2c-compact-title i {
+                            font-size: 11px;
+                            flex-shrink: 0;
+                        }
+                        .i2c-frame-title {
+                            font-size: 15px;
+                            font-weight: 700;
+                            color: var(--color-font);
+                            margin-bottom: 14px;
+                            font-family: "JetBrains Mono", "Fira Code", monospace;
+                        }
+                        .i2c-summary-grid {
+                            display: grid;
+                            grid-template-columns: repeat(6, minmax(0, 1fr));
+                            gap: 8px;
+                            margin-bottom: 16px;
+                        }
+                        .i2c-summary-item {
+                            padding: 8px 10px;
+                            border-radius: 8px;
+                            background: var(--color-second);
+                            border: 1px solid var(--color-third);
+                            min-width: 0;
+                            overflow: hidden;
+                        }
+                        .i2c-summary-label {
+                            display: block;
+                            margin-bottom: 4px;
+                            font-size: 10px;
+                            text-transform: uppercase;
+                            letter-spacing: 0.05em;
+                            color: var(--color-subfont);
+                            font-weight: 600;
+                        }
+                        .i2c-summary-value {
+                            font-family: "JetBrains Mono", "Fira Code", monospace;
+                            font-size: 12px;
+                            font-weight: 600;
+                            color: var(--color-font);
+                            word-break: break-all;
+                        }
+                        .i2c-copy-btn {
+                            font-size: 9px;
+                            color: var(--color-first);
+                            display: flex;
+                            align-items: center;
+                            gap: 5px;
+                            background: var(--color-fifth);
+                            padding: 5px 12px;
+                            border-radius: 6px;
+                            margin-left: auto;
+                            flex-shrink: 0;
+                            cursor: pointer;
+                            border: none;
+                            font-weight: 600;
+                            transition: background 0.15s;
+                            white-space: nowrap;
+                        }
+                        .i2c-copy-btn i {
+                            font-size: 8px;
+                        }
+                        .i2c-copy-btn:hover {
+                            background: var(--color-font);
+                        }
+                        .i2c-frame-diagram {
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 3px;
+                            margin-bottom: 10px;
+                        }
+                        .i2c-bit-cell {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 6px 4px;
+                            min-width: 34px;
+                            border-radius: 4px;
+                            font-family: "JetBrains Mono", "Fira Code", monospace;
+                            font-size: 11px;
+                            font-weight: 700;
+                            color: #fff;
+                            user-select: none;
+                            flex-shrink: 0;
+                        }
+                        .i2c-frame-legend {
+                            font-size: 11px;
+                            color: var(--color-subfont);
+                            margin-top: 6px;
+                        }
+                        .i2c-error-valid {
+                            color: #27ae60;
+                            font-weight: 700;
+                        }
+                        .i2c-error-invalid {
+                            color: #c0392b;
+                            font-weight: 700;
+                        }
+                        .i2c-register-note {
+                            font-family: "JetBrains Mono", "Fira Code", monospace;
+                            font-size: 13px;
+                            font-weight: 600;
+                            background: var(--color-second);
+                            border: 1px solid var(--color-fourth);
+                            border-left: 3px solid var(--color-fourth);
+                            border-radius: 8px;
+                            padding: 10px 14px;
+                            margin-top: 12px;
+                            margin-bottom: 14px;
+                            color: var(--color-fifth);
+                            word-break: break-all;
+                        }
+                        .i2c-error-summary-card {
+                            padding: 14px;
+                            border-radius: 12px;
+                            background: var(--color-first);
+                            border: 1px solid var(--color-third);
+                            border-left: 3px solid var(--color-fourth);
+                            margin-bottom: 14px;
+                            min-width: 0;
+                        }
+                        .i2c-error-grid {
+                            display: grid;
+                            grid-template-columns: repeat(4, minmax(0, 1fr));
+                            gap: 8px;
+                        }
+                        .i2c-table-wrap {
+                            border-radius: 8px;
+                            overflow: hidden;
+                            border: 1px solid var(--color-third);
+                        }
+                        .i2c-table-scroll {
+                            overflow-x: auto;
+                        }
+                        .i2c-baud-table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            font-size: 13px;
+                        }
+                        .i2c-baud-table th {
+                            background: var(--color-second);
+                            border-bottom: 2px solid var(--color-third);
+                            padding: 8px 12px;
+                            text-align: left;
+                            font-size: 11px;
+                            text-transform: uppercase;
+                            letter-spacing: 0.05em;
+                            color: var(--color-subfont);
+                            white-space: nowrap;
+                        }
+                        .i2c-baud-table td {
+                            padding: 7px 12px;
+                            border-bottom: 1px solid var(--color-third);
+                            font-family: "JetBrains Mono", "Fira Code", monospace;
+                            font-size: 12px;
+                            color: var(--color-font);
+                            white-space: nowrap;
+                        }
+                        .i2c-baud-table tr:last-child td {
+                            border-bottom: none;
+                        }
+                        .i2c-baud-table tr:hover td {
+                            background: var(--color-second);
+                        }
+                        .i2c-baud-table tr.i2c-row-highlight td {
+                            background: var(--color-second);
+                            font-weight: 700;
+                        }
+                        .i2c-custom-warning {
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 6px;
+                            font-size: 11px;
+                            color: #e67e22;
+                            background: rgba(230,126,34,0.08);
+                            border: 1px solid rgba(230,126,34,0.25);
+                            border-radius: 6px;
+                            padding: 5px 10px;
+                            margin-top: 8px;
+                        }
+                        .i2c-no-result {
+                            padding: 20px;
+                            color: var(--color-subfont);
+                            font-size: 13px;
+                            text-align: center;
+                        }
+                        @media (max-width: 900px) {
+                            .i2c-summary-grid {
+                                grid-template-columns: repeat(3, minmax(0, 1fr));
+                            }
+                            .i2c-error-grid {
+                                grid-template-columns: repeat(2, minmax(0, 1fr));
+                            }
+                        }
+                        @media (max-width: 480px) {
+                            .i2c-summary-grid {
+                                grid-template-columns: repeat(2, minmax(0, 1fr));
+                            }
+                            .i2c-error-grid {
+                                grid-template-columns: repeat(2, minmax(0, 1fr));
+                            }
+                            .i2c-result-body {
+                                padding: 10px;
+                            }
+                            .i2c-compact-card {
+                                padding: 10px;
+                            }
+                            .i2c-summary-value {
+                                font-size: 11px;
+                            }
+                        }
+                    </style><div class="tool-wrapper" style="height: auto !important;"><div class="tool-intro"><div class="content-section"><h2>What is I2C?</h2><p>I2C (Inter-Integrated Circuit, sometimes written I²C) is a synchronous half-duplex serial communication protocol developed by Philips Semiconductors (now NXP) in 1982. It uses only two bidirectional wires — SDA (Serial Data) and SCL (Serial Clock) — making it one of the most compact bus protocols in embedded systems. Both lines are open-drain: devices can only pull the lines LOW, and external pull-up resistors return the lines to HIGH when no device is pulling them down. This open-drain topology allows multiple masters and multiple slaves to share the same two-wire bus without dedicated arbiter hardware.</p><p>I2C is found on virtually every modern microcontroller and is used to connect sensors, EEPROMs, real-time clocks, DACs, ADCs, display controllers, and more. A single MCU can control dozens of peripherals with just two GPIO pins, with each slave identified by a unique 7-bit (or 10-bit) address. The trade-off is lower throughput and higher protocol overhead compared to SPI — but for configuration registers, sensor readings, and similar low-bandwidth tasks, I2C is the industry standard.</p></div><div class="content-section"><h2>I2C Frame Structure</h2><p>Every I2C transaction is framed by a START condition and a STOP condition generated by the master. In between, data is transferred in 8-bit bytes, each followed by a 1-bit acknowledgement from the receiver.</p><ul><li><strong>START condition</strong> — SDA falls while SCL is HIGH. This signals all slaves to listen for their address.</li><li><strong>Address byte</strong> — 7-bit slave address (MSB first) followed by a R/W̅ bit: 0 for write, 1 for read.</li><li><strong>ACK/NACK</strong> — After each byte, the receiver pulls SDA LOW (ACK) or leaves it HIGH (NACK) during the 9th clock pulse. A NACK after the address means no slave responded.</li><li><strong>Data bytes</strong> — One or more 8-bit data bytes, each followed by an ACK.</li><li><strong>STOP condition</strong> — SDA rises while SCL is HIGH. This releases the bus.</li><li><strong>Repeated START</strong> — A master can issue a new START without a STOP to change direction (write then read) without releasing the bus.</li></ul><div class="example-box"><pre><code>S | ADDR[6:0] | R/W | ACK | DATA[7:0] | ACK | ... | P
+  |← 7 bits →|  1  |  1  |← 8 bits →|  1  |     |</code></pre></div></div><div class="content-section"><h2>How to Use This Calculator</h2><h3>SCL Timing Calculator</h3><p>The first tab calculates I2C bus timing parameters for a selected speed mode. Choose Standard (100 kHz), Fast (400 kHz), Fast-plus (1 MHz), High-speed (3.4 MHz), or enter a custom SCL frequency. The result panel shows SCL frequency and period, minimum t_HIGH and t_LOW required by the I2C specification, theoretical bit time, and maximum bus throughput. A frame diagram illustrates the byte structure with a 7-bit address, R/W bit, ACK, and data byte. The timing spec note below the diagram shows the exact limits from the I2C specification for the selected mode.</p><h3>TWBR Register Calculator</h3><p>The second tab computes the TWBR (TWI Bit Rate Register) value for AVR microcontrollers (ATmega, ATtiny with hardware TWI). Select your MCU clock, prescaler (TWPS bits in TWSR), and target I2C speed mode. The result card shows the TWBR value to write, the actual SCL frequency achieved, and the error percentage. A comparison table below shows all four I2C speed modes with their TWBR values and errors for the selected MCU clock and prescaler.</p></div><div class="content-section"><h2>I2C Speed Modes and Timing Specification</h2><div class="example-box"><div class="tool-token-budget-table-scroll"><table class="token-budget-reference-table"><thead><tr><th>Mode</th><th>Max SCL</th><th>t_HIGH min</th><th>t_LOW min</th><th>t_r max</th><th>t_f max</th></tr></thead><tbody><tr><td>Standard (Sm)</td><td>100 kHz</td><td>4.0 µs</td><td>4.7 µs</td><td>1000 ns</td><td>300 ns</td></tr><tr><td>Fast (Fm)</td><td>400 kHz</td><td>0.6 µs</td><td>1.3 µs</td><td>300 ns</td><td>300 ns</td></tr><tr><td>Fast-plus (Fm+)</td><td>1 MHz</td><td>260 ns</td><td>500 ns</td><td>120 ns</td><td>120 ns</td></tr><tr><td>High-speed (Hs)</td><td>3.4 MHz</td><td>60 ns</td><td>160 ns</td><td>40 ns</td><td>40 ns</td></tr></tbody></table></div></div><p>Rise time (t_r) is limited by the RC time constant of the pull-up resistor and bus capacitance. For a 400 pF bus with a 4.7 kΩ pull-up: t_r ≈ 0.8473 × R × C ≈ 1590 ns — too slow for Fast mode. Reducing to 1 kΩ: t_r ≈ 338 ns — within Fast-mode spec. Pull-up selection is a key design step when using Fast or Fast-plus modes.</p></div><div class="content-section"><h2>AVR TWBR Register Formula</h2><p>AVR microcontrollers (ATmega328P, ATmega2560, etc.) implement I2C as TWI (Two-Wire Interface). The SCL frequency is determined by the CPU clock, TWBR value, and the prescaler set by TWPS[1:0] bits in TWSR:</p><div class="example-box"><pre><code>TWBR = (f_cpu / f_scl − 16) / (2 × prescaler)
+f_scl = f_cpu / (16 + 2 × TWBR × prescaler)</code></pre></div><p>TWBR must be in the range 0–255 (8-bit register). The prescaler multiplies the divisor: TWPS=00 gives ×1, TWPS=01 gives ×4, TWPS=10 gives ×16, TWPS=11 gives ×64. For 16 MHz CPU and 100 kHz I2C with prescaler ×1: TWBR = (16,000,000 / 100,000 − 16) / (2 × 1) = 72. Write TWBR = 72 and clear both TWPS bits in TWSR.</p><p>The I2C specification allows a wider error tolerance than UART because the master drives the clock and both sides share the same SCL signal. There is no accumulated error over a frame — the receiver samples SDA on each SCL edge. In practice, errors below ±5% are acceptable for all I2C modes.</p></div><div class="content-section"><h2>Frequently Asked Questions</h2><h3>What is I2C and how does it work?</h3><p>I2C is a two-wire synchronous serial protocol (SDA + SCL) with open-drain bus topology and pull-up resistors. The master generates the clock and a START condition, then sends a 7-bit slave address with R/W bit. Each byte is acknowledged by the receiver. The master ends with a STOP condition.</p><h3>What is the difference between I2C Standard, Fast, Fast-plus, and High-speed modes?</h3><p>Standard: 100 kHz, t_HIGH ≥ 4 µs, t_LOW ≥ 4.7 µs. Fast: 400 kHz, t_HIGH ≥ 0.6 µs. Fast-plus: 1 MHz, t_HIGH ≥ 260 ns, requires stronger drive current. High-speed: 3.4 MHz, requires a master code handshake and current-source pull-ups. Most devices support Standard and Fast.</p><h3>How is the TWBR register calculated for AVR microcontrollers?</h3><p>TWBR = (f_cpu / f_scl − 16) / (2 × prescaler). The prescaler is set by TWPS bits in TWSR: 1, 4, 16, or 64. For 16 MHz / 100 kHz / prescaler 1: TWBR = (160 − 16) / 2 = 72.</p><h3>What are pull-up resistors and why does I2C need them?</h3><p>I2C uses open-drain outputs — devices can only pull lines LOW. External pull-up resistors pull lines HIGH when released. The resistor value is a speed vs. power trade-off: 4.7 kΩ for Standard, 1–2.2 kΩ for Fast. Too high a value and the rise time (t_r) exceeds the spec limit for the mode.</p><h3>What is the difference between 7-bit and 10-bit I2C addressing?</h3><p>7-bit addressing gives 128 addresses (16 reserved). 10-bit extends to 1024 addresses using a two-byte prefix sequence (11110xx + 8-bit LSBs). Most devices use 7-bit addressing. Both modes can coexist on the same bus.</p><h3>What is clock stretching in I2C?</h3><p>A slave can hold SCL LOW to pause the transaction when it needs more time to process data. Since both SDA and SCL are open-drain, the slave just holds SCL LOW after the master releases it. Not all slaves implement clock stretching, and some masters (especially bit-banged ones) do not handle it.</p><h3>What is an ACK and NACK in I2C?</h3><p>After each 8-bit byte, the receiver drives SDA LOW during the 9th clock pulse (ACK = accepted) or leaves it HIGH (NACK = rejected or end of read). A NACK after the address byte means no device at that address responded.</p><h3>Can I2C be used for long-distance communication?</h3><p>I2C is designed for on-board use — bus capacitance is limited to 400 pF (Standard/Fast), restricting cable length to roughly 1–2 m. For longer distances use RS-485, CAN, or LIN. Bus extenders like PCA9600 can increase range by resetting the capacitance.</p></div><div class="content-section"><h2>Related Tools</h2><ul><li><a href="/bezier/">Bezier Curve Editor</a> - Interactive cubic Bezier curve editor with real-time animation preview, 35 easing presets, side-by-side comparison, and code export for CSS, Unity C#, C++, and JavaScript.</li><li><a href="/spi/">SPI Calculator</a> - Calculate SPI clock frequency from MCU clock and divider, transfer time, throughput, and bit/word periods. Browse all 8 clock dividers in a single table with speed class indicators. Supports SPI Mode 0–3 (CPOL/CPHA), MSB/LSB first, and word sizes of 8/16/32 bits. Runs in your browser.</li><li><a href="/bit-mask/">Bit Mask Calculator</a> - Build bitmasks visually on an 8/16/32/64-bit grid, generate C #define macros, and apply SET, CLEAR, TOGGLE, or READ operations to register values with bit layout visualization and C code output.</li><li><a href="/drone-calc/">Drone Calculator</a> - Calculate drone thrust, TWR, hover throttle, flight time, and battery C-rating safety. Compare up to 4 motor/battery/propeller configurations side by side.</li><li><a href="/robot-kinematics/">Robot Arm FK/IK Calculator</a> - Robot arm kinematics for learning &amp; practice: FK/IK, DH tables, Jacobian—aligned with cobots, industrial robots, humanoid arms, and AI robotics workflows. Robot programming friendly (CSV export). 2–6 DOF, SCARA, UR/KUKA-style presets, 3D visualization. Runs in your browser.</li></ul></div></div><div style="order: 1;" class="tool-input-type-tabs"><button class="tool-tab-btn active"><i class="fa-solid fa-wave-square"></i> SCL Timing</button><button class="tool-tab-btn"><i class="fa-solid fa-microchip"></i> TWBR Register</button></div><div class="tool-container"><div class="tool-settings-grid"><div class="tool-settings-section"><h3 class="tool-section-header"><span class="tool-icon-badge"><i class="fa-solid fa-sliders"></i></span>SCL Timing Settings</h3><div class="tool-settings-content"><div class="tool-settings-row"><label class="tool-settings-label"><i class="fa-solid fa-gauge-high"></i>Speed Mode</label><select class="tool-settings-select"><option value="standard" selected="selected">Standard (Sm) — 100 kHz</option><option value="fast">Fast (Fm) — 400 kHz</option><option value="fastplus">Fast-plus (Fm+) — 1 MHz</option><option value="highspeed">High-speed (Hs) — 3.4 MHz</option><option value="custom">Custom</option></select></div><div class="tool-settings-row"><label class="tool-settings-label"><i class="fa-solid fa-arrow-trend-up"></i>Rise Time t_r (ns)</label><input style="font-size: 11px; font-family: inherit; border: 1px solid var(--color-fourth) !important; cursor: text; box-sizing: border-box;" type="number" min="0" placeholder="e.g. 1000" class="tool-settings-select"></div><div class="tool-settings-row"><label class="tool-settings-label"><i class="fa-solid fa-arrow-trend-down"></i>Fall Time t_f (ns)</label><input style="font-size: 11px; font-family: inherit; border: 1px solid var(--color-fourth) !important; cursor: text; box-sizing: border-box;" type="number" min="0" placeholder="e.g. 300" class="tool-settings-select"></div></div></div></div><div class="tool-result-section"><div><div style="margin-bottom: 14px;" class="tool-title-row"><div class="tool-result-title"><span class="tool-icon-badge-lg"><i class="fa-solid fa-wave-square"></i></span>SCL Timing</div><button class="i2c-copy-btn"><i class="fa-solid fa-copy"></i> Copy</button></div><div class="i2c-result-body"><div class="i2c-result-grid"><div class="i2c-frame-title">100.0 kHz — Standard (Sm) — 100 kHz</div><div class="i2c-summary-grid"><div class="i2c-summary-item"><span class="i2c-summary-label">SCL Frequency</span><div class="i2c-summary-value">100.0 kHz</div></div><div class="i2c-summary-item"><span class="i2c-summary-label">SCL Period</span><div class="i2c-summary-value">10.000 μs</div></div><div class="i2c-summary-item"><span class="i2c-summary-label">t_HIGH (min)</span><div class="i2c-summary-value">4.000 μs</div></div><div class="i2c-summary-item"><span class="i2c-summary-label">t_LOW (min)</span><div class="i2c-summary-value">4.700 μs</div></div><div class="i2c-summary-item"><span class="i2c-summary-label">Bit Time</span><div class="i2c-summary-value">8.700 μs</div></div><div class="i2c-summary-item"><span class="i2c-summary-label">Max Throughput</span><div class="i2c-summary-value">88.9 kbps</div></div></div><div class="i2c-compact-card"><div class="i2c-compact-title"><i class="fa-solid fa-diagram-project"></i>Frame Diagram</div><div class="i2c-frame-diagram"><div style="background: var(--color-third); color: var(--color-subfont);" class="i2c-bit-cell">IDLE</div><div style="background: #c0392b;" class="i2c-bit-cell">S</div><div style="background: #2980b9;" class="i2c-bit-cell">A6</div><div style="background: #2980b9;" class="i2c-bit-cell">A5</div><div style="background: #2980b9;" class="i2c-bit-cell">A4</div><div style="background: #2980b9;" class="i2c-bit-cell">A3</div><div style="background: #2980b9;" class="i2c-bit-cell">A2</div><div style="background: #2980b9;" class="i2c-bit-cell">A1</div><div style="background: #2980b9;" class="i2c-bit-cell">A0</div><div style="background: #8e44ad;" class="i2c-bit-cell">R/W</div><div style="background: #27ae60;" class="i2c-bit-cell">ACK</div><div style="background: #16a085;" class="i2c-bit-cell">D7</div><div style="background: #16a085;" class="i2c-bit-cell">D6</div><div style="background: #16a085;" class="i2c-bit-cell">D5</div><div style="background: #16a085;" class="i2c-bit-cell">D4</div><div style="background: #16a085;" class="i2c-bit-cell">D3</div><div style="background: #16a085;" class="i2c-bit-cell">D2</div><div style="background: #16a085;" class="i2c-bit-cell">D1</div><div style="background: #16a085;" class="i2c-bit-cell">D0</div><div style="background: #27ae60;" class="i2c-bit-cell">ACK</div><div style="background: #c0392b;" class="i2c-bit-cell">P</div><div style="background: var(--color-third); color: var(--color-subfont);" class="i2c-bit-cell">IDLE</div></div><div class="i2c-frame-legend"><span style="margin-right:12px;"><span style="display:inline-block;width:10px;height:10px;background:var(--color-third);border-radius:2px;margin-right:4px;vertical-align:middle;"></span>IDLE</span><span style="margin-right:12px;"><span style="display:inline-block;width:10px;height:10px;background:#c0392b;border-radius:2px;margin-right:4px;vertical-align:middle;"></span>START / STOP</span><span style="margin-right:12px;"><span style="display:inline-block;width:10px;height:10px;background:#2980b9;border-radius:2px;margin-right:4px;vertical-align:middle;"></span>Address</span><span style="margin-right:12px;"><span style="display:inline-block;width:10px;height:10px;background:#8e44ad;border-radius:2px;margin-right:4px;vertical-align:middle;"></span>R/W</span><span style="margin-right:12px;"><span style="display:inline-block;width:10px;height:10px;background:#27ae60;border-radius:2px;margin-right:4px;vertical-align:middle;"></span>ACK</span><span><span style="display:inline-block;width:10px;height:10px;background:#16a085;border-radius:2px;margin-right:4px;vertical-align:middle;"></span>Data</span></div><div class="i2c-register-note">Standard (Sm): t_HIGH ≥ 4.000 μs | t_LOW ≥ 4.700 μs | t_r ≤ 1.000 μs | t_f ≤ 300.0 ns</div></div></div></div></div></div><div class="tool-tip-box"><i class="fa-solid fa-circle-info"></i> Many I2C sensors (BME280, AHT20, SMBus devices) use CRC-8 for data integrity. Use the <a href="/crc/">CRC Calculator</a> to compute CRC-8 checksums for your I2C data frames.</div></div><div class="ad-display-wrapper tool-page-mid-ad"><ins class="adsbygoogle" style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7541212813" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_1_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7541212813&amp;adk=1919058123&amp;adf=838708106&amp;pi=t.ma~as.7541212813&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1779968851&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fi2c%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;asro=0&amp;aiactd=0&amp;aicctd=0&amp;ailctd=0&amp;aimartd=4&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTcuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1779968969659&amp;bpp=1&amp;bdt=504&amp;idt=0&amp;shv=r20260521&amp;mjsv=m202605220101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0%2C1200x280&amp;nras=1&amp;correlator=7992389156419&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=36&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=1377&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95390667%2C95390788%2C31098763%2C95391803&amp;oid=2&amp;pvsid=519376954959604&amp;tmod=1092971301&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEebr%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=3&amp;uci=a!3&amp;btvi=1&amp;fsb=1&amp;dtd=13" data-google-container-id="a!3" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div></div></div></div></div></div><aside class="sidebar-right"><div class="sidebar-sticky"><div class="sidebar-section"><div class="sidebar-title">Related Tools</div><a href="/bit-mask/" class="sidebar-tool-link">Bit Mask Calculator</a><a href="/uart/" class="sidebar-tool-link">UART Calculator</a><a href="/drone-calc/" class="sidebar-tool-link">Drone Calculator</a><a href="/bezier/" class="sidebar-tool-link">Bezier Curve Editor</a><a href="/token/" class="sidebar-tool-link">LLM Token Calculator</a></div><div class="sidebar-ad-space"><div class="ad-display-wrapper sidebar-ad"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/endian/">Endian Converter</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/i2c/">I2C Calculator</a></li><li><a href="/spi/">SPI Calculator</a></li><li><a href="/uart/">UART Calculator</a></li><li><a href="/bit-mask/">Bit Mask Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20260521/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>
