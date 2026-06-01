@@ -1,5 +1,5 @@
 {
-  "catalog_as_of": "2026-05-28",
+  "catalog_as_of": "2026-06-01",
   "pricing_note": "Sourced from LiteLLM model_prices_and_context_window.json (see scripts/update_llm_models.py). Reference $/M; verify on provider dashboards.",
   "models": [
     {
@@ -329,6 +329,18 @@
     {
       "id": "claude-opus-4-7-20260416-12751fa25b",
       "label": "claude-opus-4-7-20260416",
+      "provider": "Anthropic",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 5.0,
+      "input_cached_per_mtok_usd": 0.5,
+      "output_per_mtok_usd": 25.0,
+      "pricing_url": "https://www.anthropic.com/pricing",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "claude-opus-4-8-805b1c372d",
+      "label": "claude-opus-4-8",
       "provider": "Anthropic",
       "context_window": 1048576,
       "context_display": "1M",
