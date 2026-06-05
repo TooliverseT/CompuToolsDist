@@ -1,0 +1,100 @@
+.ad-display-wrapper {
+  width: 100%;
+  overflow: hidden;
+  min-height: 60px;
+}
+
+.ad-common-display {
+  min-height: 60px;
+  margin-bottom: 24px;
+}
+@media (max-width: 768px) {
+  .ad-common-display {
+    min-height: 50px;
+  }
+}
+
+.ad-sidebar {
+  width: 100%;
+  overflow: hidden;
+  min-height: 90px;
+}
+
+.ad-tool {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding-top: 12px;
+  margin-top: 12px;
+  min-height: 60px;
+}
+html[data-theme=light] .ad-tool {
+  border-top: 1px solid rgba(213, 184, 164, 0.5);
+}
+html[data-theme=dark] .ad-tool {
+  border-top: 1px solid rgba(68, 64, 61, 0.7);
+}
+
+.ad-multiflex {
+  min-height: 90px;
+  margin: 12px 0;
+  grid-column: 1/-1;
+  overflow: hidden;
+}
+@media (max-width: 768px) {
+  .ad-multiflex {
+    min-height: 50px;
+    max-height: 300px;
+  }
+}
+
+.ad-infeed-wrapper {
+  width: 100%;
+  overflow: hidden;
+  min-height: 90px;
+  border-radius: 8px;
+}
+
+.ad-infeed {
+  padding: 12px;
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 90px;
+}
+html[data-theme=light] .ad-infeed {
+  background: #ebdbc5;
+  border: 1px solid rgba(213, 184, 164, 0.25);
+  box-shadow: var(--card-shadow);
+}
+html[data-theme=dark] .ad-infeed {
+  background: #3A3A3A;
+  border: 1px solid rgba(68, 64, 61, 0.5);
+  box-shadow: var(--card-shadow);
+}
+
+.ad-article-wrapper {
+  width: 100%;
+  overflow: hidden;
+  min-height: 60px;
+}
+
+.ad-article {
+  margin: 24px 0;
+  min-height: 60px;
+  overflow: hidden;
+}
+
+.blog-ad {
+  margin: 0 0 24px 0;
+}
+
+.post-ad {
+  margin: 32px 0 16px 0;
+}
+
+@media (max-width: 768px) {
+  .ad-sidebar {
+    display: none;
+  }
+}
