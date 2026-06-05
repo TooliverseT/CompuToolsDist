@@ -371,6 +371,26 @@ body {
 
 .sidebar-ad-space {
   min-height: 250px;
+  width: 100%;
+}
+
+.sidebar-right--ad-only .sidebar-sticky {
+  top: 20px;
+  min-height: calc(100vh - 40px);
+  min-height: calc(100dvh - 40px);
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-right--ad-only .sidebar-ad-space {
+  flex: 1 1 auto;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.sidebar-right--ad-only .ad-sidebar {
+  flex: 1 1 auto;
+  min-height: 600px;
 }
 
 .blog-recent-list {
@@ -410,15 +430,9 @@ body {
   overflow: hidden;
 }
 
-.home-recent-fallback {
-  display: none;
+.home-recent-section {
   width: 100%;
   margin-bottom: 10px;
-}
-@media (max-width: 1599px) {
-  .home-recent-fallback {
-    display: block;
-  }
 }
 
 .hero-section {
@@ -2977,15 +2991,9 @@ input[type=checkbox] {
   }
 }
 
-.blog-recent-fallback {
-  display: none;
+.blog-recent-section {
   width: 100%;
   margin-bottom: 12px;
-}
-@media (max-width: 1599px) {
-  .blog-recent-fallback {
-    display: block;
-  }
 }
 
 .blog-recent-scroll {
