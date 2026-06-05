@@ -5284,8 +5284,14 @@ a.token-budget-reference-link {
 .tool-visualization-results-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
+  grid-template-rows: auto auto;
   gap: 14px;
+}
+.tool-visualization-results-container > .ad-tool {
+  grid-column: 1/-1;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 @media (max-width: 1200px) {
   .tool-visualization-results-container {
