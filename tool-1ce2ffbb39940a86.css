@@ -2778,6 +2778,76 @@ input[type=checkbox] {
   grid-template-columns: 1fr;
 }
 
+.pre-fullscreen-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-radius: inherit;
+}
+
+.pre-fullscreen-card {
+  background: var(--color-second);
+  border: 1px solid var(--color-third);
+  border-radius: 12px;
+  padding: 20px 24px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: min(480px, 100vw - 32px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+.pre-fullscreen-card__title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-font);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+}
+
+.pre-fullscreen-card__ad {
+  width: 100%;
+  min-height: 90px;
+}
+
+.pre-fullscreen-card__btn {
+  padding: 9px 22px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: var(--color-fourth);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.15s;
+  align-self: flex-end;
+}
+.pre-fullscreen-card__btn:hover {
+  opacity: 0.85;
+}
+
+.tool-container.tool-container--kinematics-fullscreen:fullscreen > .tool-visualization-results-container--rotation > .ad-tool,
+.tool-container.tool-container--kinematics-fullscreen:fullscreen > .tool-visualization-results-container--coord > .ad-tool, .tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen > .tool-visualization-results-container--rotation > .ad-tool,
+.tool-container.tool-container--kinematics-fullscreen:-webkit-full-screen > .tool-visualization-results-container--coord > .ad-tool,
+.tool-container.tool-container--rotation-viz-fullscreen:fullscreen > .tool-visualization-results-container--rotation > .ad-tool,
+.tool-container.tool-container--rotation-viz-fullscreen:fullscreen > .tool-visualization-results-container--coord > .ad-tool,
+.tool-container.tool-container--rotation-viz-fullscreen:-webkit-full-screen > .tool-visualization-results-container--rotation > .ad-tool,
+.tool-container.tool-container--rotation-viz-fullscreen:-webkit-full-screen > .tool-visualization-results-container--coord > .ad-tool {
+  display: none;
+}
+
 .tool-container.tool-container--kinematics-fullscreen .tool-visualization-column .tool-canvas-container,
 .tool-container.tool-container--rotation-viz-fullscreen .tool-visualization-column .tool-canvas-container {
   width: 100%;

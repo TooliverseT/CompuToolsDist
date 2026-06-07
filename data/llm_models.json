@@ -1,5 +1,5 @@
 {
-  "catalog_as_of": "2026-06-05",
+  "catalog_as_of": "2026-06-07",
   "pricing_note": "Sourced from LiteLLM model_prices_and_context_window.json (see scripts/update_llm_models.py). Reference $/M; verify on provider dashboards.",
   "models": [
     {
@@ -1781,6 +1781,18 @@
     {
       "id": "mistral-ministral-8b-2512-1a56f78814",
       "label": "mistral/ministral-8b-2512",
+      "provider": "Mistral AI",
+      "context_window": 268288,
+      "context_display": "262K",
+      "input_per_mtok_usd": 0.15,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": 0.15,
+      "pricing_url": "https://mistral.ai/pricing/",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "mistral-ministral-8b-latest-bfeb02c583",
+      "label": "mistral/ministral-8b-latest",
       "provider": "Mistral AI",
       "context_window": 268288,
       "context_display": "262K",
