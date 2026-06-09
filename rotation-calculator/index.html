@@ -1,0 +1,616 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
+  <meta name="robots" content="index, follow">
+  
+  <meta name="computools" content="computools">
+  <meta name="description" content="Free online 3D rotation calculator. Chain multiple rotations using Euler angles, quaternions, axis-angle, or rotation matrix in any order — see the compound result as quaternion, Euler, axis-angle, and matrix simultaneously with a live 3D view.">
+  <meta name="keywords" content="rotation chain, compound rotation, euler angles, quaternion, axis angle, rotation matrix, 3d rotation, intrinsic extrinsic, rotation calculator">
+  <meta name="author" content="CompuTools">
+
+  <meta property="og:url" content="https://www.compu-tools.com/rotation-calculator/">
+  <meta property="og:title" content="3D Rotation Calculator – Chain Euler, Quaternion, Axis-Angle & Matrix Rotations | CompuTools">
+  <meta property="og:description" content="Free online 3D rotation calculator. Chain multiple rotations using Euler angles, quaternions, axis-angle, or rotation matrix in any order — see the compound result as quaternion, Euler, axis-angle, and matrix simultaneously with a live 3D view.">
+  <meta property="og:image" content="https://www.compu-tools.com/logo.png">
+  <meta property="og:image:height" content="607">
+  <meta property="og:image:width" content="607">
+
+
+  <title>3D Rotation Calculator – Chain Euler, Quaternion, Axis-Angle & Matrix Rotations | CompuTools</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="/index-c3e7cf8efdce56c3.css" integrity="sha384-qp3ZILm3hf3rQhwzEp7bN763Zz+JqS+aMrfFTtQLojc8xpJdPpIMqYEIF8TQ5D2e">
+  <link rel="stylesheet" href="/navbar-4f762fa37e3e282a.css" integrity="sha384-LcaHtWnBjKXjeh/GVegRDSG+GATTVE4g0/TPxk9LHy6oKr59Z/0QL70YW/Syfup2">
+  <link rel="stylesheet" href="/search-41ce7f6340de10d1.css" integrity="sha384-RKAH34XZl4xSE+AsMqI0aCsB6eigc5IMA0SaTLQ2Aj6BC+dhaIzdCOC1ognWvEpS">
+  <link rel="stylesheet" href="/tool-2322ef9496124832.css" integrity="sha384-pB+B0jDMZuMxoA8NXwp8yBqKLDWvWqvEyfnb9mujqZm+uxfqSOBoFpAdAlrRLQhN">
+  <link rel="stylesheet" href="/blog-cf830ba2fce4347c.css" integrity="sha384-LHbXydDYNBXgqeCR0WWFiWEWKFZcKYX7eUc7eckHBq3d6wkWPh8PCrqKXm58KAZQ">
+  <link rel="stylesheet" href="/post-ebef088b6c677d1f.css" integrity="sha384-awdsCN3eGb1SAnTXehkirGnlP6M/6GT7nvc8InB9gPQYoGsQqDHOwPe5mekHm+m/">
+  <link rel="stylesheet" href="/preview-b125d3e062616558.css" integrity="sha384-JmqkbwP9oQKNtGLxCby+CXe9RIP9axsJJ95/Lc20vyGOON8+KHhg6yCwW5XCjPn1">
+  <link rel="stylesheet" href="/ad-f9974c17e37fdf39.css" integrity="sha384-kwuGziYBvm34B68F4w3Nq5aJBApUYZ4n1JvROx8lHtIjYqXAjrTxCEsv082HNc7h">
+  <link rel="stylesheet" href="/prism-c451adb7299a4a0.css" integrity="sha384-JHfRrkWbZJu5R/8OJhxu3j19hT9BpfW1isiNYAlkF5vRzQu14JDkB4lWvJX5I4r7">
+  
+  
+<script src="https://pagead2.googlesyndication.com/pagead/js/r20260604/r20190131/rum.js"></script><script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202606080101/show_ads_impl.js?bust=31099019"></script><script type="module">
+import init, * as bindings from '/computools-e74f3155e841e615.js';
+const wasm = await init({ module_or_path: '/computools-e74f3155e841e615_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+
+  
+  
+
+
+  
+  
+  
+  
+  
+
+  <link rel="icon" href="/favicon-1a8ba4d4617517ad.ico" integrity="sha384-sh+KkiOvcFXwh29z2PE6y5W6JoL/C2uPj8MHwWodi4oVC6f4XcUmhJGk6dmH2Teg">
+
+  <script src="/prism.js"></script>
+
+
+  <!-- MathJax for LaTeX math rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script>
+      (function() {
+          const redirect = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          if (redirect && redirect !== window.location.href) {
+              history.replaceState(null, null, redirect);
+          }
+      })();
+  </script>
+  <script>
+    // JavaScript에서 getTimeZoneOffset 함수 정의
+    function getTimeZoneOffset() {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const offset = new Date().getTimezoneOffset();
+        return { timeZone, offset };
+    }
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9424100257975478" crossorigin="anonymous" data-checked-head="true"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1G0CMRC310');
+  </script>
+<link rel="modulepreload" href="/computools-e74f3155e841e615.js" crossorigin="anonymous" integrity="sha384-kuMzz10bCHjwxn0FX0PvdfPptqZ+NEVupMvJOYS9EPeqR9c+xbHJR46ztmVniM22"><link rel="preload" href="/computools-e74f3155e841e615_bg.wasm" crossorigin="anonymous" integrity="sha384-knQN+AjAJWI447Xz++ktP1EXDsDh40hgHmMi/6nkuAY5oo/LrcrPGOmUTQ8popjM" as="fetch" type="application/wasm"><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+<body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper" style="height: auto !important;"><div class="main-content" style="height: auto !important;"><div class="page-with-sidebar" style="height: auto !important;"><div class="page-main" style="height: auto !important;"><div class="home-wrapper" style="height: auto !important;"><h1 class="tool-title">3D Rotation Calculator – Chain Euler, Quaternion, Axis-Angle &amp; Matrix Rotations</h1><div class="tool-description">Free online 3D rotation calculator. Chain multiple rotations using Euler angles, quaternions, axis-angle, or rotation matrix in any order — see the compound result as quaternion, Euler, axis-angle, and matrix simultaneously with a live 3D view.</div><div class="ad-display-wrapper ad-common-display"><ins style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7315862436" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_0_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7315862436&amp;adk=1964690608&amp;adf=1054769236&amp;pi=t.ma~as.7315862436&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1781008797&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Frotation-calculator%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;asro=0&amp;aimartd=4&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTcuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1781008870741&amp;bpp=1&amp;bdt=552&amp;idt=-M&amp;shv=r20260604&amp;mjsv=m202606080101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0&amp;nras=1&amp;correlator=8470773115723&amp;rume=1&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=23&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=278&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=42532523%2C95390667%2C31099019%2C42533294%2C95391228%2C31061691%2C31061693&amp;oid=2&amp;pvsid=4949473319643495&amp;tmod=1277838712&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=2&amp;uci=a!2&amp;fsb=1&amp;dtd=15" data-google-container-id="a!2" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div><div class="tool-page-analytics-scope" style="height: auto !important;"><div class="tool-mid-ad-injector-host" style="height: auto !important;"><script type="application/ld+json">{
+                        "@context": "https://schema.org",
+                        "@graph": [
+                            {
+                                "@type": "SoftwareApplication",
+                                "name": "3D Rotation Calculator \u2013 Chain Euler, Quaternion, Axis-Angle & Matrix Rotations",
+                                "url": "https://www.compu-tools.com/rotation-calculator/",
+                                "applicationCategory": "DeveloperApplication",
+                                "operatingSystem": "Web Browser",
+                                "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+                                "description": "Free online 3D rotation calculator. Chain multiple rotations using Euler angles, quaternions, axis-angle, or rotation matrix in any order \u2014 see the compound result as quaternion, Euler, axis-angle, and matrix simultaneously with a live 3D view. Supports all Euler orders (XYZ, ZYX, YXZ, etc.), radians and degrees, per-row 3D views with sync mode.",
+                                "featureList": [
+                                    "Compound rotation chain calculator online",
+                                    "Euler angles rotation chain — intrinsic and extrinsic",
+                                    "Quaternion multiplication chain calculator",
+                                    "Axis-angle rotation chaining tool",
+                                    "Rotation matrix chain multiplication",
+                                    "Convert compound rotation to quaternion, Euler, axis-angle, matrix",
+                                    "Interactive 3D rotation visualization per row",
+                                    "Sync views across compound and row canvases",
+                                    "All Euler rotation orders XYZ ZYX YXZ ZXY XZY YZX",
+                                    "Free orbit, XY, YZ, ZX plane camera modes",
+                                    "Radians and degrees angle unit toggle",
+                                    "Copy results in engine-ready format"
+                                ]
+                            },
+                            {
+                                "@type": "FAQPage",
+                                "mainEntity": [
+                                    {
+                                        "@type": "Question",
+                                        "name": "What is a compound rotation and how do I calculate it?",
+                                        "acceptedAnswer": {
+                                            "@type": "Answer",
+                                            "text": "A compound rotation is the result of applying multiple successive rotations one after another. Each rotation in the chain transforms the coordinate frame produced by the previous one. To compute the compound result, multiply the corresponding rotation matrices in order. This tool does that automatically: add rows to the chain, set each one's type (Euler, quaternion, axis-angle, or matrix), and the compound result updates live."
+                                        }
+                                    },
+                                    {
+                                        "@type": "Question",
+                                        "name": "What is the difference between intrinsic and extrinsic Euler rotations?",
+                                        "acceptedAnswer": {
+                                            "@type": "Answer",
+                                            "text": "Intrinsic rotations apply each successive angle about the moving (body-fixed) axes — the axes rotate with the object. Extrinsic rotations apply each angle about the fixed world axes. An intrinsic XYZ sequence is mathematically equivalent to an extrinsic ZYX sequence in reverse. This tool chains rotations as matrix products, so you can model either convention by choosing the appropriate row order and rotation type."
+                                        }
+                                    },
+                                    {
+                                        "@type": "Question",
+                                        "name": "Why does the order of rotations matter?",
+                                        "acceptedAnswer": {
+                                            "@type": "Answer",
+                                            "text": "3D rotations are not commutative: rotating 90° around X then 90° around Y produces a different orientation than rotating 90° around Y then 90° around X. The compound result depends on the exact sequence of individual rotations. This tool lets you reorder, ignore, or delete rows to see how changing the chain order affects the final orientation."
+                                        }
+                                    },
+                                    {
+                                        "@type": "Question",
+                                        "name": "Can I mix Euler, quaternion, axis-angle, and matrix rotations in the same chain?",
+                                        "acceptedAnswer": {
+                                            "@type": "Answer",
+                                            "text": "Yes. Each row in the rotation chain can independently use a different input type: Euler Angles, Quaternion, Axis-Angle, or Rotation Matrix. Internally every row is converted to its 3×3 rotation matrix before being chained together by matrix multiplication. The compound result is then expressed in all four representations simultaneously."
+                                        }
+                                    },
+                                    {
+                                        "@type": "Question",
+                                        "name": "What Euler rotation orders does this rotation calculator support?",
+                                        "acceptedAnswer": {
+                                            "@type": "Answer",
+                                            "text": "The calculator supports all six proper Euler orders: XYZ, XZY, YXZ, YZX, ZXY, and ZYX. The output Euler representation of the compound rotation can be shown in any of these orders using the Output Settings panel, with radians or degrees. This covers conventions used in Unity (YXZ), ROS (ZYX), Three.js (XYZ), aerospace, and robotics."
+                                        }
+                                    },
+                                    {
+                                        "@type": "Question",
+                                        "name": "How does the 3D visualization work for each row?",
+                                        "acceptedAnswer": {
+                                            "@type": "Answer",
+                                            "text": "Each row in the rotation chain has its own 3D canvas showing the rotation represented by that row alone (not the compound result). The main Compound Rotation canvas shows the accumulated result of all enabled rows. When Sync Views is enabled, orbiting the main canvas also moves all row canvases to the same camera angle. You can also lock any canvas to an XY, YZ, or ZX plane view and still orbit within that plane."
+                                        }
+                                    },
+                                    {
+                                        "@type": "Question",
+                                        "name": "What does the Ignore toggle do in a rotation row?",
+                                        "acceptedAnswer": {
+                                            "@type": "Answer",
+                                            "text": "Toggling Ignore on a row temporarily removes that rotation from the compound chain without deleting it. The row's values are preserved and can be re-enabled at any time. This is useful for isolating the contribution of a specific rotation or testing what happens when part of the chain is absent."
+                                        }
+                                    },
+                                    {
+                                        "@type": "Question",
+                                        "name": "How do I copy the compound rotation result for use in my code?",
+                                        "acceptedAnswer": {
+                                            "@type": "Answer",
+                                            "text": "Each result card in the Conversion Results panel has a copy button. For Quaternion, it copies w, x, y, z values. For Euler angles, it copies the three angles in the selected order and unit. For Axis-Angle, it copies the axis vector and angle. For Rotation Matrix, it copies the full 3×3 matrix as a flat row-major array. All values update live as you edit the chain."
+                                        }
+                                    },
+                                    {
+                                        "@type": "Question",
+                                        "name": "Why does my rotation matrix input need to be orthogonal?",
+                                        "acceptedAnswer": {
+                                            "@type": "Answer",
+                                            "text": "A valid rotation matrix must belong to SO(3): its columns must be orthonormal (unit length and mutually perpendicular) and its determinant must equal 1. Non-orthogonal matrices introduce scaling or shearing rather than pure rotation. If your matrix is slightly off due to numerical drift, re-orthogonalize it using another tool (such as the Quaternion Converter) before pasting it here."
+                                        }
+                                    },
+                                    {
+                                        "@type": "Question",
+                                        "name": "How is axis-angle rotation defined in this tool?",
+                                        "acceptedAnswer": {
+                                            "@type": "Answer",
+                                            "text": "Axis-angle represents a rotation as a unit vector (nx, ny, nz) defining the rotation axis and a scalar angle θ (in degrees or radians). The rotation follows the right-hand rule: curl your right hand's fingers in the direction of positive rotation, with your thumb pointing along the axis. The tool accepts any non-zero axis vector and normalizes it automatically before computing the rotation matrix via Rodrigues' formula."
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }</script><div class="tool-wrapper" style="height: auto !important;"><div class="tool-intro"><div id="rotation-calculator" class="content-section"><h2>3D Rotation Calculator — Chain and Compose Rotations Online</h2><p>This rotation calculator lets you build a chain of multiple 3D rotations and instantly see the <strong>compound result</strong> in all four rotation representations — <strong>Quaternion</strong>, <strong>Euler Angles</strong>, <strong>Axis-Angle</strong>, and <strong>Rotation Matrix</strong> — with a live interactive 3D visualization. Each row in the chain can independently use any input type, and you can mix them freely.</p><p>The tool is designed for game developers, robotics engineers, and anyone who needs to understand how successive rotations compose. Add rows, reorder them, toggle rows on or off with Ignore, and watch the compound result and 3D axes update in real time. Enable Sync Views to lock all per-row canvases to the same camera angle as the main view.</p></div><div id="rotation-chain-inputs" class="content-section"><h2>Supported Rotation Input Types</h2><div class="example-box"><ul><li><strong>Euler Angles</strong> — Enter X, Y, Z angles in degrees or radians. Choose any of the six rotation orders (XYZ, XZY, YXZ, YZX, ZXY, ZYX) and toggle Intrinsic (body-fixed) or Extrinsic (world-fixed) to match your engine or convention. Each row has its own Euler settings.</li><li><strong>Quaternion (w, x, y, z)</strong> — Enter a unit quaternion directly. The tool normalizes it before converting to a rotation matrix for chaining.</li><li><strong>Axis-Angle</strong> — Specify a rotation axis (nx, ny, nz) and an angle. The axis is automatically normalized and the rotation is computed using Rodrigues' formula.</li><li><strong>Rotation Matrix</strong> — Enter a 3×3 rotation matrix directly. The matrix must be orthogonal with determinant 1 to represent a valid pure rotation.</li></ul></div></div><div id="how-to-use-rotation-calculator" class="content-section"><h2>How to Use the 3D Rotation Calculator</h2><ul><li><strong>1. Add Rotation Rows</strong>: Click Add Rotation to append a new row to the chain. Each row defaults to Euler Angles input.</li><li><strong>2. Set Input Type per Row</strong>: For each row, select Euler Angles, Quaternion, Axis-Angle, or Rotation Matrix from the dropdown. Enter the corresponding values.</li><li><strong>3. Configure Euler Settings</strong>: For Euler rows, choose the rotation order (XYZ, ZYX, etc.), Intrinsic/Extrinsic frame, and angle unit (degrees or radians) that match your source data.</li><li><strong>4. View Compound Result</strong>: The Compound Rotation panel at the top shows the combined result of all enabled rows as Quaternion, Euler, Axis-Angle, and Rotation Matrix simultaneously.</li><li><strong>5. Configure Output Settings</strong>: Set the Euler order and angle unit for the compound result display using the Output Settings panel.</li><li><strong>6. Ignore, Invert / Reorder Rows</strong>: Toggle the Ignore checkbox on any row to temporarily exclude it from the chain. Check Invert to apply the inverse of that row's rotation — for a rotation matrix this is the transpose (R⁻¹ = Rᵀ), which reverses the rotation direction. Use the up/down arrows to reorder rows and see how rotation order affects the compound result.</li><li><strong>7. Sync Views</strong>: Enable Sync Views to synchronize the camera angle of all per-row 3D canvases with the main Compound Rotation canvas. Orbiting the main view will move all row views simultaneously.</li><li><strong>8. Plane Camera Modes</strong>: Click XY, YZ, or ZX to lock the camera to a principal plane. You can still orbit within that plane by dragging. Click Free to return to full 3D orbit.</li><li><strong>9. Copy Results</strong>: Use the copy buttons on each result card to copy the compound rotation values in your preferred format — quaternion components, Euler angles, axis-angle, or flat matrix rows.</li></ul></div><div id="rotation-calculator-use-cases" class="content-section"><h2>Typical Use Cases</h2><div class="use-case"><h3>Game &amp; Animation Development</h3><p>Chain parent and child bone rotations to compute a world-space orientation. Mix Euler rows (for artist-friendly input) with quaternion rows (from physics or IK) and read the compound result in the format your engine expects — Unity YXZ degrees, Unreal ZYX, or Three.js XYZ radians.</p></div><div class="use-case"><h3>Robotics &amp; ROS</h3><p>Compose frame transformations in a robot's kinematic chain: sensor frame → body frame → world frame. Enter each transform as a rotation matrix or ZYX Euler and inspect the accumulated quaternion for ROS message publishing.</p></div><div class="use-case"><h3>Aerospace &amp; IMU</h3><p>Apply successive yaw, pitch, and roll rotations as separate rows, verify the compound rotation matrix, and check for gimbal lock by inspecting the middle Euler angle of the compound result. Compare ZYX (aerospace standard) vs XYZ outputs side by side.</p></div><div class="use-case"><h3>Education &amp; Debugging</h3><p>Build intuition about rotation non-commutativity: create two rows with the same rotations but in different orders and observe how the compound results differ. Use the per-row 3D canvases to visualize what each individual rotation contributes before composition.</p></div></div><div id="rotation-math-reference" class="content-section"><h2>Rotation Math Reference</h2><div class="example-box"><p><strong>Key facts about 3D rotation chaining:</strong></p><ul><li><strong>Matrix multiplication order:</strong> The compound matrix is <code>M = M₁ × M₂ × … × Mₙ</code> where M₁ is the first row applied. To apply a rotation to a vector: <code>v' = M · v</code>.</li><li><strong>Non-commutativity:</strong> Rotations do not commute in 3D. Swapping the order of two rows will generally produce a different compound orientation.</li><li><strong>Quaternion composition:</strong> Equivalent to quaternion multiplication: <code>q = q₁ ⊗ q₂ ⊗ … ⊗ qₙ</code>. The tool uses rotation matrices internally but the resulting quaternion reflects the same composition.</li><li><strong>Euler ambiguity:</strong> The same compound rotation can be expressed as many different Euler triples depending on the chosen rotation order. Always specify the order explicitly when sharing angle data.</li><li><strong>Axis-angle (Rodrigues):</strong> Any single rotation can be expressed as one rotation about a fixed axis. The compound rotation matrix is always reducible to an axis-angle pair except for the identity.</li></ul></div></div><div id="rotation-calculator-faq" class="content-section"><h2>FAQ — 3D Rotation Calculator</h2><div class="faq-item"><h3>Why do I get a different compound result when I change row order?</h3><p>3D rotations are non-commutative: M₁ × M₂ ≠ M₂ × M₁ in general. Each row applies its rotation in the frame produced by all previous rows. Reordering the chain changes the intermediate frames and therefore the final compound orientation. The 3D visualization makes this visible — try swapping two rows and observe the axis directions change.</p></div><div class="faq-item"><h3>What is the difference between each row's 3D view and the Compound Rotation view?</h3><p>Each row canvas visualizes only that row's individual rotation (the rotation defined by that row's input values alone, not accumulated). The main Compound Rotation canvas shows the product of all enabled rows in chain order — the final accumulated orientation.</p></div><div class="faq-item"><h3>How does the Ignore toggle affect the chain?</h3><p>An ignored row is excluded from the matrix multiplication chain but its input values are preserved. Re-enabling it reinserts the rotation at its original position in the chain. This lets you isolate contributions or temporarily disable a rotation without losing your values.</p></div><div class="faq-item"><h3>Can I use this as an Euler order converter?</h3><p>Yes. Enter a single Euler rotation in one row with the source order (e.g. ZYX), then read the Compound Result Euler output with a different order selected (e.g. XYZ). The intermediate quaternion ensures the conversion is mathematically exact regardless of the two chosen orders.</p></div><div class="faq-item"><h3>Why does axis-angle give a zero or undefined result near identity?</h3><p>When the rotation angle is zero (or very close to zero), the rotation axis is undefined — any axis produces the same identity rotation. The tool outputs a default axis in this case. Similarly, a 180° rotation has a well-defined axis but the sign of that axis is ambiguous. These are expected mathematical edge cases.</p></div></div><div id="rotation-calculator-related-tools" class="content-section"><h2>Related Tools</h2><ul><li><a href="/endian/">Endian Converter</a> - Free online endian converter and byte swap calculator. Convert big endian to little endian with memory layout visualization, C bswap code generator, IEEE 754 float byte order, and htonl/ntohl reference for embedded and network developers</li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a> - Visualize 3D rotations using Quaternions, Euler Angles, and Rotation Matrices with interactive 3D visualization</li><li><a href="/base/">Number Base Converter</a> - Convert numbers between binary, decimal, hexadecimal, and octal with precision</li><li><a href="/unit-converter/">Unit Converter</a> - Convert metric and imperial units for length, mass, temperature, pressure, speed, area, volume, data storage, time, energy, and more. Handy for engineering, travel, and homework—runs locally.</li><li><a href="/quaternion/">3D Rotation Converter</a> - Convert between Quaternions, Euler Angles, and 3×3 Rotation Matrices bidirectionally with interactive 3D visualization</li></ul></div></div><div style="position: relative; height: auto !important;" class="tool-container tool-container--rotation-calc"><div class="tool-visualization-results-container tool-visualization-results-container--rotation result-group" style="height: auto !important;"><div class="tool-visualization-column"><div class="tool-result-section"><div><div style="margin-bottom:10px;flex-wrap:wrap;gap:8px;" class="tool-title-row"><div class="tool-result-title"><span class="tool-icon-badge-lg"><i class="fa-solid fa-rotate"></i></span>Compound Rotation</div><div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-left:auto;"><div style="display:flex;border-radius:8px;overflow:hidden;border:1px solid var(--color-third);"><button style="padding:5px 10px;font-size:0.72rem;font-weight:600;border:none;border-right:1px solid var(--color-third);cursor:pointer;background:var(--color-fourth);color:#fff;">Free</button><button style="padding:5px 10px;font-size:0.72rem;font-weight:600;border:none;border-right:1px solid var(--color-third);cursor:pointer;background:var(--color-first);color:var(--color-subfont);">XY</button><button style="padding:5px 10px;font-size:0.72rem;font-weight:600;border:none;border-right:1px solid var(--color-third);cursor:pointer;background:var(--color-first);color:var(--color-subfont);">YZ</button><button style="padding:5px 10px;font-size:0.72rem;font-weight:600;border:none;border-right:1px solid var(--color-third);cursor:pointer;background:var(--color-first);color:var(--color-subfont);">ZX</button><button title="Reset to default orbit view" style="padding:5px 9px;font-size:0.72rem;font-weight:600;border:none;cursor:pointer;background:var(--color-first);color:var(--color-subfont);"><i class="fa-solid fa-rotate-left"></i></button></div><button title="Sync all canvas views" style="padding:5px 10px;font-size:0.72rem;font-weight:600;border:1px solid var(--color-third);border-radius:8px;cursor:pointer;background:var(--color-first);color:var(--color-subfont);"><i class="fa-solid fa-link"></i> Sync Views</button><button title="Fullscreen" style="padding:5px 10px;font-size:0.72rem;font-weight:600;border:1px solid var(--color-third);border-radius:8px;cursor:pointer;background:var(--color-first);color:var(--color-subfont);display:inline-flex;align-items:center;gap:0.35rem;"><i class="fa-solid fa-expand"></i>Fullscreen</button></div></div><div class="tool-canvas-container"><canvas width="720" height="720" style="touch-action:none;cursor:default;" class="tool-3d-canvas"></canvas><div aria-live="polite" class="tool-canvas-hud tool-canvas-hud--rotation-viz"><div class="tool-canvas-hud__metrics"><div class="tool-canvas-hud__line"><span class="tool-canvas-hud__label">Ref</span><span style="background:rgba(255,100,100,0.92);" class="tool-canvas-hud__chip">x</span><span style="background:rgba(100,255,100,0.92);" class="tool-canvas-hud__chip">y</span><span style="background:rgba(100,100,255,0.92);" class="tool-canvas-hud__chip">z</span></div><div class="tool-canvas-hud__line"><span class="tool-canvas-hud__label">Rot</span><span style="background:#e74c3c;" class="tool-canvas-hud__chip">X′</span><span style="background:#27ae60;" class="tool-canvas-hud__chip">Y′</span><span style="background:#2980b9;" class="tool-canvas-hud__chip">Z′</span></div></div></div></div><div class="tool-hint-text-result"><i class="fa-solid fa-circle-info"></i> Drag to orbit • Scroll / pinch to zoom</div></div></div></div><div style="margin:0 auto;width:100%;" class="tool-input-section"><div style="margin-bottom:8px;" class="tool-settings-section"><h3 class="tool-section-header"><span class="tool-icon-badge"><i class="fa-solid fa-gear"></i></span>Output Settings</h3><div class="tool-settings-content"><div class="tool-settings-row"><label class="tool-settings-label">Euler Order</label><select class="tool-settings-select"><option value="XYZ">XYZ</option><option value="XZY">XZY</option><option value="YXZ">YXZ</option><option value="YZX">YZX</option><option value="ZXY">ZXY</option><option value="ZYX" selected="selected">ZYX</option></select></div><div class="tool-settings-row"><label class="tool-settings-label">Euler Frame</label><select class="tool-settings-select"><option value="intrinsic" selected="selected">Intrinsic</option><option value="extrinsic">Extrinsic</option></select></div><div class="tool-settings-row"><label class="tool-settings-label">Angle Unit</label><select class="tool-settings-select"><option value="deg" selected="selected">deg</option><option value="rad">rad</option></select></div></div></div><div class="tool-settings-section"><h3 class="tool-section-header"><span class="tool-icon-badge"><i class="fa-solid fa-arrows-rotate"></i></span>Compound Result</h3><div class="tool-settings-content"><div style="display:flex;flex-direction:column;gap:8px;"><div class="result-metric-card"><div class="result-metric-label">Quaternion (w,x,y,z)</div><div style="font-family:monospace;font-size:0.72rem;font-weight:600;color:var(--color-font);margin-bottom:6px;word-break:break-all;">1.0000, 0.0000, 0.0000, 0.0000</div><div style="display:flex;flex-wrap:wrap;gap:4px;"><button style="font-size: 9px; padding: 2px 7px; border-radius: 5px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;"><i style="font-size:7px;opacity:0.7;" class="fa-solid fa-copy"></i> x,y,z,w</button><button style="font-size: 9px; padding: 2px 7px; border-radius: 5px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;"><i style="font-size:7px;opacity:0.7;" class="fa-solid fa-copy"></i> w,x,y,z</button><button style="font-size: 9px; padding: 2px 7px; border-radius: 5px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;"><i style="font-size:7px;opacity:0.7;" class="fa-solid fa-copy"></i> Python</button><button style="font-size: 9px; padding: 2px 7px; border-radius: 5px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;"><i style="font-size:7px;opacity:0.7;" class="fa-solid fa-copy"></i> C++</button></div></div><div class="result-metric-card"><div class="result-metric-label">Euler ZYX (intrinsic) (deg)</div><div style="font-family:monospace;font-size:0.72rem;font-weight:600;color:var(--color-font);margin-bottom:6px;word-break:break-all;">0.00°, 0.00°, 0.00°</div><div style="display:flex;flex-wrap:wrap;gap:4px;"><button style="font-size: 9px; padding: 2px 7px; border-radius: 5px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;"><i style="font-size:7px;opacity:0.7;" class="fa-solid fa-copy"></i> space</button><button style="font-size: 9px; padding: 2px 7px; border-radius: 5px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;"><i style="font-size:7px;opacity:0.7;" class="fa-solid fa-copy"></i> comma</button><button style="font-size: 9px; padding: 2px 7px; border-radius: 5px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;"><i style="font-size:7px;opacity:0.7;" class="fa-solid fa-copy"></i> Python</button><button style="font-size: 9px; padding: 2px 7px; border-radius: 5px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;"><i style="font-size:7px;opacity:0.7;" class="fa-solid fa-copy"></i> C++</button></div></div><div class="result-metric-card"><div class="result-metric-label">Axis-Angle (deg)</div><div style="font-family:monospace;font-size:0.72rem;font-weight:600;color:var(--color-font);margin-bottom:6px;word-break:break-all;">[0.000,0.000,1.000] 0.00°</div><div style="display:flex;flex-wrap:wrap;gap:4px;"><button style="font-size: 9px; padding: 2px 7px; border-radius: 5px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;"><i style="font-size:7px;opacity:0.7;" class="fa-solid fa-copy"></i> flat</button><button style="font-size: 9px; padding: 2px 7px; border-radius: 5px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;"><i style="font-size:7px;opacity:0.7;" class="fa-solid fa-copy"></i> bracket</button><button style="font-size: 9px; padding: 2px 7px; border-radius: 5px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;"><i style="font-size:7px;opacity:0.7;" class="fa-solid fa-copy"></i> Python</button><button style="font-size: 9px; padding: 2px 7px; border-radius: 5px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;"><i style="font-size:7px;opacity:0.7;" class="fa-solid fa-copy"></i> C++</button></div></div><div class="result-metric-card"><div class="result-metric-label">Rotation Matrix</div><div style="font-family:monospace;font-size:0.68rem;font-weight:600;color:var(--color-font);line-height:1.5;margin-bottom:6px;"><div>[1.0000,0.0000,0.0000]</div><div>[0.0000,1.0000,0.0000]</div><div>[0.0000,0.0000,1.0000]</div></div><div style="display:flex;flex-wrap:wrap;gap:4px;"><button style="font-size: 9px; padding: 2px 7px; border-radius: 5px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;"><i style="font-size:7px;opacity:0.7;" class="fa-solid fa-copy"></i> flat</button><button style="font-size: 9px; padding: 2px 7px; border-radius: 5px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;"><i style="font-size:7px;opacity:0.7;" class="fa-solid fa-copy"></i> Python</button><button style="font-size: 9px; padding: 2px 7px; border-radius: 5px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;"><i style="font-size:7px;opacity:0.7;" class="fa-solid fa-copy"></i> C++</button></div></div></div></div></div></div><div class="ad-display-wrapper ad-tool" style="height: auto !important; min-height: 0px !important;"><ins class="adsbygoogle" style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7541212813" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_1_host" style="border: none; height: 280px; width: 1166px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:1166px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1166" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7541212813&amp;adk=545835249&amp;adf=3511100235&amp;pi=t.ma~as.7541212813&amp;w=1166&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1781008797&amp;rafmt=1&amp;format=1166x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Frotation-calculator%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;asro=0&amp;aimartd=4&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTcuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;abgtt=6&amp;dt=1781008870741&amp;bpp=1&amp;bdt=552&amp;idt=1&amp;shv=r20260604&amp;mjsv=m202606080101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0%2C1200x280&amp;nras=1&amp;correlator=8470773115723&amp;rume=1&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=23&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=59&amp;ady=1474&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=42532523%2C95390667%2C31099019%2C42533294%2C95391228%2C31061691%2C31061693&amp;oid=2&amp;pvsid=4949473319643495&amp;tmod=1277838712&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoeEbr%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=3&amp;uci=a!3&amp;btvi=1&amp;fsb=1&amp;dtd=17" data-google-container-id="a!3" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div></div><div class="rotation-chain-panel"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><button style="font-size:0.82rem;padding:6px 14px;border-radius:8px;" class="tool-btn-primary"><i class="fa-solid fa-plus"></i> Add Rotation</button><span style="font-size:0.78rem;color:var(--color-font-sub);">1 rotation(s) in chain</span></div><div class="rotation-row-card"><div style="" class="rotation-row-card__header"><div style="display:flex;align-items:center;gap:6px;flex-shrink:0;"><div style="display:flex;flex-direction:column;gap:1px;"><button title="Move up" style="padding:1px 5px;font-size:0.6rem;" disabled="disabled" class="rotation-row-reorder-btn">▲</button><button title="Move down" style="padding:1px 5px;font-size:0.6rem;" disabled="disabled" class="rotation-row-reorder-btn">▼</button></div><span style="font-size:0.78rem;font-weight:700;white-space:nowrap;color:var(--color-font);padding-right:6px;border-right:1px solid rgba(255,255,255,0.25);">Rotation 1</span></div><div style="display:flex;align-items:center;gap:4px;flex:1;min-width:0;"><select style="font-size:0.72rem;padding:2px 2px;flex-shrink:1;min-width:0;" class="tool-settings-select"><option value="euler" selected="selected">Euler Angles</option><option value="quat">Quaternion</option><option value="axisangle">Axis-Angle</option><option value="matrix">Rotation Matrix</option></select><select style="font-size:0.72rem;padding:2px 2px;flex-shrink:1;min-width:0;" class="tool-settings-select"><option value="deg" selected="selected">deg</option><option value="rad">rad</option></select><select style="font-size:0.72rem;padding:2px 2px;flex-shrink:1;min-width:0;" class="tool-settings-select"><option value="XYZ">XYZ</option><option value="XZY">XZY</option><option value="YXZ">YXZ</option><option value="YZX">YZX</option><option value="ZXY">ZXY</option><option value="ZYX" selected="selected">ZYX</option></select><select style="font-size:0.72rem;padding:2px 2px;flex-shrink:1;min-width:0;" title="Intrinsic: body-fixed axes. Extrinsic: world-fixed axes." class="tool-settings-select"><option value="intrinsic" selected="selected">Int</option><option value="extrinsic">Ext</option></select><label style="flex-shrink:0;margin-left:4px;white-space:nowrap;" title="Exclude this rotation from the chain" class="rotation-row-ignore-label"><input type="checkbox">Ignore</label><label style="flex-shrink:0;white-space:nowrap;" title="Invert this rotation (transpose = inverse for rotation matrices)" class="rotation-row-ignore-label"><input type="checkbox">Invert</label></div><button style="flex-shrink:0;margin-left:0;" title="Remove row" class="rotation-row-remove-btn"><i class="fa-solid fa-xmark"></i></button></div><div class="rotation-row-card__body"><div style="margin-bottom:0;border-radius:8px;" class="tool-input-section"><div class="rotation-row-body"><div class="rotation-row-inputs"><div class="tool-settings-section"><h3 class="tool-section-header"><span class="tool-icon-badge"><i class="fa-solid fa-sliders"></i></span>Input</h3><div class="tool-settings-content"><div class="tool-input-grid-3"><div class="tool-input-field"><label class="tool-input-label">X</label><input type="text" inputmode="decimal" autocomplete="off" style="font-size:11px;color:var(--color-font);" class="tool-number-input"></div><div class="tool-input-field"><label class="tool-input-label">Y</label><input type="text" inputmode="decimal" autocomplete="off" style="font-size:11px;color:var(--color-font);" class="tool-number-input"></div><div class="tool-input-field"><label class="tool-input-label">Z</label><input type="text" inputmode="decimal" autocomplete="off" style="font-size:11px;color:var(--color-font);" class="tool-number-input"></div></div></div></div><div style="margin-top:8px;" class="tool-settings-section"><h3 class="tool-section-header"><span class="tool-icon-badge"><i class="fa-solid fa-wand-magic-sparkles"></i></span>Preset</h3><div class="tool-settings-content"><div style="display:flex;flex-wrap:wrap;gap:5px;"><button style="font-size: 10px; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;">Identity</button><button style="font-size: 10px; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;">Rx +90°</button><button style="font-size: 10px; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;">Rx 180°</button><button style="font-size: 10px; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;">Rx −90°</button><button style="font-size: 10px; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;">Ry +90°</button><button style="font-size: 10px; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;">Ry 180°</button><button style="font-size: 10px; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;">Ry −90°</button><button style="font-size: 10px; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;">Rz +90°</button><button style="font-size: 10px; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;">Rz 180°</button><button style="font-size: 10px; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;">Rz −90°</button></div></div></div><div style="margin-top:8px;" class="tool-settings-section"><h3 class="tool-section-header"><span class="tool-icon-badge"><i class="fa-solid fa-paste"></i></span>Paste</h3><div class="tool-settings-content"><textarea rows="2" style="width:100%;font-size:10px;font-family:monospace;resize:vertical;box-sizing:border-box;border:1px solid var(--color-fourth);border-radius:6px;padding:6px;background:var(--color-first);color:var(--color-font);outline:none;" placeholder="Paste numbers here..."></textarea><div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:4px;align-items:center;"><button style="font-size: 10px; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--color-fourth); background-color: var(--color-fourth); color: var(--color-font); cursor: pointer;"><i style="font-size:8px;opacity:0.7;" class="fa-solid fa-paste"></i> Apply</button></div></div></div></div><div class="rotation-row-canvas-col"><div class="rotation-row-canvas-controls"><button style="padding:3px 7px;font-size:0.65rem;font-weight:600;border:1px solid var(--color-fourth);cursor:pointer;border-radius:4px;background:var(--color-fourth);color:var(--color-first);">Free</button><button style="padding:3px 7px;font-size:0.65rem;font-weight:600;border:1px solid var(--color-fourth);cursor:pointer;border-radius:4px;background:transparent;color:var(--color-subfont);">XY</button><button style="padding:3px 7px;font-size:0.65rem;font-weight:600;border:1px solid var(--color-fourth);cursor:pointer;border-radius:4px;background:transparent;color:var(--color-subfont);">YZ</button><button style="padding:3px 7px;font-size:0.65rem;font-weight:600;border:1px solid var(--color-fourth);cursor:pointer;border-radius:4px;background:transparent;color:var(--color-subfont);">ZX</button><button style="padding:3px 7px;font-size:0.65rem;border:1px solid var(--color-fourth);cursor:pointer;border-radius:4px;background:transparent;color:var(--color-subfont);" title="Reset row view"><i class="fa-solid fa-rotate-left"></i></button></div><canvas width="355" height="355" class="rotation-row-mini-canvas"></canvas></div></div></div></div><div class="rotation-row-card__output"><div style="margin-bottom:0;border-radius:8px;" class="tool-input-section"><h3 style="cursor:pointer;margin-bottom:0;user-select:none;" class="tool-section-header"><span class="tool-icon-badge"><i class="fa-solid fa-chart-bar"></i></span>Row Result<i style="margin-left:auto;font-size:0.65rem;opacity:0.6;transition:transform 0.2s;transform:rotate(0deg);" class="fa-solid fa-chevron-down"></i></h3></div></div></div></div></div></div></div></div></div></div><aside class="sidebar-right sidebar-right--ad-only"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper ad-sidebar"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/rotation-calculator/">3D Rotation Calculator</a></li><li><a href="/endian/">Endian Converter</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/i2c/">I2C Calculator</a></li><li><a href="/spi/">SPI Calculator</a></li><li><a href="/uart/">UART Calculator</a></li><li><a href="/bit-mask/">Bit Mask Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK Calculator</a></li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20260604/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>
