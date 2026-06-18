@@ -6377,3 +6377,76 @@ a.token-budget-reference-link {
   flex-wrap: wrap;
   gap: 4px;
 }
+
+.tool-underline-tab-bar {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--color-fourth);
+  padding-bottom: 0;
+  flex-wrap: wrap;
+}
+
+.tool-underline-tab {
+  padding: 7px 18px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: var(--color-subfont);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  border-radius: 4px 4px 0 0;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.tool-underline-tab:hover:not(.tool-underline-tab--active) {
+  color: var(--color-font);
+  background: rgba(0, 0, 0, 0.04);
+}
+.tool-underline-tab--active {
+  color: var(--color-fourth);
+  border-bottom-color: var(--color-fourth);
+  background: color-mix(in srgb, var(--color-fourth) 8%, transparent);
+  font-weight: 700;
+}
+
+.file-compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.file-compare-grid > * {
+  min-width: 0;
+  overflow: hidden;
+}
+@media (max-width: 600px) {
+  .file-compare-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.file-compare-result-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  margin-top: 10px;
+}
+.file-compare-result-table th,
+.file-compare-result-table td {
+  padding: 6px 10px;
+  border: 1px solid var(--color-third);
+  text-align: left;
+  vertical-align: middle;
+}
+.file-compare-result-table th {
+  background: var(--color-third);
+  font-weight: 600;
+}
+.file-compare-result-table td.hash-cell {
+  font-family: monospace;
+  cursor: pointer;
+}
+.file-compare-result-table td.hash-cell:hover {
+  background: var(--color-third);
+}
