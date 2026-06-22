@@ -1,5 +1,5 @@
 {
-  "catalog_as_of": "2026-06-19",
+  "catalog_as_of": "2026-06-22",
   "pricing_note": "Sourced from LiteLLM model_prices_and_context_window.json (see scripts/update_llm_models.py). Reference $/M; verify on provider dashboards.",
   "models": [
     {
@@ -615,6 +615,30 @@
       "fallback_bpe": "cl100k_base"
     },
     {
+      "id": "deepseek-v4-flash-d7ec4636f9",
+      "label": "deepseek-v4-flash",
+      "provider": "DeepSeek",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 0.14,
+      "input_cached_per_mtok_usd": 0.0,
+      "output_per_mtok_usd": 0.28,
+      "pricing_url": "https://www.deepseek.com/",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "deepseek-v4-pro-71d7468888",
+      "label": "deepseek-v4-pro",
+      "provider": "DeepSeek",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 0.43,
+      "input_cached_per_mtok_usd": 0.0,
+      "output_per_mtok_usd": 0.87,
+      "pricing_url": "https://www.deepseek.com/",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
       "id": "deepseek-deepseek-chat-ee27802046",
       "label": "deepseek/deepseek-chat",
       "provider": "DeepSeek",
@@ -683,6 +707,30 @@
       "input_per_mtok_usd": 0.28,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 0.4,
+      "pricing_url": "https://www.deepseek.com/",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "deepseek-deepseek-v4-flash-54e95ee1c0",
+      "label": "deepseek/deepseek-v4-flash",
+      "provider": "DeepSeek",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 0.14,
+      "input_cached_per_mtok_usd": 0.0,
+      "output_per_mtok_usd": 0.28,
+      "pricing_url": "https://www.deepseek.com/",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "deepseek-deepseek-v4-pro-76d7f6e838",
+      "label": "deepseek/deepseek-v4-pro",
+      "provider": "DeepSeek",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 0.43,
+      "input_cached_per_mtok_usd": 0.0,
+      "output_per_mtok_usd": 0.87,
       "pricing_url": "https://www.deepseek.com/",
       "fallback_bpe": "cl100k_base"
     },
@@ -1943,6 +1991,18 @@
       "input_per_mtok_usd": 0.4,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 2.0,
+      "pricing_url": "https://mistral.ai/pricing/",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "mistral-mistral-medium-3-5-e66424890b",
+      "label": "mistral/mistral-medium-3-5",
+      "provider": "Mistral AI",
+      "context_window": 268288,
+      "context_display": "262K",
+      "input_per_mtok_usd": 1.5,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": 7.5,
       "pricing_url": "https://mistral.ai/pricing/",
       "fallback_bpe": "cl100k_base"
     },
@@ -4085,6 +4145,19 @@
       "output_per_mtok_usd": 2.4,
       "pricing_url": "https://openai.com/api/pricing/",
       "tiktoken_model": "gpt-realtime-mini-2025-12-15",
+      "fallback_bpe": "o200k_base"
+    },
+    {
+      "id": "gpt-realtime-whisper-e141a9ba44",
+      "label": "gpt-realtime-whisper",
+      "provider": "OpenAI",
+      "context_window": 0,
+      "context_display": "Unknown",
+      "input_per_mtok_usd": null,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": null,
+      "pricing_url": "https://openai.com/api/pricing/",
+      "tiktoken_model": "gpt-realtime-whisper",
       "fallback_bpe": "o200k_base"
     },
     {

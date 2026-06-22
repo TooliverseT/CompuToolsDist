@@ -1,0 +1,698 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
+  <meta name="robots" content="index, follow">
+  
+  <meta name="computools" content="computools">
+  <meta name="description" content="Convert between decimal, hexadecimal, and IEEE 754 binary bit patterns for 32-bit float and 64-bit double. Visualize sign, exponent, and mantissa fields. Debug firmware register dumps, NaN/Inf values, and floating-point encoding.">
+  <meta name="keywords" content="ieee 754, float to hex, floating point converter, float hex binary, ieee754 calculator, double to hex, binary floating point, mantissa exponent, NaN infinity float, embedded float debug, register dump float, f32 bits, f64 bits">
+  <meta name="author" content="CompuTools">
+
+  <meta property="og:url" content="https://www.compu-tools.com/ieee754/">
+  <meta property="og:title" content="IEEE 754 Float/Double Converter – Decimal ↔ Hex ↔ Binary Bit Pattern | CompuTools">
+  <meta property="og:description" content="Convert between decimal, hexadecimal, and IEEE 754 binary bit patterns for 32-bit float and 64-bit double. Visualize sign, exponent, and mantissa fields. Debug firmware register dumps, NaN/Inf values, and floating-point encoding.">
+  <meta property="og:image" content="https://www.compu-tools.com/logo.png">
+  <meta property="og:image:height" content="607">
+  <meta property="og:image:width" content="607">
+
+
+  <title>IEEE 754 Float/Double Converter – Decimal ↔ Hex ↔ Binary Bit Pattern | CompuTools</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="/index-6401a87969f6e014.css" integrity="sha384-/shxofdFic+FzguATdHouO0nO/nfZgAZqVsP0efCU+nfIy+nj0Qdxf+hMlCb+WkH">
+  <link rel="stylesheet" href="/navbar-9e9aef7cd77cab4c.css" integrity="sha384-6d1zFgEWqeWEuYjeYP1X4JWCHsAvuIX1dUZl3gwWk4c3cxX9Ku6/9UazyGXTDV1Z">
+  <link rel="stylesheet" href="/search-5e76d837f4992b24.css" integrity="sha384-/Xa2ZCby4ZmmWNBxgZM41extbMbzZ+P/es51hPXQPhEGNyDW4+EUPV9VDBWa29PS">
+  <link rel="stylesheet" href="/tool-b67921465c577f8c.css" integrity="sha384-RSe/uBHskPmf3dR1BekHLBFvh8fbukMGaUf86FKSkHbtO7QvraHSHig6wzn89WUt">
+  <link rel="stylesheet" href="/blog-42a481462b65cc52.css" integrity="sha384-2iPE0yDuVRZ3KUHNX4hpaBkqKz3tEvcLb+XrIHRx5JdGKEjt7mSJ52uqL/CB4Pi4">
+  <link rel="stylesheet" href="/post-b5e6c3c39c74afcf.css" integrity="sha384-xEvK5PS7+b6i78In+EmuVOKx2Iutp16AiL1HdFCNZ9pANUH0ucmgry8G0a5SYJy2">
+  <link rel="stylesheet" href="/preview-14aa51ba045d7a89.css" integrity="sha384-voDBMygIpwsbaKvxZcMlpyqFvrbvEqJCUHps1FiKydP3A8oGRCQEoxURv0X7YLmO">
+  <link rel="stylesheet" href="/ad-f9974c17e37fdf39.css" integrity="sha384-kwuGziYBvm34B68F4w3Nq5aJBApUYZ4n1JvROx8lHtIjYqXAjrTxCEsv082HNc7h">
+  <link rel="stylesheet" href="/prism-c451adb7299a4a0.css" integrity="sha384-JHfRrkWbZJu5R/8OJhxu3j19hT9BpfW1isiNYAlkF5vRzQu14JDkB4lWvJX5I4r7">
+  
+  
+<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202606160101/show_ads_impl.js?bust=31099217"></script><script type="module">
+import init, * as bindings from '/computools-9f578b7eec69be75.js';
+const wasm = await init({ module_or_path: '/computools-9f578b7eec69be75_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+
+  
+  
+
+
+  
+  
+  
+  
+  
+
+  <link rel="icon" href="/favicon-1a8ba4d4617517ad.ico" integrity="sha384-sh+KkiOvcFXwh29z2PE6y5W6JoL/C2uPj8MHwWodi4oVC6f4XcUmhJGk6dmH2Teg">
+
+  <script src="/prism.js"></script>
+
+
+  <!-- MathJax for LaTeX math rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script>
+      (function() {
+          const redirect = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          if (redirect && redirect !== window.location.href) {
+              history.replaceState(null, null, redirect);
+          }
+      })();
+  </script>
+  <script>
+    // JavaScript에서 getTimeZoneOffset 함수 정의
+    function getTimeZoneOffset() {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const offset = new Date().getTimezoneOffset();
+        return { timeZone, offset };
+    }
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9424100257975478" crossorigin="anonymous" data-checked-head="true"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1G0CMRC310');
+  </script>
+<link rel="modulepreload" href="/computools-9f578b7eec69be75.js" crossorigin="anonymous" integrity="sha384-QkRKlTVeZrCjUXS//slILsBoFVRS62pf0fNGqbBfAXldQyziBUQTgDVKaWmXBj4r"><link rel="preload" href="/computools-9f578b7eec69be75_bg.wasm" crossorigin="anonymous" integrity="sha384-oR2ZUA6KtPu+mG9KWCZds1QrqawtfUJkiY4Pluu+lCxRwVbmWAE62EX/QdWbY68S" as="fetch" type="application/wasm"><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+<body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper" style="height: auto !important;"><div class="main-content" style="height: auto !important;"><div class="page-with-sidebar" style="height: auto !important;"><div class="page-main" style="height: auto !important;"><div class="home-wrapper" style="height: auto !important;"><h1 class="tool-title">IEEE 754 Float/Double Converter – Decimal ↔ Hex ↔ Binary Bit Pattern</h1><div class="tool-description">Convert between decimal, hexadecimal, and IEEE 754 binary bit patterns for 32-bit float and 64-bit double. Visualize sign, exponent, and mantissa fields. Debug firmware register dumps, NaN/Inf values, and floating-point encoding.</div><div class="ad-display-wrapper ad-common-display"><ins style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7315862436" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_0_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7315862436&amp;adk=1964690608&amp;adf=1054769236&amp;pi=t.ma~as.7315862436&amp;abgtt=6&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1782112216&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fieee754%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;asro=0&amp;aimartd=4&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTcuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;dt=1782112296770&amp;bpp=44&amp;bdt=507&amp;idt=-M&amp;shv=r20260617&amp;mjsv=m202606160101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0&amp;nras=1&amp;correlator=3679650495226&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=25&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=252&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=31099217%2C95386362%2C95394755&amp;oid=2&amp;pvsid=7312970807114986&amp;tmod=583832310&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=2&amp;uci=a!2&amp;fsb=1&amp;dtd=13" data-google-container-id="a!2" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div><div class="tool-page-analytics-scope" style="height: auto !important;"><div class="tool-mid-ad-injector-host" style="height: auto !important;"><style>
+                    .ieee754-bits {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 2px;
+                        font-family: 'JetBrains Mono', monospace;
+                        font-size: 11px;
+                        line-height: 1;
+                    }
+                    .ieee754-bit-sign {
+                        background: #FF6B6B;
+                        color: white;
+                        padding: 4px 6px;
+                        border-radius: 3px;
+                        min-width: 20px;
+                        text-align: center;
+                        font-weight: 700;
+                        cursor: default;
+                    }
+                    .ieee754-bit-exp {
+                        background: #4DABF7;
+                        color: #1a1a2e;
+                        padding: 4px 6px;
+                        border-radius: 3px;
+                        min-width: 20px;
+                        text-align: center;
+                        font-weight: 700;
+                        cursor: default;
+                    }
+                    .ieee754-bit-man {
+                        background: #69DB7C;
+                        color: #1a1a2e;
+                        padding: 4px 6px;
+                        border-radius: 3px;
+                        min-width: 20px;
+                        text-align: center;
+                        font-weight: 700;
+                        cursor: default;
+                    }
+                    .ieee754-group {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 4px;
+                    }
+                    .ieee754-group-bits {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 2px;
+                    }
+                    .ieee754-group-label {
+                        font-size: 10px;
+                        color: var(--color-text-muted, #888);
+                        font-family: 'JetBrains Mono', monospace;
+                        font-weight: 600;
+                        letter-spacing: 0.05em;
+                    }
+                    .ieee754-bit-layout {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 8px;
+                        align-items: flex-start;
+                        padding: 10px 0 6px 0;
+                    }
+                    .ieee754-legend {
+                        display: flex;
+                        gap: 14px;
+                        flex-wrap: wrap;
+                        margin-top: 8px;
+                        font-size: 12px;
+                        font-family: 'JetBrains Mono', monospace;
+                    }
+                    .ieee754-legend-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                    }
+                    .ieee754-legend-dot {
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 3px;
+                        display: inline-block;
+                    }
+                    .ieee754-decode-grid {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 8px;
+                        margin-top: 8px;
+                    }
+                    @media (max-width: 500px) {
+                        .ieee754-decode-grid { grid-template-columns: 1fr; }
+                    }
+                    .ieee754-decode-item {
+                        background: var(--color-second, #f5f7fa);
+                        border-radius: 6px;
+                        padding: 8px 12px;
+                    }
+                    .ieee754-decode-label {
+                        font-size: 10px;
+                        color: var(--color-text-muted, #888);
+                        font-family: 'JetBrains Mono', monospace;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        letter-spacing: 0.06em;
+                        margin-bottom: 2px;
+                    }
+                    .ieee754-decode-value {
+                        font-size: 13px;
+                        font-family: 'JetBrains Mono', monospace;
+                        font-weight: 700;
+                        word-break: break-all;
+                    }
+                    .ieee754-decode-value.sign-pos { color: #2ecc71; }
+                    .ieee754-decode-value.sign-neg { color: #e74c3c; }
+                    .ieee754-decode-value.class-special { color: #e67e22; }
+                    .ieee754-decode-value.class-normal { color: #3498db; }
+                    .ieee754-decode-value.class-denorm { color: #9b59b6; }
+                </style><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "IEEE 754 Float/Double Converter",
+      "url": "https://www.compu-tools.com/ieee754/",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web Browser",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Convert between decimal, hexadecimal, octal, and IEEE 754 binary bit patterns for 32-bit float and 64-bit double. Visualize sign, exponent, and mantissa fields with color-coded bit layout. Debug firmware register dumps, NaN/Infinity values, and floating-point encoding. Runs locally via WebAssembly.",
+      "featureList": [
+        "32-bit float (f32) and 64-bit double (f64) conversion",
+        "Decimal, hexadecimal, octal, and binary bit pattern input",
+        "Color-coded bit visualization: sign (red), exponent (blue), mantissa (green)",
+        "Decoded field panel: sign, biased exponent, actual exponent, mantissa fraction",
+        "Special value detection: NaN, Infinity, -Infinity, +Zero, -Zero, Denormalized",
+        "Any input field can be the source of truth, all others update automatically",
+        "Copy to clipboard for all fields",
+        "Precision mode persisted in localStorage",
+        "Runs entirely in the browser via WebAssembly"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is IEEE 754?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "IEEE 754 is the international standard for floating-point arithmetic, defining how real numbers are stored in binary hardware. It specifies 32-bit single precision (float) and 64-bit double precision (double) formats. Each value is encoded as three fields: a sign bit, a biased exponent, and a fractional mantissa (significand)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I convert a float to hex, octal, or binary?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter your decimal float value (e.g. 3.14) in the Decimal field. The tool instantly computes the IEEE 754 bit pattern and displays it as hexadecimal (e.g. 0x4048F5C3 for 32-bit), octal (e.g. 0o10022172703), and a 32-bit binary string — all updated in real time. You can also start from any of the four formats and the rest will update automatically. In C, the equivalent for hex is: uint32_t bits; memcpy(&bits, &float_val, sizeof(float));"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What do sign, exponent, and mantissa mean?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The sign bit (1 bit) is 0 for positive and 1 for negative values. The exponent field (8 bits for float, 11 bits for double) stores a biased exponent — subtract 127 (float) or 1023 (double) to get the actual power of 2. The mantissa (23 bits for float, 52 bits for double) stores the fractional part of the significand; for normalized numbers the implicit leading 1 is assumed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are NaN, Infinity, and Denormalized numbers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NaN (Not a Number) has all exponent bits set to 1 and a non-zero mantissa — produced by operations like 0/0 or sqrt(-1). Infinity (positive or negative) has all exponent bits 1 and zero mantissa. Denormalized (subnormal) numbers have all exponent bits 0 and non-zero mantissa — they fill the gap between zero and the smallest normal number, allowing gradual underflow."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I read a floating-point register dump?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Paste the hexadecimal register value (e.g. 0xC0490FDB) into the Hex field. The tool decodes it to the decimal float value (-3.14159...) and shows the bit layout with sign, exponent, and mantissa highlighted. This is useful for debugging embedded firmware, MCU peripheral registers, and memory dumps."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between float and double precision?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "32-bit float (single precision) uses 1 sign bit, 8 exponent bits, and 23 mantissa bits — about 7 decimal digits of precision and a range of ~1.18e-38 to ~3.40e+38. 64-bit double (double precision) uses 1 sign bit, 11 exponent bits, and 52 mantissa bits — about 15-17 decimal digits and a range of ~2.23e-308 to ~1.80e+308. Use the tabs to switch between the two modes."
+          }
+        }
+      ]
+    }
+  ]
+}</script><div class="tool-wrapper" style="height: auto !important;"><div class="tool-intro"><div class="content-section"><h2>What is IEEE 754?</h2><p>IEEE 754 is the international standard for binary floating-point arithmetic, published by the Institute of Electrical and Electronics Engineers. It defines how computers store and compute with real numbers — used by every CPU, GPU, and microcontroller manufactured in the last 40 years. The standard specifies two primary formats: <strong>32-bit single precision (float)</strong> and <strong>64-bit double precision (double)</strong>. Every value, including special cases like infinity and NaN, is encoded as a three-field binary pattern: a sign bit, a biased exponent, and a fractional mantissa.</p><p>Understanding the raw bit pattern behind a floating-point number is essential for embedded firmware development, debugging MCU register dumps, porting numeric code between platforms, and understanding rounding errors. This tool lets you explore any float or double by entering it as a decimal, hex, octal, or binary value — and shows you the exact IEEE 754 bit structure in real time.</p></div><div class="content-section"><h2>How to Use This Tool</h2><ol><li><strong>Select Precision</strong> — Choose 32-bit Float or 64-bit Double using the tabs at the top.</li><li><strong>Enter a Value</strong> — Type into any of the four input fields. <em>Decimal:</em> enter any floating-point number (e.g. <code>3.14</code>, <code>-1.0</code>, <code>NaN</code>, <code>inf</code>). <em>Hex:</em> enter the raw bit pattern as hex (e.g. <code>0x4048F5C3</code> for 32-bit). <em>Octal:</em> enter the octal bit pattern (e.g. <code>0o10022172703</code> for 32-bit). <em>Binary:</em> enter the 32- or 64-character bit string directly.</li><li><strong>Read the Bit Layout</strong> — The color-coded visualization shows each bit in its field: <span style="color:#FF6B6B; font-weight:bold;">red</span> for the sign bit, <span style="color:#4DABF7; font-weight:bold;">blue</span> for the exponent, <span style="color:#69DB7C; font-weight:bold;">green</span> for the mantissa.</li><li><strong>Read the Decoded Fields</strong> — The panel below the bit visualization shows the sign, biased exponent, actual exponent, mantissa fraction, and value class (Normal, NaN, Infinity, Zero, Denormalized).</li><li><strong>Copy</strong> — Click the copy icon next to any field to copy the value to your clipboard.</li></ol></div><div class="content-section"><h2>Common Use Cases</h2><ul><li><strong>Firmware / Embedded Register Debugging:</strong> When a sensor, ADC, or DSP returns a 32-bit hex register value that represents a float, paste it into the Hex field to see the decoded decimal and bit layout. E.g. a temperature sensor may return <code>0x42280000</code> which decodes to <code>42.0°C</code>.</li><li><strong>NaN and Infinity Detection:</strong> Diagnose floating-point errors in math-heavy code. If a computation produces 0x7FC00000 (32-bit), the tool immediately identifies it as a <em>Quiet NaN</em>.</li><li><strong>Cross-Platform Numeric Portability:</strong> Verify that a float serialized on a big-endian server matches the bit pattern expected on a little-endian ARM MCU.</li><li><strong>Modbus / CAN Bus Float Decoding:</strong> Industrial protocols often transmit IEEE 754 floats in 32-bit registers. This tool helps you verify the encoding from the raw hex register dump.</li><li><strong>Learning Floating-Point Internals:</strong> Step through special values like <code>0.1</code>, <code>1.0/3.0</code>, <code>16777216 + 1</code> to see how precision is lost at the bit level.</li></ul></div><div class="content-section"><h2>IEEE 754 Special Values</h2><div style="background-color: var(--color-third, #f8f9fa); padding: 10px; border-radius: 5px; margin: 10px 0; overflow-x: auto;"><table style="width: 100%; border-collapse: collapse; font-size: 12px; font-family: 'JetBrains Mono', monospace;"><thead style="background-color: var(--color-fourth, #3498db); color: white;"><tr><th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Value</th><th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Exponent (8-bit)</th><th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Mantissa (23-bit)</th><th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Hex (32-bit)</th><th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Notes</th></tr></thead><tbody><tr><td style="padding: 6px; border: 1px solid #ddd;"><strong>+0</strong></td><td style="padding: 6px; border: 1px solid #ddd;">00000000</td><td style="padding: 6px; border: 1px solid #ddd;">00000…0</td><td style="padding: 6px; border: 1px solid #ddd;">0x00000000</td><td style="padding: 6px; border: 1px solid #ddd;">Positive zero</td></tr><tr><td style="padding: 6px; border: 1px solid #ddd;"><strong>-0</strong></td><td style="padding: 6px; border: 1px solid #ddd;">00000000</td><td style="padding: 6px; border: 1px solid #ddd;">00000…0</td><td style="padding: 6px; border: 1px solid #ddd;">0x80000000</td><td style="padding: 6px; border: 1px solid #ddd;">Negative zero (sign=1)</td></tr><tr><td style="padding: 6px; border: 1px solid #ddd;"><strong>+Infinity</strong></td><td style="padding: 6px; border: 1px solid #ddd;">11111111</td><td style="padding: 6px; border: 1px solid #ddd;">00000…0</td><td style="padding: 6px; border: 1px solid #ddd;">0x7F800000</td><td style="padding: 6px; border: 1px solid #ddd;">Overflow, 1.0/0.0</td></tr><tr><td style="padding: 6px; border: 1px solid #ddd;"><strong>-Infinity</strong></td><td style="padding: 6px; border: 1px solid #ddd;">11111111</td><td style="padding: 6px; border: 1px solid #ddd;">00000…0</td><td style="padding: 6px; border: 1px solid #ddd;">0xFF800000</td><td style="padding: 6px; border: 1px solid #ddd;">Negative overflow</td></tr><tr><td style="padding: 6px; border: 1px solid #ddd;"><strong>Quiet NaN</strong></td><td style="padding: 6px; border: 1px solid #ddd;">11111111</td><td style="padding: 6px; border: 1px solid #ddd;">1xxxxxx…</td><td style="padding: 6px; border: 1px solid #ddd;">0x7FC00000</td><td style="padding: 6px; border: 1px solid #ddd;">0/0, sqrt(-1), etc.</td></tr><tr><td style="padding: 6px; border: 1px solid #ddd;"><strong>Denormalized</strong></td><td style="padding: 6px; border: 1px solid #ddd;">00000000</td><td style="padding: 6px; border: 1px solid #ddd;">non-zero</td><td style="padding: 6px; border: 1px solid #ddd;">0x00000001…</td><td style="padding: 6px; border: 1px solid #ddd;">Gradual underflow, no implicit leading 1</td></tr><tr><td style="padding: 6px; border: 1px solid #ddd;"><strong>Smallest Normal</strong></td><td style="padding: 6px; border: 1px solid #ddd;">00000001</td><td style="padding: 6px; border: 1px solid #ddd;">00000…0</td><td style="padding: 6px; border: 1px solid #ddd;">0x00800000</td><td style="padding: 6px; border: 1px solid #ddd;">≈ 1.175e-38</td></tr><tr><td style="padding: 6px; border: 1px solid #ddd;"><strong>Largest Normal</strong></td><td style="padding: 6px; border: 1px solid #ddd;">11111110</td><td style="padding: 6px; border: 1px solid #ddd;">11111…1</td><td style="padding: 6px; border: 1px solid #ddd;">0x7F7FFFFF</td><td style="padding: 6px; border: 1px solid #ddd;">≈ 3.403e+38</td></tr></tbody></table></div></div><div class="content-section"><h2>Related Tools</h2><ul><li><a href="/base/">Number Base Converter</a> - Convert numbers between binary, decimal, hexadecimal, and octal with precision</li><li><a href="/unit-converter/">Unit Converter</a> - Convert metric and imperial units for length, mass, temperature, pressure, speed, area, volume, data storage, time, energy, and more. Handy for engineering, travel, and homework—runs locally.</li><li><a href="/rotation-calculator/">3D Rotation Calculator</a> - Free 3D rotation calculator online. Compose and chain multiple rotations — Euler angles, quaternions, axis-angle, and rotation matrices — and see the compound result in all four formats with live 3D visualization. Runs locally in your browser.</li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a> - Visualize 3D rotations using Quaternions, Euler Angles, and Rotation Matrices with interactive 3D visualization</li><li><a href="/quaternion/">3D Rotation Converter</a> - Convert between Quaternions, Euler Angles, and 3×3 Rotation Matrices bidirectionally with interactive 3D visualization</li></ul></div></div><div class="tool-container" style="height: auto !important;"><div style="margin-bottom: 14px;" class="tool-input-type-tabs"><button class="tool-tab-btn active"><i class="fa-solid fa-microchip"></i> 32-bit Float (f32)</button><button class="tool-tab-btn"><i class="fa-solid fa-microchip"></i> 64-bit Double (f64)</button></div><div class="tool-settings-grid"><div style="grid-column: 1 / -1;" class="tool-settings-section"><div style="display: flex; align-items: center; justify-content: space-between;"><h3 style="margin-bottom: 0;" class="tool-section-header"><span class="tool-icon-badge"><i class="fa-solid fa-bars"></i></span>Bit Layout Visualization</h3><button style="padding: 4px 10px; font-size: 10px; width: auto;" disabled="disabled" class="tool-copy-button"><i class="fa-solid fa-copy"></i> Copy</button></div><div class="tool-settings-content"><div style="padding: 12px 0;" class="tool-hint-text"><i class="fa-solid fa-circle-info"></i> Enter a value above to see the bit layout</div></div></div></div><div class="tool-ad-anchor" style="height: auto !important;"><div class="ad-display-wrapper ad-tool" style="height: auto !important; min-height: 0px !important;"><ins class="adsbygoogle" style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7541212813" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_1_host" style="border: none; height: 280px; width: 1162px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:1162px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1162" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7541212813&amp;adk=4138624831&amp;adf=1594126187&amp;pi=t.ma~as.7541212813&amp;abgtt=6&amp;w=1162&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1782112216&amp;rafmt=1&amp;format=1162x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fieee754%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;asro=0&amp;aimartd=4&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTcuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;dt=1782112296770&amp;bpp=1&amp;bdt=507&amp;idt=1&amp;shv=r20260617&amp;mjsv=m202606160101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie_enabled=1&amp;eoidce=1&amp;prev_fmts=0x0%2C1200x280&amp;nras=1&amp;correlator=3679650495226&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=25&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=59&amp;ady=777&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=31099217%2C95386362%2C95394755&amp;oid=2&amp;pvsid=7312970807114986&amp;tmod=583832310&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=o%7C%7CoeEbr%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=3&amp;uci=a!3&amp;btvi=1&amp;fsb=1&amp;dtd=15" data-google-container-id="a!3" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div></div><div class="tool-result-section result-group"><div style="margin-bottom: 14px;" class="tool-result-title"><span class="tool-icon-badge-lg"><i class="fa-solid fa-calculator"></i></span>IEEE 754 Converter &amp; Field Breakdown</div><div style="display: flex; flex-direction: column; gap: 10px;" class="tool-input-section"><div style="background: var(--color-second); padding: 14px; border-radius: 8px; border: 1px solid var(--color-fourth);"><div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;"><label style="font-size: 11px; font-weight: 600; color: var(--color-font);">Decimal</label><button style="padding: 4px 10px; font-size: 10px; width: auto;" disabled="disabled" class="tool-copy-button"><i class="fa-solid fa-copy"></i> Copy</button></div><input type="text" placeholder="e.g. 3.14, -1.0, NaN, inf, -inf" spellcheck="false" autocomplete="off" style="width: 100%; text-align: left; font-family: 'Consolas', 'Monaco', monospace; font-size: 11px; color: var(--color-font);" class="tool-number-input"><div style="margin-top: 6px; font-size: 11px; color: var(--color-subfont);" class="tool-hint-text"><i class="fa-solid fa-circle-info"></i>Valid: 0-9, ., e, +, - | Special: NaN, inf, -inf, -0 accepted</div></div><div style="background: var(--color-second); padding: 14px; border-radius: 8px; border: 1px solid var(--color-fourth);"><div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;"><label style="font-size: 11px; font-weight: 600; color: var(--color-font);">Hexadecimal</label><button style="padding: 4px 10px; font-size: 10px; width: auto;" disabled="disabled" class="tool-copy-button"><i class="fa-solid fa-copy"></i> Copy</button></div><input type="text" placeholder="e.g. 0x4048F5C3" spellcheck="false" autocomplete="off" style="width: 100%; text-align: left; font-family: 'Consolas', 'Monaco', monospace; font-size: 11px; color: var(--color-font);" class="tool-number-input"><div style="margin-top: 6px; font-size: 11px; color: var(--color-subfont);" class="tool-hint-text"><i class="fa-solid fa-circle-info"></i>Valid: 0-9, A-F | Formats: 0x, x, \x, or plain (up to 8 digits)</div></div><div style="background: var(--color-second); padding: 14px; border-radius: 8px; border: 1px solid var(--color-fourth);"><div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;"><label style="font-size: 11px; font-weight: 600; color: var(--color-font);">Octal</label><button style="padding: 4px 10px; font-size: 10px; width: auto;" disabled="disabled" class="tool-copy-button"><i class="fa-solid fa-copy"></i> Copy</button></div><input type="text" placeholder="e.g. 0o10022172703" spellcheck="false" autocomplete="off" style="width: 100%; text-align: left; font-family: 'Consolas', 'Monaco', monospace; font-size: 11px; color: var(--color-font);" class="tool-number-input"><div style="margin-top: 6px; font-size: 11px; color: var(--color-subfont);" class="tool-hint-text"><i class="fa-solid fa-circle-info"></i>Valid: 0-7 | Formats: 0o, o, \, 0-prefix, or plain (up to 11 digits)</div></div><div style="background: var(--color-second); padding: 14px; border-radius: 8px; border: 1px solid var(--color-fourth);"><div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;"><label style="font-size: 11px; font-weight: 600; color: var(--color-font);">Binary (32-bit)</label><button style="padding: 4px 10px; font-size: 10px; width: auto;" disabled="disabled" class="tool-copy-button"><i class="fa-solid fa-copy"></i> Copy</button></div><input type="text" placeholder="32-bit string, e.g. 01000000010010001111010111000011" spellcheck="false" autocomplete="off" style="width: 100%; text-align: left; font-family: 'Consolas', 'Monaco', monospace; font-size: 11px; color: var(--color-font);" class="tool-number-input"><div style="margin-top: 6px; font-size: 11px; color: var(--color-subfont);" class="tool-hint-text"><i class="fa-solid fa-circle-info"></i>Valid: 0-1 | Formats: 0b, b, or plain (exactly 32 bits)</div></div></div><div style="border-top: 1px solid var(--color-border, #e8e8e8); margin: 16px 0 0 0;"></div><div style="padding: 16px; text-align: center;" class="tool-hint-text"><i class="fa-solid fa-circle-info"></i> Enter a value to see the decoded IEEE 754 fields</div></div><div class="tool-tip-box"><i class="fa-solid fa-circle-info"></i> Need to swap the byte order of your float for a big-endian device? Use the <a href="/endian/">Endian Converter</a> to byte-swap the hex value, then paste it back here.</div><button class="tool-container-fullscreen-btn" title="Fullscreen: entire tool panel"><i class="fa-solid fa-expand"></i></button></div></div></div></div></div></div><aside class="sidebar-right sidebar-right--ad-only"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper ad-sidebar"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/hmac/">HMAC Generator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/rotation-calculator/">3D Rotation Calculator</a></li><li><a href="/ieee754/">IEEE 754 Converter</a></li><li><a href="/endian/">Endian Converter</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/i2c/">I2C Calculator</a></li><li><a href="/spi/">SPI Calculator</a></li><li><a href="/uart/">UART Calculator</a></li><li><a href="/bit-mask/">Bit Mask Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/pwm-servo/">PWM &amp; Servo Calculator</a></li><li><a href="/resistor/">Resistor Color Code</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK Calculator</a></li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20260617/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>
