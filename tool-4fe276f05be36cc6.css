@@ -1409,7 +1409,6 @@ body {
 }
 
 .footer-top {
-  max-width: 1200px;
   margin: 0 auto;
   padding: 40px 30px 30px 30px;
   border-bottom: 1px solid var(--color-third);
@@ -1469,7 +1468,6 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 24px;
-  max-width: 1200px;
   margin: 0 auto;
   padding: 30px 30px;
   border-bottom: 1px solid var(--color-third);
@@ -1558,7 +1556,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1200px;
   margin: 0 auto;
   padding: 16px 30px;
 }
