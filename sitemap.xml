@@ -271,13 +271,18 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://www.compu-tools.com/bitwise/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.compu-tools.com/pid/</loc>
     <lastmod>2026-06-25</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.compu-tools.com/bitwise/</loc>
-    <lastmod>2026-06-24</lastmod>
+    <loc>https://www.compu-tools.com/text-codec/</loc>
+    <lastmod>2026-06-26</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
