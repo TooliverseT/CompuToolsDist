@@ -3839,113 +3839,101 @@ input[type=text] {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 10px;
+  padding: 6px 8px;
   background: var(--color-second);
-  border-radius: 8px;
+  border-radius: 6px;
   border: 1px solid var(--color-fourth);
   min-width: 0;
   overflow: hidden;
 }
-@media (max-width: 1024px) {
-  .tool-operation-row {
-    gap: 5px;
-    padding: 6px 8px;
-  }
-}
-@media (max-width: 768px) {
-  .tool-operation-row {
-    gap: 4px;
-    padding: 6px 8px;
-  }
-}
 @media (max-width: 480px) {
   .tool-operation-row {
     gap: 4px;
-    padding: 6px 6px;
+    padding: 5px 6px;
   }
 }
 
 .tool-operation-select {
-  width: 54px;
-  height: 36px;
-  padding: 0 4px;
-  font-size: 14px;
+  width: 44px;
+  height: 28px;
+  padding: 0 3px;
+  font-size: 12px;
   font-weight: 700;
   text-align: center;
-  border-radius: 6px;
+  border-radius: 4px;
   border: 1px solid var(--color-fourth) !important;
   background: var(--color-first);
   color: var(--color-font);
   cursor: pointer;
   flex-shrink: 0;
   box-sizing: border-box;
-  line-height: 36px;
+  line-height: 28px;
 }
 @media (max-width: 1024px) {
   .tool-operation-select {
-    height: 34px;
-    font-size: 13px;
-    line-height: 34px;
-    width: 50px;
+    height: 26px;
+    font-size: 11px;
+    line-height: 26px;
+    width: 42px;
   }
 }
 @media (max-width: 768px) {
   .tool-operation-select {
-    height: 32px;
-    font-size: 12px;
-    line-height: 32px;
-    width: 48px;
+    height: 24px;
+    font-size: 10px;
+    line-height: 24px;
+    width: 40px;
   }
 }
 @media (max-width: 480px) {
   .tool-operation-select {
-    height: 30px;
-    font-size: 11px;
-    line-height: 30px;
-    width: 44px;
-    padding: 0 3px;
+    height: 22px;
+    font-size: 9px;
+    line-height: 22px;
+    width: 38px;
+    padding: 0 2px;
   }
 }
 
 .tool-operation-input {
-  width: 70px !important;
-  height: 36px !important;
+  width: 60px !important;
+  height: 28px !important;
   text-align: center;
   padding: 0 4px !important;
   flex-shrink: 0;
-  line-height: 36px !important;
+  line-height: 28px !important;
   border: 1px solid var(--color-fourth) !important;
-  border-radius: 6px;
+  border-radius: 4px;
   background: var(--color-first) !important;
   color: var(--color-font) !important;
-  font-size: 14px !important;
+  font-size: 12px !important;
   box-sizing: border-box;
   min-width: 0;
   font-family: "JetBrains Mono", helvetica, sans-serif !important;
 }
 @media (max-width: 1024px) {
   .tool-operation-input {
-    height: 34px !important;
-    font-size: 13px !important;
-    line-height: 34px !important;
-    width: 65px !important;
+    height: 26px !important;
+    font-size: 11px !important;
+    line-height: 26px !important;
+    width: 58px !important;
   }
 }
 @media (max-width: 768px) {
   .tool-operation-input {
-    height: 32px !important;
-    font-size: 12px !important;
-    line-height: 32px !important;
-    width: 60px !important;
+    height: 24px !important;
+    font-size: 10px !important;
+    line-height: 24px !important;
+    width: 56px !important;
     padding: 0 3px !important;
   }
 }
 @media (max-width: 480px) {
   .tool-operation-input {
-    height: 30px !important;
-    font-size: 11px !important;
-    line-height: 30px !important;
-    width: 55px !important;
+    height: 22px !important;
+    font-size: 9px !important;
+    line-height: 22px !important;
+    width: 50px !important;
     padding: 0 2px !important;
   }
 }
@@ -3953,50 +3941,50 @@ input[type=text] {
 .tool-operation-unit-select {
   flex: 1;
   min-width: 0;
-  height: 36px;
+  height: 28px;
   padding: 0 6px;
-  font-size: 14px;
-  border-radius: 6px;
+  font-size: 12px;
+  border-radius: 4px;
   border: 1px solid var(--color-fourth) !important;
   background: var(--color-first);
   color: var(--color-font);
   cursor: pointer;
   box-sizing: border-box;
-  line-height: 36px;
+  line-height: 28px;
 }
 @media (max-width: 1024px) {
   .tool-operation-unit-select {
-    height: 34px;
-    font-size: 13px;
-    line-height: 34px;
+    height: 26px;
+    font-size: 11px;
+    line-height: 26px;
     padding: 0 5px;
   }
 }
 @media (max-width: 768px) {
   .tool-operation-unit-select {
-    height: 32px;
-    font-size: 12px;
-    line-height: 32px;
+    height: 24px;
+    font-size: 10px;
+    line-height: 24px;
     padding: 0 4px;
   }
 }
 @media (max-width: 480px) {
   .tool-operation-unit-select {
-    height: 30px;
-    font-size: 11px;
-    line-height: 30px;
+    height: 22px;
+    font-size: 9px;
+    line-height: 22px;
     padding: 0 3px;
   }
 }
 
 .tool-operation-remove-btn {
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   padding: 0;
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4005,23 +3993,23 @@ input[type=text] {
 }
 @media (max-width: 1024px) {
   .tool-operation-remove-btn {
-    width: 34px;
-    height: 34px;
-    font-size: 13px;
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
   }
 }
 @media (max-width: 768px) {
   .tool-operation-remove-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 12px;
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
   }
 }
 @media (max-width: 480px) {
   .tool-operation-remove-btn {
-    width: 30px;
-    height: 30px;
-    font-size: 11px;
+    width: 22px;
+    height: 22px;
+    font-size: 9px;
   }
 }
 .tool-operation-remove-btn.disabled {
