@@ -6650,3 +6650,129 @@ a.token-budget-reference-link {
 .file-compare-result-table td.hash-cell:hover {
   background: var(--color-third);
 }
+
+.css-two-col {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.css-two-col .css-two-col-controls {
+  flex: 1;
+  min-width: 300px;
+}
+.css-two-col .css-two-col-preview {
+  flex: 0 0 300px;
+  min-width: 260px;
+  align-self: flex-start;
+  position: sticky;
+  top: 12px;
+}
+@media (max-width: 710px) {
+  .css-two-col {
+    flex-direction: column-reverse;
+  }
+  .css-two-col .css-two-col-controls {
+    flex: 1 1 100%;
+    min-width: 0;
+    width: 100%;
+  }
+  .css-two-col .css-two-col-preview {
+    flex: 1 1 100%;
+    min-width: 0;
+    width: 100%;
+    position: static;
+  }
+}
+
+@media (max-width: 710px) {
+  .css-two-col-controls .tool-settings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.css-ctrl-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-start;
+}
+.css-ctrl-row--stretch {
+  align-items: stretch;
+}
+
+.css-preset-field-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.css-preset-field-row__label {
+  flex: 0 0 110px;
+  font-size: 11px;
+  color: var(--color-subfont);
+  white-space: nowrap;
+  text-align: left;
+}
+
+.css-preset-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+.css-preset-row__label {
+  flex: 0 0 110px;
+  font-size: 10px;
+  color: var(--color-subfont);
+  white-space: nowrap;
+  text-align: left;
+  padding-top: 3px;
+}
+.css-preset-row__buttons {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.css-preset-card {
+  flex: 1;
+  min-width: 240px;
+  background: var(--color-second);
+  border-radius: 6px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.css-ctrl-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  background: var(--color-second);
+  border-radius: 6px;
+  padding: 6px 8px;
+  margin-bottom: 0;
+  width: max-content;
+  height: 150px;
+  box-sizing: border-box;
+}
+.css-ctrl-card.css-ctrl-card--auto {
+  height: auto;
+}
+.css-ctrl-card .css-ctrl-label {
+  font-size: 10px;
+  color: var(--color-subfont);
+  white-space: nowrap;
+  text-align: center;
+  width: 100%;
+}
+
+.css-uc-table-wrap {
+  border: 1px solid var(--color-third);
+  border-radius: 8px;
+  overflow: hidden;
+}
