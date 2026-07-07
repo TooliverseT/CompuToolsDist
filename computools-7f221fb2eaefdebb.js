@@ -244,6 +244,14 @@ if (!('encodeInto' in cachedTextEncoder)) {
 
 let WASM_VECTOR_LEN = 0;
 
+function wasm_bindgen__convert__closures________invoke__h43956eb296134926(arg0, arg1, arg2) {
+    wasm.wasm_bindgen__convert__closures________invoke__h43956eb296134926(arg0, arg1, arg2);
+}
+
+function wasm_bindgen__convert__closures_____invoke__h44f02f056773cfea(arg0, arg1) {
+    wasm.wasm_bindgen__convert__closures_____invoke__h44f02f056773cfea(arg0, arg1);
+}
+
 function wasm_bindgen__convert__closures_____invoke__h3b09059cc6a40e5e(arg0, arg1, arg2) {
     wasm.wasm_bindgen__convert__closures_____invoke__h3b09059cc6a40e5e(arg0, arg1, arg2);
 }
@@ -252,24 +260,16 @@ function wasm_bindgen__convert__closures_____invoke__h12c59439273534ff(arg0, arg
     wasm.wasm_bindgen__convert__closures_____invoke__h12c59439273534ff(arg0, arg1, arg2);
 }
 
-function wasm_bindgen__convert__closures________invoke__h43956eb296134926(arg0, arg1, arg2) {
-    wasm.wasm_bindgen__convert__closures________invoke__h43956eb296134926(arg0, arg1, arg2);
-}
-
-function wasm_bindgen__convert__closures_____invoke__hdd9b310d8d6bc02a(arg0, arg1, arg2) {
-    wasm.wasm_bindgen__convert__closures_____invoke__hdd9b310d8d6bc02a(arg0, arg1, arg2);
+function wasm_bindgen__convert__closures________invoke__h8c9cb9b50d97e311(arg0, arg1, arg2) {
+    wasm.wasm_bindgen__convert__closures________invoke__h8c9cb9b50d97e311(arg0, arg1, arg2);
 }
 
 function wasm_bindgen__convert__closures________invoke__h90b861b5600af84b(arg0, arg1, arg2) {
     wasm.wasm_bindgen__convert__closures________invoke__h90b861b5600af84b(arg0, arg1, arg2);
 }
 
-function wasm_bindgen__convert__closures________invoke__h8c9cb9b50d97e311(arg0, arg1, arg2) {
-    wasm.wasm_bindgen__convert__closures________invoke__h8c9cb9b50d97e311(arg0, arg1, arg2);
-}
-
-function wasm_bindgen__convert__closures_____invoke__h44f02f056773cfea(arg0, arg1) {
-    wasm.wasm_bindgen__convert__closures_____invoke__h44f02f056773cfea(arg0, arg1);
+function wasm_bindgen__convert__closures_____invoke__hdd9b310d8d6bc02a(arg0, arg1, arg2) {
+    wasm.wasm_bindgen__convert__closures_____invoke__hdd9b310d8d6bc02a(arg0, arg1, arg2);
 }
 
 const EXPECTED_RESPONSE_TYPES = new Set(['basic', 'cors', 'default']);
