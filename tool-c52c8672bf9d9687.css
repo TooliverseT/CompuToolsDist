@@ -6771,6 +6771,12 @@ a.token-budget-reference-link {
   width: 100%;
 }
 
+@media (max-width: 710px) {
+  .css-minifier-split {
+    grid-template-columns: 1fr;
+  }
+}
+
 .css-uc-table-wrap {
   border: 1px solid var(--color-third);
   border-radius: 8px;
