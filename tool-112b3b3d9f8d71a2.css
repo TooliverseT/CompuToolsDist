@@ -124,6 +124,10 @@ html[data-theme=light] {
   --hero-gradient: linear-gradient(135deg, #D5B8A4 0%, #FFFBE9 50%, #D5B8A4 100%);
   --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   --card-shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.12);
+  --diff-del-text: #cc0000;
+  --diff-ins-text: #006600;
+  --diff-del-bg: color-mix(in srgb, var(--color-error) 12%, var(--color-first));
+  --diff-ins-bg: color-mix(in srgb, #28a745 14%, var(--color-first));
 }
 
 html[data-theme=dark] {
@@ -138,6 +142,10 @@ html[data-theme=dark] {
   --hero-gradient: linear-gradient(135deg, #44403D 0%, #2B2B2B 50%, #44403D 100%);
   --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   --card-shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.35);
+  --diff-del-text: #dc3545;
+  --diff-ins-text: #28a745;
+  --diff-del-bg: color-mix(in srgb, var(--color-error) 12%, var(--color-first));
+  --diff-ins-bg: color-mix(in srgb, #28a745 14%, var(--color-first));
 }
 
 html {
