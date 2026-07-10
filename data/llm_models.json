@@ -1,5 +1,5 @@
 {
-  "catalog_as_of": "2026-07-09",
+  "catalog_as_of": "2026-07-10",
   "pricing_note": "Sourced from LiteLLM model_prices_and_context_window.json (see scripts/update_llm_models.py). Reference $/M; verify on provider dashboards.",
   "models": [
     {
@@ -3985,6 +3985,58 @@
       "fallback_bpe": "o200k_base"
     },
     {
+      "id": "gpt-5.6-15b69e9c6c",
+      "label": "gpt-5.6",
+      "provider": "OpenAI",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 5.0,
+      "input_cached_per_mtok_usd": 0.5,
+      "output_per_mtok_usd": 30.0,
+      "pricing_url": "https://openai.com/api/pricing/",
+      "tiktoken_model": "gpt-5.6",
+      "fallback_bpe": "o200k_base"
+    },
+    {
+      "id": "gpt-5.6-luna-0d9f1a0c47",
+      "label": "gpt-5.6-luna",
+      "provider": "OpenAI",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 1.0,
+      "input_cached_per_mtok_usd": 0.1,
+      "output_per_mtok_usd": 6.0,
+      "pricing_url": "https://openai.com/api/pricing/",
+      "tiktoken_model": "gpt-5.6-luna",
+      "fallback_bpe": "o200k_base"
+    },
+    {
+      "id": "gpt-5.6-sol-da9957adb9",
+      "label": "gpt-5.6-sol",
+      "provider": "OpenAI",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 5.0,
+      "input_cached_per_mtok_usd": 0.5,
+      "output_per_mtok_usd": 30.0,
+      "pricing_url": "https://openai.com/api/pricing/",
+      "tiktoken_model": "gpt-5.6-sol",
+      "fallback_bpe": "o200k_base"
+    },
+    {
+      "id": "gpt-5.6-terra-237f527c30",
+      "label": "gpt-5.6-terra",
+      "provider": "OpenAI",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 2.5,
+      "input_cached_per_mtok_usd": 0.25,
+      "output_per_mtok_usd": 15.0,
+      "pricing_url": "https://openai.com/api/pricing/",
+      "tiktoken_model": "gpt-5.6-terra",
+      "fallback_bpe": "o200k_base"
+    },
+    {
       "id": "gpt-audio-f9ad11a2c7",
       "label": "gpt-audio",
       "provider": "OpenAI",
@@ -4177,6 +4229,32 @@
       "output_per_mtok_usd": 16.0,
       "pricing_url": "https://openai.com/api/pricing/",
       "tiktoken_model": "gpt-realtime-2",
+      "fallback_bpe": "o200k_base"
+    },
+    {
+      "id": "gpt-realtime-2.1-16a9b020ab",
+      "label": "gpt-realtime-2.1",
+      "provider": "OpenAI",
+      "context_window": 131072,
+      "context_display": "128K",
+      "input_per_mtok_usd": 4.0,
+      "input_cached_per_mtok_usd": 0.4,
+      "output_per_mtok_usd": 24.0,
+      "pricing_url": "https://openai.com/api/pricing/",
+      "tiktoken_model": "gpt-realtime-2.1",
+      "fallback_bpe": "o200k_base"
+    },
+    {
+      "id": "gpt-realtime-2.1-mini-3352ef43f5",
+      "label": "gpt-realtime-2.1-mini",
+      "provider": "OpenAI",
+      "context_window": 131072,
+      "context_display": "128K",
+      "input_per_mtok_usd": 0.6,
+      "input_cached_per_mtok_usd": 0.06,
+      "output_per_mtok_usd": 2.4,
+      "pricing_url": "https://openai.com/api/pricing/",
+      "tiktoken_model": "gpt-realtime-2.1-mini",
       "fallback_bpe": "o200k_base"
     },
     {
