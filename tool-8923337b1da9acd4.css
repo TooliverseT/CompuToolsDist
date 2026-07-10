@@ -3842,6 +3842,14 @@ input[type=text] {
   max-height: 600px;
   overflow-y: auto;
 }
+.md-editor-split.md-editor-split--resizable .tool-custom-textarea {
+  flex: 0 0 auto;
+  height: var(--editor-pane-min-height);
+  resize: vertical;
+}
+.md-editor-split.md-editor-split--resizable .tool-custom-textarea.readonly {
+  height: var(--editor-pane-min-height);
+}
 
 .tool-operation-row {
   display: flex;
