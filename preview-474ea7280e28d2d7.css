@@ -1830,16 +1830,19 @@ input[type=datetime-local]:focus {
 }
 
 /* Calendar picker icon color - matches font color */
-input[type=datetime-local]::-webkit-calendar-picker-indicator {
+input[type=datetime-local]::-webkit-calendar-picker-indicator,
+input[type=date]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   opacity: 0.7;
 }
 
-html[data-theme=light] input[type=datetime-local]::-webkit-calendar-picker-indicator {
+html[data-theme=light] input[type=datetime-local]::-webkit-calendar-picker-indicator,
+html[data-theme=light] input[type=date]::-webkit-calendar-picker-indicator {
   filter: invert(0);
 }
 
-html[data-theme=dark] input[type=datetime-local]::-webkit-calendar-picker-indicator {
+html[data-theme=dark] input[type=datetime-local]::-webkit-calendar-picker-indicator,
+html[data-theme=dark] input[type=date]::-webkit-calendar-picker-indicator {
   filter: invert(1);
 }
 
