@@ -3853,6 +3853,11 @@ input[type=text] {
 .md-editor-split.md-editor-split--resizable .tool-custom-textarea.readonly {
   height: var(--editor-pane-min-height);
 }
+@media (max-width: 768px) {
+  .md-editor-split {
+    grid-template-columns: 1fr;
+  }
+}
 
 .tool-operation-row {
   display: flex;

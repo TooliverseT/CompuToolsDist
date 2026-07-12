@@ -1,5 +1,5 @@
 {
-  "catalog_as_of": "2026-07-11",
+  "catalog_as_of": "2026-07-12",
   "pricing_note": "Sourced from LiteLLM model_prices_and_context_window.json (see scripts/update_llm_models.py). Reference $/M; verify on provider dashboards.",
   "models": [
     {
@@ -1585,6 +1585,18 @@
       "output_per_mtok_usd": null,
       "pricing_url": "https://ai.google.dev/pricing",
       "heuristic_only": true
+    },
+    {
+      "id": "meta-muse-spark-1.1-b154617ddd",
+      "label": "meta/muse-spark-1.1",
+      "provider": "Meta",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 1.25,
+      "input_cached_per_mtok_usd": 0.15,
+      "output_per_mtok_usd": 4.25,
+      "pricing_url": "https://ai.meta.com/",
+      "fallback_bpe": "cl100k_base"
     },
     {
       "id": "mistral-codestral-2405-819260fb05",
