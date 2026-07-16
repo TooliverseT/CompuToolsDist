@@ -1,5 +1,5 @@
 {
-  "catalog_as_of": "2026-07-13",
+  "catalog_as_of": "2026-07-16",
   "pricing_note": "Sourced from LiteLLM model_prices_and_context_window.json (see scripts/update_llm_models.py). Reference $/M; verify on provider dashboards.",
   "models": [
     {
@@ -1367,6 +1367,18 @@
       "input_per_mtok_usd": 0.3,
       "input_cached_per_mtok_usd": 0.07,
       "output_per_mtok_usd": 2.0,
+      "pricing_url": "https://ai.google.dev/pricing",
+      "heuristic_only": true
+    },
+    {
+      "id": "gemini-gemini-omni-flash-preview-30851a78e5",
+      "label": "gemini/gemini-omni-flash-preview",
+      "provider": "Google",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 1.5,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": 9.0,
       "pricing_url": "https://ai.google.dev/pricing",
       "heuristic_only": true
     },
