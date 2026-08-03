@@ -6806,3 +6806,228 @@ a.token-budget-reference-link {
   border-radius: 8px;
   overflow: hidden;
 }
+
+.aero-presets-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.aero-presets-row .tool-reset-button {
+  flex: 1;
+  min-width: 72px;
+}
+
+.aero-orbital-layout {
+  display: grid;
+  grid-template-columns: minmax(340px, 2fr) minmax(520px, 3fr);
+  gap: 14px;
+  margin-bottom: 14px;
+}
+@media (max-width: 1024px) {
+  .aero-orbital-layout {
+    grid-template-columns: minmax(300px, 2fr) minmax(420px, 3fr);
+  }
+}
+@media (max-width: 768px) {
+  .aero-orbital-layout {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.aero-orbit-preview-section {
+  min-width: 0;
+}
+
+.aero-orbital-side {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 14px;
+  min-width: 0;
+}
+@media (max-width: 768px) {
+  .aero-orbital-side {
+    gap: 10px;
+  }
+}
+
+.aero-settings-content-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 12px;
+}
+@media (max-width: 480px) {
+  .aero-settings-content-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+.aero-settings-content-grid .tool-settings-row {
+  min-width: 0;
+}
+
+.aero-settings-content-grid .tool-settings-row--full-span {
+  grid-column: 1/-1;
+}
+
+.aero-result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 8px;
+}
+
+.aero-result-card {
+  background: var(--color-second);
+  border: 1px solid var(--color-fifth);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.aero-result-card--clickable {
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+.aero-result-card--clickable:hover {
+  filter: brightness(0.96);
+}
+
+.aero-result-label {
+  font-size: 10px;
+  color: var(--color-subfont);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.aero-result-value {
+  font-size: 13px;
+  color: var(--color-font);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.aero-subline {
+  margin-top: 3px;
+  color: var(--color-subfont);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.aero-orbit-wrap {
+  margin-top: 10px;
+  border: 1px solid var(--color-fifth);
+  border-radius: 10px;
+  background: radial-gradient(circle at 20% 20%, #22395e 0%, #172845 45%, #0f1b2f 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 380px;
+  overflow: hidden;
+  position: relative;
+}
+@media (max-width: 1024px) {
+  .aero-orbit-wrap {
+    min-height: 340px;
+  }
+}
+@media (max-width: 768px) {
+  .aero-orbit-wrap {
+    min-height: 300px;
+  }
+}
+
+.aero-orbit-zoom-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  padding: 5px 8px;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(12, 19, 34, 0.68);
+  color: var(--color-font);
+  font-size: 11px;
+  line-height: 1.2;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+.aero-orbit-svg {
+  width: 100%;
+  height: auto;
+  max-width: 760px;
+  max-height: 520px;
+  display: block;
+}
+
+.aero-orbit-svg--interactive {
+  cursor: grab;
+  touch-action: none;
+}
+.aero-orbit-svg--interactive:active {
+  cursor: grabbing;
+}
+
+.aero-orbit-overlay {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(12, 19, 34, 0.68);
+  backdrop-filter: blur(2px);
+  pointer-events: none;
+}
+
+.aero-orbit-overlay__line {
+  font-size: 11px;
+  line-height: 1.35;
+  color: var(--color-font);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+}
+
+.aero-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-second);
+  border: 1px solid var(--color-fifth);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.aero-table th,
+.aero-table td {
+  border-bottom: 1px solid var(--color-third);
+  padding: 8px 10px;
+  font-size: 11px;
+  text-align: left;
+  vertical-align: top;
+}
+.aero-table th {
+  width: 25%;
+  color: var(--color-font);
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.03);
+}
+.aero-table td {
+  color: var(--color-subfont);
+}
+.aero-table tr:last-child th,
+.aero-table tr:last-child td {
+  border-bottom: none;
+}
+
+.aero-drone-panel {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-fifth);
+  border-radius: 8px;
+  background: var(--color-second);
+}
