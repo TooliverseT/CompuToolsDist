@@ -264,28 +264,16 @@ if (!('encodeInto' in cachedTextEncoder)) {
 
 let WASM_VECTOR_LEN = 0;
 
-function wasm_bindgen_98644e2abeb9822___convert__closures________invoke___web_sys_7771eb89ff97b277___features__gen_Event__Event______2_(arg0, arg1, arg2) {
-    wasm.wasm_bindgen_98644e2abeb9822___convert__closures________invoke___web_sys_7771eb89ff97b277___features__gen_Event__Event______2_(arg0, arg1, arg2);
-}
-
 function wasm_bindgen_98644e2abeb9822___convert__closures_____invoke___web_sys_7771eb89ff97b277___features__gen_MouseEvent__MouseEvent_____(arg0, arg1, arg2) {
     wasm.wasm_bindgen_98644e2abeb9822___convert__closures_____invoke___web_sys_7771eb89ff97b277___features__gen_MouseEvent__MouseEvent_____(arg0, arg1, arg2);
 }
 
-function wasm_bindgen_98644e2abeb9822___convert__closures_____invoke_______1_(arg0, arg1) {
-    wasm.wasm_bindgen_98644e2abeb9822___convert__closures_____invoke_______1_(arg0, arg1);
-}
-
-function wasm_bindgen_98644e2abeb9822___convert__closures________invoke___web_sys_7771eb89ff97b277___features__gen_Event__Event______1_(arg0, arg1, arg2) {
-    wasm.wasm_bindgen_98644e2abeb9822___convert__closures________invoke___web_sys_7771eb89ff97b277___features__gen_Event__Event______1_(arg0, arg1, arg2);
-}
-
-function wasm_bindgen_98644e2abeb9822___convert__closures________invoke___web_sys_7771eb89ff97b277___features__gen_Event__Event_____(arg0, arg1, arg2) {
-    wasm.wasm_bindgen_98644e2abeb9822___convert__closures________invoke___web_sys_7771eb89ff97b277___features__gen_Event__Event_____(arg0, arg1, arg2);
-}
-
 function wasm_bindgen_98644e2abeb9822___convert__closures_____invoke___wasm_bindgen_98644e2abeb9822___JsValue_____(arg0, arg1, arg2) {
     wasm.wasm_bindgen_98644e2abeb9822___convert__closures_____invoke___wasm_bindgen_98644e2abeb9822___JsValue_____(arg0, arg1, arg2);
+}
+
+function wasm_bindgen_98644e2abeb9822___convert__closures_____invoke_______1_(arg0, arg1) {
+    wasm.wasm_bindgen_98644e2abeb9822___convert__closures_____invoke_______1_(arg0, arg1);
 }
 
 function wasm_bindgen_98644e2abeb9822___convert__closures_____invoke___web_sys_7771eb89ff97b277___features__gen_TouchEvent__TouchEvent_____(arg0, arg1, arg2) {
@@ -294,6 +282,18 @@ function wasm_bindgen_98644e2abeb9822___convert__closures_____invoke___web_sys_7
 
 function wasm_bindgen_98644e2abeb9822___convert__closures_____invoke______(arg0, arg1) {
     wasm.wasm_bindgen_98644e2abeb9822___convert__closures_____invoke______(arg0, arg1);
+}
+
+function wasm_bindgen_98644e2abeb9822___convert__closures________invoke___web_sys_7771eb89ff97b277___features__gen_Event__Event_____(arg0, arg1, arg2) {
+    wasm.wasm_bindgen_98644e2abeb9822___convert__closures________invoke___web_sys_7771eb89ff97b277___features__gen_Event__Event_____(arg0, arg1, arg2);
+}
+
+function wasm_bindgen_98644e2abeb9822___convert__closures________invoke___web_sys_7771eb89ff97b277___features__gen_Event__Event______2_(arg0, arg1, arg2) {
+    wasm.wasm_bindgen_98644e2abeb9822___convert__closures________invoke___web_sys_7771eb89ff97b277___features__gen_Event__Event______2_(arg0, arg1, arg2);
+}
+
+function wasm_bindgen_98644e2abeb9822___convert__closures________invoke___web_sys_7771eb89ff97b277___features__gen_Event__Event______1_(arg0, arg1, arg2) {
+    wasm.wasm_bindgen_98644e2abeb9822___convert__closures________invoke___web_sys_7771eb89ff97b277___features__gen_Event__Event______1_(arg0, arg1, arg2);
 }
 
 function wasm_bindgen_98644e2abeb9822___convert__closures_____invoke___wasm_bindgen_98644e2abeb9822___JsValue__wasm_bindgen_98644e2abeb9822___JsValue_____(arg0, arg1, arg2, arg3) {
