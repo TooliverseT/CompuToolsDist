@@ -1,5 +1,5 @@
 {
-  "catalog_as_of": "2026-08-15",
+  "catalog_as_of": "2026-08-16",
   "pricing_note": "Sourced from LiteLLM model_prices_and_context_window.json (see scripts/update_llm_models.py). Reference $/M; verify on provider dashboards.",
   "models": [
     {
@@ -1251,6 +1251,18 @@
       "heuristic_only": true
     },
     {
+      "id": "gemini-gemini-3.1-flash-tts-preview-9dd5a87f5a",
+      "label": "gemini/gemini-3.1-flash-tts-preview",
+      "provider": "Google",
+      "context_window": 8192,
+      "context_display": "8K",
+      "input_per_mtok_usd": 1.0,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": 20.0,
+      "pricing_url": "https://ai.google.dev/pricing",
+      "heuristic_only": true
+    },
+    {
       "id": "gemini-gemini-3.1-pro-preview-5a46187d2b",
       "label": "gemini/gemini-3.1-pro-preview",
       "provider": "Google",
@@ -1715,6 +1727,30 @@
       "input_per_mtok_usd": 1.25,
       "input_cached_per_mtok_usd": 0.15,
       "output_per_mtok_usd": 4.25,
+      "pricing_url": "https://ai.meta.com/",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "meta-muse-spark-1.2-44c17bbb0d",
+      "label": "meta/muse-spark-1.2",
+      "provider": "Meta",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 1.25,
+      "input_cached_per_mtok_usd": 0.15,
+      "output_per_mtok_usd": 4.25,
+      "pricing_url": "https://ai.meta.com/",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "meta-muse-spark-1.2-contributor-d504b804a7",
+      "label": "meta/muse-spark-1.2-contributor",
+      "provider": "Meta",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 0.1,
+      "input_cached_per_mtok_usd": 0.0,
+      "output_per_mtok_usd": 0.2,
       "pricing_url": "https://ai.meta.com/",
       "fallback_bpe": "cl100k_base"
     },
