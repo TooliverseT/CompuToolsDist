@@ -1,0 +1,574 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
+  <meta name="naver-site-verification" content="457aba595da679106dd139e9a9116d1685df4a4b">
+  <meta name="yandex-verification" content="3a939e8b309ca928">
+  <meta name="robots" content="index, follow">
+  
+  <meta name="computools" content="computools">
+  <meta name="description" content="Inspect binary dumps in the browser: offset, hex, and ASCII columns with virtual scroll up to 10 MB. Paste hex in any common format (0x, \x, x-prefix, raw pairs, xxd / hexdump -C) or upload a file. Search hex or text, go to offset, choose dump output style (0x48, x48, 48, \x48), and edit bytes — overwrite, insert with hex value, delete, or download. Define struct overlays with CSV import/export; each field is color-coded in the dump with per-field LE/BE decoding (u8–u64, f32/f64, char[n]). Your last struct is restored from browser storage. No upload.">
+  <meta name="keywords" content="hex editor online, hex viewer online, binary file viewer, binary file inspector, hex dump viewer, firmware hex viewer, struct overlay hex, hex struct parser, binary struct viewer, hex csv import, xxd online, hexdump online, hex search, hex text search, hex go to offset, hex insert delete, download binary hex, little endian hex, big endian hex, protocol hex dump, embedded hex viewer, localStorage struct overlay">
+  <meta name="author" content="CompuTools">
+
+  <meta property="og:url" content="https://www.compu-tools.com/hex-inspector/">
+  <meta property="og:title" content="Hex File Inspector Online – Hex Viewer, Struct Overlay, Search & Edit | Free | CompuTools">
+  <meta property="og:description" content="Inspect binary dumps in the browser: offset, hex, and ASCII columns with virtual scroll up to 10 MB. Paste hex in any common format (0x, \x, x-prefix, raw pairs, xxd / hexdump -C) or upload a file. Search hex or text, go to offset, choose dump output style (0x48, x48, 48, \x48), and edit bytes — overwrite, insert with hex value, delete, or download. Define struct overlays with CSV import/export; each field is color-coded in the dump with per-field LE/BE decoding (u8–u64, f32/f64, char[n]). Your last struct is restored from browser storage. No upload.">
+  <meta property="og:image" content="https://www.compu-tools.com/logo.png">
+  <meta property="og:image:height" content="607">
+  <meta property="og:image:width" content="607">
+
+
+  <title>Hex File Inspector Online – Hex Viewer, Struct Overlay, Search & Edit | Free | CompuTools</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="/index-d679cff5b6440cd8.css" integrity="sha384-7j+je2s8cPF3leWEovWVOdm9C44JMKx0/rhqCFIwoq/Cpw1hwkN3fzfYa5WrHuNa">
+  <link rel="stylesheet" href="/navbar-8ede0f16b0acb92f.css" integrity="sha384-PuvAEo/FC+R+osNw2LydaJJ1U+KFTjlRM7XeMisccpCg6hbt9J2PkJJOYc+lFfTY">
+  <link rel="stylesheet" href="/search-6c8ef22740a6ade3.css" integrity="sha384-IPIYR84Xw+jb9YDzqkBK317r2o7B5Hc3f2TUh4ADkFHruGXsZWDqHXbs0du/mHqJ">
+  <link rel="stylesheet" href="/tool-86fd4fe175efc679.css" integrity="sha384-JT9fOzFtatyrI17eBXjhKqEbrBEdjyqK+/P05sdMOPglGvEto1VRhlYjNks5MPrM">
+  <link rel="stylesheet" href="/blog-174718e01e6a0d47.css" integrity="sha384-y+KofKMYCVQLicSs13hXMq9r5z6Sev3qtzXgR4ZUnp1Cw3yTbndAE08c7hqRzxKb">
+  <link rel="stylesheet" href="/post-39c9122277702160.css" integrity="sha384-dSbp3JKvjFMQ4LVnJNagmWeLbLTIVFJXyl8OuoSL/vecjtPyqO3wM1HVSoN/6sCL">
+  <link rel="stylesheet" href="/preview-474ea7280e28d2d7.css" integrity="sha384-7x5ZUqrPFlXbUHg4cVipryKZvsrvlwe0Da8DZjoSqKPgGXQYR/YWPLv2Tk6Qca1A">
+  <link rel="stylesheet" href="/ad-f9974c17e37fdf39.css" integrity="sha384-kwuGziYBvm34B68F4w3Nq5aJBApUYZ4n1JvROx8lHtIjYqXAjrTxCEsv082HNc7h">
+  <link rel="stylesheet" href="/prism-c451adb7299a4a0.css" integrity="sha384-JHfRrkWbZJu5R/8OJhxu3j19hT9BpfW1isiNYAlkF5vRzQu14JDkB4lWvJX5I4r7">
+  
+  
+  
+<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202608250101/show_ads_impl.js"></script><script type="module">
+import init, * as bindings from '/computools-f466b25cfa3e490e.js';
+const wasm = await init({ module_or_path: '/computools-f466b25cfa3e490e_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+
+  <link rel="icon" href="/favicon-1a8ba4d4617517ad.ico" integrity="sha384-sh+KkiOvcFXwh29z2PE6y5W6JoL/C2uPj8MHwWodi4oVC6f4XcUmhJGk6dmH2Teg">
+
+  <script src="/prism.js"></script>
+
+
+  <!-- MathJax for LaTeX math rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script>
+      (function() {
+          const redirect = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          if (redirect && redirect !== window.location.href) {
+              history.replaceState(null, null, redirect);
+          }
+      })();
+  </script>
+  <script>
+    // JavaScript에서 getTimeZoneOffset 함수 정의
+    function getTimeZoneOffset() {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const offset = new Date().getTimezoneOffset();
+        return { timeZone, offset };
+    }
+  </script>
+  <!-- Google Funding Choices (ad recovery) -->
+  <script async="" src="https://fundingchoicesmessages.google.com/i/pub-9424100257975478?ers=1"></script>
+  <script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+  <script src="/funding-choices-recovery.js"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9424100257975478" crossorigin="anonymous" data-checked-head="true"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1G0CMRC310');
+  </script>
+<link rel="modulepreload" href="/computools-f466b25cfa3e490e.js" crossorigin="anonymous" integrity="sha384-XJ5xUCEM8A3YncthjEjyqKxJGtHWSs1nkeyPtfNzIrn+pn1dsITLpk1HRYZ5sQl+"><link rel="preload" href="/computools-f466b25cfa3e490e_bg.wasm" crossorigin="anonymous" integrity="sha384-vxasBkX8AyNDK9R3nWeyrBnzG7CCb7EnXGjPbDC5bC061Qw+ttVCcyd+wsBWkfOc" as="fetch" type="application/wasm"><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+<body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper" style="height: auto !important;"><div class="main-content" style="height: auto !important;"><div class="page-with-sidebar" style="height: auto !important;"><div class="page-main" style="height: auto !important;"><div class="home-wrapper" style="height: auto !important;"><h1 class="tool-title">Hex File Inspector Online – Hex Viewer, Struct Overlay, Search &amp; Edit | Free</h1><div class="tool-description">Inspect binary dumps in the browser: offset, hex, and ASCII columns with virtual scroll up to 10 MB. Paste hex in any common format (0x, \x, x-prefix, raw pairs, xxd / hexdump -C) or upload a file. Search hex or text, go to offset, choose dump output style (0x48, x48, 48, \x48), and edit bytes — overwrite, insert with hex value, delete, or download. Define struct overlays with CSV import/export; each field is color-coded in the dump with per-field LE/BE decoding (u8–u64, f32/f64, char[n]). Your last struct is restored from browser storage. No upload.</div><div class="ad-display-wrapper ad-common-display"><ins style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7315862436" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_0_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7315862436&amp;adk=1964690608&amp;adf=1054769236&amp;pi=t.ma~as.7315862436&amp;abgtt=6&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1788184635&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fhex-inspector%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;aiof=13&amp;asro=0&amp;aimartd=4&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTcuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;dt=1788184813663&amp;bpp=32&amp;bdt=516&amp;idt=-M&amp;shv=r20260825&amp;mjsv=m202608250101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie=ID%3Ddc389800fb270acc%3AT%3D1788184776%3ART%3D1788184776%3AS%3DALNI_MZ8wxPEaKvHohINlIwDS0aNdAclng&amp;gpic=UID%3D000014ef94178ae8%3AT%3D1788184776%3ART%3D1788184776%3AS%3DALNI_MYbBr9JqyG4M3e5PIYBewlSz4BRCQ&amp;eo_id_str=ID%3D367f40040b36b5fe%3AT%3D1788184776%3ART%3D1788184776%3AS%3DAA-AfjZ53pVgMjM0DXVZwRLPh3dr&amp;prev_fmts=0x0&amp;nras=1&amp;correlator=5675183716773&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=50&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=329&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95399157%2C95399629%2C95400781%2C95373848%2C122880333&amp;oid=2&amp;pvsid=579672144979858&amp;tmod=1524076283&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=2&amp;uci=a!2&amp;fsb=1&amp;dtd=19" data-google-container-id="a!2" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div><div class="tool-page-analytics-scope" style="height: auto !important;"><div class="tool-mid-ad-injector-host" style="height: auto !important;"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Hex File Inspector",
+      "url": "https://www.compu-tools.com/hex-inspector/",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web Browser",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Free online hex viewer and binary inspector. Open files up to 10 MB or paste hex in any common format, browse offset/hex/ASCII with virtual scroll, search hex or text, edit bytes with styled dump output, define struct overlays with CSV import/export, and restore your last struct from browser storage. Runs locally in your browser.",
+      "featureList": [
+        "Three-column hex dump: offset, hex bytes, ASCII",
+        "Virtual scroll for dumps up to 10 MB",
+        "File upload or paste hex — 0x, \\x, x, raw pairs, and xxd / hexdump -C",
+        "Hex and text search with highlighted matches",
+        "Configurable dump output style: 0x48, x48, 48, or \\x48",
+        "In-place byte edit, hex-valued insert, delete, and download",
+        "Struct overlay with per-field colors, CSV import/export, and localStorage",
+        "Types: u8–u64, i8–i64, f32, f64, char[n] with LE/BE per field",
+        "No upload — all processing stays in the browser"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the maximum file size?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This inspector accepts files and hex pastes up to 10 MB. Rows are virtualized so the DOM only renders the visible slice of the dump."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this tool upload my firmware or dump to a server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Parsing, search, overlay, and download all run in your browser with WebAssembly. Nothing is sent to a backend."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which struct types can I overlay?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "u8, i8, u16, i16, u32, i32, u64, i64, f32, f64, and char[n]. Each field has its own offset, length (for char[n]), and little- or big-endian setting. Add fields manually, jump to offsets from the overlay table, export/import CSV, and your last struct is restored from browser localStorage. Matching bytes are color-coded in the dump."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I edit bytes and save the file?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Click a hex cell and type two hex digits to overwrite that byte. Insert uses the value field in Inspect — leave it empty for 0x00 or enter hex such as DE or DE AD BE EF. Delete removes one byte at the selection. Download saves the edited buffer as a binary blob. This is a lightweight dump inspector, not a full hex editor."
+          }
+        }
+      ]
+    }
+  ]
+}</script><div class="tool-wrapper tool-ad-top" style="height: auto !important;"><div style="order:3;" class="tool-intro"><div class="content-section"><h2>Hex File Inspector — Binary Dump Viewer in the Browser</h2><p>Inspect firmware images, protocol captures, and file headers without leaving the browser. Load a file up to 10 MB or paste hex — including 0x, \x, x-prefix, raw pairs, and xxd / hexdump -C dumps — then browse a classic three-column view: file offset, 16 hex bytes per row, and ASCII. Virtual scrolling keeps the DOM to visible rows only, so multi-megabyte dumps stay responsive.</p><p>All parsing, search, overlay, edit, and download run locally in WebAssembly. Nothing is uploaded.</p></div><div class="content-section"><h2>Inspect — Search, Navigate, and Edit</h2><ul><li><strong>Hex search: </strong>find byte patterns such as 0xDE \xAD xBE AD or DEADBEEF. Matches are listed and highlighted in yellow in the dump.</li><li><strong>Text search: </strong>find ASCII strings such as ELF or IHDR in the loaded buffer.</li><li><strong>Go to: </strong>jump to an offset with 0x100 or a decimal index.</li><li><strong>Output style: </strong>choose how bytes render in the dump — 0x48, x48, 48, or \x48.</li><li><strong>Edit: </strong>click a byte and type two hex digits to overwrite. Insert uses the value field (empty = 0x00, or enter hex such as DE AD). Delete removes one byte at the selection.</li><li><strong>Download: </strong>save the current buffer as a binary blob after edits.</li></ul><p>The selected byte shows a blue outline. Search hits use a yellow dashed outline. Changed bytes are marked in the dump.</p></div><div class="content-section"><h2>Struct Overlay</h2><p>Map named fields onto byte ranges without loading a file first — the overlay panel is always available under Inspect. Supported types: u8, i8, u16, i16, u32, i32, u64, i64, f32, f64, and char[n]. Each field has its own offset, length (for char[n]), and LE/BE endian setting.</p><ul><li><strong>+ Field: </strong>add a field manually. New fields default to little-endian.</li><li><strong>Colors: </strong>each field gets a distinct color in the hex dump for quick visual mapping.</li><li><strong>Go to field: </strong>use the crosshair button in a row to jump to that field's offset.</li><li><strong>CSV: </strong>export or import field definitions (columns: name, type, offset, len, endian).</li><li><strong>Persistence: </strong>your last struct is restored automatically from browser localStorage.</li></ul><p>Clearing input does not remove your struct definition. Parsed values appear in the Value column once a buffer is loaded.</p><p>Multi-byte interpretation can be checked in the <a href="/endian/">Endian Converter</a>. Integer bitfields pair with the <a href="/bit-mask/">Bit Mask Calculator</a>. Float payloads can be verified in the <a href="/ieee754/">IEEE 754 Converter</a>.</p></div><div class="content-section"><h2>Related Tools</h2><ul><li><a href="/robot-kinematics/">Robot Arm FK/IK/Jacobian Calculator</a> — Robot arm kinematics for learning &amp; practice: FK/IK, DH tables, dedicated Jacobian tab with 6×N matrix, velocity mapping ẋ=J·q̇, manipulability index, SVD, singularity detection—aligned with cobots, industrial robots, humanoid arms, and AI robotics workflows. Robot programming friendly (CSV export). 2–6 DOF, SCARA, UR/KUKA-style presets, 3D visualization. Runs in your browser.</li><li><a href="/bezier/">Bezier Curve Editor</a> — Interactive cubic Bezier curve editor with real-time animation preview, 35 easing presets, side-by-side comparison, and code export for CSS, Unity C#, C++, and JavaScript.</li><li><a href="/pwm-servo/">PWM &amp; Servo Calculator</a> — Calculate PWM period, duty cycle, high/low time, servo angle-to-pulse-width mapping, and ESC throttle position. Supports standard (1000–2000 µs) and wide-range (500–2500 µs) servos. Runs in your browser.</li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a> — Convert vectors and attitudes between NED, ENU, and Body coordinate frames. Visualize frame axes, apply roll/pitch/yaw DCM rotation, and understand frame relationships used in drone, robot, and navigation systems.</li><li><a href="/token/">LLM Token Calculator</a> — Count prompt tokens in the browser before you hit the API. Compare GPT-4o, Claude, and Gemini context windows, reserve output tokens, and estimate input/output cost. tiktoken-based where the model encoding is known.</li></ul></div></div><div class="tool-container" style="height: auto !important;"><div class="tool-settings-grid"><div class="tool-settings-section"><h3 class="tool-section-header"><span class="tool-icon-badge"><i class="fa-solid fa-keyboard"></i></span>Input Settings</h3><div class="tool-settings-content"><div class="tool-settings-row"><label class="tool-settings-label"><i class="fa-solid fa-code"></i>Input Method</label></div><div class="hex-mode-tabs"><button type="button" class="hex-mode-tab">HEX</button><button type="button" class="hex-mode-tab active">FILE</button></div></div></div></div><div style="margin-top:14px;" class="tool-input-section"><div class="tool-title-row"><div class="tool-section-title"><i class="fa-solid fa-pen-to-square"></i>Input</div><span class="tool-mode-badge">FILE Mode</span></div><div style="border: 2px solid transparent;border-radius:8px;padding:20px;text-align:center;transition:border-color 0.15s ease;"><div><div style="margin-bottom:10px;"><i style="font-size:24px;color:var(--color-font);" class="fa-solid fa-cloud-arrow-up"></i></div><div style="margin-bottom:8px;font-weight:700;color:var(--color-fourth);">Drop file here or click to upload</div><div style="font-size:12px;color:var(--color-font);margin-bottom:10px;">Any binary file · Max 10 MB</div><input id="hex-inspector-file" type="file" style="display:none;"><label for="hex-inspector-file" style="display:inline-block;cursor:pointer;" class="hex-mini-btn hex-mini-btn--accent"><i class="fa-solid fa-folder-open"></i> Choose File</label></div></div></div><div style="margin-top:14px;" class="tool-settings-grid"><div style="grid-column:1/-1;" class="tool-settings-section"><h3 class="tool-section-header"><span class="tool-icon-badge"><i class="fa-solid fa-magnifying-glass"></i></span>Inspect</h3><div class="tool-settings-content"><div style="margin-bottom:10px;" class="tool-settings-row"><label class="tool-settings-label"><i class="fa-solid fa-search"></i>Search</label><div class="hex-ctrl"><div class="hex-mode-tabs hex-mode-tabs--inline"><button type="button" class="hex-mode-tab active">Hex</button><button type="button" class="hex-mode-tab">Text</button></div><input style="flex:1;min-width:0;font-family:ui-monospace,monospace;" placeholder="0xDE \xAD xBE AD or DEADBEEF" class="tool-settings-input"><button type="button" class="hex-mini-btn">Find</button></div></div><div style="margin-bottom:10px;" class="tool-settings-row"><label class="tool-settings-label"><i class="fa-solid fa-location-crosshairs"></i>Go to</label><div class="hex-ctrl"><input style="flex:1;min-width:0;font-family:ui-monospace,monospace;" placeholder="0x100 or 256" class="tool-settings-input"><button type="button" class="hex-mini-btn">Go</button></div></div><div style="margin-bottom:10px;" class="tool-settings-row"><label class="tool-settings-label"><i class="fa-solid fa-eye"></i>Output style</label><div class="hex-ctrl"><div class="hex-mode-tabs hex-mode-tabs--inline"><button type="button" class="hex-mode-tab">0x48</button><button type="button" class="hex-mode-tab">x48</button><button type="button" class="hex-mode-tab active">48</button><button type="button" class="hex-mode-tab">\x48</button></div></div></div><div class="tool-settings-row"><label class="tool-settings-label"><i class="fa-solid fa-pen"></i>Edit</label><div class="hex-ctrl"><input style="flex:1;min-width:0;max-width:140px;font-family:ui-monospace,monospace;" placeholder="00 or 0xDE" class="tool-settings-input"><button type="button" disabled="disabled" class="hex-mini-btn"><i class="fa-solid fa-plus"></i> Insert</button><button type="button" disabled="disabled" class="hex-mini-btn"><i class="fa-solid fa-minus"></i> Delete</button><button type="button" disabled="disabled" class="hex-mini-btn"><i class="fa-solid fa-download"></i> Download</button></div></div></div></div><div style="grid-column:1/-1;" class="tool-settings-section"><h3 class="tool-section-header"><span class="tool-icon-badge"><i class="fa-solid fa-table-columns"></i></span>Struct overlay</h3><div class="tool-settings-content"><div class="hex-overlay-actions"><button type="button" class="hex-mini-btn hex-mini-btn--accent"><i class="fa-solid fa-plus"></i> Field</button><button type="button" class="hex-mini-btn"><i class="fa-solid fa-trash"></i> Clear</button><button type="button" class="hex-mini-btn"><i class="fa-solid fa-file-export"></i> Export CSV</button><input id="hex-inspector-csv-import" type="file" accept=".csv,text/csv,text/plain" style="display:none;"><label for="hex-inspector-csv-import" style="cursor:pointer;margin:0;" class="hex-mini-btn"><i class="fa-solid fa-file-import"></i> Import CSV</label></div><div class="tool-hint-text"><i class="fa-solid fa-circle-info"></i> Add fields manually or import CSV (name, type, offset, len, endian). Each field gets a color in the dump. Use the crosshair button to jump to a field offset. Values appear when input is loaded; your struct is saved in this browser.</div></div></div></div><div class="tool-ad-anchor" style="height: auto !important;"><div class="ad-display-wrapper ad-tool" style="height: auto !important; min-height: 0px !important;"><ins class="adsbygoogle" style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7541212813" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_1_host" style="border: none; height: 280px; width: 1162px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:1162px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1162" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7541212813&amp;adk=4138624831&amp;adf=1735448561&amp;pi=t.ma~as.7541212813&amp;abgtt=6&amp;w=1162&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1788184635&amp;rafmt=1&amp;format=1162x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fhex-inspector%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;aiof=13&amp;asro=0&amp;aimartd=4&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTcuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;dt=1788184813663&amp;bpp=3&amp;bdt=516&amp;idt=3&amp;shv=r20260825&amp;mjsv=m202608250101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie=ID%3Ddc389800fb270acc%3AT%3D1788184776%3ART%3D1788184776%3AS%3DALNI_MZ8wxPEaKvHohINlIwDS0aNdAclng&amp;gpic=UID%3D000014ef94178ae8%3AT%3D1788184776%3ART%3D1788184776%3AS%3DALNI_MYbBr9JqyG4M3e5PIYBewlSz4BRCQ&amp;eo_id_str=ID%3D367f40040b36b5fe%3AT%3D1788184776%3ART%3D1788184776%3AS%3DAA-AfjZ53pVgMjM0DXVZwRLPh3dr&amp;prev_fmts=0x0%2C1200x280&amp;nras=1&amp;correlator=5675183716773&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=50&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=59&amp;ady=1527&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95399157%2C95399629%2C95400781%2C95373848%2C122880333&amp;oid=2&amp;pvsid=579672144979858&amp;tmod=1524076283&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=o%7C%7CoeEbr%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=3&amp;uci=a!3&amp;btvi=1&amp;fsb=1&amp;dtd=21" data-google-container-id="a!3" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div></div><div style="margin-top:14px;" class="tool-tip-box"><i class="fa-solid fa-circle-info"></i> Struct overlay fields can use LE or BE per row — open the <a href="/endian/">Endian Converter</a> to double-check multi-byte values. For register masks use <a href="/bit-mask/">Bit Mask Calculator</a>, and for bus dumps see <a href="/can/">CAN Bus Frame Analyzer</a> or <a href="/uart/">UART Calculator</a>.</div><button class="tool-container-fullscreen-btn" title="Fullscreen: entire tool panel"><i class="fa-solid fa-expand"></i></button></div></div></div></div></div></div><aside class="sidebar-right sidebar-right--ad-only"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper ad-sidebar"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/hmac/">HMAC Generator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/text-codec/">Universal Text Codec</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/rotation-calculator/">3D Rotation Calculator</a></li><li><a href="/ieee754/">IEEE 754 Converter</a></li><li><a href="/endian/">Endian Converter</a></li><li><a href="/bitwise/">Binary &amp; Bitwise Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/i2c/">I2C Calculator</a></li><li><a href="/spi/">SPI Calculator</a></li><li><a href="/uart/">UART Calculator</a></li><li><a href="/can/">CAN Frame Analyzer</a></li><li><a href="/bit-mask/">Bit Mask Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/pwm-servo/">PWM &amp; Servo Calculator</a></li><li><a href="/subnet/">IP / Subnet Calculator</a></li><li><a href="/resistor/">Resistor Color Code</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK/Jacobian Calculator</a></li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a></li><li><a href="/hex-inspector/">Hex File Inspector</a></li><li><a href="/aerospace/">Aerospace Calculator</a></li><li><a href="/pid/">PID Controller Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code Generator</a></li><li><a href="/mock-data/">Mock Data Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/curl/">cURL &amp; API Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li><li><a href="/css/">CSS Toolbox</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-image"></i>Image</div><ul class="footer-links"><li><a href="/image/">Image Converter, EXIF Viewer &amp; Palette Extractor</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20260825/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>
