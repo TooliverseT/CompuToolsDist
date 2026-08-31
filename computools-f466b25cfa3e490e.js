@@ -264,12 +264,8 @@ if (!('encodeInto' in cachedTextEncoder)) {
 
 let WASM_VECTOR_LEN = 0;
 
-function wasm_bindgen_1d7a7e59496fd11f___convert__closures________invoke___web_sys_d5c75c5186e62359___features__gen_Event__Event______2_(arg0, arg1, arg2) {
-    wasm.wasm_bindgen_1d7a7e59496fd11f___convert__closures________invoke___web_sys_d5c75c5186e62359___features__gen_Event__Event______2_(arg0, arg1, arg2);
-}
-
-function wasm_bindgen_1d7a7e59496fd11f___convert__closures________invoke___web_sys_d5c75c5186e62359___features__gen_Event__Event______3_(arg0, arg1, arg2) {
-    wasm.wasm_bindgen_1d7a7e59496fd11f___convert__closures________invoke___web_sys_d5c75c5186e62359___features__gen_Event__Event______3_(arg0, arg1, arg2);
+function wasm_bindgen_1d7a7e59496fd11f___convert__closures_____invoke___web_sys_d5c75c5186e62359___features__gen_TouchEvent__TouchEvent_____(arg0, arg1, arg2) {
+    wasm.wasm_bindgen_1d7a7e59496fd11f___convert__closures_____invoke___web_sys_d5c75c5186e62359___features__gen_TouchEvent__TouchEvent_____(arg0, arg1, arg2);
 }
 
 function wasm_bindgen_1d7a7e59496fd11f___convert__closures_____invoke___web_sys_d5c75c5186e62359___features__gen_MouseEvent__MouseEvent_____(arg0, arg1, arg2) {
@@ -288,8 +284,12 @@ function wasm_bindgen_1d7a7e59496fd11f___convert__closures________invoke___web_s
     wasm.wasm_bindgen_1d7a7e59496fd11f___convert__closures________invoke___web_sys_d5c75c5186e62359___features__gen_Event__Event_____(arg0, arg1, arg2);
 }
 
-function wasm_bindgen_1d7a7e59496fd11f___convert__closures_____invoke___web_sys_d5c75c5186e62359___features__gen_TouchEvent__TouchEvent_____(arg0, arg1, arg2) {
-    wasm.wasm_bindgen_1d7a7e59496fd11f___convert__closures_____invoke___web_sys_d5c75c5186e62359___features__gen_TouchEvent__TouchEvent_____(arg0, arg1, arg2);
+function wasm_bindgen_1d7a7e59496fd11f___convert__closures________invoke___web_sys_d5c75c5186e62359___features__gen_Event__Event______3_(arg0, arg1, arg2) {
+    wasm.wasm_bindgen_1d7a7e59496fd11f___convert__closures________invoke___web_sys_d5c75c5186e62359___features__gen_Event__Event______3_(arg0, arg1, arg2);
+}
+
+function wasm_bindgen_1d7a7e59496fd11f___convert__closures________invoke___web_sys_d5c75c5186e62359___features__gen_Event__Event______2_(arg0, arg1, arg2) {
+    wasm.wasm_bindgen_1d7a7e59496fd11f___convert__closures________invoke___web_sys_d5c75c5186e62359___features__gen_Event__Event______2_(arg0, arg1, arg2);
 }
 
 function wasm_bindgen_1d7a7e59496fd11f___convert__closures_____invoke______(arg0, arg1) {
