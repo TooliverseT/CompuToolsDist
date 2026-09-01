@@ -1,0 +1,593 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
+  <meta name="naver-site-verification" content="457aba595da679106dd139e9a9116d1685df4a4b">
+  <meta name="yandex-verification" content="3a939e8b309ca928">
+  <meta name="robots" content="index, follow">
+  
+  <meta name="computools" content="computools">
+  <meta name="description" content="Parse CSV and TSV in the browser: delimiter and header auto-detect, spreadsheet-style grid with sort, filter, and dedupe. Export to JSON, JSONL, Markdown tables, SQL INSERT, TSV, or CSV. UTF-8 default with UTF-16 Excel support. Import JSON arrays and JSONL. No upload.">
+  <meta name="keywords" content="csv to json converter, csv to json online, tsv viewer, csv viewer online, csv to markdown table, csv to sql insert, json to csv converter, jsonl to csv, csv parser online, tsv to json, spreadsheet csv tool, rfc 4180 csv, utf-8 csv">
+  <meta name="author" content="CompuTools">
+
+  <meta property="og:url" content="https://www.compu-tools.com/csv/">
+  <meta property="og:title" content="CSV to JSON Converter Online – TSV Viewer, Markdown & SQL Export | Free | CompuTools">
+  <meta property="og:description" content="Parse CSV and TSV in the browser: delimiter and header auto-detect, spreadsheet-style grid with sort, filter, and dedupe. Export to JSON, JSONL, Markdown tables, SQL INSERT, TSV, or CSV. UTF-8 default with UTF-16 Excel support. Import JSON arrays and JSONL. No upload.">
+  <meta property="og:image" content="https://www.compu-tools.com/logo.png">
+  <meta property="og:image:height" content="607">
+  <meta property="og:image:width" content="607">
+
+
+  <title>CSV to JSON Converter Online – TSV Viewer, Markdown & SQL Export | Free | CompuTools</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="/index-d679cff5b6440cd8.css" integrity="sha384-7j+je2s8cPF3leWEovWVOdm9C44JMKx0/rhqCFIwoq/Cpw1hwkN3fzfYa5WrHuNa">
+  <link rel="stylesheet" href="/navbar-8ede0f16b0acb92f.css" integrity="sha384-PuvAEo/FC+R+osNw2LydaJJ1U+KFTjlRM7XeMisccpCg6hbt9J2PkJJOYc+lFfTY">
+  <link rel="stylesheet" href="/search-6c8ef22740a6ade3.css" integrity="sha384-IPIYR84Xw+jb9YDzqkBK317r2o7B5Hc3f2TUh4ADkFHruGXsZWDqHXbs0du/mHqJ">
+  <link rel="stylesheet" href="/tool-86fd4fe175efc679.css" integrity="sha384-JT9fOzFtatyrI17eBXjhKqEbrBEdjyqK+/P05sdMOPglGvEto1VRhlYjNks5MPrM">
+  <link rel="stylesheet" href="/blog-174718e01e6a0d47.css" integrity="sha384-y+KofKMYCVQLicSs13hXMq9r5z6Sev3qtzXgR4ZUnp1Cw3yTbndAE08c7hqRzxKb">
+  <link rel="stylesheet" href="/post-39c9122277702160.css" integrity="sha384-dSbp3JKvjFMQ4LVnJNagmWeLbLTIVFJXyl8OuoSL/vecjtPyqO3wM1HVSoN/6sCL">
+  <link rel="stylesheet" href="/preview-474ea7280e28d2d7.css" integrity="sha384-7x5ZUqrPFlXbUHg4cVipryKZvsrvlwe0Da8DZjoSqKPgGXQYR/YWPLv2Tk6Qca1A">
+  <link rel="stylesheet" href="/ad-f9974c17e37fdf39.css" integrity="sha384-kwuGziYBvm34B68F4w3Nq5aJBApUYZ4n1JvROx8lHtIjYqXAjrTxCEsv082HNc7h">
+  <link rel="stylesheet" href="/prism-c451adb7299a4a0.css" integrity="sha384-JHfRrkWbZJu5R/8OJhxu3j19hT9BpfW1isiNYAlkF5vRzQu14JDkB4lWvJX5I4r7">
+  
+  
+  
+<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202608270101/show_ads_impl.js?bust=122880756"></script><script type="module">
+import init, * as bindings from '/computools-f4cdc900dfc2ee3.js';
+const wasm = await init({ module_or_path: '/computools-f4cdc900dfc2ee3_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+
+  <link rel="icon" href="/favicon-1a8ba4d4617517ad.ico" integrity="sha384-sh+KkiOvcFXwh29z2PE6y5W6JoL/C2uPj8MHwWodi4oVC6f4XcUmhJGk6dmH2Teg">
+
+  <script src="/prism.js"></script>
+
+
+  <!-- MathJax for LaTeX math rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script>
+      (function() {
+          const redirect = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          if (redirect && redirect !== window.location.href) {
+              history.replaceState(null, null, redirect);
+          }
+      })();
+  </script>
+  <script>
+    // JavaScript에서 getTimeZoneOffset 함수 정의
+    function getTimeZoneOffset() {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const offset = new Date().getTimezoneOffset();
+        return { timeZone, offset };
+    }
+  </script>
+  <!-- Google Funding Choices (ad recovery) -->
+  <script async="" src="https://fundingchoicesmessages.google.com/i/pub-9424100257975478?ers=1"></script>
+  <script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+  <script src="/funding-choices-recovery.js"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9424100257975478" crossorigin="anonymous" data-checked-head="true"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1G0CMRC310');
+  </script>
+<link rel="modulepreload" href="/computools-f4cdc900dfc2ee3.js" crossorigin="anonymous" integrity="sha384-OCZZ/mz2rDk7JhRBeatKEtwjqkcLv9Rywxb4N3wqrrCDVcdFLm/n+AYllOnES9dJ"><link rel="preload" href="/computools-f4cdc900dfc2ee3_bg.wasm" crossorigin="anonymous" integrity="sha384-EzyLAe/fsEok84hIocQfTMkhei5wKT3Nmut91YgjWESx8xvxL5+RPKrh/b10O8Fv" as="fetch" type="application/wasm"><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+<body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper" style="height: auto !important;"><div class="main-content" style="height: auto !important;"><div class="page-with-sidebar" style="height: auto !important;"><div class="page-main" style="height: auto !important;"><div class="home-wrapper" style="height: auto !important;"><h1 class="tool-title">CSV to JSON Converter Online – TSV Viewer, Markdown &amp; SQL Export | Free</h1><div class="tool-description">Parse CSV and TSV in the browser: delimiter and header auto-detect, spreadsheet-style grid with sort, filter, and dedupe. Export to JSON, JSONL, Markdown tables, SQL INSERT, TSV, or CSV. UTF-8 default with UTF-16 Excel support. Import JSON arrays and JSONL. No upload.</div><div class="ad-display-wrapper ad-common-display"><ins style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7315862436" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_0_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7315862436&amp;adk=1964690608&amp;adf=1054769236&amp;pi=t.ma~as.7315862436&amp;abgtt=6&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1788275984&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fcsv%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;asro=0&amp;aimartd=4&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTcuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;dt=1788276041719&amp;bpp=51&amp;bdt=484&amp;idt=-M&amp;shv=r20260831&amp;mjsv=m202608270101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie=ID%3D74bf714904dfcedd%3AT%3D1788276022%3ART%3D1788276022%3AS%3DALNI_Ma6Fb7CDOTxgGYxuKZL54jb3Ta2bw&amp;gpic=UID%3D000014f095accbe6%3AT%3D1788276022%3ART%3D1788276022%3AS%3DALNI_MYxFENNLJqIKDh9FQdOkwGpQfngeg&amp;eo_id_str=ID%3D9842e9dc7c66fd77%3AT%3D1788276022%3ART%3D1788276022%3AS%3DAA-Afjat2UdWQ1UjOl579CMZ_uUM&amp;prev_fmts=0x0&amp;nras=1&amp;correlator=3786796851149&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=18&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=278&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95399630%2C95400774%2C122880756&amp;oid=2&amp;pvsid=5295870443375004&amp;tmod=156598966&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=2&amp;uci=a!2&amp;fsb=1&amp;dtd=15" data-google-container-id="a!2" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div><div class="tool-page-analytics-scope" style="height: auto !important;"><div class="tool-mid-ad-injector-host" style="height: auto !important;"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "CSV TSV Table Viewer & Converter",
+      "url": "https://www.compu-tools.com/csv/",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web Browser",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Parse CSV and TSV in the browser with a spreadsheet-style grid, then export to JSON, JSONL, Markdown tables, or SQL INSERT. UTF-8 default with UTF-16 Excel export support. No upload.",
+      "featureList": [
+        "RFC 4180 CSV parsing with quoted fields and embedded newlines",
+        "Delimiter auto-detect and grid preview with sort, filter, dedupe",
+        "Export JSON, JSONL, Markdown, SQL INSERT, TSV, CSV",
+        "UTF-8 and UTF-16 LE/BE file decoding with BOM detection",
+        "Bidirectional JSON array and JSONL import"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does this tool support legacy encodings like EUC-KR?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Only Unicode UTF-8 (default) and UTF-16 LE/BE for Excel-style exports are supported. Re-save legacy files as UTF-8 in your spreadsheet app if characters look wrong."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my data uploaded to a server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Parsing, preview, and export run entirely in your browser with WebAssembly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I convert CSV to JSON online?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Paste or upload your CSV, set Output format to JSON, and the Result panel updates instantly. Click the textarea or Download to copy or save export.json."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I handle multi-row headers from Google Analytics exports?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enable Skip # lines, set Header rows (N) to 2, and enable Skip empty key. The first two rows merge into column names like Country / Metric, and comment or total rows are filtered out."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I import JSON or JSONL into a table?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Paste a JSON array of objects or JSONL (one object per line). The tool auto-detects the format and builds a grid. CSV/TSV import options do not apply to JSON or JSONL."
+          }
+        }
+      ]
+    }
+  ]
+}</script><div class="tool-wrapper" style="height: auto !important;"><div class="tool-intro"><div class="content-section"><h2>What is the CSV / TSV Table Viewer &amp; Converter?</h2><p>CSV (Comma-Separated Values) and TSV (Tab-Separated Values) are the most common formats for exchanging tabular data — spreadsheet exports, database dumps, analytics reports, log aggregations, and API responses saved to disk. This free online tool parses CSV, TSV, and related delimited text in your browser, shows a sortable spreadsheet-style preview grid, and exports to JSON, JSONL, Markdown tables, SQL INSERT statements, TSV, or CSV — with no upload and no server round-trip.</p><p>Unlike opening a file in Excel or Google Sheets, you get instant format conversion, column-level sorting and hiding, row search and deduplication, and copy-ready output for scripts, documentation, or SQL migrations — all from a single paste or drag-and-drop. Parsing follows RFC 4180 rules: quoted fields, embedded commas, and multiline cell values inside double quotes are handled correctly.</p><p>Everything runs locally in WebAssembly (Rust compiled to WASM). Your data never leaves the browser.</p></div><div class="content-section"><h2>Why Use an Online CSV Viewer and Converter?</h2><ul><li><strong>Quick inspection: </strong>Paste a CSV snippet from a log, email, or terminal and see a clean grid without opening a spreadsheet app.</li><li><strong>Format conversion: </strong>Turn CSV into JSON for REST APIs, JSONL for streaming pipelines, Markdown for README docs, or SQL INSERT for database seeding.</li><li><strong>Analytics exports: </strong>Google Analytics and similar tools export CSV with <code>#</code> comment lines, two-row merged headers, and summary rows — import options strip noise and build proper column names.</li><li><strong>Privacy: </strong>Sensitive customer or production data stays on your machine. No cloud upload required.</li><li><strong>Bidirectional JSON: </strong>Import JSON arrays or JSONL back into a table view, then re-export as CSV or TSV.</li></ul></div><div class="content-section"><h2>How to Use — Step by Step</h2><h3>Basic CSV → JSON conversion</h3><ol><li>Switch <strong>Input Method</strong> to <strong>TEXT</strong> (default) or <strong>FILE</strong> to upload a file.</li><li>Paste or upload tabular data — for example:</li></ol><div class="example-box"><pre><code>name,age,city
+Alice,30,NYC
+Bob,25,LA</code></pre></div><ol start="3"><li>Leave <strong>Delimiter</strong> on <strong>Auto</strong> (comma detected) and <strong>Header row</strong> on <strong>Auto-detect</strong>.</li><li>Set <strong>Output format</strong> to <strong>JSON</strong> in the Export section.</li><li>The <strong>Preview grid</strong> shows 2 rows × 3 columns; the <strong>Result</strong> panel shows a JSON array. Click the textarea to copy, or use <strong>Download</strong> to save <code>export.json</code>.</li></ol><h3>FILE mode — upload a spreadsheet export</h3><ol><li>Set <strong>Input Method</strong> to <strong>FILE</strong>.</li><li>Drag-and-drop or choose a <code>.csv</code>, <code>.tsv</code>, <code>.txt</code>, or <code>.json</code> file (max 5 MB).</li><li>For Excel <strong>CSV UTF-16</strong> exports, set <strong>File encoding</strong> to <strong>UTF-16 LE</strong> or <strong>UTF-16 BE</strong>. UTF-8 with BOM is auto-detected.</li><li>Adjust Parse &amp; display options if needed, then pick an export format.</li></ol></div><div id="input-settings" class="content-section"><h2>Input Settings</h2><h3>Input Method — TEXT vs FILE</h3><div class="example-box"><ul><li><strong>TEXT: </strong>Paste directly into the textarea. Parsing runs on every keystroke. Use <strong>Clear</strong> to reset input, grid, and result.</li><li><strong>FILE: </strong>Drag-and-drop or <strong>Choose file</strong>. Supported extensions: <code>.csv</code>, <code>.tsv</code>, <code>.txt</code>, <code>.json</code>, <code>.jsonl</code>. Max file size: 5 MB. Settings persist in browser localStorage.</li></ul></div><h3>File encoding (FILE mode)</h3><p>Choose how raw bytes are decoded before parsing:</p><ul><li><strong>UTF-8: </strong>Default. BOM (Byte Order Mark) at the start of the file is stripped automatically.</li><li><strong>UTF-16 LE: </strong>Little-endian UTF-16, common for Excel "CSV UTF-16" exports on Windows.</li><li><strong>UTF-16 BE: </strong>Big-endian UTF-16, occasionally seen in cross-platform exports.</li></ul><p>Legacy locale encodings (EUC-KR, GBK, Shift_JIS, Windows-1252, etc.) are <strong>not supported</strong>. Re-save the file as <strong>CSV UTF-8</strong> in Excel or Google Sheets if characters appear garbled.</p></div><div id="parse-display" class="content-section"><h2>Parse &amp; Display Options</h2><p>These settings control how delimited text is interpreted and how the preview grid behaves. All options except File encoding apply to TEXT and FILE input.</p><h3>Delimiter</h3><div class="example-box"><ul><li><strong>Auto: </strong>Samples the first 20 lines and picks the delimiter (comma, tab, semicolon, or pipe) with the most consistent column count per row.</li><li><strong>Comma (,): </strong>Standard CSV.</li><li><strong>Tab (TSV): </strong>Tab-separated values — common for Unix tools and <code>cut -f</code> pipelines.</li><li><strong>Semicolon (;): </strong>European Excel default when the locale uses comma as decimal separator.</li><li><strong>Pipe (|): </strong>Pipe-delimited logs and database exports.</li></ul></div><h3>Header row</h3><p>Controls whether the first data row becomes column names. Only used when <strong>Header rows (N)</strong> is set to <strong>Off</strong>.</p><ul><li><strong>Auto-detect: </strong>Treats the first row as a header when it looks textual and the second row looks more numeric, or when column names repeat. Single-column all-text files are treated as data without a header.</li><li><strong>Has header row: </strong>Always use row 1 as column names; data starts at row 2.</li><li><strong>No header: </strong>All rows are data; columns are named <code>col1</code>, <code>col2</code>, …</li></ul><h3>Search rows</h3><p>Case-insensitive filter across all columns. Matching is substring search — typing <code>Gadget</code> in a product column shows only rows containing that text. Search applies to both the preview grid and the export output.</p><h3>Dedupe rows</h3><p>When enabled, removes duplicate rows (full-row comparison) from the preview and export. Useful after joins or log merges where identical lines appear more than once.</p></div><div id="csv-import-options" class="content-section"><h2>CSV / TSV Import Preprocessing</h2><p>These three options apply only to the CSV/TSV parsing path. They are <strong>not applied</strong> when input is detected as JSON (array starting with <code>[</code>) or JSONL (multiple <code>{...}</code> lines).</p><h3>Skip `#` lines</h3><p>Removes rows whose first non-empty cell starts with <code>#</code>. Analytics tools, custom exporters, and config dumps often prepend metadata lines like <code># Report title</code> or <code># 2026-01-01 to 2026-03-01</code> before the actual table.</p><h3>Skip empty key</h3><p>Skips data rows where the first column is empty. Google Analytics page-path exports use an empty first cell for country subtotals and grand-total rows (e.g. <code>,6071.01,13650,...</code> summary line). Enable this to keep only rows with a page path in column 1.</p><h3>Header rows (N)</h3><p>Merges the first N rows into hierarchical column names, then treats row N+1 as the first data row. Each header row is forward-filled horizontally (empty cells inherit the value from the left, like Excel merged headers), then layers are joined per column with <code> / </code>.</p><div class="example-box"><p><strong>Two-row header example (Google Analytics style):</strong></p><pre><code>,United States,United States,Canada,Canada
+Page path,Revenue,Events,Revenue,Events
+/endian/,1140.95,2741,37.26,166</code></pre><p>With <strong>Header rows: 2</strong>, column names become:</p><ul><li>Col 1: <code>Page path</code></li><li>Col 2: <code>United States / Revenue</code></li><li>Col 3: <code>United States / Events</code></li><li>Col 4: <code>Canada / Revenue</code></li><li>Col 5: <code>Canada / Events</code></li></ul><p>Set N to <strong>Off</strong> to fall back to the <strong>Header row</strong> setting instead. Supported values: Off, 1, 2, 3, 4, or 5 rows.</p></div><h3>Recommended settings for Google Analytics CSV exports</h3><ol><li>Enable <strong>Skip `#` lines</strong> — removes <code>#</code> metadata rows at the top.</li><li>Set <strong>Header rows (N)</strong> to <strong>2 rows</strong> — merges country/region row with metric names.</li><li>Enable <strong>Skip empty key</strong> — drops total/summary rows with an empty first column.</li><li>Leave <strong>Delimiter</strong> on <strong>Auto</strong> and export as JSON or Markdown for further analysis.</li></ol></div><div id="preview-grid" class="content-section"><h2>Preview Grid</h2><p>After successful parsing, a paginated table shows the current view (after search, dedupe, sort, and hidden columns).</p><ul><li><strong>Sort: </strong>Click a column header to sort ascending; click again for descending; a third click clears sort. A <i class="fa-solid fa-sort"></i> icon hints that the column is sortable.</li><li><strong>Hide column: </strong>Click the eye-slash icon on a header to hide that column from the grid and export.</li><li><strong>Pagination: </strong>Choose 25, 50, 100, or 200 rows per page. The badge shows total filtered rows × visible columns.</li><li><strong>Row cap: </strong>Up to 50,000 rows are loaded; larger files show a truncation notice.</li><li><strong>Parse warnings: </strong>RFC 4180 issues (e.g. unclosed quotes) are listed without stopping the entire parse when possible.</li></ul></div><div id="export-formats" class="content-section"><h2>Export Formats</h2><p>The Result panel reflects the current grid state (search, dedupe, sort, hidden columns). Click the textarea to copy; use <strong>Download</strong> to save a file.</p><h3>JSON</h3><div class="example-box"><p>Array of objects — one object per row, keys from column headers:</p><pre><code>[
+  { "name": "Alice", "age": "30", "city": "NYC" },
+  { "name": "Bob", "age": "25", "city": "LA" }
+]</code></pre></div><h3>JSONL</h3><p>Newline-delimited JSON — one object per line. Ideal for log ingestion, BigQuery loads, and streaming ETL.</p><h3>Markdown Table</h3><p>GitHub-flavoured Markdown pipe table with a header separator row. Paste directly into README files, Notion, or GitLab wikis.</p><h3>SQL INSERT</h3><div class="example-box"><p>Set <strong>SQL table name</strong> (default <code>records</code>) in Export settings:</p><pre><code>INSERT INTO records (name, age, city) VALUES ('Alice', '30', 'NYC');
+INSERT INTO records (name, age, city) VALUES ('Bob', '25', 'LA');</code></pre><p>String values are single-quoted with internal quotes escaped. Review before running against production databases.</p></div><h3>TSV and CSV</h3><p>Re-export as tab- or comma-separated text. Useful after cleaning, deduplicating, or hiding columns. Delimiter for re-export follows the Output format (tab for TSV, comma for CSV).</p></div><div id="json-import" class="content-section"><h2>JSON and JSONL Import</h2><p>The tool auto-detects structured JSON input:</p><ul><li><strong>JSON array: </strong>Input starting with <code>[</code> must be an array of objects. Keys become column headers; key order follows first-seen order across rows.</li><li><strong>JSONL: </strong>Two or more non-empty lines each starting with <code>{</code> are parsed as JSON Lines. Each line must be a JSON object.</li></ul><div class="example-box"><p><strong>JSONL example:</strong></p><pre><code>{"name":"Alice","age":"30"}
+{"name":"Bob","age":"25"}</code></pre><p>After import, switch Output format to CSV or Markdown to convert formats without a separate tool.</p></div><p>CSV/TSV import options (Skip `#`, Skip empty key, Header rows N) do not apply to JSON or JSONL.</p></div><div class="content-section"><h2>RFC 4180 Parsing Notes</h2><ul><li>Fields containing commas, quotes, or newlines must be wrapped in double quotes.</li><li>A double quote inside a quoted field is escaped as two double quotes (<code>""</code>).</li><li>Example — quoted comma:<code> "apple, organic",3 </code> parses as two fields.</li><li>Carriage return + line feed (<code>
+</code>) and bare <code>
+</code> line endings are both accepted.</li></ul></div><div class="content-section"><h2>Frequently Asked Questions</h2><div class="faq-item"><h3>Is my CSV data uploaded to a server?</h3><p>No. Parsing, grid rendering, and export run entirely in your browser via WebAssembly. Nothing is sent to CompuTools servers.</p></div><div class="faq-item"><h3>Why do Korean or Chinese characters look wrong?</h3><p>The file is likely saved in a legacy encoding (EUC-KR, GBK, etc.). This tool supports UTF-8 and UTF-16 only. Open the file in Excel or Google Sheets and re-export as <strong>CSV UTF-8</strong> (or UTF-16 if you prefer).</p></div><div class="faq-item"><h3>How is Header row Auto-detect different from Header rows (N)?</h3><p>Header row Auto/Has/No applies when Header rows (N) is <strong>Off</strong> — it decides whether a single first row is column names. Header rows (N) at 2 or more always consumes the first N rows as a merged multi-level header, ignoring the Header row setting.</p></div><div class="faq-item"><h3>Can I convert TSV to JSON?</h3><p>Yes. Paste tab-separated data or upload a <code>.tsv</code> file. Set Delimiter to <strong>Tab (TSV)</strong> or leave Auto (tabs are detected). Choose JSON as Output format.</p></div><div class="faq-item"><h3>What happens if my file has more than 50,000 rows?</h3><p>The first 50,000 data rows are loaded and a truncation notice appears. For very large datasets, split the file or use a command-line tool such as <code>csvkit</code> or <code>mlr</code>.</p></div><div class="faq-item"><h3>Does dedupe keep the first or last occurrence?</h3><p>The first occurrence of each unique row is kept; later duplicates are removed. Order of remaining rows is preserved unless a sort is active.</p></div><div class="faq-item"><h3>Are all settings remembered?</h3><p>Yes. Delimiter, header mode, encoding, output format, SQL table name, dedupe, input mode, and CSV import options are saved to browser localStorage and restored on the next visit.</p></div></div><div class="content-section"><h2>Manual Test Cases</h2><p>Use these scenarios to verify the tool end-to-end. Full step-by-step expected outputs are documented in <code>docs/csv-test-cases.md</code> in the project repository.</p><h3>TC-1 — Basic comma CSV</h3><div class="example-box"><pre><code>name,age,city
+Alice,30,NYC
+Bob,25,LA</code></pre><p>Expected: Preview 2×3; JSON export with two objects; Auto header detects <code>name</code>, <code>age</code>, <code>city</code>.</p></div><h3>TC-2 — Quoted field with embedded comma</h3><div class="example-box"><pre><code>item,qty
+"apple, organic",3
+banana,5</code></pre><p>Expected: <code>apple, organic</code> stays in one cell; not split at the comma inside quotes.</p></div><h3>TC-3 — Google Analytics export (multi-row header)</h3><p>Upload a GA revenue CSV with <code>#</code> comment lines, two header rows, and total rows.</p><ul><li>Skip `#` lines: ON</li><li>Header rows (N): 2</li><li>Skip empty key: ON</li></ul><p>Expected: Merged headers like <code>United States / Revenue</code>; metadata and blank-key total rows removed; page paths in first column.</p><h3>TC-4 — JSON array import → CSV export</h3><div class="example-box"><pre><code>[{"id":1,"label":"alpha"},{"id":2,"label":"beta"}]</code></pre><p>Expected: Grid with columns <code>id</code>, <code>label</code>; switch Output to CSV to round-trip.</p></div><h3>TC-5 — Search, sort, dedupe</h3><p>Paste a CSV with duplicate rows. Enable Dedupe → count drops. Type in Search rows → grid filters. Click column header → sort toggles Asc / Desc / None.</p><h3>TC-6 — FILE mode UTF-16 Excel export</h3><p>Save a spreadsheet as CSV UTF-16 in Excel. Upload in FILE mode with encoding UTF-16 LE. Expected: characters intact, grid populated.</p><h3>TC-7 — Error handling</h3><ul><li>Empty input → no grid; placeholder in Result.</li><li>Unclosed quote → parse error message.</li><li>File &gt; 5 MB → size limit error.</li><li>EUC-KR file → encoding error with re-save guidance.</li></ul></div><div class="content-section"><h2>Related Tools</h2><ul><li><a href="/markdown/">Markdown Editor</a> — Live Markdown preview with GitHub Flavored Markdown: tables, task lists, footnotes, math-friendly layout, table of contents, and HTML export. Ideal for README and docs—runs in your browser.</li><li><a href="/text-case/">Text Case Converter</a> — Convert naming conventions for code and docs: camelCase, PascalCase, snake_case, kebab-case, flat case, alternating case, sentence/title case, and more. Batch-friendly, copy results locally.</li><li><a href="/text-codec/">Universal Text Codec</a> — Encode or decode text in 20+ formats simultaneously: Base16, Base32, Base36, Base45 (RFC 9285), Base58 (Bitcoin/IPFS), Base62, Base64, Base64url, Base85 (Ascii85 &amp; z85), Base91, URL percent-encoding, HTML entities, Unicode escapes (JS/Python), ROT13, Punycode, and more. Auto-detects encoding. All processing runs locally in your browser.</li><li><a href="/base64/">Base64 Encoder/Decoder</a> — Encode and decode Base64 data with support for files and URLs</li><li><a href="/base32/">Base32 Encoder/Decoder</a> — Encode and decode Base32 data for TOTP, 2FA secrets, and human-readable encoding</li></ul></div></div><div class="tool-container" style="height: auto !important;"><div class="tool-settings-grid"><div class="tool-settings-section"><h3 class="tool-section-header"><span class="tool-icon-badge"><i class="fa-solid fa-gear"></i></span>Parse &amp; display</h3><div class="tool-settings-content"><div class="tool-settings-row"><label class="tool-settings-label">Delimiter</label><select class="tool-settings-select"><option value="auto" selected="selected">Auto</option><option value="comma">Comma (,)</option><option value="tab">Tab (TSV)</option><option value="semicolon">Semicolon (;)</option><option value="pipe">Pipe (|)</option></select></div><div class="tool-settings-row"><label class="tool-settings-label">Header row</label><select class="tool-settings-select"><option value="auto" selected="selected">Auto-detect</option><option value="has">Has header row</option><option value="none">No header</option></select></div><div class="tool-settings-row"><label class="tool-settings-label">File encoding</label><select class="tool-settings-select"><option value="utf8" selected="selected">UTF-8</option><option value="utf16le">UTF-16 LE</option><option value="utf16be">UTF-16 BE</option></select></div><div class="tool-settings-row"><label class="tool-settings-label">Search rows</label><input type="text" style="flex:0 0 45%;text-align:left;" placeholder="Filter across columns…" class="tool-number-input"></div><div class="tool-settings-row"><label class="tool-settings-label">Dedupe rows</label><label style="flex:0 0 45%;display:flex;align-items:center;gap:8px;cursor:pointer;font-size:11px;color:var(--color-font);margin:0;font-weight:400;"><input type="checkbox">Remove duplicate rows in preview &amp; export</label></div><div style="margin-top:4px;font-size:9px;color:var(--color-subfont);line-height:1.4;">CSV / TSV import options (not applied to JSON or JSONL):</div><div class="tool-settings-row"><label class="tool-settings-label">Skip `#` lines</label><label style="flex:0 0 45%;display:flex;align-items:center;gap:8px;cursor:pointer;font-size:11px;color:var(--color-font);margin:0;font-weight:400;"><input type="checkbox">Ignore rows whose first cell starts with `#`</label></div><div class="tool-settings-row"><label class="tool-settings-label">Skip empty key</label><label style="flex:0 0 45%;display:flex;align-items:center;gap:8px;cursor:pointer;font-size:11px;color:var(--color-font);margin:0;font-weight:400;"><input type="checkbox">Skip rows with an empty first column</label></div><div class="tool-settings-row"><label class="tool-settings-label">Header rows (N)</label><select class="tool-settings-select"><option value="0" selected="selected">Off (use Header row setting)</option><option value="1">1 row</option><option value="2">2 rows</option><option value="3">3 rows</option><option value="4">4 rows</option><option value="5">5 rows</option></select></div></div></div><div class="tool-settings-section"><h3 class="tool-section-header"><span class="tool-icon-badge"><i class="fa-solid fa-file-export"></i></span>Export</h3><div class="tool-settings-content"><div class="tool-settings-row"><label class="tool-settings-label">Output format</label><select class="tool-settings-select"><option value="json" selected="selected">JSON</option><option value="jsonl">JSONL</option><option value="markdown">Markdown Table</option><option value="sql">SQL INSERT</option><option value="tsv">TSV</option><option value="csv">CSV</option></select></div></div></div></div><div style="margin-top:14px;" class="tool-settings-grid"><div class="tool-settings-section"><h3 class="tool-section-header"><span class="tool-icon-badge"><i class="fa-solid fa-keyboard"></i></span>Input settings</h3><div class="tool-settings-content"><div class="tool-settings-row"><label class="tool-settings-label"><i class="fa-solid fa-code"></i>Input method</label></div><div class="hex-mode-tabs"><button type="button" class="hex-mode-tab active">TEXT</button><button type="button" class="hex-mode-tab">FILE</button></div></div></div></div><div style="margin-top:14px;" class="tool-input-section"><div><div class="tool-title-row"><div class="tool-section-title"><i class="fa-solid fa-pen-to-square"></i>Input</div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;"><span class="tool-mode-badge">TEXT Mode</span><button type="button" class="hex-mini-btn"><i class="fa-solid fa-trash"></i> Clear</button></div></div><textarea style="resize:vertical;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.45;min-height:140px;" placeholder="Paste CSV, TSV, JSON array, or JSONL…" class="tool-custom-textarea"></textarea><div class="tool-hint-text"><i class="fa-solid fa-circle-info"></i>Supports RFC 4180 CSV/TSV, JSON arrays of objects, and JSONL. File upload: UTF-8 (BOM ok) or UTF-16 LE/BE — not legacy locale encodings.</div></div></div><div class="ad-display-wrapper ad-tool" style="height: auto !important; min-height: 0px !important;"><ins class="adsbygoogle" style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7541212813" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_1_host" style="border: none; height: 280px; width: 1162px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:1162px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1162" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7541212813&amp;adk=2360826665&amp;adf=1741982317&amp;pi=t.ma~as.7541212813&amp;abgtt=6&amp;w=1162&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1788275984&amp;rafmt=1&amp;format=1162x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fcsv%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;asro=0&amp;aimartd=4&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTcuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;dt=1788276041719&amp;bpp=1&amp;bdt=483&amp;idt=1&amp;shv=r20260831&amp;mjsv=m202608270101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie=ID%3D74bf714904dfcedd%3AT%3D1788276022%3ART%3D1788276022%3AS%3DALNI_Ma6Fb7CDOTxgGYxuKZL54jb3Ta2bw&amp;gpic=UID%3D000014f095accbe6%3AT%3D1788276022%3ART%3D1788276022%3AS%3DALNI_MYxFENNLJqIKDh9FQdOkwGpQfngeg&amp;eo_id_str=ID%3D9842e9dc7c66fd77%3AT%3D1788276022%3ART%3D1788276022%3AS%3DAA-Afjat2UdWQ1UjOl579CMZ_uUM&amp;prev_fmts=0x0%2C1200x280&amp;nras=1&amp;correlator=3786796851149&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=18&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=59&amp;ady=1481&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95399630%2C95400774%2C122880756&amp;oid=2&amp;pvsid=5295870443375004&amp;tmod=156598966&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=o%7C%7CoeEbr%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=3&amp;uci=a!3&amp;btvi=1&amp;fsb=1&amp;dtd=17" data-google-container-id="a!3" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div><div style="margin-top:14px;" class="tool-result-section result-group"><div class="tool-title-row"><div class="tool-result-title"><span class="tool-icon-badge-lg"><i class="fa-solid fa-font"></i></span>Result (JSON)</div><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"><span class="tool-copy-hint-result"><i class="fa-solid fa-copy"></i>Click to copy</span><button type="button" class="hex-mini-btn"><i class="fa-solid fa-download"></i> Download</button></div></div><textarea title="Click to copy" style="white-space:pre;overflow-x:scroll;overflow-y:scroll;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.45;height:480px;min-height:480px;cursor:pointer;" placeholder="Export appears here after valid input…" readonly="readonly" class="tool-custom-textarea readonly"></textarea></div><div class="tool-tip-box"><i class="fa-solid fa-circle-info"></i> Need JSON tree/table views or YAML? Try the <a href="/json/">JSON Formatter</a> and <a href="/format-converter/">Format Converter</a>. Generate fake rows from a schema in <a href="/mock-data/">Mock Data Generator</a>.</div><button class="tool-container-fullscreen-btn" title="Fullscreen: entire tool panel"><i class="fa-solid fa-expand"></i></button></div></div></div></div></div></div><aside class="sidebar-right sidebar-right--ad-only"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper ad-sidebar"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/hmac/">HMAC Generator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/text-codec/">Universal Text Codec</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/csv/">CSV / TSV Viewer &amp; Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/rotation-calculator/">3D Rotation Calculator</a></li><li><a href="/ieee754/">IEEE 754 Converter</a></li><li><a href="/endian/">Endian Converter</a></li><li><a href="/bitwise/">Binary &amp; Bitwise Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/i2c/">I2C Calculator</a></li><li><a href="/spi/">SPI Calculator</a></li><li><a href="/uart/">UART Calculator</a></li><li><a href="/can/">CAN Frame Analyzer</a></li><li><a href="/bit-mask/">Bit Mask Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/pwm-servo/">PWM &amp; Servo Calculator</a></li><li><a href="/subnet/">IP / Subnet Calculator</a></li><li><a href="/resistor/">Resistor Color Code</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK/Jacobian Calculator</a></li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a></li><li><a href="/hex-inspector/">Hex File Inspector</a></li><li><a href="/aerospace/">Aerospace Calculator</a></li><li><a href="/pid/">PID Controller Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code Generator</a></li><li><a href="/mock-data/">Mock Data Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/curl/">cURL &amp; API Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li><li><a href="/css/">CSS Toolbox</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-image"></i>Image</div><ul class="footer-links"><li><a href="/image/">Image Converter, EXIF Viewer &amp; Palette Extractor</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20260831/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>
