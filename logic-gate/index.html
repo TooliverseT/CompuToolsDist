@@ -1,0 +1,565 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
+  <meta name="naver-site-verification" content="457aba595da679106dd139e9a9116d1685df4a4b">
+  <meta name="yandex-verification" content="3a939e8b309ca928">
+  <meta name="robots" content="index, follow">
+  
+  <meta name="computools" content="computools">
+  <meta name="description" content="Analyze Boolean expressions in the browser: 64-row truth table (Copy CSV), Quine-McCluskey SOP/POS, Karnaugh map (2–4 vars), De Morgan rewrite, and IEEE gate schematics in four modes — As entered, Minimized SOP, Minimized POS, De Morgan — with PNG download. Click-to-copy SOP/POS/De Morgan. Operator insert buttons, categorized examples, NAND/NOR/XNOR support. Up to 6 variables. No upload.">
+  <meta name="keywords" content="truth table generator, boolean algebra calculator, karnaugh map solver, k map calculator, quine mccluskey, logic gate diagram, logic gate simulator, sop pos minimization, product of sums calculator, sum of products calculator, de morgan theorem, boolean expression parser, digital logic calculator, gate schematic svg, logic circuit diagram, minimized sop pos, nand nor gate, fpga boolean logic, verilog boolean expression, truth table csv export">
+  <meta name="author" content="CompuTools">
+
+  <meta property="og:url" content="https://www.compu-tools.com/logic-gate/">
+  <meta property="og:title" content="Boolean Algebra Calculator Online – Truth Table, K-Map, SOP/POS, Gate Diagram PNG | CompuTools">
+  <meta property="og:description" content="Analyze Boolean expressions in the browser: 64-row truth table (Copy CSV), Quine-McCluskey SOP/POS, Karnaugh map (2–4 vars), De Morgan rewrite, and IEEE gate schematics in four modes — As entered, Minimized SOP, Minimized POS, De Morgan — with PNG download. Click-to-copy SOP/POS/De Morgan. Operator insert buttons, categorized examples, NAND/NOR/XNOR support. Up to 6 variables. No upload.">
+  <meta property="og:image" content="https://www.compu-tools.com/logo.png">
+  <meta property="og:image:height" content="607">
+  <meta property="og:image:width" content="607">
+
+
+  <title>Boolean Algebra Calculator Online – Truth Table, K-Map, SOP/POS, Gate Diagram PNG | CompuTools</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="/index-d679cff5b6440cd8.css" integrity="sha384-7j+je2s8cPF3leWEovWVOdm9C44JMKx0/rhqCFIwoq/Cpw1hwkN3fzfYa5WrHuNa">
+  <link rel="stylesheet" href="/navbar-8ede0f16b0acb92f.css" integrity="sha384-PuvAEo/FC+R+osNw2LydaJJ1U+KFTjlRM7XeMisccpCg6hbt9J2PkJJOYc+lFfTY">
+  <link rel="stylesheet" href="/search-6c8ef22740a6ade3.css" integrity="sha384-IPIYR84Xw+jb9YDzqkBK317r2o7B5Hc3f2TUh4ADkFHruGXsZWDqHXbs0du/mHqJ">
+  <link rel="stylesheet" href="/tool-84c999990b989ad3.css" integrity="sha384-GjJpNdAZuiXODZuUdBR8qqbiqnzyh8ywzBcUrE7SM/Pr8KSwyTjdYn59S2fctY+T">
+  <link rel="stylesheet" href="/blog-174718e01e6a0d47.css" integrity="sha384-y+KofKMYCVQLicSs13hXMq9r5z6Sev3qtzXgR4ZUnp1Cw3yTbndAE08c7hqRzxKb">
+  <link rel="stylesheet" href="/post-39c9122277702160.css" integrity="sha384-dSbp3JKvjFMQ4LVnJNagmWeLbLTIVFJXyl8OuoSL/vecjtPyqO3wM1HVSoN/6sCL">
+  <link rel="stylesheet" href="/preview-474ea7280e28d2d7.css" integrity="sha384-7x5ZUqrPFlXbUHg4cVipryKZvsrvlwe0Da8DZjoSqKPgGXQYR/YWPLv2Tk6Qca1A">
+  <link rel="stylesheet" href="/ad-f9974c17e37fdf39.css" integrity="sha384-kwuGziYBvm34B68F4w3Nq5aJBApUYZ4n1JvROx8lHtIjYqXAjrTxCEsv082HNc7h">
+  <link rel="stylesheet" href="/prism-c451adb7299a4a0.css" integrity="sha384-JHfRrkWbZJu5R/8OJhxu3j19hT9BpfW1isiNYAlkF5vRzQu14JDkB4lWvJX5I4r7">
+  
+  
+  
+<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202608280101/show_ads_impl.js?bust=122880757" fetchpriority="high"></script><script type="module">
+import init, * as bindings from '/computools-c137c8d98242a88a.js';
+const wasm = await init({ module_or_path: '/computools-c137c8d98242a88a_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+
+  <link rel="icon" href="/favicon-1a8ba4d4617517ad.ico" integrity="sha384-sh+KkiOvcFXwh29z2PE6y5W6JoL/C2uPj8MHwWodi4oVC6f4XcUmhJGk6dmH2Teg">
+
+  <script src="/prism.js"></script>
+
+
+  <!-- MathJax for LaTeX math rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script>
+      (function() {
+          const redirect = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          if (redirect && redirect !== window.location.href) {
+              history.replaceState(null, null, redirect);
+          }
+      })();
+  </script>
+  <script>
+    // JavaScript에서 getTimeZoneOffset 함수 정의
+    function getTimeZoneOffset() {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const offset = new Date().getTimezoneOffset();
+        return { timeZone, offset };
+    }
+  </script>
+  <!-- Google Funding Choices (ad recovery) -->
+  <script async="" src="https://fundingchoicesmessages.google.com/i/pub-9424100257975478?ers=1"></script>
+  <script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+  <script src="/funding-choices-recovery.js"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9424100257975478" crossorigin="anonymous" data-checked-head="true"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1G0CMRC310');
+  </script>
+<link rel="modulepreload" href="/computools-c137c8d98242a88a.js" crossorigin="anonymous" integrity="sha384-fcplGUYu/ExYtGgvOkDjC0oBrtWG/l30JhAA83DytxXwxta2Nc8XyqRT+q0IM9Qt"><link rel="preload" href="/computools-c137c8d98242a88a_bg.wasm" crossorigin="anonymous" integrity="sha384-Bt+BBxnpNpgC+RpaH4Bl6VhA2806H9D9G+L/Eo4o2DH5vePCE6vxB6ZvTvth2fGd" as="fetch" type="application/wasm"><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+<body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper" style="height: auto !important;"><div class="main-content" style="height: auto !important;"><div class="page-with-sidebar" style="height: auto !important;"><div class="page-main" style="height: auto !important;"><div class="home-wrapper" style="height: auto !important;"><h1 class="tool-title">Boolean Algebra Calculator Online – Truth Table, K-Map, SOP/POS, Gate Diagram PNG</h1><div class="tool-description">Analyze Boolean expressions in the browser: 64-row truth table (Copy CSV), Quine-McCluskey SOP/POS, Karnaugh map (2–4 vars), De Morgan rewrite, and IEEE gate schematics in four modes — As entered, Minimized SOP, Minimized POS, De Morgan — with PNG download. Click-to-copy SOP/POS/De Morgan. Operator insert buttons, categorized examples, NAND/NOR/XNOR support. Up to 6 variables. No upload.</div><div class="ad-display-wrapper ad-common-display"><ins style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7315862436" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_0_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7315862436&amp;adk=1964690608&amp;adf=1054769236&amp;pi=t.ma~as.7315862436&amp;abgtt=6&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1788445256&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Flogic-gate%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;asro=0&amp;aimartd=4&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTcuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;dt=1788445445934&amp;bpp=67&amp;bdt=549&amp;idt=-M&amp;shv=r20260901&amp;mjsv=m202608280101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie=ID%3D9550a71923301e04%3AT%3D1788445297%3ART%3D1788445297%3AS%3DALNI_MZn3zXz-ju9Vo7J3d_oGRsPT0DPkw&amp;gpic=UID%3D000014f32654fe98%3AT%3D1788445297%3ART%3D1788445297%3AS%3DALNI_MYHdglYVgIKoJi0N7iEg6Qjl3lEOg&amp;eo_id_str=ID%3D5c1e377ac46108d3%3AT%3D1788445297%3ART%3D1788445297%3AS%3DAA-AfjaHIE7sZXW0WXJO4zd69SPV&amp;prev_fmts=0x0&amp;nras=1&amp;correlator=3292139431531&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=50&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=303&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95399629%2C122880757&amp;oid=2&amp;pvsid=6832573344669736&amp;tmod=1113057492&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=2&amp;uci=a!2&amp;fsb=1&amp;dtd=16" data-google-container-id="a!2" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div><div class="tool-page-analytics-scope" style="height: auto !important;"><div class="tool-mid-ad-injector-host" style="height: auto !important;"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Logic Gate & Boolean Algebra Calculator",
+      "url": "https://www.compu-tools.com/logic-gate/",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web Browser",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Boolean expression analyzer in your browser: truth table, Quine-McCluskey SOP/POS, Karnaugh map, De Morgan rewrite, and IEEE gate schematics with four diagram modes and PNG download.",
+      "featureList": [
+        "Boolean parser — AND/OR/NOT/XOR/NAND/NOR/XNOR and symbolic · + ' notation",
+        "Truth table up to 6 variables with Copy CSV",
+        "Quine-McCluskey minimization with Petrick's method — SOP and POS",
+        "Karnaugh map with prime-implicant groups (2–4 variables)",
+        "Gate diagram — As entered, Minimized SOP, Minimized POS, De Morgan",
+        "Download gate diagram as PNG",
+        "Click-to-copy SOP, POS, and De Morgan results",
+        "Categorized examples and operator insert buttons"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I enter a Boolean expression?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use word operators (AND, OR, NOT, XOR, NAND, NOR, XNOR) or symbols: · or * for AND, + or | for OR, ' postfix or ! prefix for NOT, ⊕ for XOR. Example: (A AND B) OR (NOT C) or A·B + C'. Pick a category from the Examples dropdown, then click a tag button to load a sample."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What gate diagram modes are available?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Four modes: As entered (one gate per operator you typed), Minimized SOP (two-level AND-OR from the minimum cover), Minimized POS (dual OR-AND from maxterms), and De Morgan (complemented AND/OR rewritten for learning). Each mode can be downloaded as PNG."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many variables are supported?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Up to 6 variables (64-row truth table). Karnaugh maps are shown for 2–4 variables only."
+          }
+        }
+      ]
+    }
+  ]
+}</script><div class="tool-wrapper" style="height: auto !important;"><div class="tool-intro"><div class="content-section"><h2>What is the Logic Gate &amp; Boolean Algebra Calculator?</h2><p>This free online tool turns a Boolean expression into a complete digital-logic analysis — truth table, minimized Sum-of-Products (SOP) and Product-of-Sums (POS), Karnaugh map, De Morgan equivalent, and an IEEE-style gate schematic — all computed locally in your browser. Enter <code>(A AND B) OR (NOT C)</code> or symbolic <code>A·B + C'</code> and every result panel updates on each keystroke.</p><p>Minimization uses Quine-McCluskey to enumerate prime implicants, then essential prime implicants plus Petrick's method for a minimum cover. Gate diagrams are generated from the parsed expression tree (not a fixed template), so custom inputs produce accurate, input-specific schematics.</p><p>Everything runs in WebAssembly (Rust compiled to WASM). Your expressions never leave the browser, and the last expression is saved in localStorage.</p></div><div class="content-section"><h2>Why Use This Tool?</h2><ul><li><strong>Homework &amp; exams: </strong>Verify truth tables, compare K-map groups with highlighted prime implicants, and copy minimized SOP/POS with one click.</li><li><strong>HDL / FPGA prototyping: </strong>Check minterm coverage before writing <code>assign</code> or <code>always_comb</code> blocks; inspect enable/mask logic from firmware register patterns.</li><li><strong>Visual learning: </strong>Switch gate diagram modes to see how the same function looks as typed, as minimized SOP, as minimized POS, and after De Morgan's law.</li><li><strong>Export &amp; share: </strong>Copy truth table or K-map as CSV; download the current gate diagram as PNG for slides or lab reports.</li><li><strong>Privacy: </strong>No server upload — ideal for proprietary chip-enable or security-related logic.</li></ul></div><div class="content-section"><h2>How to Use — Step by Step</h2><ol><li>Type or paste a Boolean expression in the <strong>Boolean expression</strong> textarea, or pick an <strong>Examples</strong> category and click a tag button to load a sample.</li><li>Use the operator insert buttons (<code>AND</code>, <code>·</code>, <code>(</code>, etc.) to add tokens at the text cursor.</li><li>Variables <code>A</code>–<code>Z</code> (including multi-letter names like <code>ADDR_MATCH</code>) are auto-detected and ordered alphabetically. The header shows <strong>n vars · n minterms</strong> and a <strong>Clear</strong> button.</li><li>Review results top to bottom: <strong>Truth table</strong> → <strong>SOP</strong> → <strong>POS</strong> → <strong>K-map</strong> (2–4 vars) → <strong>De Morgan</strong> → <strong>Gate diagram</strong>.</li><li>Copy outputs: <strong>Copy CSV</strong> on Truth table / K-map; click SOP, POS, or De Morgan result boxes to copy text; <strong>Download PNG</strong> on the gate diagram for the active mode.</li></ol><div class="example-box"><p><strong>Quick start example:</strong></p><pre><code>(A AND B) OR (NOT C)</code></pre><p>Expected: 8-row truth table (3 vars), minimized SOP <code>AB + C'</code>, K-map with grouped minterms, and a gate diagram with AND + NOT + OR in <em>As entered</em> mode.</p></div></div><div id="input-area" class="content-section"><h2>Input Area</h2><h3>Examples — category dropdown + tag buttons</h3><p>The Examples dropdown lists categories only (Basics, XOR &amp; comparison, Minimization, De Morgan, Universal gates, Firmware &amp; control). After selecting a category, example expressions appear as tag buttons — click one to replace the textarea with that expression.</p><h3>Operator insert buttons</h3><p>Buttons below the textarea insert at the cursor: <code>AND</code>, <code>OR</code>, <code>NOT</code>, <code>XOR</code>, <code>NAND</code>, <code>NOR</code>, <code>XNOR</code>, <code>·</code>, <code>+</code>, <code>'</code>, <code>⊕</code>, <code>!</code>, <code>(</code>, <code>)</code>.</p><h3>Symbol → operator mapping (collapsible)</h3><p>Expand the mapping table to see word forms, accepted symbols, and operator precedence. The table uses alternating row backgrounds for readability.</p></div><div id="copy-export" class="content-section"><h2>Copy &amp; Export</h2><ul><li><strong>Truth table — Copy CSV: </strong>Header row <code>A,B,C,F</code> plus one row per input combination (1/0).</li><li><strong>Karnaugh map — Copy CSV: </strong>Matrix with row/column Gray-code labels and cell values.</li><li><strong>SOP / POS / De Morgan — click to copy: </strong>Click the result box (hint: "Click to copy"). No separate copy button — the entire result area is clickable.</li><li><strong>Gate diagram — Download PNG: </strong>Rasterizes the current mode's SVG with theme colors. Filename: <code>logic-gate-as-entered.png</code>, <code>logic-gate-min-sop.png</code>, etc.</li></ul></div><div id="gate-diagram-modes" class="content-section"><h2>Gate Diagram — Four Modes</h2><p>Switch modes with the tab buttons in the Gate diagram title row. Each mode uses the same IEEE distinctive-shape renderer (AND semicircle, OR curved body, XOR double curve, inversion bubbles on NAND/NOR/XNOR/NOT).</p><ul><li><strong>As entered: </strong>Structural view — one gate per operator you typed. Associative AND/OR/XOR chains merge into one multi-input gate. Each variable drives a vertical track with junction dots where it fans out.</li><li><strong>Minimized SOP: </strong>Two-level AND-OR circuit from the Quine-McCluskey minimum cover. Logically equivalent to your input, usually fewer gates than the typed form.</li><li><strong>Minimized POS: </strong>Dual of SOP — two-level OR-AND from the minimized maxterm (Product of Sums) cover. Same function, inverted topology (OR gates feed an AND).</li><li><strong>De Morgan: </strong>Educational rewrite — a leading NOT on AND/OR/NAND/NOR is pushed through De Morgan's law (e.g. <code>NOT (A AND B)</code> → <code>(NOT A) OR (NOT B)</code>). Not a minimization pass; XOR/XNOR keep their original shape.</li></ul></div><div id="operator-notation" class="content-section"><h2>Operator Notation &amp; Precedence</h2><div class="example-box"><table style="width:100%;border-collapse:collapse;font-size:12px;"><thead style="background:var(--color-fifth);color:white;"><tr><th style="padding:8px;border:1px solid var(--color-border);text-align:left;">Operator</th><th style="padding:8px;border:1px solid var(--color-border);text-align:left;">Word form</th><th style="padding:8px;border:1px solid var(--color-border);text-align:left;">Symbols</th></tr></thead><tbody><tr><td style="padding:6px;border:1px solid var(--color-border);">AND</td><td style="padding:6px;border:1px solid var(--color-border);"><code>AND</code></td><td style="padding:6px;border:1px solid var(--color-border);"><code>·  *  &amp;</code></td></tr><tr><td style="padding:6px;border:1px solid var(--color-border);">OR</td><td style="padding:6px;border:1px solid var(--color-border);"><code>OR</code></td><td style="padding:6px;border:1px solid var(--color-border);"><code>+  |</code></td></tr><tr><td style="padding:6px;border:1px solid var(--color-border);">NOT</td><td style="padding:6px;border:1px solid var(--color-border);"><code>NOT x</code></td><td style="padding:6px;border:1px solid var(--color-border);"><code>!x  x'</code></td></tr><tr><td style="padding:6px;border:1px solid var(--color-border);">XOR</td><td style="padding:6px;border:1px solid var(--color-border);"><code>XOR</code></td><td style="padding:6px;border:1px solid var(--color-border);"><code>⊕  ^</code></td></tr><tr><td style="padding:6px;border:1px solid var(--color-border);">NAND / NOR / XNOR</td><td style="padding:6px;border:1px solid var(--color-border);"><code>NAND  NOR  XNOR</code></td><td style="padding:6px;border:1px solid var(--color-border);">word form only</td></tr></tbody></table><p style="margin-top:10px;">Precedence (highest first): <strong>NOT</strong> → <strong>AND / NAND</strong> → <strong>XOR / XNOR</strong> → <strong>OR / NOR</strong>. Use parentheses to override — e.g. use <code>(A OR B) AND C</code> instead of ambiguous mixed notation.</p></div></div><div class="content-section"><h2>Result Panels Explained</h2><ul><li><strong>Truth table: </strong>Every input combination with output F. Rows where F=1 are highlighted (minterms). Up to 64 rows (6 variables).</li><li><strong>SOP: </strong>Minimized Sum of Products — OR of AND terms. Complement shown as <code>A'</code>. Click the result box to copy.</li><li><strong>POS: </strong>Minimized Product of Sums — AND of OR terms from maxterms (rows where F=0). Click to copy.</li><li><strong>Karnaugh map: </strong>2–4 variables only. Gray-code axes; colored regions match SOP prime implicants.</li><li><strong>De Morgan: </strong>Text equivalent after applying De Morgan's law to complemented AND/OR. Click to copy.</li><li><strong>Gate diagram: </strong>Interactive schematic — see <a href="#gate-diagram-modes">Gate Diagram — Four Modes</a> above.</li></ul></div><div id="limitations" class="content-section"><h2>Limitations &amp; Caveats</h2><div class="example-box"><ul><li><strong>6 variables max: </strong>Truth table stops at 64 rows. More variables require external EDA tools.</li><li><strong>K-map: 2–4 variables only. </strong>5–6 variable functions still get truth table + SOP/POS + gate diagrams but no map.</li><li><strong>Single output function: </strong>One Boolean expression → one F column. No multi-output or sequential logic.</li><li><strong>NAND/NOR/XNOR symbols: </strong>Use word form — there is no single-character symbol for NAND/NOR/XNOR.</li><li><strong>Gate routing is schematic: </strong>Orthogonal wires per gate column, not placement-optimized like professional EDA. Dense expressions may have crossing wires.</li><li><strong>Constants 0/1: </strong>Fully minimized tautology or contradiction shows a text note instead of gates.</li><li><strong>Bit-mask link: </strong>No automatic import from <a href="/bit-mask/">Bit Mask Calculator</a> — copy expressions manually.</li></ul></div></div><div class="content-section"><h2>Example Categories</h2><p>Select a category in the Examples dropdown; tag buttons appear below:</p><ul><li><strong>Basics — </strong>Simple AND/OR/NOT and symbolic <code>A·B + C'</code></li><li><strong>XOR &amp; comparison — </strong>XOR, XNOR, parity functions</li><li><strong>Minimization — </strong>Majority, 4-variable SOP practice</li><li><strong>De Morgan — </strong>Complement-of-product and complement-of-sum patterns</li><li><strong>Universal gates — </strong>NAND-only and NOR-only constructions</li><li><strong>Firmware &amp; control — </strong>Enable/valid/reset, interrupt mask, write strobe (<code>CS AND (NOT WE) AND ADDR_MATCH</code>)</li></ul></div><div class="content-section"><h2>Typical Scenarios</h2><h3>Digital logic homework</h3><p>Enter the assigned function, verify the truth table, compare K-map groups with highlighted regions, click SOP to copy the minimized form for submission, and download the gate diagram PNG for your report.</p><h3>HDL / FPGA combinatorial logic</h3><p>Prototype <code>assign y = ...</code> conditions by checking minterm coverage. Compare <strong>As entered</strong> vs <strong>Minimized SOP</strong> diagrams before refactoring RTL.</p><h3>Register enable / mask verification</h3><p>After defining bitfields in <a href="/bit-mask/">Bit Mask Calculator</a>, express <code>CS AND !WE AND ADDR_MATCH</code> here and confirm which address/data combinations assert the output.</p><h3>De Morgan &amp; POS study</h3><p>Load a De Morgan category example, read the text equivalent, then switch the gate diagram to <strong>De Morgan</strong> or <strong>Minimized POS</strong> to see how complement and dual forms change the circuit topology.</p></div><div class="content-section"><h2>FAQ</h2><div class="faq-item"><h3>Why is there no K-map for my 5-variable function?</h3><p>K-maps are only rendered for 2, 3, or 4 variables. Use the truth table and minimized SOP/POS for higher variable counts.</p></div><div class="faq-item"><h3>Why does SOP differ from what I typed?</h3><p>SOP is minimized — redundant terms are removed and adjacent minterms are merged. The result is logically equivalent but structurally simpler. Use <strong>As entered</strong> gate diagram mode to see your original structure.</p></div><div class="faq-item"><h3>What is the difference between Minimized SOP and Minimized POS diagrams?</h3><p>Both implement the same Boolean function. SOP uses a two-level AND-OR network; POS uses OR-AND (OR gates feeding an AND). Gate count is typically similar — choose the form that matches your design style or homework requirement.</p></div><div class="faq-item"><h3>What minimization algorithm is used?</h3><p>Quine-McCluskey to enumerate prime implicants, then essential prime implicants plus Petrick's method (with absorption and a greedy fallback for large covers) for a minimum cover.</p></div><div class="faq-item"><h3>Can I use lowercase variable names?</h3><p>Identifiers are normalized to uppercase. <code>a AND b</code> is treated as <code>A AND B</code>.</p></div><div class="faq-item"><h3>How does this relate to the Bit Mask Calculator?</h3><p>Use <a href="/bit-mask/">Bit Mask Calculator</a> to define register bitfields, then express enable/mask logic as Boolean expressions here for truth-table verification.</p></div></div><div class="content-section"><h2>Related Tools</h2><ul><li><a href="/drone-calc/">Drone Calculator</a> — Calculate drone thrust, TWR, hover throttle, flight time, and battery C-rating safety. Compare up to 4 motor/battery/propeller configurations side by side.</li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a> — Convert vectors and attitudes between NED, ENU, and Body coordinate frames. Visualize frame axes, apply roll/pitch/yaw DCM rotation, and understand frame relationships used in drone, robot, and navigation systems.</li><li><a href="/subnet/">IP / Subnet Calculator</a> — Calculate subnet information from CIDR notation, IP + prefix, or IP + mask. Shows network address, broadcast, first/last host, host count, wildcard mask, IP class, and color-coded binary layout. For DevOps, network engineers, and embedded systems.</li><li><a href="/i2c/">I2C Calculator</a> — Interactive 7-bit I2C address map (0x00–0x7F) with reserved addresses highlighted, plus SCL timing (t_HIGH, t_LOW) and AVR TWBR register calculation for Standard, Fast, Fast-plus, and High-speed modes. Runs in your browser.</li><li><a href="/hex-inspector/">Hex File Inspector</a> — Inspect binary dumps in the browser: offset, hex, and ASCII columns with virtual scroll up to 10 MB. Paste hex in any common format (0x, \x, x-prefix, raw pairs, xxd / hexdump -C) or upload a file. Search hex or text, go to offset, choose dump output style (0x48, x48, 48, \x48), and edit bytes — overwrite, insert with hex value, delete, or download. Define struct overlays with CSV import/export; each field is color-coded in the dump with per-field LE/BE decoding (u8–u64, f32/f64, char[n]). Your last struct is restored from browser storage. No upload.</li></ul></div></div><div class="tool-container" style="height: auto !important;"><div class="tool-settings-grid"><div class="tool-settings-section"><h3 class="tool-section-header"><span class="tool-icon-badge"><i class="fa-solid fa-keyboard"></i></span>Input</h3><div class="tool-settings-content"><div class="tool-settings-row"><label class="tool-settings-label">Examples</label><select class="tool-settings-select"><option value="" selected="selected">— category —</option><option value="0">Basics</option><option value="1">XOR &amp; comparison</option><option value="2">Minimization</option><option value="3">De Morgan</option><option value="4">Universal gates</option><option value="5">Firmware &amp; control</option></select></div></div></div></div><div style="margin-top:14px;" class="tool-input-section"><div style="flex-wrap:nowrap;gap:8px;" class="tool-title-row"><div class="tool-section-title"><i class="fa-solid fa-pen-to-square"></i>Boolean expression</div><div style="margin-left:auto;display:flex;align-items:center;gap:8px;flex-shrink:0;"><span class="tool-mode-badge">3 vars · 5 minterms</span><button type="button" class="hex-mini-btn"><i class="fa-solid fa-trash"></i> Clear</button></div></div><textarea spellcheck="false" autocomplete="off" placeholder="(A AND B) OR (NOT C)  —  or  A·B + C'" class="tool-custom-textarea"></textarea><div style="margin-top:8px;line-height:1.55;" class="tool-hint-text"><i class="fa-solid fa-circle-info"></i> Click a button below to insert at the cursor. Variables <code>A–Z</code> are auto-detected.</div><div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;"><button type="button" title="Insert AND" class="hex-mini-btn">AND</button><button type="button" title="Insert OR" class="hex-mini-btn">OR</button><button type="button" title="Insert NOT" class="hex-mini-btn">NOT</button><button type="button" title="Insert XOR" class="hex-mini-btn">XOR</button><button type="button" title="Insert NAND" class="hex-mini-btn">NAND</button><button type="button" title="Insert NOR" class="hex-mini-btn">NOR</button><button type="button" title="Insert XNOR" class="hex-mini-btn">XNOR</button><button type="button" title="Insert ·" class="hex-mini-btn">·</button><button type="button" title="Insert +" class="hex-mini-btn">+</button><button type="button" title="Insert '" class="hex-mini-btn">'</button><button type="button" title="Insert ⊕" class="hex-mini-btn">⊕</button><button type="button" title="Insert !" class="hex-mini-btn">!</button><button type="button" title="Insert (" class="hex-mini-btn">(</button><button type="button" title="Insert )" class="hex-mini-btn">)</button></div><div style="margin-top:10px;font-size:11px;line-height:1.6;padding:0;overflow:hidden;" class="example-box"><button type="button" style="display:flex;align-items:center;gap:8px;width:100%;padding:10px 12px;border:none;background:transparent;color:var(--color-font);font-size:11px;font-weight:600;cursor:pointer;text-align:left;">Symbol → operator mapping<i style="margin-left:auto;font-size:0.65rem;opacity:0.6;transition:transform 0.2s;transform:rotate(0deg);" class="fa-solid fa-chevron-down"></i></button></div></div><div class="ad-display-wrapper ad-tool" style="height: auto !important; min-height: 0px !important;"><ins class="adsbygoogle" style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7541212813" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_1_host" style="border: none; height: 280px; width: 1162px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:1162px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1162" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7541212813&amp;adk=2360826665&amp;adf=2730609148&amp;pi=t.ma~as.7541212813&amp;abgtt=6&amp;w=1162&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1788445256&amp;rafmt=1&amp;format=1162x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Flogic-gate%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;asro=0&amp;aimartd=4&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTcuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;dt=1788445445934&amp;bpp=1&amp;bdt=550&amp;idt=1&amp;shv=r20260901&amp;mjsv=m202608280101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie=ID%3D9550a71923301e04%3AT%3D1788445297%3ART%3D1788445297%3AS%3DALNI_MZn3zXz-ju9Vo7J3d_oGRsPT0DPkw&amp;gpic=UID%3D000014f32654fe98%3AT%3D1788445297%3ART%3D1788445297%3AS%3DALNI_MYHdglYVgIKoJi0N7iEg6Qjl3lEOg&amp;eo_id_str=ID%3D5c1e377ac46108d3%3AT%3D1788445297%3ART%3D1788445297%3AS%3DAA-AfjaHIE7sZXW0WXJO4zd69SPV&amp;prev_fmts=0x0%2C1200x280&amp;nras=1&amp;correlator=3292139431531&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=50&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=59&amp;ady=1086&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95399629%2C122880757&amp;oid=2&amp;pvsid=6832573344669736&amp;tmod=1113057492&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=o%7C%7CoeEbr%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=3&amp;uci=a!3&amp;btvi=1&amp;fsb=1&amp;dtd=18" data-google-container-id="a!3" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins></div><div style="margin-top:14px;" class="tool-result-section result-group"><div class="tool-title-row"><div class="tool-result-title"><span class="tool-icon-badge-lg"><i class="fa-solid fa-screwdriver-wrench"></i></span>Truth table</div><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"><span class="tool-mode-badge">8 rows</span><button type="button" style="cursor:pointer;border:none;width:auto;flex-shrink:0;white-space:nowrap;font-family:inherit;" class="tool-copy-hint-result"><i class="fa-solid fa-file-csv"></i> Copy CSV</button></div></div><div style="padding:0;overflow:hidden;" class="example-box"><div style="max-height:360px;overflow:auto;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;background:var(--color-first);border:none;border-radius:8px;" class="table-view-container"><table style="width:100%;border-collapse:collapse;"><thead><tr style="background:var(--color-fifth);color:white;"><th style="padding:8px 10px;text-align:center;border:1px solid var(--color-border);">A</th><th style="padding:8px 10px;text-align:center;border:1px solid var(--color-border);">B</th><th style="padding:8px 10px;text-align:center;border:1px solid var(--color-border);">C</th><th style="padding:8px 10px;text-align:center;border:1px solid var(--color-border);">F</th></tr></thead><tbody><tr style="background:rgba(74,222,128,0.12);"><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">0</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">0</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">0</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);font-weight:700;">1</td></tr><tr style=""><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">0</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">0</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">1</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);font-weight:700;">0</td></tr><tr style="background:rgba(74,222,128,0.12);"><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">0</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">1</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">0</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);font-weight:700;">1</td></tr><tr style=""><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">0</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">1</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">1</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);font-weight:700;">0</td></tr><tr style="background:rgba(74,222,128,0.12);"><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">1</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">0</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">0</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);font-weight:700;">1</td></tr><tr style=""><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">1</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">0</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">1</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);font-weight:700;">0</td></tr><tr style="background:rgba(74,222,128,0.12);"><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">1</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">1</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">0</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);font-weight:700;">1</td></tr><tr style="background:rgba(74,222,128,0.12);"><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">1</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">1</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);">1</td><td style="padding:6px 10px;text-align:center;border:1px solid var(--color-border);font-weight:700;">1</td></tr></tbody></table></div></div></div><div style="margin-top:14px;" class="tool-result-section result-group"><div class="tool-title-row"><div class="tool-result-title"><span class="tool-icon-badge-lg"><i class="fa-solid fa-screwdriver-wrench"></i></span>SOP (Sum of Products)</div><span class="tool-copy-hint-result"><i class="fa-solid fa-copy"></i>Click to copy</span></div><div style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;background:var(--color-first);border:1px solid var(--color-fourth);border-radius:8px;padding:12px;cursor:pointer;" title="Click to copy" class="example-box">C' + AB</div></div><div style="margin-top:14px;" class="tool-result-section result-group"><div class="tool-title-row"><div class="tool-result-title"><span class="tool-icon-badge-lg"><i class="fa-solid fa-screwdriver-wrench"></i></span>POS (Product of Sums)</div><span class="tool-copy-hint-result"><i class="fa-solid fa-copy"></i>Click to copy</span></div><div style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;background:var(--color-first);border:1px solid var(--color-fourth);border-radius:8px;padding:12px;cursor:pointer;" title="Click to copy" class="example-box">((B + C')) · ((A + C'))</div></div><div style="margin-top:14px;" class="tool-result-section result-group"><div class="tool-title-row"><div class="tool-result-title"><span class="tool-icon-badge-lg"><i class="fa-solid fa-screwdriver-wrench"></i></span>Karnaugh map</div><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"><span class="tool-mode-badge">2 × 4</span><button type="button" style="cursor:pointer;border:none;width:auto;flex-shrink:0;white-space:nowrap;font-family:inherit;" class="tool-copy-hint-result"><i class="fa-solid fa-file-csv"></i> Copy CSV</button></div></div><div style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;background:var(--color-first);border:1px solid var(--color-fourth);border-radius:8px;padding:12px;padding:12px 8px;" class="example-box"><div style="overflow-x:auto;"><table style="border-collapse:collapse;font-family:ui-monospace,monospace;font-size:13px;margin:0 auto;"><thead><tr><th style="padding:6px;border:1px solid var(--color-border);background:var(--color-fifth);color:white;">A \ BC</th><th style="padding:8px 12px;border:1px solid var(--color-border);background:var(--color-fifth);color:white;"></th><th style="padding:8px 12px;border:1px solid var(--color-border);background:var(--color-fifth);color:white;">1</th><th style="padding:8px 12px;border:1px solid var(--color-border);background:var(--color-fifth);color:white;">11</th><th style="padding:8px 12px;border:1px solid var(--color-border);background:var(--color-fifth);color:white;">1</th></tr></thead><tbody><tr><th style="padding:8px 12px;border:1px solid var(--color-border);background:var(--color-fifth);color:white;"></th><td style="padding:12px 16px;text-align:center;border:1px solid var(--color-border);background:transparent;min-width:44px;">—</td><td style="padding:12px 16px;text-align:center;border:1px solid var(--color-border);background:transparent;min-width:44px;">—</td><td style="padding:12px 16px;text-align:center;border:1px solid var(--color-border);background:transparent;min-width:44px;">—</td><td style="padding:12px 16px;text-align:center;border:1px solid var(--color-border);background:transparent;min-width:44px;">—</td></tr><tr><th style="padding:8px 12px;border:1px solid var(--color-border);background:var(--color-fifth);color:white;">1</th><td style="padding:12px 16px;text-align:center;border:1px solid var(--color-border);background:transparent;min-width:44px;">—</td><td style="padding:12px 16px;text-align:center;border:1px solid var(--color-border);background:transparent;min-width:44px;">—</td><td style="padding:12px 16px;text-align:center;border:1px solid var(--color-border);background:rgba(96,165,250,0.35);min-width:44px;">1</td><td style="padding:12px 16px;text-align:center;border:1px solid var(--color-border);background:transparent;min-width:44px;">—</td></tr></tbody></table></div><div style="margin-top:8px;font-size:11px;color:var(--color-subfont);">Prime implicant groups highlighted — <span style="margin-right:10px;"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:rgba(96,165,250,0.35);margin-right:4px;"></span>AB</span></div></div></div><div style="margin-top:14px;" class="tool-result-section result-group"><div class="tool-title-row"><div class="tool-result-title"><span class="tool-icon-badge-lg"><i class="fa-solid fa-screwdriver-wrench"></i></span>De Morgan equivalent</div><span class="tool-copy-hint-result"><i class="fa-solid fa-copy"></i>Click to copy</span></div><div style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;background:var(--color-first);border:1px solid var(--color-fourth);border-radius:8px;padding:12px;cursor:pointer;" title="Click to copy" class="example-box">((A) AND (B)) OR (NOT (C))</div></div><div style="margin-top:14px;" class="tool-result-section result-group"><div class="tool-title-row"><div class="tool-result-title"><span class="tool-icon-badge-lg"><i class="fa-solid fa-screwdriver-wrench"></i></span>Gate diagram</div><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"><div class="tool-settings-inline-toggle-wrap logic-gate-mode-toggle"><button type="button" title="One gate per operator, exactly as typed" class="tool-tab-btn active">As entered</button><button type="button" title="Two-level AND-OR circuit from the minimized SOP" class="tool-tab-btn">Minimized SOP</button><button type="button" title="Two-level OR-AND circuit from the minimized POS" class="tool-tab-btn">Minimized POS</button><button type="button" title="Circuit after applying De Morgan to complemented AND/OR" class="tool-tab-btn">De Morgan</button></div><button type="button" style="cursor:pointer;border:none;width:auto;flex-shrink:0;white-space:nowrap;font-family:inherit;" title="Download the current gate diagram as PNG" class="tool-copy-hint-result"><i class="fa-solid fa-download"></i> Download PNG</button></div></div><div style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;background:var(--color-first);border:1px solid var(--color-fourth);border-radius:8px;padding:12px;overflow:auto;padding:10px;min-height:120px;max-height:520px;" class="example-box"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 266 135" width="266" height="135" style="max-width:100%;height:auto;display:block;"><line x1="15.5" y1="18.0" x2="21.5" y2="18.0" fill="none" style="stroke:var(--color-fourth)" stroke-width="1.4" stroke-linejoin="round"></line><line x1="15.5" y1="60.0" x2="32.5" y2="60.0" fill="none" style="stroke:var(--color-fourth)" stroke-width="1.4" stroke-linejoin="round"></line><line x1="15.5" y1="102.0" x2="43.5" y2="102.0" fill="none" style="stroke:var(--color-fourth)" stroke-width="1.4" stroke-linejoin="round"></line><polyline points="21.5,18.0 55.5,18.0 55.5,29.0 67.5,29.0" fill="none" style="stroke:var(--color-fourth)" stroke-width="1.4" stroke-linejoin="round"></polyline><line x1="67.5" y1="29.0" x2="89.5" y2="29.0" fill="none" style="stroke:var(--color-fourth)" stroke-width="1.4" stroke-linejoin="round"></line><polyline points="32.5,60.0 50.5,60.0 50.5,49.0 67.5,49.0" fill="none" style="stroke:var(--color-fourth)" stroke-width="1.4" stroke-linejoin="round"></polyline><line x1="67.5" y1="49.0" x2="89.5" y2="49.0" fill="none" style="stroke:var(--color-fourth)" stroke-width="1.4" stroke-linejoin="round"></line><line x1="43.5" y1="102.0" x2="67.5" y2="102.0" fill="none" style="stroke:var(--color-fourth)" stroke-width="1.4" stroke-linejoin="round"></line><line x1="67.5" y1="102.0" x2="89.5" y2="102.0" fill="none" style="stroke:var(--color-fourth)" stroke-width="1.4" stroke-linejoin="round"></line><polyline points="123.5,39.0 147.5,39.0 147.5,60.5 159.5,60.5" fill="none" style="stroke:var(--color-fourth)" stroke-width="1.4" stroke-linejoin="round"></polyline><line x1="159.5" y1="60.5" x2="181.5" y2="60.5" fill="none" style="stroke:var(--color-fourth)" stroke-width="1.4" stroke-linejoin="round"></line><polyline points="123.5,102.0 142.5,102.0 142.5,80.5 159.5,80.5" fill="none" style="stroke:var(--color-fourth)" stroke-width="1.4" stroke-linejoin="round"></polyline><line x1="159.5" y1="80.5" x2="181.5" y2="80.5" fill="none" style="stroke:var(--color-fourth)" stroke-width="1.4" stroke-linejoin="round"></line><line x1="215.5" y1="70.5" x2="243.5" y2="70.5" fill="none" style="stroke:var(--color-fourth)" stroke-width="1.4" stroke-linejoin="round"></line><path d="M 77.5,19.0 h 26.0 a 20.0,20.0 0 0 1 0,40.0 h -26.0 Z" style="fill:var(--color-third);stroke:var(--color-fourth)" stroke-width="1.6"></path><path d="M 77.5,87.0 L 115.5,102.0 L 77.5,117.0 Z" style="fill:var(--color-third);stroke:var(--color-fourth)" stroke-width="1.6"></path><circle cx="119.5" cy="102.0" r="4" style="fill:var(--color-third);stroke:var(--color-fourth)" stroke-width="1.6"></circle><path d="M 169.5,50.5 Q 194.8,50.5 215.5,70.5 Q 194.8,90.5 169.5,90.5 Q 183.3,70.5 169.5,50.5 Z" style="fill:var(--color-third);stroke:var(--color-fourth)" stroke-width="1.6"></path><text x="4" y="22.0" font-size="12" font-family="ui-monospace,monospace" font-weight="600" style="fill:var(--color-font)">A</text><text x="4" y="64.0" font-size="12" font-family="ui-monospace,monospace" font-weight="600" style="fill:var(--color-font)">B</text><text x="4" y="106.0" font-size="12" font-family="ui-monospace,monospace" font-weight="600" style="fill:var(--color-font)">C</text><text x="97.7" y="42.0" font-size="8.5" text-anchor="middle" style="fill:var(--color-font)">AND</text><text x="189.7" y="73.5" font-size="8.5" text-anchor="middle" style="fill:var(--color-font)">OR</text><text x="248.5" y="74.5" font-size="12" font-family="ui-monospace,monospace" font-weight="700" style="fill:var(--color-font)">F</text></svg></div><div style="margin-top:8px;line-height:1.55;" class="tool-hint-text"><i class="fa-solid fa-circle-info"></i> Structural view: every operator you typed becomes its own gate. Repeated AND/OR/XOR operands merge into one multi-input gate, and each variable drives a shared vertical track.</div></div><div style="margin-top:14px;" class="tool-tip-box"><i class="fa-solid fa-circle-info"></i> Register bit fields → Boolean expressions in the <a href="/bit-mask/">Bit Mask Calculator</a>. Per-row bitwise ops in <a href="/bitwise/">Binary / Bitwise Calculator</a>, hex dumps in <a href="/hex-inspector/">Hex File Inspector</a>.</div><button class="tool-container-fullscreen-btn" title="Fullscreen: entire tool panel"><i class="fa-solid fa-expand"></i></button></div></div></div></div></div></div><aside class="sidebar-right sidebar-right--ad-only"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper ad-sidebar"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/hmac/">HMAC Generator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/text-codec/">Universal Text Codec</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/csv/">CSV / TSV Viewer &amp; Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/rotation-calculator/">3D Rotation Calculator</a></li><li><a href="/ieee754/">IEEE 754 Converter</a></li><li><a href="/endian/">Endian Converter</a></li><li><a href="/bitwise/">Binary &amp; Bitwise Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/i2c/">I2C Calculator</a></li><li><a href="/spi/">SPI Calculator</a></li><li><a href="/uart/">UART Calculator</a></li><li><a href="/can/">CAN Frame Analyzer</a></li><li><a href="/bit-mask/">Bit Mask Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/pwm-servo/">PWM &amp; Servo Calculator</a></li><li><a href="/subnet/">IP / Subnet Calculator</a></li><li><a href="/resistor/">Resistor Color Code</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK/Jacobian Calculator</a></li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a></li><li><a href="/hex-inspector/">Hex File Inspector</a></li><li><a href="/logic-gate/">Logic Gate &amp; Boolean Algebra</a></li><li><a href="/aerospace/">Aerospace Calculator</a></li><li><a href="/pid/">PID Controller Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code Generator</a></li><li><a href="/mock-data/">Mock Data Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/curl/">cURL &amp; API Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li><li><a href="/css/">CSS Toolbox</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-image"></i>Image</div><ul class="footer-links"><li><a href="/image/">Image Converter, EXIF Viewer &amp; Palette Extractor</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20260901/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>

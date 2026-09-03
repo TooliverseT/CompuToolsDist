@@ -1,5 +1,5 @@
 {
-  "catalog_as_of": "2026-09-01",
+  "catalog_as_of": "2026-09-03",
   "pricing_note": "Sourced from LiteLLM model_prices_and_context_window.json (see scripts/update_llm_models.py). Reference $/M; verify on provider dashboards.",
   "models": [
     {
@@ -214,6 +214,18 @@
       "context_display": "1M",
       "input_per_mtok_usd": 10.0,
       "input_cached_per_mtok_usd": 1.0,
+      "output_per_mtok_usd": 50.0,
+      "pricing_url": "https://www.anthropic.com/pricing",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "claude-fable-5-1-b75d4ac035",
+      "label": "claude-fable-5-1",
+      "provider": "Anthropic",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 10.0,
+      "input_cached_per_mtok_usd": 0.25,
       "output_per_mtok_usd": 50.0,
       "pricing_url": "https://www.anthropic.com/pricing",
       "fallback_bpe": "cl100k_base"
