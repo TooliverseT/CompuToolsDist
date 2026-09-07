@@ -1,5 +1,5 @@
 {
-  "catalog_as_of": "2026-09-05",
+  "catalog_as_of": "2026-09-07",
   "pricing_note": "Sourced from LiteLLM model_prices_and_context_window.json (see scripts/update_llm_models.py). Reference $/M; verify on provider dashboards.",
   "models": [
     {
@@ -267,6 +267,18 @@
       "fallback_bpe": "cl100k_base"
     },
     {
+      "id": "claude-mythos-5-1-14dad00744",
+      "label": "claude-mythos-5-1",
+      "provider": "Anthropic",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 10.0,
+      "input_cached_per_mtok_usd": 0.25,
+      "output_per_mtok_usd": 50.0,
+      "pricing_url": "https://www.anthropic.com/pricing",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
       "id": "claude-mythos-preview-91b903bfcb",
       "label": "claude-mythos-preview",
       "provider": "Anthropic",
@@ -479,6 +491,18 @@
       "input_per_mtok_usd": 0.12,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 0.0,
+      "pricing_url": "https://cohere.com/pricing",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "cohere-parse-v5.0-a0f066be2c",
+      "label": "cohere/parse-v5.0",
+      "provider": "Cohere",
+      "context_window": 0,
+      "context_display": "Unknown",
+      "input_per_mtok_usd": null,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": null,
       "pricing_url": "https://cohere.com/pricing",
       "fallback_bpe": "cl100k_base"
     },
@@ -1359,11 +1383,11 @@
       "heuristic_only": true
     },
     {
-      "id": "gemini-gemini-3.5-live-translate-preview-1b011ec166",
+      "id": "gemini-gemini-3.5-live-translate-preview-316353f497",
       "label": "gemini/gemini-3.5-live-translate-preview",
       "provider": "Google",
-      "context_window": 0,
-      "context_display": "Unknown",
+      "context_window": 134144,
+      "context_display": "131K",
       "input_per_mtok_usd": 3.5,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 21.0,
@@ -1769,6 +1793,30 @@
     {
       "id": "gemini-lyria-3-pro-preview-1629598350",
       "label": "gemini/lyria-3-pro-preview",
+      "provider": "Google",
+      "context_window": 134144,
+      "context_display": "131K",
+      "input_per_mtok_usd": 0.0,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": 0.0,
+      "pricing_url": "https://ai.google.dev/pricing",
+      "heuristic_only": true
+    },
+    {
+      "id": "gemini-lyria-3.5-clip-preview-5cb58bf7ed",
+      "label": "gemini/lyria-3.5-clip-preview",
+      "provider": "Google",
+      "context_window": 134144,
+      "context_display": "131K",
+      "input_per_mtok_usd": 0.0,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": 0.0,
+      "pricing_url": "https://ai.google.dev/pricing",
+      "heuristic_only": true
+    },
+    {
+      "id": "gemini-lyria-3.5-pro-preview-4f7bd98383",
+      "label": "gemini/lyria-3.5-pro-preview",
       "provider": "Google",
       "context_window": 134144,
       "context_display": "131K",
@@ -2217,7 +2265,7 @@
       "context_window": 268288,
       "context_display": "262K",
       "input_per_mtok_usd": 0.2,
-      "input_cached_per_mtok_usd": null,
+      "input_cached_per_mtok_usd": 0.02,
       "output_per_mtok_usd": 0.2,
       "pricing_url": "https://mistral.ai/pricing/",
       "fallback_bpe": "cl100k_base"
@@ -2229,7 +2277,7 @@
       "context_window": 268288,
       "context_display": "262K",
       "input_per_mtok_usd": 0.2,
-      "input_cached_per_mtok_usd": null,
+      "input_cached_per_mtok_usd": 0.02,
       "output_per_mtok_usd": 0.2,
       "pricing_url": "https://mistral.ai/pricing/",
       "fallback_bpe": "cl100k_base"
@@ -2277,7 +2325,7 @@
       "context_window": 134144,
       "context_display": "131K",
       "input_per_mtok_usd": 0.1,
-      "input_cached_per_mtok_usd": null,
+      "input_cached_per_mtok_usd": 0.01,
       "output_per_mtok_usd": 0.1,
       "pricing_url": "https://mistral.ai/pricing/",
       "fallback_bpe": "cl100k_base"
@@ -2289,7 +2337,7 @@
       "context_window": 134144,
       "context_display": "131K",
       "input_per_mtok_usd": 0.1,
-      "input_cached_per_mtok_usd": null,
+      "input_cached_per_mtok_usd": 0.01,
       "output_per_mtok_usd": 0.1,
       "pricing_url": "https://mistral.ai/pricing/",
       "fallback_bpe": "cl100k_base"
@@ -4936,6 +4984,32 @@
       "fallback_bpe": "o200k_base"
     },
     {
+      "id": "gpt-daybreak-blue-latest-bdfb76eda6",
+      "label": "gpt-daybreak-blue-latest",
+      "provider": "OpenAI",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 4.0,
+      "input_cached_per_mtok_usd": 0.4,
+      "output_per_mtok_usd": 20.0,
+      "pricing_url": "https://openai.com/api/pricing/",
+      "tiktoken_model": "gpt-daybreak-blue-latest",
+      "fallback_bpe": "o200k_base"
+    },
+    {
+      "id": "gpt-daybreak-red-latest-64e22bfe6c",
+      "label": "gpt-daybreak-red-latest",
+      "provider": "OpenAI",
+      "context_window": 409600,
+      "context_display": "400K",
+      "input_per_mtok_usd": 12.5,
+      "input_cached_per_mtok_usd": 1.25,
+      "output_per_mtok_usd": 75.0,
+      "pricing_url": "https://openai.com/api/pricing/",
+      "tiktoken_model": "gpt-daybreak-red-latest",
+      "fallback_bpe": "o200k_base"
+    },
+    {
       "id": "gpt-image-1-b2d74ecfc7",
       "label": "gpt-image-1",
       "provider": "OpenAI",
@@ -4995,7 +5069,7 @@
       "context_display": "Unknown",
       "input_per_mtok_usd": 5.0,
       "input_cached_per_mtok_usd": 1.25,
-      "output_per_mtok_usd": 10.0,
+      "output_per_mtok_usd": null,
       "pricing_url": "https://openai.com/api/pricing/",
       "tiktoken_model": "gpt-image-2",
       "fallback_bpe": "o200k_base"
@@ -5008,7 +5082,7 @@
       "context_display": "Unknown",
       "input_per_mtok_usd": 5.0,
       "input_cached_per_mtok_usd": 1.25,
-      "output_per_mtok_usd": 10.0,
+      "output_per_mtok_usd": null,
       "pricing_url": "https://openai.com/api/pricing/",
       "tiktoken_model": "gpt-image-2-2026-04-21",
       "fallback_bpe": "o200k_base"
