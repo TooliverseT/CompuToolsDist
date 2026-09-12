@@ -1,5 +1,5 @@
 {
-  "catalog_as_of": "2026-09-07",
+  "catalog_as_of": "2026-09-12",
   "pricing_note": "Sourced from LiteLLM model_prices_and_context_window.json (see scripts/update_llm_models.py). Reference $/M; verify on provider dashboards.",
   "models": [
     {
@@ -668,6 +668,30 @@
       "provider": "Cohere",
       "context_window": 4096,
       "context_display": "4K",
+      "input_per_mtok_usd": 0.0,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": 0.0,
+      "pricing_url": "https://cohere.com/pricing",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "rerank-v4.0-fast-63cad51d04",
+      "label": "rerank-v4.0-fast",
+      "provider": "Cohere",
+      "context_window": 32768,
+      "context_display": "32K",
+      "input_per_mtok_usd": 0.0,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": 0.0,
+      "pricing_url": "https://cohere.com/pricing",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "rerank-v4.0-pro-8ff2bc962d",
+      "label": "rerank-v4.0-pro",
+      "provider": "Cohere",
+      "context_window": 32768,
+      "context_display": "32K",
       "input_per_mtok_usd": 0.0,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 0.0,
@@ -1796,6 +1820,18 @@
       "provider": "Google",
       "context_window": 134144,
       "context_display": "131K",
+      "input_per_mtok_usd": 0.0,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": 0.0,
+      "pricing_url": "https://ai.google.dev/pricing",
+      "heuristic_only": true
+    },
+    {
+      "id": "gemini-lyria-3.5-ae0b2cf9b4",
+      "label": "gemini/lyria-3.5",
+      "provider": "Google",
+      "context_window": 1048576,
+      "context_display": "1M",
       "input_per_mtok_usd": 0.0,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 0.0,
@@ -5085,6 +5121,58 @@
       "output_per_mtok_usd": null,
       "pricing_url": "https://openai.com/api/pricing/",
       "tiktoken_model": "gpt-image-2-2026-04-21",
+      "fallback_bpe": "o200k_base"
+    },
+    {
+      "id": "gpt-image-2.5-flare-2b653a4683",
+      "label": "gpt-image-2.5-flare",
+      "provider": "OpenAI",
+      "context_window": 0,
+      "context_display": "Unknown",
+      "input_per_mtok_usd": 5.0,
+      "input_cached_per_mtok_usd": 1.25,
+      "output_per_mtok_usd": null,
+      "pricing_url": "https://openai.com/api/pricing/",
+      "tiktoken_model": "gpt-image-2.5-flare",
+      "fallback_bpe": "o200k_base"
+    },
+    {
+      "id": "gpt-image-2.5-flare-2026-09-08-9e90722f26",
+      "label": "gpt-image-2.5-flare-2026-09-08",
+      "provider": "OpenAI",
+      "context_window": 0,
+      "context_display": "Unknown",
+      "input_per_mtok_usd": 5.0,
+      "input_cached_per_mtok_usd": 1.25,
+      "output_per_mtok_usd": null,
+      "pricing_url": "https://openai.com/api/pricing/",
+      "tiktoken_model": "gpt-image-2.5-flare-2026-09-08",
+      "fallback_bpe": "o200k_base"
+    },
+    {
+      "id": "gpt-image-2.5-sunburst-99df981625",
+      "label": "gpt-image-2.5-sunburst",
+      "provider": "OpenAI",
+      "context_window": 0,
+      "context_display": "Unknown",
+      "input_per_mtok_usd": 5.0,
+      "input_cached_per_mtok_usd": 1.25,
+      "output_per_mtok_usd": null,
+      "pricing_url": "https://openai.com/api/pricing/",
+      "tiktoken_model": "gpt-image-2.5-sunburst",
+      "fallback_bpe": "o200k_base"
+    },
+    {
+      "id": "gpt-image-2.5-sunburst-2026-09-08-f1b3af6b74",
+      "label": "gpt-image-2.5-sunburst-2026-09-08",
+      "provider": "OpenAI",
+      "context_window": 0,
+      "context_display": "Unknown",
+      "input_per_mtok_usd": 5.0,
+      "input_cached_per_mtok_usd": 1.25,
+      "output_per_mtok_usd": null,
+      "pricing_url": "https://openai.com/api/pricing/",
+      "tiktoken_model": "gpt-image-2.5-sunburst-2026-09-08",
       "fallback_bpe": "o200k_base"
     },
     {
