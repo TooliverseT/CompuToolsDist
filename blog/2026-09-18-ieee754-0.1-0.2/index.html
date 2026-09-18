@@ -1,0 +1,634 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
+  <meta name="naver-site-verification" content="457aba595da679106dd139e9a9116d1685df4a4b">
+  <meta name="yandex-verification" content="3a939e8b309ca928">
+  <meta name="robots" content="index, follow">
+  
+  <meta name="computools" content="computools">
+  <meta name="description" content="Unit test failing on 0.1 + 0.2 == 0.3? IEEE 754 binary floats, f32/f64 bit patterns, and practical fixes for billing, games, and embedded— with Python, C, and C++ examples.">
+  <meta name="keywords" content="CompuTools, blog, engineering, tutorial, developer tools, programming, WebAssembly">
+  <meta name="author" content="CompuTools">
+
+  <meta property="og:url" content="https://www.compu-tools.com/blog/2026-09-18-ieee754-0.1-0.2">
+  <meta property="og:title" content="Why 0.1 + 0.2 ≠ 0.3: IEEE 754 Is Working as Designed | CompuTools Blog">
+  <meta property="og:description" content="Unit test failing on 0.1 + 0.2 == 0.3? IEEE 754 binary floats, f32/f64 bit patterns, and practical fixes for billing, games, and embedded— with Python, C, and C++ examples.">
+  <meta property="og:image" content="https://www.compu-tools.com/blog/assets/base/ieee754_structure.png">
+  <meta property="og:image:height" content="607">
+  <meta property="og:image:width" content="607">
+
+
+  <title>Why 0.1 + 0.2 ≠ 0.3: IEEE 754 Is Working as Designed | CompuTools Blog</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="/index-d679cff5b6440cd8.css" integrity="sha384-7j+je2s8cPF3leWEovWVOdm9C44JMKx0/rhqCFIwoq/Cpw1hwkN3fzfYa5WrHuNa">
+  <link rel="stylesheet" href="/navbar-8ede0f16b0acb92f.css" integrity="sha384-PuvAEo/FC+R+osNw2LydaJJ1U+KFTjlRM7XeMisccpCg6hbt9J2PkJJOYc+lFfTY">
+  <link rel="stylesheet" href="/search-6c8ef22740a6ade3.css" integrity="sha384-IPIYR84Xw+jb9YDzqkBK317r2o7B5Hc3f2TUh4ADkFHruGXsZWDqHXbs0du/mHqJ">
+  <link rel="stylesheet" href="/tool-943af9c3bfe36b71.css" integrity="sha384-SX1H/dOVnaMwBQxTt/PHnk6v7cEFwAxWvdEi4xOS8vhkpCrV0/qHG5xrexmGNNgG">
+  <link rel="stylesheet" href="/blog-174718e01e6a0d47.css" integrity="sha384-y+KofKMYCVQLicSs13hXMq9r5z6Sev3qtzXgR4ZUnp1Cw3yTbndAE08c7hqRzxKb">
+  <link rel="stylesheet" href="/post-39c9122277702160.css" integrity="sha384-dSbp3JKvjFMQ4LVnJNagmWeLbLTIVFJXyl8OuoSL/vecjtPyqO3wM1HVSoN/6sCL">
+  <link rel="stylesheet" href="/preview-474ea7280e28d2d7.css" integrity="sha384-7x5ZUqrPFlXbUHg4cVipryKZvsrvlwe0Da8DZjoSqKPgGXQYR/YWPLv2Tk6Qca1A">
+  <link rel="stylesheet" href="/ad-f9974c17e37fdf39.css" integrity="sha384-kwuGziYBvm34B68F4w3Nq5aJBApUYZ4n1JvROx8lHtIjYqXAjrTxCEsv082HNc7h">
+  <link rel="stylesheet" href="/prism-c451adb7299a4a0.css" integrity="sha384-JHfRrkWbZJu5R/8OJhxu3j19hT9BpfW1isiNYAlkF5vRzQu14JDkB4lWvJX5I4r7">
+  
+  
+  
+<script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202609150101/show_ads_impl.js" fetchpriority="high"></script><script type="module">
+import init, * as bindings from '/computools-ffb21b710b779f0a.js';
+const wasm = await init({ module_or_path: '/computools-ffb21b710b779f0a_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+
+  <link rel="icon" href="/favicon-1a8ba4d4617517ad.ico" integrity="sha384-sh+KkiOvcFXwh29z2PE6y5W6JoL/C2uPj8MHwWodi4oVC6f4XcUmhJGk6dmH2Teg">
+
+  <script src="/prism.js"></script>
+
+
+  <!-- MathJax for LaTeX math rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Mermaid for diagram rendering in Markdown preview -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({ startOnLoad: false, theme: 'neutral', securityLevel: 'loose' });
+    }
+  </script>
+
+  <script>
+      (function() {
+          const redirect = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          if (redirect && redirect !== window.location.href) {
+              history.replaceState(null, null, redirect);
+          }
+      })();
+  </script>
+  <script>
+    // JavaScript에서 getTimeZoneOffset 함수 정의
+    function getTimeZoneOffset() {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const offset = new Date().getTimezoneOffset();
+        return { timeZone, offset };
+    }
+  </script>
+  <!-- Google Funding Choices (ad recovery) -->
+  <script async="" src="https://fundingchoicesmessages.google.com/i/pub-9424100257975478?ers=1"></script>
+  <script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+  <script src="/funding-choices-recovery.js"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9424100257975478" crossorigin="anonymous" data-checked-head="true"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1G0CMRC310');
+  </script>
+<link rel="modulepreload" href="/computools-ffb21b710b779f0a.js" crossorigin="anonymous" integrity="sha384-S18DbXoP2o0GTec5rFBBgz5t84gHfOyVp0Q2Fwv44JFJj1azZwv3W+P3sjDQx7ol"><link rel="preload" href="/computools-ffb21b710b779f0a_bg.wasm" crossorigin="anonymous" integrity="sha384-bHm+V49Gt2pXj3g00tKWgfVzdkDnN6Udbm8/5bdh4znkNcNjzl0iac/z1yGUOfAO" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Why 0.1 + 0.2 ≠ 0.3: IEEE 754 Is Working as Designed | CompuTools Blog">
+  <meta name="twitter:description" content="Unit test failing on 0.1 + 0.2 == 0.3? IEEE 754 binary floats, f32/f64 bit patterns, and practical fixes for billing, games, and embedded— with Python, C, and C++ examples.">
+  <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/base/ieee754_structure.png">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Why 0.1 + 0.2 ≠ 0.3: IEEE 754 Is Working as Designed", "description": "Unit test failing on 0.1 + 0.2 == 0.3? IEEE 754 binary floats, f32/f64 bit patterns, and practical fixes for billing, games, and embedded— with Python, C, and C++ examples.", "url": "https://www.compu-tools.com/blog/2026-09-18-ieee754-0.1-0.2", "image": ["https://www.compu-tools.com/blog/assets/base/ieee754_structure.png"], "author": {"@type": "Organization", "name": "CompuTools", "url": "https://www.compu-tools.com"}, "publisher": {"@type": "Organization", "name": "CompuTools", "logo": {"@type": "ImageObject", "url": "https://www.compu-tools.com/logo.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://www.compu-tools.com/blog/2026-09-18-ieee754-0.1-0.2"}, "datePublished": "2026-09-18", "dateModified": "2026-09-18"}</script>
+  <style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+<body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper" style="height: auto !important;"><div class="main-content" style="height: auto !important;"><div class="page-with-sidebar" style="height: auto !important;"><div class="page-main" style="height: auto !important;"><div class="home-wrapper" style="height: auto !important;"><div class="post-wrapper" style="height: auto !important;"><div class="post-metadata"><h1 class="post-title">Why 0.1 + 0.2 ≠ 0.3: IEEE 754 Is Working as Designed</h1><div class="post-date">18 September 2026</div><div class="post-excerpt">Ever had a unit test fail on 0.1 + 0.2 == 0.3? This post explains why IEEE 754 binary floating-point cannot store decimal 0.1 exactly, how f32/f64 bit patterns differ, and what to do in billing, games, and embedded systems—with math and code.</div><div class="post-tags"><div class="tag">Mathematical</div><div class="tag">Guide</div></div></div><div class="ad-display-wrapper ad-multiflex"><ins style="display: block; text-align: center; height: 280px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="5198951087" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_0_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:1200px;height:280px;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=5198951087&amp;adk=456125646&amp;adf=2584940624&amp;pi=t.ma~as.5198951087&amp;abgtt=6&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1789736535&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fblog%2F2026-09-18-ieee754-0.1-0.2%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;asro=0&amp;aimartd=4&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTcuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;dt=1789736852016&amp;bpp=12&amp;bdt=509&amp;idt=-M&amp;shv=r20260917&amp;mjsv=m202609150101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie=ID%3D6d70f1d1ba7d7ec6%3AT%3D1789736540%3ART%3D1789736842%3AS%3DALNI_MZQ59EmCTHZxJSTPNMt3E-EPqir1A&amp;gpic=UID%3D0000153d86fc9629%3AT%3D1789736540%3ART%3D1789736842%3AS%3DALNI_MaJ5mjE2jifyACICX3bHDPujj8_qg&amp;eo_id_str=ID%3D6f7ec75f90d63a0b%3AT%3D1789736540%3ART%3D1789736842%3AS%3DAA-AfjbqxBpZ6M3l11-SeNCLtXfI&amp;prev_fmts=0x0&amp;nras=1&amp;correlator=67395053637&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=50&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=142&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95403098&amp;oid=2&amp;pvsid=5625380067327331&amp;tmod=1362413823&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=2&amp;uci=a!2&amp;fsb=1&amp;dtd=27" data-google-container-id="a!2" tabindex="0" title="Advertisement" aria-label="Advertisement" data-google-query-id="CPuHvqqZ-JYDFZg0igIdNKwFdQ" data-load-complete="true"></iframe></div></ins></div><div class="post-content" style="height: auto !important;"><p><strong>0.1 + 0.2 ≠ 0.3</strong> is not a language bug. It happens because <strong>IEEE 754 binary floating-point</strong> cannot represent most decimal fractions exactly in a finite number of bits. The “floating-point error” people mention starts right here—in the limits of the representation itself.</p>
+<p>The first time I hit this was on a web backend that summed cart totals with <code>float</code>. Logs showed <code>0.30000000000000004</code>, and QA filed a “one cent off” ticket. Code review came back with one line: use epsilon instead of <code>==</code>. Nobody could explain <strong>why 0.1 was already wrong before the addition</strong>. That was when it clicked: this is not a <code>printf</code> formatting issue. If you do not know the rules for <strong>storing reals in binary</strong>, you keep falling into the same trap.</p>
+<p>The fastest way to see how 0.1 is stored at the bit level is the <a href="https://compu-tools.com/ieee754/">IEEE 754 Converter</a>. Enter <code>0.1</code>, <code>0.2</code>, and <code>0.3</code>, then switch between f64 (double) and f32 (single) and compare the sign, exponent, and mantissa fields.</p>
+<h2>The Real Question Behind a “Broken” Test</h2><div class="ad-article-wrapper ad-article">
+                <ins class="adsbygoogle" style="display: block; text-align: center; height: 0px;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9424100257975478" data-ad-slot="2892459749" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_2_host" style="border: none; height: 0px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: hidden; opacity: 0;"><iframe id="aswift_2" name="aswift_2" style="left: 0px; position: absolute; top: 0px; border: 0px; width: 1200px; height: 0px; min-height: auto; max-height: none; min-width: auto; max-width: none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="0" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=2892459749&amp;adk=1458197379&amp;adf=2496579566&amp;pi=t.ma~as.2892459749&amp;abgtt=6&amp;w=1200&amp;fwrn=4&amp;fwrnh=0&amp;lmt=1789736535&amp;rafmt=1&amp;armr=3&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fblog%2F2026-09-18-ieee754-0.1-0.2%2F&amp;fwr=0&amp;rpe=1&amp;resp_fmts=3&amp;asro=0&amp;aimartd=4&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTcuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;dt=1789736852910&amp;bpp=9&amp;bdt=1404&amp;idt=9&amp;shv=r20260917&amp;mjsv=m202609150101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie=ID%3D6d70f1d1ba7d7ec6%3AT%3D1789736540%3ART%3D1789736842%3AS%3DALNI_MZQ59EmCTHZxJSTPNMt3E-EPqir1A&amp;gpic=UID%3D0000153d86fc9629%3AT%3D1789736540%3ART%3D1789736842%3AS%3DALNI_MaJ5mjE2jifyACICX3bHDPujj8_qg&amp;eo_id_str=ID%3D6f7ec75f90d63a0b%3AT%3D1789736540%3ART%3D1789736842%3AS%3DAA-AfjbqxBpZ6M3l11-SeNCLtXfI&amp;prev_fmts=0x0%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280%2C1200x280&amp;nras=1&amp;correlator=67395053637&amp;frm=20&amp;pv=1&amp;rplot=4&amp;u_tz=0&amp;u_his=50&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=924&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95403098&amp;oid=2&amp;pvsid=5625380067327331&amp;tmod=1362413823&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEebr%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=55&amp;uci=a!1j&amp;btvi=19&amp;fsb=1&amp;dtd=17" data-google-container-id="a!1j" tabindex="0" title="Advertisement" aria-label="Advertisement" data-google-query-id="CIXh86qZ-JYDFfk1igIdEzMEJg" data-load-complete="true"></iframe></div></ins>
+            </div>
+<p>In a Python REPL, <code>0.1 + 0.2 == 0.3</code> is <code>False</code>. The JavaScript console agrees. The same operation in C++ <code>double</code> does not match <code>0.3</code> at the bit level either. New hires often hear “floats are approximate” and stop there; in production the questions branch:</p>
+<ul>
+<li>Billing and finance: why do whole currency units drift?</li>
+<li>Games and physics: why does collision logic wobble slightly frame to frame?</li>
+<li>Embedded and sensor fusion: why does a float hex from UART parse to a subtly different value on the PC?</li>
+</ul>
+<p>The common thread is <strong>thinking in decimal while storing binary floating-point</strong>. It feels like a “bug that will never be fixed,” but IEEE 754 has been the <strong>deliberate shared standard</strong> across hardware, languages, GPUs, and DSPs since 1985. “Fixing” it would mean changing what float arithmetic <em>means</em> on essentially every CPU.</p>
+<h2>How IEEE 754 Stores One Number</h2>
+<p>IEEE 754 (current revision: <a href="https://standards.ieee.org/standard/754-2019.html">IEEE Std 754-2019</a>) encodes reals with sign, exponent, and significand. Normalized finite values follow roughly:</p>
+<p>[
+(-1)^{s} \times 2^{e - bias} \times (1 + f)
+]</p>
+<p>Here (f) is the fractional part held in the significand field. <strong>The crucial point is that the significand is a finite binary fraction.</strong> Write (1/10 = 0.1_{10}) in binary and you get a <strong>repeating</strong> expansion like (0.0001100110011\ldots_{2}), which cannot be cut exactly to 52 bits (f64) or 23 bits (f32). The stored 0.1 is the <strong>closest representable value</strong>; so are 0.2 and 0.3. Add three independently rounded values and you may not get the same bit pattern as decimal 0.3 computed by hand.</p>
+<p class="blog-image">
+  <img src="/blog/assets/base/ieee754_structure.png" alt="IEEE 754 single-precision 32-bit layout: sign, 8-bit exponent, 23-bit mantissa">
+</p>
+<p align="center">
+  <em>How one f32 word splits into sign / exponent / mantissa—the starting point for reading register dumps</em>
+</p>
+<p>Goldberg’s classic <a href="https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">"What Every Computer Scientist Should Know About Floating-Point Arithmetic"</a> explains systematically how representation error propagates and blows up through <strong>catastrophic cancellation</strong>. “0.1 + 0.2” is practically the <strong>opening sentence</strong> of that textbook.</p>
+<h2>Reproduce in Code, Then Inspect Bits</h2>
+<h3>Python</h3>
+<div class="code-toolbar"><pre class="language-python" tabindex="0"><code class="language-python">a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c <span class="token operator">=</span> <span class="token number">0.1</span><span class="token punctuation">,</span> <span class="token number">0.2</span><span class="token punctuation">,</span> <span class="token number">0.3</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token operator">+</span> b<span class="token punctuation">)</span>          <span class="token comment"># 0.30000000000000004</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token operator">+</span> b <span class="token operator">==</span> c<span class="token punctuation">)</span>     <span class="token comment"># False</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">hex</span><span class="token punctuation">(</span><span class="token builtin">id</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>     <span class="token comment"># for bits, not object id:</span>
+<span class="token keyword">import</span> struct
+<span class="token keyword">print</span><span class="token punctuation">(</span>struct<span class="token punctuation">.</span>unpack<span class="token punctuation">(</span><span class="token string">"!d"</span><span class="token punctuation">,</span> struct<span class="token punctuation">.</span>pack<span class="token punctuation">(</span><span class="token string">"!d"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> label<span class="token punctuation">,</span> x <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token string">"0.1"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"0.2"</span><span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"0.3"</span><span class="token punctuation">,</span> c<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"sum"</span><span class="token punctuation">,</span> a<span class="token operator">+</span>b<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+    bits <span class="token operator">=</span> struct<span class="token punctuation">.</span>unpack<span class="token punctuation">(</span><span class="token string">"&gt;Q"</span><span class="token punctuation">,</span> struct<span class="token punctuation">.</span>pack<span class="token punctuation">(</span><span class="token string">"&gt;d"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">{</span>label<span class="token punctuation">}</span></span><span class="token string">: </span><span class="token interpolation"><span class="token punctuation">{</span>bits<span class="token punctuation">:</span><span class="token format-spec">#018x</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>Python</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<h3>C</h3>
+<div class="code-toolbar"><pre class="language-c" tabindex="0"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;math.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdint.h&gt;</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">double</span> a <span class="token operator">=</span> <span class="token number">0.1</span><span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">0.2</span><span class="token punctuation">,</span> c <span class="token operator">=</span> <span class="token number">0.3</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> s <span class="token operator">=</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%.17g\n"</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"equal: %d\n"</span><span class="token punctuation">,</span> s <span class="token operator">==</span> c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">union</span> <span class="token punctuation">{</span> <span class="token keyword">double</span> d<span class="token punctuation">;</span> <span class="token class-name">uint64_t</span> u<span class="token punctuation">;</span> <span class="token punctuation">}</span> u <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">.</span>d <span class="token operator">=</span> s <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"bits: 0x%016llX\n"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">long</span> <span class="token keyword">long</span><span class="token punctuation">)</span>u<span class="token punctuation">.</span>u<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>C</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<h3>C++ (<code>std::numeric_limits</code> and <code>std::bit_cast</code>)</h3>
+<div class="code-toolbar"><pre class="language-cpp" tabindex="0"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iomanip&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;limits&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bit&gt;</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">using</span> limits <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span>numeric_limits<span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">double</span> a <span class="token operator">=</span> <span class="token number">0.1</span><span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">0.2</span><span class="token punctuation">,</span> c <span class="token operator">=</span> <span class="token number">0.3</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">double</span> s <span class="token operator">=</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span><span class="token function">setprecision</span><span class="token punctuation">(</span><span class="token number">17</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> s <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>boolalpha <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>s <span class="token operator">==</span> c<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"epsilon: "</span> <span class="token operator">&lt;&lt;</span> limits<span class="token double-colon punctuation">::</span><span class="token function">epsilon</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"hex: 0x"</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>hex <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">bit_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span><span class="token keyword">uint64_t</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>C++</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<p>Drop to f32 and the error contour gets coarser. In game engines using <code>float</code> coordinates or MCUs running single-precision FFT, QA reports of “snapping to 0.1 increments” often start with <strong>f32 quantization</strong>.</p>
+<p>If firmware gives you a dump like <code>0x3FB99999A0000000</code>, fix word byte order with the <a href="https://compu-tools.com/endian/">Endian Converter</a> before pasting into the IEEE 754 Converter. Wrong endian interpretation produces a <strong>completely different number</strong> that looks like a “floating-point bug.” For endian basics, pair this with <a href="https://compu-tools.com/blog/2026-03-04-endian/">Understanding Endianness</a>.</p>
+<h2>Same Math, Different Domains</h2><div class="ad-article-wrapper ad-article">
+                <ins class="adsbygoogle" style="display: block; text-align: center; height: 280px;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9424100257975478" data-ad-slot="2892459749" data-adsbygoogle-status="done"><div id="aswift_3_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"></div></ins>
+            </div>
+<h3>Web, finance, and billing</h3>
+<p>JSON and JavaScript <code>Number</code> use IEEE 754 binary64. Money that needs <strong>fixed decimal semantics</strong>—dollars and cents, won and jeon—should not accumulate in <code>float</code>/<code>double</code>. Use <strong>integers in minor units</strong> or decimal types (Python <code>Decimal</code>, Java <code>BigDecimal</code>, .NET <code>decimal</code>). Stripe taking amounts in integer cents follows the same pattern.</p>
+<h3>Games, graphics, and physics</h3>
+<p>Rendering and physics still lean on float. Logic like “snap to a 0.3 grid” is safer with <strong>integer grid coordinates</strong> or epsilon comparisons than <code>round(x * 10) / 10</code>. Unity and Unreal run float internally, but editor snap and tile maps often parallel integer coordinate systems.</p>
+<h3>Embedded and signal processing</h3>
+<p>When lifting ADC readings to float, a common pattern is <strong>normalize scale and offset in integers first</strong>, then convert to float at the end. If reals live in CAN or Modbus registers, word order varies by protocol—using the IEEE 754 Converter together with an endian tool saves debug time.</p>
+<h3>Scientific computing</h3>
+<p>NumPy <code>float64</code> is the same standard. <code>numpy.nextafter</code> and <code>np.isclose(atol, rtol)</code> are APIs for the absolute and relative tolerances Goldberg discusses. Make “use isclose, not ==” a habit.</p>
+<div class="ad-article-wrapper ad-article">
+                <ins class="adsbygoogle" style="display: block; text-align: center; height: 280px;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9424100257975478" data-ad-slot="2892459749" data-adsbygoogle-status="done"><div id="aswift_4_host" style="border: none; height: 280px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"></div></ins>
+            </div><h2>Defensive Patterns in Production</h2>
+<p><strong>1. Avoid equality; use tolerances</strong></p>
+<div class="code-toolbar"><pre class="language-python" tabindex="0"><code class="language-python"><span class="token keyword">import</span> math
+<span class="token keyword">def</span> <span class="token function">float_eq</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> rel<span class="token operator">=</span><span class="token number">1e-9</span><span class="token punctuation">,</span> abs_<span class="token operator">=</span><span class="token number">1e-12</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> math<span class="token punctuation">.</span>isclose<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> rel_tol<span class="token operator">=</span>rel<span class="token punctuation">,</span> abs_tol<span class="token operator">=</span>abs_<span class="token punctuation">)</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><span>Python</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
+<p><strong>2. Money and counters as integers</strong></p>
+<p>Scaling to cents or micro-units in <code>int64</code> is the safer default.</p>
+<p><strong>3. Separate display from storage</strong></p>
+<p>Show <code>%.2f</code> in the UI; keep integers or <code>Decimal</code> internally. Logging with <code>%.17g</code> helps teams agree that <code>0.30000000000000004</code> is <strong>expected behavior</strong>.</p>
+<p><strong>4. Unit tests: bits or ULP</strong></p>
+<p>Numerical libraries often assert against <a href="https://en.wikipedia.org/wiki/Unit_in_the_last_place">ULP (units in the last place)</a>. “Within 1 ULP of <code>c</code>” beats “must equal 0.3” for standards-aligned tests.</p>
+<h2>Verify with the CompuTools IEEE 754 Converter</h2>
+<p>The <a href="https://compu-tools.com/ieee754/">IEEE 754 Converter</a> runs f32 and f64 conversion in the browser. Enter decimal <code>0.1</code>, <code>0.2</code>, and <code>0.3</code> and compare the hex and binary tabs. When you type the sum of <code>0.1 + 0.2</code> directly, you can see visually why its 64-bit pattern differs from <code>0.3</code>—often starting with <strong>one or two mantissa bits</strong>.</p>
+<p>Special values—<code>NaN</code>, <code>Inf</code>, <code>-0</code>—are classified on the same screen. For sensor faults or post–divide-by-zero results, enter <code>nan</code>, <code>inf</code>, and <code>-0</code> in the converter first; then when a UART log shows something like <code>7FF8000000000000</code>, you can recognize it as a special value immediately.</p>
+<p>Because computation stays on the client, pasting internal protocol dumps or float strings that touch customer data does not add requests in the network tab—the same local WASM story as in <a href="https://compu-tools.com/blog/2026-05-10-webassembly/">Browser-Based Dev Tools and Local Processing</a>.</p>
+<h2>References</h2>
+<ol>
+<li><strong>IEEE Computer Society.</strong> <a href="https://standards.ieee.org/standard/754-2019.html">IEEE Std 754-2019 – IEEE Standard for Floating-Point Arithmetic</a> — Normative definition of sign, exponent, significand, rounding modes, and special values.</li>
+<li><strong>Goldberg, D.</strong> <a href="https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">"What Every Computer Scientist Should Know About Floating-Point Arithmetic"</a>, ACM Computing Surveys, 1991 — Representation error, cancellation, and stable formula choice.</li>
+<li><strong>Python Software Foundation.</strong> <a href="https://docs.python.org/3/tutorial/floatingpoint.html">Floating Point Arithmetic: Issues and Limitations</a> — Representation error for 0.1, examples such as <code>0.1 + 0.1 + 0.1 == 0.3</code>, and the <code>decimal</code> module.</li>
+<li><strong>WG14.</strong> <a href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2310.pdf">ISO/IEC 9899:2018 (C17), draft N2310 (PDF)</a> — Annex F: binding of <code>&lt;float.h&gt;</code>, <code>&lt;math.h&gt;</code> to IEC 60559 (IEEE 754).</li>
+<li><strong>Wikipedia contributors.</strong> <a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format">Double-precision floating-point format</a> — binary64 layout, bias 1023, and double-precision examples.</li>
+</ol>
+</div><div class="post-popular-section"><div class="section-header"><div class="section-title"><i class="fa-solid fa-fire"></i>Popular Posts</div></div><div class="post-popular-list"><a href="/blog/2026-03-07-gimbal-lock/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">The Mathematical Cause of Gimbal Lock and How to Avoid It: A Complete Guide to Euler Angles vs Quaternions</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>07 March 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Mathematical</span></div></a><a href="/blog/2026-03-15-crc-comparison/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">Checksum vs CRC vs Hash: Which Should You Use for Data Integrity Verification?</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>15 March 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Security &amp; Hash</span></div></a><a href="/blog/2026-01-31-3d-rotation/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">Understanding 3D Rotation: A Practical Guide to Quaternions, Euler Angles, and Rotation Matrices</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>21 January 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Mathematical</span></div></a><a href="/blog/2026-02-25-cron/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">The Complete Guide to Cron Expressions: Everything a Developer Must Know About Scheduling</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>25 February 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Time &amp; Date</span></div></a><a href="/blog/2026-03-24-robot-kinematics/" class="post-popular-item"><div class="post-popular-title-row"><span class="post-popular-title">Mastering Robot Arm Kinematics: A Practical Guide to Forward Kinematics, Inverse Kinematics, and DH Parameters</span><span class="post-popular-date"><i class="fa-regular fa-calendar"></i>24 March 2026</span></div><div class="post-popular-tags"><span class="post-popular-tag">#Engineering</span></div></a></div></div><div class="ad-display-wrapper ad-common-display"><ins style="display: block; text-align: center; height: 0px;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="7315862436" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_1_host" style="border: none; height: 0px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: hidden; opacity: 0;"><iframe id="aswift_1" name="aswift_1" style="left: 0px; position: absolute; top: 0px; border: 0px; width: 1200px; height: 0px; min-height: auto; max-height: none; min-width: auto; max-width: none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="0" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-9424100257975478&amp;output=html&amp;h=280&amp;slotname=7315862436&amp;adk=3048900072&amp;adf=3067865478&amp;pi=t.ma~as.7315862436&amp;abgtt=6&amp;w=1200&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1789736535&amp;rafmt=1&amp;format=1200x280&amp;url=http%3A%2F%2Flocalhost%3A8765%2Fblog%2F2026-09-18-ieee754-0.1-0.2%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;asro=0&amp;aimartd=4&amp;aieuf=1&amp;aicrs=1&amp;uach=WyJMaW51eCIsIjYuMTcuMCIsIng4NiIsIiIsIjEzMC4wLjY3MjMuMzEiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxMzAuMC42NzIzLjMxIl0sWyJIZWFkbGVzc0Nocm9tZSIsIjEzMC4wLjY3MjMuMzEiXSxbIk5vdD9BX0JyYW5kIiwiOTkuMC4wLjAiXV0sMF0.&amp;dt=1789736852016&amp;bpp=3&amp;bdt=509&amp;idt=3&amp;shv=r20260917&amp;mjsv=m202609150101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie=ID%3D6d70f1d1ba7d7ec6%3AT%3D1789736540%3ART%3D1789736842%3AS%3DALNI_MZQ59EmCTHZxJSTPNMt3E-EPqir1A&amp;gpic=UID%3D0000153d86fc9629%3AT%3D1789736540%3ART%3D1789736842%3AS%3DALNI_MaJ5mjE2jifyACICX3bHDPujj8_qg&amp;eo_id_str=ID%3D6f7ec75f90d63a0b%3AT%3D1789736540%3ART%3D1789736842%3AS%3DAA-AfjbqxBpZ6M3l11-SeNCLtXfI&amp;prev_fmts=0x0%2C1200x280&amp;nras=1&amp;correlator=67395053637&amp;frm=20&amp;pv=1&amp;u_tz=0&amp;u_his=50&amp;u_h=720&amp;u_w=1280&amp;u_ah=720&amp;u_aw=1280&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=40&amp;ady=454&amp;biw=1280&amp;bih=720&amp;scr_x=0&amp;scr_y=0&amp;eid=95403098&amp;oid=2&amp;pvsid=5625380067327331&amp;tmod=1362413823&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1280%2C0%2C1280%2C720%2C1280%2C720&amp;vis=1&amp;rsz=%7C%7CoEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;plas=404x648_l%7C404x648_r&amp;bz=1&amp;ifi=3&amp;uci=a!3&amp;fsb=1&amp;dtd=29" data-google-container-id="a!3" tabindex="0" title="Advertisement" aria-label="Advertisement" data-google-query-id="CKDxvaqZ-JYDFUcbSwEdS9kuWg" data-load-complete="true"></iframe></div></ins></div></div></div></div><aside class="sidebar-right sidebar-right--ad-only"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper ad-sidebar"><ins style="display:block; text-align:center;" data-ad-client="ca-pub-9424100257975478" data-ad-slot="3444624514" data-ad-format="auto" data-full-width-responsive="true" class="adsbygoogle" data-adsbygoogle-status="done"></ins></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/hmac/">HMAC Generator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/text-codec/">Universal Text Codec</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/csv/">CSV / TSV Viewer &amp; Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/rotation-calculator/">3D Rotation Calculator</a></li><li><a href="/ieee754/">IEEE 754 Converter</a></li><li><a href="/endian/">Endian Converter</a></li><li><a href="/bitwise/">Binary &amp; Bitwise Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/i2c/">I2C Calculator</a></li><li><a href="/spi/">SPI Calculator</a></li><li><a href="/uart/">UART Calculator</a></li><li><a href="/can/">CAN Frame Analyzer</a></li><li><a href="/bit-mask/">Bit Mask Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/pwm-servo/">PWM &amp; Servo Calculator</a></li><li><a href="/subnet/">IP / Subnet Calculator</a></li><li><a href="/resistor/">Resistor Color Code</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK/Jacobian Calculator</a></li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a></li><li><a href="/hex-inspector/">Hex File Inspector</a></li><li><a href="/logic-gate/">Logic Gate &amp; Boolean Algebra</a></li><li><a href="/aerospace/">Aerospace Calculator</a></li><li><a href="/pid/">PID Controller Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code &amp; Barcode</a></li><li><a href="/mock-data/">Mock Data Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/curl/">cURL &amp; API Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li><li><a href="/css/">CSS Toolbox</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-image"></i>Image</div><ul class="footer-links"><li><a href="/image/">Image Converter, EXIF Viewer &amp; Palette Extractor</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer><iframe src="https://www.google.com/recaptcha/api2/aframe" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20260917/r20190131/zrt_lookup.html" style="display: none;"></iframe></html>
