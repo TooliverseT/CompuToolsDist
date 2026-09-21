@@ -1,5 +1,5 @@
 {
-  "catalog_as_of": "2026-09-18",
+  "catalog_as_of": "2026-09-21",
   "pricing_note": "Sourced from LiteLLM model_prices_and_context_window.json (see scripts/update_llm_models.py). Reference $/M; verify on provider dashboards.",
   "models": [
     {
@@ -543,11 +543,11 @@
       "fallback_bpe": "cl100k_base"
     },
     {
-      "id": "embed-english-light-v3.0-69aa565107",
+      "id": "embed-english-light-v3.0-28b393dfae",
       "label": "embed-english-light-v3.0",
       "provider": "Cohere",
-      "context_window": 1024,
-      "context_display": "1K",
+      "context_window": 0,
+      "context_display": "512",
       "input_per_mtok_usd": 0.1,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 0.0,
@@ -567,11 +567,11 @@
       "fallback_bpe": "cl100k_base"
     },
     {
-      "id": "embed-english-v3.0-bc23d92629",
+      "id": "embed-english-v3.0-afb8206b96",
       "label": "embed-english-v3.0",
       "provider": "Cohere",
-      "context_window": 1024,
-      "context_display": "1K",
+      "context_window": 0,
+      "context_display": "512",
       "input_per_mtok_usd": 0.1,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 0.0,
@@ -579,11 +579,11 @@
       "fallback_bpe": "cl100k_base"
     },
     {
-      "id": "embed-multilingual-light-v3.0-aa4f12d601",
+      "id": "embed-multilingual-light-v3.0-f36d558367",
       "label": "embed-multilingual-light-v3.0",
       "provider": "Cohere",
-      "context_window": 1024,
-      "context_display": "1K",
+      "context_window": 0,
+      "context_display": "512",
       "input_per_mtok_usd": 100.0,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 0.0,
@@ -603,11 +603,11 @@
       "fallback_bpe": "cl100k_base"
     },
     {
-      "id": "embed-multilingual-v3.0-722bbcac37",
+      "id": "embed-multilingual-v3.0-7e5228c021",
       "label": "embed-multilingual-v3.0",
       "provider": "Cohere",
-      "context_window": 1024,
-      "context_display": "1K",
+      "context_window": 0,
+      "context_display": "512",
       "input_per_mtok_usd": 0.1,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 0.0,
