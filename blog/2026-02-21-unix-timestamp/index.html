@@ -1,5 +1,18 @@
 <!DOCTYPE html><html lang="en" data-theme="light"><head>
   <meta charset="utf-8">
+  <script>
+    (function () {
+      function normalizedHost() {
+        var h = (location.hostname || '').toLowerCase();
+        if (h.length >= 2 && h.charAt(0) === '[' && h.charAt(h.length - 1) === ']') {
+          h = h.slice(1, -1);
+        }
+        return h;
+      }
+      var allowed = ['www.compu-tools.com', 'compu-tools.com'];
+      window.__compuProductionSite = allowed.indexOf(normalizedHost()) !== -1;
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
   <meta name="naver-site-verification" content="457aba595da679106dd139e9a9116d1685df4a4b">
@@ -45,8 +58,8 @@
   
   
 <script type="module">
-import init, * as bindings from '/computools-b678366a9f8bada2.js';
-const wasm = await init({ module_or_path: '/computools-b678366a9f8bada2_bg.wasm' });
+import init, * as bindings from '/computools-4da26332a8180e9e.js';
+const wasm = await init({ module_or_path: '/computools-4da26332a8180e9e_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -112,26 +125,50 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
         return { timeZone, offset };
     }
   </script>
-  <!-- Google Funding Choices (ad recovery) -->
-  <script async="" src="https://fundingchoicesmessages.google.com/i/pub-9424100257975478?ers=1"></script>
-  <script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
-  <script src="/funding-choices-recovery.js"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script>
-
-  <!-- Google tag (gtag.js) -->
-  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <!-- Google Funding Choices / Analytics / AdSense: production host only -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    (function () {
+      if (!window.__compuProductionSite) return;
 
-    gtag('config', 'G-1G0CMRC310');
+      var fc = document.createElement('script');
+      fc.async = true;
+      fc.src = 'https://fundingchoicesmessages.google.com/i/pub-9424100257975478?ers=1';
+      document.head.appendChild(fc);
+
+      (function signalGooglefcPresent() {
+        if (!window.frames['googlefcPresent']) {
+          if (document.body) {
+            var iframe = document.createElement('iframe');
+            iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;';
+            iframe.style.display = 'none';
+            iframe.name = 'googlefcPresent';
+            document.body.appendChild(iframe);
+          } else {
+            setTimeout(signalGooglefcPresent, 0);
+          }
+        }
+      })();
+
+      var recovery = document.createElement('script');
+      recovery.src = '/funding-choices-recovery.js';
+      document.head.appendChild(recovery);
+
+      var gtagJs = document.createElement('script');
+      gtagJs.async = true;
+      gtagJs.src = 'https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310';
+      document.head.appendChild(gtagJs);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', 'G-1G0CMRC310');
+    })();
   </script>
-  <!-- AdSense: load after WASM remounts over prerendered HTML.
-       Head-async load fills snapshot <ins>, then Yew clears body, so
-       visible ads become a second (often unfilled) request. -->
+  <!-- AdSense: load after WASM remounts over prerendered HTML (production only). -->
   <script>
     (function () {
       function loadAdSense() {
+        if (!window.__compuProductionSite) return;
         if (window.__compuAdSenseLoaded) return;
         window.__compuAdSenseLoaded = true;
         var s = document.createElement('script');
@@ -144,7 +181,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-b678366a9f8bada2.js" crossorigin="anonymous" integrity="sha384-4z/EjJ2n3Y2tyDcfg/XR0ZwMmEIJVnxZ4uT1g3mM2seEPTfplRvjaA3aEvSMj+BW"><link rel="preload" href="/computools-b678366a9f8bada2_bg.wasm" crossorigin="anonymous" integrity="sha384-KOcAtRVRzCXxfDQW8/OtsyannxLYnuYtZi5EdB+JYlB9qqUtcn8O/SsLbposgP38" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-4da26332a8180e9e.js" crossorigin="anonymous" integrity="sha384-ulmYnkPdr+sACZPgfCFK5bG7z2OGUfF13/vRiaZyt1i6a81OEdMlodXM0fhoFIUv"><link rel="preload" href="/computools-4da26332a8180e9e_bg.wasm" crossorigin="anonymous" integrity="sha384-Rfx+XZbeNteo0eFnHQgF2M21zQjjtbKGEwn+aXcDxU9DSdnPKmza006UxSkgqTNz" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Everything About Unix Timestamps: A Developer's Guide to Handling Time as Numbers | CompuTools Blog">
   <meta name="twitter:description" content="Why is the Unix Epoch January 1, 1970? What happens when 32-bit timestamps overflow in 2038? From the historical origins of Unix time to the real-world complexities of timezones, DST, and millisecond handling — a deep dive for developers. Includes practical examples using a custom-built Unix timestamp converter tool.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/unix_timestamp/timezone_map.png">
@@ -538,9 +575,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
   font-family: MJXTEX-VB;
   src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
 }
-</style><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script></head>
+</style></head>
 
-<body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="page-with-sidebar"><div class="page-main"><div class="home-wrapper"><div class="post-wrapper"><div class="post-metadata"><h1 class="post-title">Everything About Unix Timestamps: A Developer's Guide to Handling Time as Numbers</h1><div class="post-date">21 February 2026</div><div class="post-excerpt">Why is the Unix Epoch January 1, 1970? What happens when 32-bit timestamps overflow in 2038? From the historical origins of Unix time to the real-world complexities of timezones, DST, and millisecond handling — a deep dive for developers. Includes practical examples using a custom-built Unix timestamp converter tool.</div><div class="post-tags"><div class="tag">Time &amp; Date</div></div></div><div class="ad-display-wrapper ad-multiflex"></div><div class="post-content"><p>The way computer systems handle time is fundamentally different from how we read a calendar. We say "February 21, 2026 at 3:00 PM," but a computer represents that exact moment as a single integer. That integer is the <strong>Unix Timestamp</strong>. In this post, we'll explore the historical context, technical principles, and the real-world complexities developers encounter — all hidden behind what appears to be a simple number. If you'd like to follow along hands-on, try the <a href="https://compu-tools.com/unix-timestamp/">Unix Timestamp Converter</a> I built.</p>
+<body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="page-with-sidebar"><div class="page-main"><div class="home-wrapper"><div class="post-wrapper"><div class="post-metadata"><h1 class="post-title">Everything About Unix Timestamps: A Developer's Guide to Handling Time as Numbers</h1><div class="post-date">21 February 2026</div><div class="post-excerpt">Why is the Unix Epoch January 1, 1970? What happens when 32-bit timestamps overflow in 2038? From the historical origins of Unix time to the real-world complexities of timezones, DST, and millisecond handling — a deep dive for developers. Includes practical examples using a custom-built Unix timestamp converter tool.</div><div class="post-tags"><div class="tag">Time &amp; Date</div></div></div><div class="post-content"><p>The way computer systems handle time is fundamentally different from how we read a calendar. We say "February 21, 2026 at 3:00 PM," but a computer represents that exact moment as a single integer. That integer is the <strong>Unix Timestamp</strong>. In this post, we'll explore the historical context, technical principles, and the real-world complexities developers encounter — all hidden behind what appears to be a simple number. If you'd like to follow along hands-on, try the <a href="https://compu-tools.com/unix-timestamp/">Unix Timestamp Converter</a> I built.</p>
 <h2>Why January 1, 1970? The Birth of the Epoch</h2>
 <p>When I first learned programming and studied what the <code>time()</code> function actually returns, a natural question came to mind: "Why 1970? That's not when computers were invented."</p>
 <p>The answer lies in the history of Unix. In 1969, Ken Thompson and Dennis Ritchie at AT&amp;T Bell Labs began developing the Unix operating system. To represent time internally, they defined a single integer as the number of seconds elapsed from a fixed reference point. That reference — close enough to be practical, round enough to be elegant — was set to <strong>January 1, 1970 at 00:00:00 UTC</strong>.</p>
@@ -581,7 +618,9 @@ time<span class="token punctuation">.</span><span class="token method function p
 <span class="token comment">// e.g. 1740124800  (10 digits)</span>
 </code></pre><div class="toolbar"><div class="toolbar-item"><span>JavaScript</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
 <p>A practical rule of thumb: a 13-digit number is almost certainly in milliseconds; a 10-digit number is in seconds. Early in my career, I passed a JavaScript-generated timestamp directly into server-side Python code without dividing by 1000. The resulting date calculations were completely wrong, and it took several frustrating hours to track down the cause — a single missing division.</p>
-<h2>Timezones and DST: The Real Complexity of Timestamps</h2>
+<h2>Timezones and DST: The Real Complexity of Timestamps</h2><div class="ad-article-wrapper ad-article">
+                
+            </div>
 <p>Unix timestamps are always UTC. But the real world operates on timezones, and that's where many developers encounter unexpected bugs.</p>
 <h3>The IANA Timezone Database</h3>
 <p>The world contains more than 600 named timezones registered in the <a href="https://www.iana.org/time-zones">IANA (Internet Assigned Numbers Authority) Timezone Database</a>. A simple UTC±N offset is not enough — the database tracks historically changed timezone rules, Daylight Saving Time (DST) transition dates, and the fact that different countries apply DST differently.</p>
@@ -632,7 +671,9 @@ time<span class="token punctuation">.</span><span class="token method function p
 <p align="center">
   <em>Unix Timestamp Converter: Converting a scheduled datetime (America/New_York) to a Unix timestamp for deployment automation</em>
 </p>
-<h2>The Year 2038 Problem: History Repeating Itself</h2>
+<h2>The Year 2038 Problem: History Repeating Itself</h2><div class="ad-article-wrapper ad-article">
+                
+            </div>
 <p>If you remember Y2K, the Year 2038 Problem will feel familiar — though technically, it is far more straightforward.</p>
 <p>The maximum value of a <strong>signed 32-bit integer</strong> is <code>2,147,483,647</code>. That value corresponds exactly to <strong>January 19, 2038 at 03:14:07 UTC</strong>. When a 32-bit system's clock reaches this point, the timestamp overflows into a negative number, and the interpreted date wraps back to <strong>December 13, 1901</strong>.</p>
 <div class="code-toolbar"><pre class="language-text" tabindex="0"><code class="language-text">2147483647  → 2038-01-19 03:14:07 UTC  (32-bit maximum)
@@ -640,9 +681,7 @@ time<span class="token punctuation">.</span><span class="token method function p
             → interpreted as 1901-12-13 20:45:52 UTC
 </code></pre><div class="toolbar"><div class="toolbar-item"><span>Plain text</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
 <p>As noted by <a href="https://www.openbsd.org/">OpenBSD security advisories</a>, this is not just a legacy code problem. Embedded systems, industrial control equipment, and network device firmware with long update cycles face real risk. The solution is well-established: <strong>64-bit timestamps</strong> extend the representable range to roughly <strong>292 billion years</strong>. The Linux kernel began transitioning 32-bit platforms to 64-bit <code>time_t</code> starting around 2012 (<a href="https://kernelnewbies.org/y2038">Linux kernel time64_t transition</a>), and modern 64-bit systems are already safe. The converter tool featured in this post also uses 64-bit integers internally and is not affected by this problem.</p>
-<h2>Leap Seconds: Why Unix Timestamps Aren't Perfect</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>Leap Seconds: Why Unix Timestamps Aren't Perfect</h2>
 <p>There is one lesser-known fact about Unix timestamps: they <strong>ignore leap seconds</strong>.</p>
 <p>Earth's rotation is not perfectly constant, causing a gradual divergence between astronomical time (UT1) and atomic-clock-based Coordinated Universal Time (UTC). To correct this, the <a href="https://www.iers.org/">International Earth Rotation and Reference Systems Service (IERS)</a> periodically inserts one-second adjustments called leap seconds. From 1972 through 2024, 27 leap seconds have been added in total.</p>
 <p>Unix timestamps treat every day as exactly 86,400 seconds. When a leap second is inserted, the timestamp either repeats the same value twice (leap smearing) or skips it entirely, depending on the system's implementation. This can cause subtle discrepancies in cross-system time synchronization.</p>
@@ -653,9 +692,7 @@ time<span class="token punctuation">.</span><span class="token method function p
 <p><a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> is the international standard for representing dates and times, defining formats like <code>2026-02-21T15:30:00+09:00</code>. Its key advantage is that it embeds timezone offset information, and crucially, <strong>alphabetical string sorting and chronological sorting produce identical results</strong> — which makes it especially safe to use in logs and databases without additional parsing.</p>
 <h3>RFC 3339: ISO 8601 Profiled for Internet Use</h3>
 <p><a href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> is a stricter profile of ISO 8601 designed specifically for internet protocols. The Google API Design Guide, GitHub API, and AWS timestamp formats all follow RFC 3339. When designing a REST API, the choice typically comes down to RFC 3339 strings versus Unix integers. My personal preference is <strong>ISO 8601 / RFC 3339 for any field that humans will read or debug</strong>, and <strong>Unix timestamps for internal processing where performance matters</strong>.</p>
-<h2>Practical Patterns: Handling Timestamps Correctly</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>Practical Patterns: Handling Timestamps Correctly</h2>
 <p>These are the principles I've settled on after debugging timestamp-related issues across multiple production systems.</p>
 <p><strong>Store in UTC, display in local time.</strong> This single rule prevents the majority of timezone-related bugs. Store UTC timestamps in the database and convert to local timezone only at the presentation layer.</p>
 <p><strong>Document the unit explicitly.</strong> Specify whether a timestamp field is in seconds or milliseconds in every function signature and API contract. Encoding the unit in the name — such as <code>created_at_ms</code> — is a simple, effective convention.</p>
@@ -674,4 +711,4 @@ time<span class="token punctuation">.</span><span class="token method function p
 <li><strong>Linux Kernel Newbies</strong> — <a href="https://kernelnewbies.org/y2038">Y2038 time_t transition</a> — Documentation of the Linux kernel's migration to 64-bit timestamps</li>
 <li><strong>Python Official Docs</strong> — <a href="https://docs.python.org/3/library/time.html">time — Time access and conversions</a> — Standard library reference for handling Unix timestamps in Python</li>
 </ol>
-</div><div class="ad-display-wrapper ad-common-display"></div></div></div></div><aside class="sidebar-right sidebar-right--ad-only"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper ad-sidebar"></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/hmac/">HMAC Generator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/text-codec/">Universal Text Codec</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/csv/">CSV / TSV Viewer &amp; Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/rotation-calculator/">3D Rotation Calculator</a></li><li><a href="/ieee754/">IEEE 754 Converter</a></li><li><a href="/endian/">Endian Converter</a></li><li><a href="/bitwise/">Binary &amp; Bitwise Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/i2c/">I2C Calculator</a></li><li><a href="/spi/">SPI Calculator</a></li><li><a href="/uart/">UART Calculator</a></li><li><a href="/can/">CAN Frame Analyzer</a></li><li><a href="/bit-mask/">Bit Mask Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/pwm-servo/">PWM &amp; Servo Calculator</a></li><li><a href="/subnet/">IP / Subnet Calculator</a></li><li><a href="/resistor/">Resistor Color Code</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK/Jacobian Calculator</a></li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a></li><li><a href="/hex-inspector/">Hex File Inspector</a></li><li><a href="/logic-gate/">Logic Gate &amp; Boolean Algebra</a></li><li><a href="/aerospace/">Aerospace Calculator</a></li><li><a href="/pid/">PID Controller Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code &amp; Barcode</a></li><li><a href="/mock-data/">Mock Data Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/curl/">cURL &amp; API Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li><li><a href="/css/">CSS Toolbox</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-image"></i>Image</div><ul class="footer-links"><li><a href="/image/">Image Converter, EXIF Viewer &amp; Palette Extractor</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer></body></html>
+</div></div></div></div><aside class="sidebar-right sidebar-right--ad-only"><div class="sidebar-sticky"><div class="sidebar-ad-space"></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/hmac/">HMAC Generator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/text-codec/">Universal Text Codec</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/csv/">CSV / TSV Viewer &amp; Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/rotation-calculator/">3D Rotation Calculator</a></li><li><a href="/ieee754/">IEEE 754 Converter</a></li><li><a href="/endian/">Endian Converter</a></li><li><a href="/bitwise/">Binary &amp; Bitwise Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/i2c/">I2C Calculator</a></li><li><a href="/spi/">SPI Calculator</a></li><li><a href="/uart/">UART Calculator</a></li><li><a href="/can/">CAN Frame Analyzer</a></li><li><a href="/bit-mask/">Bit Mask Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/pwm-servo/">PWM &amp; Servo Calculator</a></li><li><a href="/subnet/">IP / Subnet Calculator</a></li><li><a href="/resistor/">Resistor Color Code</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK/Jacobian Calculator</a></li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a></li><li><a href="/hex-inspector/">Hex File Inspector</a></li><li><a href="/logic-gate/">Logic Gate &amp; Boolean Algebra</a></li><li><a href="/aerospace/">Aerospace Calculator</a></li><li><a href="/pid/">PID Controller Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code &amp; Barcode</a></li><li><a href="/mock-data/">Mock Data Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/curl/">cURL &amp; API Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li><li><a href="/css/">CSS Toolbox</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-image"></i>Image</div><ul class="footer-links"><li><a href="/image/">Image Converter, EXIF Viewer &amp; Palette Extractor</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer></body></html>

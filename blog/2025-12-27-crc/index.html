@@ -1,5 +1,18 @@
 <!DOCTYPE html><html lang="en" data-theme="light"><head>
   <meta charset="utf-8">
+  <script>
+    (function () {
+      function normalizedHost() {
+        var h = (location.hostname || '').toLowerCase();
+        if (h.length >= 2 && h.charAt(0) === '[' && h.charAt(h.length - 1) === ']') {
+          h = h.slice(1, -1);
+        }
+        return h;
+      }
+      var allowed = ['www.compu-tools.com', 'compu-tools.com'];
+      window.__compuProductionSite = allowed.indexOf(normalizedHost()) !== -1;
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
   <meta name="naver-site-verification" content="457aba595da679106dd139e9a9116d1685df4a4b">
@@ -45,8 +58,8 @@
   
   
 <script type="module">
-import init, * as bindings from '/computools-b678366a9f8bada2.js';
-const wasm = await init({ module_or_path: '/computools-b678366a9f8bada2_bg.wasm' });
+import init, * as bindings from '/computools-4da26332a8180e9e.js';
+const wasm = await init({ module_or_path: '/computools-4da26332a8180e9e_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -112,26 +125,50 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
         return { timeZone, offset };
     }
   </script>
-  <!-- Google Funding Choices (ad recovery) -->
-  <script async="" src="https://fundingchoicesmessages.google.com/i/pub-9424100257975478?ers=1"></script>
-  <script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
-  <script src="/funding-choices-recovery.js"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script>
-
-  <!-- Google tag (gtag.js) -->
-  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <!-- Google Funding Choices / Analytics / AdSense: production host only -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    (function () {
+      if (!window.__compuProductionSite) return;
 
-    gtag('config', 'G-1G0CMRC310');
+      var fc = document.createElement('script');
+      fc.async = true;
+      fc.src = 'https://fundingchoicesmessages.google.com/i/pub-9424100257975478?ers=1';
+      document.head.appendChild(fc);
+
+      (function signalGooglefcPresent() {
+        if (!window.frames['googlefcPresent']) {
+          if (document.body) {
+            var iframe = document.createElement('iframe');
+            iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;';
+            iframe.style.display = 'none';
+            iframe.name = 'googlefcPresent';
+            document.body.appendChild(iframe);
+          } else {
+            setTimeout(signalGooglefcPresent, 0);
+          }
+        }
+      })();
+
+      var recovery = document.createElement('script');
+      recovery.src = '/funding-choices-recovery.js';
+      document.head.appendChild(recovery);
+
+      var gtagJs = document.createElement('script');
+      gtagJs.async = true;
+      gtagJs.src = 'https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310';
+      document.head.appendChild(gtagJs);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', 'G-1G0CMRC310');
+    })();
   </script>
-  <!-- AdSense: load after WASM remounts over prerendered HTML.
-       Head-async load fills snapshot <ins>, then Yew clears body, so
-       visible ads become a second (often unfilled) request. -->
+  <!-- AdSense: load after WASM remounts over prerendered HTML (production only). -->
   <script>
     (function () {
       function loadAdSense() {
+        if (!window.__compuProductionSite) return;
         if (window.__compuAdSenseLoaded) return;
         window.__compuAdSenseLoaded = true;
         var s = document.createElement('script');
@@ -144,7 +181,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-b678366a9f8bada2.js" crossorigin="anonymous" integrity="sha384-4z/EjJ2n3Y2tyDcfg/XR0ZwMmEIJVnxZ4uT1g3mM2seEPTfplRvjaA3aEvSMj+BW"><link rel="preload" href="/computools-b678366a9f8bada2_bg.wasm" crossorigin="anonymous" integrity="sha384-KOcAtRVRzCXxfDQW8/OtsyannxLYnuYtZi5EdB+JYlB9qqUtcn8O/SsLbposgP38" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-4da26332a8180e9e.js" crossorigin="anonymous" integrity="sha384-ulmYnkPdr+sACZPgfCFK5bG7z2OGUfF13/vRiaZyt1i6a81OEdMlodXM0fhoFIUv"><link rel="preload" href="/computools-4da26332a8180e9e_bg.wasm" crossorigin="anonymous" integrity="sha384-Rfx+XZbeNteo0eFnHQgF2M21zQjjtbKGEwn+aXcDxU9DSdnPKmza006UxSkgqTNz" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Data Integrity Verification with CRC: A Practical Guide | CompuTools Blog">
   <meta name="twitter:description" content="Explore the mathematical foundations and practical applications of CRC (Cyclic Redundancy Check) algorithms. Learn how polynomial division provides superior error detection in network protocols, storage systems, and embedded applications—from Ethernet to automotive CAN buses.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/crc/crc_workflow.png">
@@ -538,142 +575,6 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
   font-family: MJXTEX-VB;
   src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
 }
-</style><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script></head>
+</style></head>
 
-<body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="page-with-sidebar"><div class="page-main"><div class="home-wrapper"><div class="post-wrapper"><div class="post-metadata"><h1 class="post-title">Data Integrity Verification with CRC: A Practical Guide</h1><div class="post-date">27 December 2025</div><div class="post-excerpt">Explore the mathematical foundations and practical applications of CRC (Cyclic Redundancy Check) algorithms. Learn how polynomial division provides superior error detection in network protocols, storage systems, and embedded applications—from Ethernet to automotive CAN buses.</div><div class="post-tags"><div class="tag">Security &amp; Hash</div></div></div><div class="ad-display-wrapper ad-multiflex"></div><div class="post-content"><p>Let's explore CRC (Cyclic Redundancy Check), an essential component in digital communication and data storage.</p>
-<p>CRC is an error detection algorithm that plays a crucial role in various protocols and systems. While it may seem simple, there's much to understand for practical implementation. This article covers content for those encountering CRC for the first time or looking to apply it in real-world scenarios. If you need to calculate CRC values, you can use the <a href="https://compu-tools.com/crc/">CRC Tool</a>.</p>
-<h2>Why Do We Need CRC?</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
-<p>What's most important when transmitting or storing data? <strong>Verifying that the data has been delivered accurately.</strong> Countless factors can corrupt data: noise in network cables, physical damage to storage media, electromagnetic interference, and more.</p>
-<p>CRC is an error detection algorithm designed to solve these problems. Unlike simple checksums, it's based on mathematically rigorous <strong>Polynomial Division</strong>, enabling it to detect complex errors with high probability, such as reordered bytes or specific patterns of bit flips.</p>
-<p class="blog-image">
-  <img src="/blog/assets/crc/crc_workflow.png" alt="Flowchart showing CRC operation from data input through checksum generation, transmission, and receiver-side verification">
-</p>
-<p align="center">
-  <em>Basic CRC workflow illustrating how a checksum is generated from input data, appended during transmission, and verified on the receiver side.</em>
-</p>
-<h2>How Is CRC Used in Practice?</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
-<h3>1. Foundation of Network Communication (Ethernet)</h3>
-<p>CRC is used in <a href="https://standards.ieee.org/standard/802_3-2022.html">Ethernet (IEEE 802.3)</a>, the foundation of internet communication. Every Ethernet frame contains a 32-bit FCS (Frame Check Sequence) field that includes a CRC-32/ISO-HDLC checksum. Network switches and routers automatically verify this value, discarding corrupted frames and requesting retransmission.</p>
-<h3>2. Industrial Automation Sites (MODBUS)</h3>
-<p>The <a href="https://www.modbustools.com/modbus.html">MODBUS RTU</a> protocol, a standard in factory automation systems, uses CRC-16/MODBUS for data integrity. Industrial environments have severe electromagnetic noise, making CRC essential for reliable data transmission between PLCs (Programmable Logic Controllers) and sensors.</p>
-<p class="blog-image">
-  <img src="/blog/assets/crc/modbus_frame_structure.png" alt="MODBUS RTU frame layout with device ID, function code, data bytes, and CRC-16 checksum shown in hexadecimal">
-</p>
-<p align="center">
-  <em>MODBUS RTU request frame structure showing Device ID, Function Code, Data field, and CRC-16/MODBUS checksum (01 03 00 00 00 02 C4 0B).</em>
-</p>
-<h3>3. Automotive Electronic Systems (CAN Bus)</h3>
-<p>The <a href="https://www.iso.org/standard/63648.html">CAN (Controller Area Network, ISO 11898)</a> bus, used for communication between ECUs (Electronic Control Units) in modern vehicles, employs CRC-15/CAN. Since safety-critical data like steering and braking is transmitted, functional safety standards such as <a href="https://www.iso.org/standard/68383.html">ISO 26262</a> emphasize these error detection mechanisms.</p>
-<h3>4. Embedded Sensor Communication (1-Wire)</h3>
-<p>Low-power embedded devices like temperature sensors often use <a href="https://www.analog.com/en/resources/technical-articles/understanding-and-using-cyclic-redundancy-checks-with-maxim-1wire-and-ibutton-products.html">Maxim's 1-Wire</a> protocol, which implements CRC-8/MAXIM-DOW. An 8-byte data reading from the sensor is followed by a 1-byte CRC, detecting data corruption that can occur over long cables.</p>
-<p class="blog-image">
-  <img src="/blog/assets/crc/sensor_data_packet.png" alt="Sensor communication packet displaying multiple data bytes followed by a highlighted CRC byte for error detection">
-</p>
-<p align="center">
-  <em>Embedded sensor data packet with the final CRC byte highlighted, demonstrating CRC-based error detection in low-power communication protocols.</em>
-</p>
-<h2>CRC Algorithm Configuration Parameters</h2>
-<p>Even with the same bit width (e.g., 16 bits), MODBUS, USB, and XMODEM produce different results because their parameters differ. According to <a href="http://www.ross.net/crc/download/crc_v3.txt">Ross Williams's CRC Guide</a>, CRC algorithms are defined by:</p>
-<ul>
-<li><strong>Generator Polynomial</strong>: The divisor used in division. Example: CRC-16/ANSI uses <code>0x8005</code>.</li>
-<li><strong>Initial Value</strong>: The value loaded into the register at calculation start. Usually <code>0x0000</code> or <code>0xFFFF</code>.</li>
-<li><strong>XOR Output</strong>: XOR value applied to the final calculation result.</li>
-<li><strong>Input/Output Reflection</strong>: Whether to reverse bit order within bytes during processing.</li>
-</ul>
-<p class="blog-image">
-  <img src="/blog/assets/crc/crc_results.png" alt="Table comparing CRC checksum results for the string Hello using different CRC algorithms and polynomials">
-</p>
-<p align="center">
-  <em>Comparison of CRC results for the same input string ("Hello") across multiple CRC algorithms, highlighting how different polynomials and parameters produce different checksums.</em>
-</p>
-<h2>Practical Implementation: MODBUS CRC Example</h2>
-<p>Let's calculate the CRC for a MODBUS RTU protocol request frame <code>01 03 00 00 00 0A</code> that reads 10 registers.</p>
-<h3>Step 1: Data Preparation</h3>
-<p>First, prepare the data excluding the CRC in hexadecimal:</p>
-<div class="code-toolbar"><pre class="language-text" tabindex="0"><code class="language-text">01 03 00 00 00 0A
-</code></pre><div class="toolbar"><div class="toolbar-item"><span>Plain text</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
-<ul>
-<li><strong>Input Method</strong>: Select CRC-16/MODBUS</li>
-</ul>
-<p>When entering this value in the <a href="https://compu-tools.com/crc/">CRC Tool</a>, select 'HEX' as the input method and enter with spaces separating the values.</p>
-<h3>Step 2: Algorithm Configuration and Input</h3>
-<ul>
-<li><strong>CRC Algorithm</strong>: CRC-16/MODBUS</li>
-<li><strong>Output Format</strong>: HEX</li>
-<li><strong>Hex Style</strong>: 0x48</li>
-<li><strong>Byte Order</strong>: Little Endian (MODBUS uses Little Endian)</li>
-<li><strong>Byte Format</strong>: Byte Separated</li>
-</ul>
-<p class="blog-image">
-  <img src="/blog/assets/crc/crc_input_computools.png" alt="CRC calculation tool interface with HEX input mode selected and a MODBUS RTU request frame entered for checksum computation in Computools.">
-</p>
-<p align="center">
-  <em>CRC calculator interface with hexadecimal input mode selected and a MODBUS request frame entered in Computools</em>
-</p>
-<h3>Step 3: Result Verification</h3>
-<p>CRC-16/MODBUS calculation result: <strong>0xC5 0xCD</strong></p>
-<p>Since MODBUS uses little endian, it's appended to the data in <code>0xC5 0xCD</code> order during actual transmission.</p>
-<p class="blog-image">
-  <img src="/blog/assets/crc/crc_output_computools.png" alt="CRC calculation result screen showing the computed CRC value along with little-endian representations in Computools.">
-</p>
-<p align="center">
-  <em>CRC calculator output showing calculated checksum with little-endian byte order representations in Computools</em>
-</p>
-<h3>Step 4: C Code Implementation</h3>
-<div class="code-toolbar"><pre class="language-c" tabindex="0"><code class="language-c"><span class="token class-name">uint16_t</span> <span class="token function">calculate_modbus_crc</span><span class="token punctuation">(</span><span class="token class-name">uint8_t</span> <span class="token operator">*</span>data<span class="token punctuation">,</span> <span class="token class-name">size_t</span> length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token class-name">uint16_t</span> crc <span class="token operator">=</span> <span class="token number">0xFFFF</span><span class="token punctuation">;</span> <span class="token comment">// MODBUS initial value</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">size_t</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        crc <span class="token operator">^=</span> data<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> <span class="token number">8</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>crc <span class="token operator">&amp;</span> <span class="token number">0x0001</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                crc <span class="token operator">=</span> <span class="token punctuation">(</span>crc <span class="token operator">&gt;&gt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token number">0xA001</span><span class="token punctuation">;</span> <span class="token comment">// Reflected polynomial of 0x8005</span>
-            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-                crc <span class="token operator">=</span> crc <span class="token operator">&gt;&gt;</span> <span class="token number">1</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> crc<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre><div class="toolbar"><div class="toolbar-item"><span>C</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
-<h2>Performance Optimization: Lookup Table</h2>
-<p>Bit-wise calculation is slow due to the high number of loops. In practice, performance is improved by approximately 10x or more by using a lookup table with 256 pre-calculated values, processing byte by byte.</p>
-<div class="code-toolbar"><pre class="language-c" tabindex="0"><code class="language-c"><span class="token comment">// Pre-calculated CRC-16/MODBUS lookup table (partial)</span>
-<span class="token keyword">static</span> <span class="token keyword">const</span> <span class="token class-name">uint16_t</span> crc_table<span class="token punctuation">[</span><span class="token number">256</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
-    <span class="token number">0x0000</span><span class="token punctuation">,</span> <span class="token number">0xC0C1</span><span class="token punctuation">,</span> <span class="token number">0xC181</span><span class="token punctuation">,</span> <span class="token number">0x0140</span><span class="token punctuation">,</span> <span class="token number">0xC301</span><span class="token punctuation">,</span> <span class="token number">0x03C0</span><span class="token punctuation">,</span> <span class="token number">0x0280</span><span class="token punctuation">,</span> <span class="token number">0xC241</span><span class="token punctuation">,</span>
-    <span class="token comment">// ... remaining entries omitted</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token class-name">uint16_t</span> <span class="token function">calculate_modbus_crc_fast</span><span class="token punctuation">(</span><span class="token class-name">uint8_t</span> <span class="token operator">*</span>data<span class="token punctuation">,</span> <span class="token class-name">size_t</span> length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token class-name">uint16_t</span> crc <span class="token operator">=</span> <span class="token number">0xFFFF</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">size_t</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token class-name">uint8_t</span> index <span class="token operator">=</span> <span class="token punctuation">(</span>crc <span class="token operator">^</span> data<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">0xFF</span><span class="token punctuation">;</span>
-        crc <span class="token operator">=</span> <span class="token punctuation">(</span>crc <span class="token operator">&gt;&gt;</span> <span class="token number">8</span><span class="token punctuation">)</span> <span class="token operator">^</span> crc_table<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> crc<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre><div class="toolbar"><div class="toolbar-item"><span>C</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
-<h2>CRC's Error Detection Capability and Limitations</h2>
-<h3>Detectable Errors</h3>
-<p>CRC detects the following accidental errors with very high probability:</p>
-<ul>
-<li><strong>Single-bit and adjacent 2-bit errors</strong>: 100% detection.</li>
-<li><strong>Odd number of bit errors</strong>: 100% detection when the generator polynomial includes the <span class="math-inline"><mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="1" style="font-size: 119.6%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D465 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2B"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="3"><mjx-c class="mjx-c31"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></math></mjx-assistive-mml></mjx-container></span> factor.</li>
-<li><strong>Burst Errors</strong>: 100% detection of consecutive errors within the CRC bit width (n).</li>
-</ul>
-<h3>Security Limitations</h3>
-<p>CRC is a tool for preventing <strong>accidental data corruption</strong> and, unlike cryptographic hashes (SHA-256, etc.), <strong>cannot be used for security purposes.</strong> Malicious attackers can reverse-calculate to modify data while maintaining the same CRC value.</p>
-<div class="ad-article-wrapper ad-article">
-                
-            </div><h2>References and Further Reading</h2>
-<ol>
-<li><strong>Ross Williams</strong>, <a href="http://www.ross.net/crc/download/crc_v3.txt">"A Painless Guide to CRC Error Detection Algorithms"</a> - The most recommended document for understanding CRC operation principles and parameters.</li>
-<li><strong>Modbus Tools</strong>, <a href="https://www.modbustools.com/modbus.html">"Modbus Protocol Description"</a> - The standard for MODBUS CRC implementation.</li>
-<li><strong>Analog Devices</strong>, <a href="https://www.analog.com/en/resources/technical-articles/understanding-and-using-cyclic-redundancy-checks-with-maxim-1wire-and-ibutton-products.html">"Understanding and Using Cyclic Redundancy Checks with Maxim 1-Wire and iButton Products"</a> - Covers CRC application in embedded 1-Wire systems.</li>
-<li><strong>IEEE 802.3 Standard</strong>, <a href="https://standards.ieee.org/standard/802_3-2022.html">"IEEE Standard for Ethernet"</a> - Defines CRC-32 specifications for Ethernet frames.</li>
-</ol>
-<p>Data integrity is directly tied to system reliability. When implementing, it's important to verify with tools like the <a href="https://compu-tools.com/crc/">CRC Tool</a> and accurately follow standard specifications.</p>
-</div><div class="ad-display-wrapper ad-common-display"></div></div></div></div><aside class="sidebar-right sidebar-right--ad-only"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper ad-sidebar"></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/hmac/">HMAC Generator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/text-codec/">Universal Text Codec</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/csv/">CSV / TSV Viewer &amp; Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/rotation-calculator/">3D Rotation Calculator</a></li><li><a href="/ieee754/">IEEE 754 Converter</a></li><li><a href="/endian/">Endian Converter</a></li><li><a href="/bitwise/">Binary &amp; Bitwise Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/i2c/">I2C Calculator</a></li><li><a href="/spi/">SPI Calculator</a></li><li><a href="/uart/">UART Calculator</a></li><li><a href="/can/">CAN Frame Analyzer</a></li><li><a href="/bit-mask/">Bit Mask Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/pwm-servo/">PWM &amp; Servo Calculator</a></li><li><a href="/subnet/">IP / Subnet Calculator</a></li><li><a href="/resistor/">Resistor Color Code</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK/Jacobian Calculator</a></li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a></li><li><a href="/hex-inspector/">Hex File Inspector</a></li><li><a href="/logic-gate/">Logic Gate &amp; Boolean Algebra</a></li><li><a href="/aerospace/">Aerospace Calculator</a></li><li><a href="/pid/">PID Controller Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code &amp; Barcode</a></li><li><a href="/mock-data/">Mock Data Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/curl/">cURL &amp; API Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li><li><a href="/css/">CSS Toolbox</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-image"></i>Image</div><ul class="footer-links"><li><a href="/image/">Image Converter, EXIF Viewer &amp; Palette Extractor</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer></body></html>
+<body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="page-with-sidebar"><div class="page-main"><div class="home-wrapper"><div class="post-wrapper"><div class="post-metadata"><h1 class="post-title"></h1><div class="post-date"></div><div class="post-excerpt"></div><div class="post-tags"></div></div><div class="post-content"></div></div></div></div><aside class="sidebar-right sidebar-right--ad-only"><div class="sidebar-sticky"><div class="sidebar-ad-space"></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/hmac/">HMAC Generator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/text-codec/">Universal Text Codec</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/csv/">CSV / TSV Viewer &amp; Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/rotation-calculator/">3D Rotation Calculator</a></li><li><a href="/ieee754/">IEEE 754 Converter</a></li><li><a href="/endian/">Endian Converter</a></li><li><a href="/bitwise/">Binary &amp; Bitwise Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/i2c/">I2C Calculator</a></li><li><a href="/spi/">SPI Calculator</a></li><li><a href="/uart/">UART Calculator</a></li><li><a href="/can/">CAN Frame Analyzer</a></li><li><a href="/bit-mask/">Bit Mask Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/pwm-servo/">PWM &amp; Servo Calculator</a></li><li><a href="/subnet/">IP / Subnet Calculator</a></li><li><a href="/resistor/">Resistor Color Code</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK/Jacobian Calculator</a></li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a></li><li><a href="/hex-inspector/">Hex File Inspector</a></li><li><a href="/logic-gate/">Logic Gate &amp; Boolean Algebra</a></li><li><a href="/aerospace/">Aerospace Calculator</a></li><li><a href="/pid/">PID Controller Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code &amp; Barcode</a></li><li><a href="/mock-data/">Mock Data Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/curl/">cURL &amp; API Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li><li><a href="/css/">CSS Toolbox</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-image"></i>Image</div><ul class="footer-links"><li><a href="/image/">Image Converter, EXIF Viewer &amp; Palette Extractor</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer></body></html>

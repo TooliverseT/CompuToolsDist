@@ -1,5 +1,18 @@
 <!DOCTYPE html><html lang="en" data-theme="light"><head>
   <meta charset="utf-8">
+  <script>
+    (function () {
+      function normalizedHost() {
+        var h = (location.hostname || '').toLowerCase();
+        if (h.length >= 2 && h.charAt(0) === '[' && h.charAt(h.length - 1) === ']') {
+          h = h.slice(1, -1);
+        }
+        return h;
+      }
+      var allowed = ['www.compu-tools.com', 'compu-tools.com'];
+      window.__compuProductionSite = allowed.indexOf(normalizedHost()) !== -1;
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
   <meta name="naver-site-verification" content="457aba595da679106dd139e9a9116d1685df4a4b">
@@ -45,8 +58,8 @@
   
   
 <script type="module">
-import init, * as bindings from '/computools-b678366a9f8bada2.js';
-const wasm = await init({ module_or_path: '/computools-b678366a9f8bada2_bg.wasm' });
+import init, * as bindings from '/computools-4da26332a8180e9e.js';
+const wasm = await init({ module_or_path: '/computools-4da26332a8180e9e_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -112,26 +125,50 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
         return { timeZone, offset };
     }
   </script>
-  <!-- Google Funding Choices (ad recovery) -->
-  <script async="" src="https://fundingchoicesmessages.google.com/i/pub-9424100257975478?ers=1"></script>
-  <script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
-  <script src="/funding-choices-recovery.js"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script>
-
-  <!-- Google tag (gtag.js) -->
-  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <!-- Google Funding Choices / Analytics / AdSense: production host only -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    (function () {
+      if (!window.__compuProductionSite) return;
 
-    gtag('config', 'G-1G0CMRC310');
+      var fc = document.createElement('script');
+      fc.async = true;
+      fc.src = 'https://fundingchoicesmessages.google.com/i/pub-9424100257975478?ers=1';
+      document.head.appendChild(fc);
+
+      (function signalGooglefcPresent() {
+        if (!window.frames['googlefcPresent']) {
+          if (document.body) {
+            var iframe = document.createElement('iframe');
+            iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;';
+            iframe.style.display = 'none';
+            iframe.name = 'googlefcPresent';
+            document.body.appendChild(iframe);
+          } else {
+            setTimeout(signalGooglefcPresent, 0);
+          }
+        }
+      })();
+
+      var recovery = document.createElement('script');
+      recovery.src = '/funding-choices-recovery.js';
+      document.head.appendChild(recovery);
+
+      var gtagJs = document.createElement('script');
+      gtagJs.async = true;
+      gtagJs.src = 'https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310';
+      document.head.appendChild(gtagJs);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', 'G-1G0CMRC310');
+    })();
   </script>
-  <!-- AdSense: load after WASM remounts over prerendered HTML.
-       Head-async load fills snapshot <ins>, then Yew clears body, so
-       visible ads become a second (often unfilled) request. -->
+  <!-- AdSense: load after WASM remounts over prerendered HTML (production only). -->
   <script>
     (function () {
       function loadAdSense() {
+        if (!window.__compuProductionSite) return;
         if (window.__compuAdSenseLoaded) return;
         window.__compuAdSenseLoaded = true;
         var s = document.createElement('script');
@@ -144,7 +181,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-b678366a9f8bada2.js" crossorigin="anonymous" integrity="sha384-4z/EjJ2n3Y2tyDcfg/XR0ZwMmEIJVnxZ4uT1g3mM2seEPTfplRvjaA3aEvSMj+BW"><link rel="preload" href="/computools-b678366a9f8bada2_bg.wasm" crossorigin="anonymous" integrity="sha384-KOcAtRVRzCXxfDQW8/OtsyannxLYnuYtZi5EdB+JYlB9qqUtcn8O/SsLbposgP38" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-4da26332a8180e9e.js" crossorigin="anonymous" integrity="sha384-ulmYnkPdr+sACZPgfCFK5bG7z2OGUfF13/vRiaZyt1i6a81OEdMlodXM0fhoFIUv"><link rel="preload" href="/computools-4da26332a8180e9e_bg.wasm" crossorigin="anonymous" integrity="sha384-Rfx+XZbeNteo0eFnHQgF2M21zQjjtbKGEwn+aXcDxU9DSdnPKmza006UxSkgqTNz" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="The Complete Guide to Cron Expressions: Everything a Developer Must Know About Scheduling | CompuTools Blog">
   <meta name="twitter:description" content="Why does Linux Cron have exactly 5 fields? What's the real difference between Linux Cron and Quartz? From basic syntax to timezone pitfalls and real-world edge cases — a deep-dive scheduling guide for DevOps engineers and backend developers. Includes a walkthrough of a custom-built Cron parser tool.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/cron/linux_vs_quartz_fields.png">
@@ -538,13 +575,11 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
   font-family: MJXTEX-VB;
   src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
 }
-</style><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script></head>
+</style></head>
 
-<body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="page-with-sidebar"><div class="page-main"><div class="home-wrapper"><div class="post-wrapper"><div class="post-metadata"><h1 class="post-title">The Complete Guide to Cron Expressions: Everything a Developer Must Know About Scheduling</h1><div class="post-date">25 February 2026</div><div class="post-excerpt">Why does Linux Cron have exactly 5 fields? What's the real difference between Linux Cron and Quartz? From basic syntax to timezone pitfalls and real-world edge cases — a deep-dive scheduling guide for DevOps engineers and backend developers. Includes a walkthrough of a custom-built Cron parser tool.</div><div class="post-tags"><div class="tag">Time &amp; Date</div></div></div><div class="ad-display-wrapper ad-multiflex"></div><div class="post-content"><p>When I first started working with automated systems, the idea that "a server cleans up data on its own every night" felt like magic. That magic had a name: <strong>Cron</strong>. A few months later, a batch job fired twice at 3 AM in production without warning. Tracing the cause led me to a collision between a DST (Daylight Saving Time) transition and a Cron schedule. From that day on, I stopped thinking of Cron expressions as "just a few asterisks."</p>
+<body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="page-with-sidebar"><div class="page-main"><div class="home-wrapper"><div class="post-wrapper"><div class="post-metadata"><h1 class="post-title">The Complete Guide to Cron Expressions: Everything a Developer Must Know About Scheduling</h1><div class="post-date">25 February 2026</div><div class="post-excerpt">Why does Linux Cron have exactly 5 fields? What's the real difference between Linux Cron and Quartz? From basic syntax to timezone pitfalls and real-world edge cases — a deep-dive scheduling guide for DevOps engineers and backend developers. Includes a walkthrough of a custom-built Cron parser tool.</div><div class="post-tags"><div class="tag">Time &amp; Date</div></div></div><div class="post-content"><p>When I first started working with automated systems, the idea that "a server cleans up data on its own every night" felt like magic. That magic had a name: <strong>Cron</strong>. A few months later, a batch job fired twice at 3 AM in production without warning. Tracing the cause led me to a collision between a DST (Daylight Saving Time) transition and a Cron schedule. From that day on, I stopped thinking of Cron expressions as "just a few asterisks."</p>
 <p>This article systematically covers the history and structure of Cron expressions, the pitfalls every practitioner must know, and the differences between the two major Cron systems — Linux Cron and Quartz/Spring. I'll also walk through hands-on examples using a <a href="https://compu-tools.com/cron/">Cron Expression Parser</a> I built myself.</p>
-<h2>The Birth of Cron: From AT&amp;T Bell Labs to the Language of DevOps</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>The Birth of Cron: From AT&amp;T Bell Labs to the Language of DevOps</h2>
 <p>The history of Cron is inseparable from the history of Unix. In the mid-1970s, Ken Thompson at AT&amp;T Bell Labs first introduced periodic task execution to Unix, laying the groundwork for what would become Cron. In 1979, Brian Kernighan rewrote it as a proper background daemon for Version 7 Unix, establishing the syntax we recognize today. Then in 1987, Paul Vixie released a major overhaul — <strong>Vixie Cron</strong> — which became the de facto standard and ships with most Linux distributions to this day.</p>
 <p class="blog-image">
   <img src="/blog/assets/cron/cron_history_timeline.png" alt="A horizontal timeline diagram tracing Cron's history from AT&amp;T Bell Labs in the mid-1970s to cloud-native Kubernetes CronJob today">
@@ -639,9 +674,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p align="center">
   <em>DST and Cron in Conflict: Execution skipped in spring (red), double-execution risk in fall (orange)</em>
 </p>
-<div class="ad-article-wrapper ad-article">
-                
-            </div><h2>Practical Usage: Walkthrough of the Cron Expression Parser</h2>
+<h2>Practical Usage: Walkthrough of the Cron Expression Parser</h2>
 <p>One of the riskiest things you can do when writing a Cron expression is "calculate it in your head and deploy." Visually confirming the actual execution times is a non-negotiable step. The <a href="https://compu-tools.com/cron/">Cron Expression Parser</a> was built for exactly this purpose — enter any expression and instantly see the next N execution times in your chosen timezone.</p>
 <h3>Example 1: Validating a Weekday Business Hours Schedule</h3>
 <p>Suppose you're setting up a schedule to send a batch report every weekday at 9 AM Eastern Time.</p>
@@ -677,7 +710,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p align="center">
   <em>Quartz mode validation: Confirming that Linux Cron's <code>0 9 * * 1-5</code> and Quartz's <code>0 0 9 ? * MON-FRI</code> produce identical execution times</em>
 </p>
-<h2>Real-World Problems and Solutions</h2>
+<div class="ad-article-wrapper ad-article">
+                
+            </div><h2>Real-World Problems and Solutions</h2>
 <h3>Problem 1: Scheduling the Last Day of Every Month</h3>
 <p>February has 28 days (29 in a leap year), some months have 30, others 31 — which means "the last day of every month" cannot be expressed directly in standard Linux Cron syntax. Setting <code>0 0 31 * *</code> simply won't run in months with fewer than 31 days (February, April, June, September, November).</p>
 <p>The most common workaround is checking the date inside the script itself.</p>
@@ -693,7 +728,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p>The <code>-n</code> flag makes the lock non-blocking — if the lock is already held by a running instance, the new invocation exits immediately. In Kubernetes, <code>concurrencyPolicy: Forbid</code> on a CronJob serves the same purpose.</p>
 <h3>Problem 3: Handling Missed Jobs After a Restart</h3>
 <p>When a server restart or Cron daemon downtime causes scheduled jobs to be skipped, you need to decide whether to run the missed jobs or skip them. Traditional Linux Cron defaults to skipping. Anacron can run missed jobs after a restart, but it isn't suitable for schedules with minute-level or finer precision. If catch-up execution is a hard requirement, it's worth evaluating Quartz's <code>MisfireInstruction</code> settings or a full workflow orchestrator like Apache Airflow.</p>
-<h2>Cron and the Modern Scheduling Ecosystem</h2>
+<h2>Cron and the Modern Scheduling Ecosystem</h2><div class="ad-article-wrapper ad-article">
+                
+            </div>
 <p>Understanding which Cron dialect each platform uses prevents a whole category of subtle bugs.</p>
 <ul>
 <li><strong>AWS EventBridge</strong>: Uses a Quartz-like 6-field format but is not identical. The day-of-week field accepts 1–7 or SUN–SAT (1 = Sunday; 0 is not supported), and a year field is available. Consult the <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-rule-schedule.html">official documentation</a>.</li>
@@ -702,9 +739,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <li><strong>Spring <code>@Scheduled</code></strong>: Quartz Cron 6-field format. Timezone can be specified via the <code>zone</code> attribute.</li>
 </ul>
 <p>Because each platform applies its own subtle variations, always cross-reference the platform's official documentation and verify results with an actual parser tool before deploying.</p>
-<h2>Pro Tips: How to Handle Cron Safely</h2><div class="ad-article-wrapper ad-article">
+<div class="ad-article-wrapper ad-article">
                 
-            </div>
+            </div><h2>Pro Tips: How to Handle Cron Safely</h2>
 <p><strong>Always validate with a tool.</strong> No matter how carefully you reason through an expression mentally, the actual execution times can still surprise you. Entering the expression into a tool like the <a href="https://compu-tools.com/cron/">Cron Expression Parser</a> and visually confirming 10–20 upcoming execution times should be a mandatory pre-deployment step.</p>
 <p><strong>Store in UTC, display in local time.</strong> Just as with Unix timestamps, defining Cron schedules in UTC and running servers on UTC eliminates an entire class of DST-related incidents at the architectural level.</p>
 <p><strong>Distribute execution times.</strong> Concentrating all Cron jobs at <code>0 * * * *</code> (the top of every hour) creates sudden spikes in server load. Intentionally spreading jobs across different minutes — <code>7 * * * *</code>, <code>23 * * * *</code> — smooths out resource usage.</p>
@@ -727,4 +764,4 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <li><strong>AWS</strong> — <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-rule-schedule.html">EventBridge Scheduler Cron expressions</a> — Official reference for AWS's Cron dialect</li>
 <li><strong>Kubernetes</strong> — <a href="https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/">CronJob Documentation</a> — Official Kubernetes CronJob resource documentation</li>
 </ol>
-</div><div class="ad-display-wrapper ad-common-display"></div></div></div></div><aside class="sidebar-right sidebar-right--ad-only"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper ad-sidebar"></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/hmac/">HMAC Generator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/text-codec/">Universal Text Codec</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/csv/">CSV / TSV Viewer &amp; Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/rotation-calculator/">3D Rotation Calculator</a></li><li><a href="/ieee754/">IEEE 754 Converter</a></li><li><a href="/endian/">Endian Converter</a></li><li><a href="/bitwise/">Binary &amp; Bitwise Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/i2c/">I2C Calculator</a></li><li><a href="/spi/">SPI Calculator</a></li><li><a href="/uart/">UART Calculator</a></li><li><a href="/can/">CAN Frame Analyzer</a></li><li><a href="/bit-mask/">Bit Mask Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/pwm-servo/">PWM &amp; Servo Calculator</a></li><li><a href="/subnet/">IP / Subnet Calculator</a></li><li><a href="/resistor/">Resistor Color Code</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK/Jacobian Calculator</a></li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a></li><li><a href="/hex-inspector/">Hex File Inspector</a></li><li><a href="/logic-gate/">Logic Gate &amp; Boolean Algebra</a></li><li><a href="/aerospace/">Aerospace Calculator</a></li><li><a href="/pid/">PID Controller Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code &amp; Barcode</a></li><li><a href="/mock-data/">Mock Data Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/curl/">cURL &amp; API Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li><li><a href="/css/">CSS Toolbox</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-image"></i>Image</div><ul class="footer-links"><li><a href="/image/">Image Converter, EXIF Viewer &amp; Palette Extractor</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer></body></html>
+</div></div></div></div><aside class="sidebar-right sidebar-right--ad-only"><div class="sidebar-sticky"><div class="sidebar-ad-space"></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/hmac/">HMAC Generator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/text-codec/">Universal Text Codec</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/csv/">CSV / TSV Viewer &amp; Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/rotation-calculator/">3D Rotation Calculator</a></li><li><a href="/ieee754/">IEEE 754 Converter</a></li><li><a href="/endian/">Endian Converter</a></li><li><a href="/bitwise/">Binary &amp; Bitwise Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/i2c/">I2C Calculator</a></li><li><a href="/spi/">SPI Calculator</a></li><li><a href="/uart/">UART Calculator</a></li><li><a href="/can/">CAN Frame Analyzer</a></li><li><a href="/bit-mask/">Bit Mask Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/pwm-servo/">PWM &amp; Servo Calculator</a></li><li><a href="/subnet/">IP / Subnet Calculator</a></li><li><a href="/resistor/">Resistor Color Code</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK/Jacobian Calculator</a></li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a></li><li><a href="/hex-inspector/">Hex File Inspector</a></li><li><a href="/logic-gate/">Logic Gate &amp; Boolean Algebra</a></li><li><a href="/aerospace/">Aerospace Calculator</a></li><li><a href="/pid/">PID Controller Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code &amp; Barcode</a></li><li><a href="/mock-data/">Mock Data Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/curl/">cURL &amp; API Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li><li><a href="/css/">CSS Toolbox</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-image"></i>Image</div><ul class="footer-links"><li><a href="/image/">Image Converter, EXIF Viewer &amp; Palette Extractor</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer></body></html>

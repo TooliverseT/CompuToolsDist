@@ -1,5 +1,18 @@
 <!DOCTYPE html><html lang="en" data-theme="light"><head>
   <meta charset="utf-8">
+  <script>
+    (function () {
+      function normalizedHost() {
+        var h = (location.hostname || '').toLowerCase();
+        if (h.length >= 2 && h.charAt(0) === '[' && h.charAt(h.length - 1) === ']') {
+          h = h.slice(1, -1);
+        }
+        return h;
+      }
+      var allowed = ['www.compu-tools.com', 'compu-tools.com'];
+      window.__compuProductionSite = allowed.indexOf(normalizedHost()) !== -1;
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
   <meta name="naver-site-verification" content="457aba595da679106dd139e9a9116d1685df4a4b">
@@ -45,8 +58,8 @@
   
   
 <script type="module">
-import init, * as bindings from '/computools-b678366a9f8bada2.js';
-const wasm = await init({ module_or_path: '/computools-b678366a9f8bada2_bg.wasm' });
+import init, * as bindings from '/computools-4da26332a8180e9e.js';
+const wasm = await init({ module_or_path: '/computools-4da26332a8180e9e_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -112,26 +125,50 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
         return { timeZone, offset };
     }
   </script>
-  <!-- Google Funding Choices (ad recovery) -->
-  <script async="" src="https://fundingchoicesmessages.google.com/i/pub-9424100257975478?ers=1"></script>
-  <script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
-  <script src="/funding-choices-recovery.js"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script>
-
-  <!-- Google tag (gtag.js) -->
-  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <!-- Google Funding Choices / Analytics / AdSense: production host only -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    (function () {
+      if (!window.__compuProductionSite) return;
 
-    gtag('config', 'G-1G0CMRC310');
+      var fc = document.createElement('script');
+      fc.async = true;
+      fc.src = 'https://fundingchoicesmessages.google.com/i/pub-9424100257975478?ers=1';
+      document.head.appendChild(fc);
+
+      (function signalGooglefcPresent() {
+        if (!window.frames['googlefcPresent']) {
+          if (document.body) {
+            var iframe = document.createElement('iframe');
+            iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;';
+            iframe.style.display = 'none';
+            iframe.name = 'googlefcPresent';
+            document.body.appendChild(iframe);
+          } else {
+            setTimeout(signalGooglefcPresent, 0);
+          }
+        }
+      })();
+
+      var recovery = document.createElement('script');
+      recovery.src = '/funding-choices-recovery.js';
+      document.head.appendChild(recovery);
+
+      var gtagJs = document.createElement('script');
+      gtagJs.async = true;
+      gtagJs.src = 'https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310';
+      document.head.appendChild(gtagJs);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', 'G-1G0CMRC310');
+    })();
   </script>
-  <!-- AdSense: load after WASM remounts over prerendered HTML.
-       Head-async load fills snapshot <ins>, then Yew clears body, so
-       visible ads become a second (often unfilled) request. -->
+  <!-- AdSense: load after WASM remounts over prerendered HTML (production only). -->
   <script>
     (function () {
       function loadAdSense() {
+        if (!window.__compuProductionSite) return;
         if (window.__compuAdSenseLoaded) return;
         window.__compuAdSenseLoaded = true;
         var s = document.createElement('script');
@@ -144,7 +181,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-b678366a9f8bada2.js" crossorigin="anonymous" integrity="sha384-4z/EjJ2n3Y2tyDcfg/XR0ZwMmEIJVnxZ4uT1g3mM2seEPTfplRvjaA3aEvSMj+BW"><link rel="preload" href="/computools-b678366a9f8bada2_bg.wasm" crossorigin="anonymous" integrity="sha384-KOcAtRVRzCXxfDQW8/OtsyannxLYnuYtZi5EdB+JYlB9qqUtcn8O/SsLbposgP38" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-4da26332a8180e9e.js" crossorigin="anonymous" integrity="sha384-ulmYnkPdr+sACZPgfCFK5bG7z2OGUfF13/vRiaZyt1i6a81OEdMlodXM0fhoFIUv"><link rel="preload" href="/computools-4da26332a8180e9e_bg.wasm" crossorigin="anonymous" integrity="sha384-Rfx+XZbeNteo0eFnHQgF2M21zQjjtbKGEwn+aXcDxU9DSdnPKmza006UxSkgqTNz" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="The Mathematical Cause of Gimbal Lock and How to Avoid It: A Complete Guide to Euler Angles vs Quaternions | CompuTools Blog">
   <meta name="twitter:description" content="Gimbal Lock is a singularity phenomenon that occurs when representing 3D rotations using Euler angles. Having encountered this firsthand in drone control and robotic arm projects, this post analyzes the mathematical roots of the phenomenon from an SO(3) perspective and introduces Quaternion-based avoidance strategies proven in aerospace, robotics, and game development.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/rotation/gimbal_lock.png">
@@ -538,9 +575,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
   font-family: MJXTEX-VB;
   src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
 }
-</style><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/input/tex/extensions/boldsymbol.js" charset="UTF-8"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script></head>
+</style><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/input/tex/extensions/boldsymbol.js" charset="UTF-8"></script></head>
 
-<body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="page-with-sidebar"><div class="page-main"><div class="home-wrapper"><div class="post-wrapper"><div class="post-metadata"><h1 class="post-title">The Mathematical Cause of Gimbal Lock and How to Avoid It: A Complete Guide to Euler Angles vs Quaternions</h1><div class="post-date">07 March 2026</div><div class="post-excerpt">Gimbal Lock is a singularity phenomenon that occurs when representing 3D rotations using Euler angles. Having encountered this firsthand in drone control and robotic arm projects, this post analyzes the mathematical roots of the phenomenon from an SO(3) perspective and introduces Quaternion-based avoidance strategies proven in aerospace, robotics, and game development.</div><div class="post-tags"><div class="tag">Mathematical</div></div></div><div class="ad-display-wrapper ad-multiflex"></div><div class="post-content"><p><strong>Gimbal Lock is a singularity phenomenon that occurs when representing 3D rotations using Euler angles.</strong> When two rotation axes align at a specific angle (typically Pitch ±90°), one degree of freedom is lost — and any controller attempting to compensate may command joints to rotate hundreds of degrees, with catastrophic results.</p>
+<body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="page-with-sidebar"><div class="page-main"><div class="home-wrapper"><div class="post-wrapper"><div class="post-metadata"><h1 class="post-title">The Mathematical Cause of Gimbal Lock and How to Avoid It: A Complete Guide to Euler Angles vs Quaternions</h1><div class="post-date">07 March 2026</div><div class="post-excerpt">Gimbal Lock is a singularity phenomenon that occurs when representing 3D rotations using Euler angles. Having encountered this firsthand in drone control and robotic arm projects, this post analyzes the mathematical roots of the phenomenon from an SO(3) perspective and introduces Quaternion-based avoidance strategies proven in aerospace, robotics, and game development.</div><div class="post-tags"><div class="tag">Mathematical</div></div></div><div class="post-content"><p><strong>Gimbal Lock is a singularity phenomenon that occurs when representing 3D rotations using Euler angles.</strong> When two rotation axes align at a specific angle (typically Pitch ±90°), one degree of freedom is lost — and any controller attempting to compensate may command joints to rotate hundreds of degrees, with catastrophic results.</p>
 <p><em>"The logic is perfect. Why is the arm spinning like that?"</em></p>
 <p>During my graduate research on a 6-axis robotic arm, I asked myself that question hundreds of times. The Inverse Kinematics algorithm had been mathematically verified and ran perfectly in simulation. But whenever the arm approached a certain pose, the joints would suddenly thrash — rotating hundreds of degrees at a time. The control software showed no errors. The problem lay somewhere entirely different: a <strong>mathematical flaw inherent to the Euler Angles representation itself</strong>, known as Gimbal Lock.</p>
 <p>In this post, I'll dig into <em>why</em> gimbal lock occurs mathematically, and summarize avoidance strategies proven in aerospace, robotics, and game development. If you'd like to compute and visualize 3D rotation transformations yourself, the <a href="https://compu-tools.com/quaternion/">3D Rotation Transformation Tool</a> is a great companion.</p>
@@ -579,9 +616,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p align="center">
   <em>Jacobian determinant det(J) = cos(θ): it reaches zero at Pitch = ±90°, making the inverse transformation impossible</em>
 </p>
-<h2>Practical Consequences of Gimbal Lock: What Actually Happens</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>Practical Consequences of Gimbal Lock: What Actually Happens</h2>
 <p>The theory may feel abstract, so let's look at what actually happens at the code level.</p>
 <p>A commonly used formula for converting a quaternion to ZYX Euler angles:</p>
 <div class="code-toolbar"><pre class="language-python" tabindex="0"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
@@ -624,9 +659,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p align="center">
   <em>SLERP (left) follows the shortest arc on the unit sphere. Euler interpolation (right) takes an abnormal detour near the singularity</em>
 </p>
-<h2>Avoidance Strategy 2: Singularity Detection and Path Replanning</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>Avoidance Strategy 2: Singularity Detection and Path Replanning</h2>
 <p>In real-time control systems, switching the pose representation alone is sometimes insufficient. Input may arrive as Euler angles, or the system may need to interface with legacy components. In such cases, <strong>proactively detecting proximity to a singularity and replanning the path</strong> is an effective strategy.</p>
 <p>A common approach in aviation attitude control systems is to monitor the condition number of the Jacobian:</p>
 <div class="code-toolbar"><pre class="language-python" tabindex="0"><code class="language-python"><span class="token keyword">def</span> <span class="token function">check_singularity</span><span class="token punctuation">(</span>pitch_rad<span class="token punctuation">,</span> threshold<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -651,9 +684,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
         <span class="token keyword">return</span> euler_controller<span class="token punctuation">(</span>roll<span class="token punctuation">,</span> pitch<span class="token punctuation">,</span> yaw<span class="token punctuation">)</span>
 </code></pre><div class="toolbar"><div class="toolbar-item"><span>Python</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
 <p>NASA's Space Shuttle control system used a similar "Representation Switching" strategy. Henderson's (1977) NASA technical report systematically covers the relationships between Euler angles, quaternions, and transformation matrices as applied to Space Shuttle attitude analysis. When the attitude approached a certain threshold, the system automatically switched from Euler-based control to quaternion-based control. (<a href="https://ntrs.nasa.gov/citations/19770019231">NASA Technical Report: Euler Angles, Quaternions, and Transformation Matrices for Space Shuttle Analysis</a>)</p>
-<h2>Avoidance Strategy 3: Hybrid Use with Rotation Matrices</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>Avoidance Strategy 3: Hybrid Use with Rotation Matrices</h2>
 <p><strong>3×3 Rotation Matrices</strong> are also singularity-free. By directly representing SO(3) using nine values, they are immune to Gimbal Lock. They are a particularly natural choice in rendering pipelines or computation-heavy linear algebra environments.</p>
 <p>Transforming a vector with a rotation matrix requires just 9 multiplications and 6 additions:</p>
 <div class="math-block">$$\vec{p'} = R \cdot \vec{p}$$</div>
@@ -675,7 +706,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p align="center">
   <em>Gimbal Lock in the 3D Rotation Transformation Tool: with ZYX Euler at Pitch=90°, changing Roll and Yaw independently produces identical rotations</em>
 </p>
-<h2>Field-Specific Avoidance Strategies</h2>
+<div class="ad-article-wrapper ad-article">
+                
+            </div><h2>Field-Specific Avoidance Strategies</h2>
 <h3>Aerospace: Dual Representation Strategy</h3>
 <p>NASA's Space Shuttle attitude analysis system uses quaternions internally while displaying Euler angles only on the pilot interface. During the display conversion, the system always checks for proximity to singularities and remains ready to switch to an alternative representation.</p>
 <p>Commercial aircraft are trained to treat a pitch angle exceeding roughly ±70° as an Unusual Attitude, triggering special recovery procedures. This is also a safety margin designed so that human pilots can intervene before Gimbal Lock becomes an issue.</p>
@@ -706,12 +739,16 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
     <span class="token comment">// transform.eulerAngles = Vector3.Lerp(startEuler, endEuler, t);</span>
 <span class="token punctuation">}</span>
 </code></pre><div class="toolbar"><div class="toolbar-item"><span>C#</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
-<h2>Conclusion: Choosing the Right Representation Is Engineering</h2>
+<div class="ad-article-wrapper ad-article">
+                
+            </div><h2>Conclusion: Choosing the Right Representation Is Engineering</h2>
 <p>Gimbal Lock is a mathematical singularity. It is a topological inevitability of attempting to globally coordinate SO(3) with Euler angles, and no implementation optimization can resolve it at its root. There is only one way to avoid it: <strong>move to a representation space that has no such singularity.</strong></p>
 <p>Unit quaternions, as the double cover of SO(3), represent every pose without singularities. The notation <span class="math-inline">$w + xi + yj + zk$</span> may feel unfamiliar at first — but after losing days to Gimbal Lock, those four numbers start to feel like an elegant lifeline.</p>
 <p>Use Euler angles only for human-readable interfaces. For all internal computation and interpolation, always use quaternions or rotation matrices. This is the design principle validated over decades in aerospace, robotics, and game development alike.</p>
 <p>One final note: it's genuinely difficult to internalize these concepts without direct experimentation. Head to the <a href="https://compu-tools.com/quaternion/">3D Rotation Transformation Tool</a>, push the Pitch in Euler angles to 90°, then represent the same pose as a quaternion. The moment you see the difference with your own eyes, Gimbal Lock will no longer be an abstract theory.</p>
-<h2>References</h2>
+<h2>References</h2><div class="ad-article-wrapper ad-article">
+                
+            </div>
 <ol>
 <li><strong>Diebel, J.</strong> <a href="https://www.astro.rug.nl/software/kapteyn-beta/_downloads/attitude.pdf">"Representing Attitude: Euler Angles, Unit Quaternions, and Rotation Vectors"</a>, Stanford University, 2006 — The most systematic reference for the mathematical relationships between Euler angles, quaternions, and rotation vectors. The ZYX Jacobian singularity derivation in §5.6 directly corresponds to the mathematical explanation in this post.</li>
 <li><strong>Shoemake, K.</strong> <a href="https://www.cs.cmu.edu/~kiranb/animation/p245-shoemake.pdf">"Animating Rotation with Quaternion Curves"</a>, SIGGRAPH 1985 — The paper that first introduced the SLERP concept to computer graphics.</li>
@@ -719,4 +756,4 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <li><strong>Siciliano, B. et al.</strong> <a href="https://link.springer.com/book/10.1007/978-1-84628-642-1">Robotics: Modelling, Planning and Control</a>, Springer 2009 — The textbook reference for singularity theory in robotics.</li>
 <li><strong>MoveIt! Documentation</strong> <a href="https://moveit.ros.org/documentation/concepts/">"MoveIt Concepts"</a> — Official documentation for the ROS-based singularity-avoiding path planning framework.</li>
 </ol>
-</div><div class="ad-display-wrapper ad-common-display"></div></div></div></div><aside class="sidebar-right sidebar-right--ad-only"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper ad-sidebar"></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/hmac/">HMAC Generator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/text-codec/">Universal Text Codec</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/csv/">CSV / TSV Viewer &amp; Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/rotation-calculator/">3D Rotation Calculator</a></li><li><a href="/ieee754/">IEEE 754 Converter</a></li><li><a href="/endian/">Endian Converter</a></li><li><a href="/bitwise/">Binary &amp; Bitwise Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/i2c/">I2C Calculator</a></li><li><a href="/spi/">SPI Calculator</a></li><li><a href="/uart/">UART Calculator</a></li><li><a href="/can/">CAN Frame Analyzer</a></li><li><a href="/bit-mask/">Bit Mask Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/pwm-servo/">PWM &amp; Servo Calculator</a></li><li><a href="/subnet/">IP / Subnet Calculator</a></li><li><a href="/resistor/">Resistor Color Code</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK/Jacobian Calculator</a></li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a></li><li><a href="/hex-inspector/">Hex File Inspector</a></li><li><a href="/logic-gate/">Logic Gate &amp; Boolean Algebra</a></li><li><a href="/aerospace/">Aerospace Calculator</a></li><li><a href="/pid/">PID Controller Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code &amp; Barcode</a></li><li><a href="/mock-data/">Mock Data Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/curl/">cURL &amp; API Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li><li><a href="/css/">CSS Toolbox</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-image"></i>Image</div><ul class="footer-links"><li><a href="/image/">Image Converter, EXIF Viewer &amp; Palette Extractor</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer></body></html>
+</div></div></div></div><aside class="sidebar-right sidebar-right--ad-only"><div class="sidebar-sticky"><div class="sidebar-ad-space"></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/hmac/">HMAC Generator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/text-codec/">Universal Text Codec</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/csv/">CSV / TSV Viewer &amp; Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/rotation-calculator/">3D Rotation Calculator</a></li><li><a href="/ieee754/">IEEE 754 Converter</a></li><li><a href="/endian/">Endian Converter</a></li><li><a href="/bitwise/">Binary &amp; Bitwise Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/i2c/">I2C Calculator</a></li><li><a href="/spi/">SPI Calculator</a></li><li><a href="/uart/">UART Calculator</a></li><li><a href="/can/">CAN Frame Analyzer</a></li><li><a href="/bit-mask/">Bit Mask Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/pwm-servo/">PWM &amp; Servo Calculator</a></li><li><a href="/subnet/">IP / Subnet Calculator</a></li><li><a href="/resistor/">Resistor Color Code</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK/Jacobian Calculator</a></li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a></li><li><a href="/hex-inspector/">Hex File Inspector</a></li><li><a href="/logic-gate/">Logic Gate &amp; Boolean Algebra</a></li><li><a href="/aerospace/">Aerospace Calculator</a></li><li><a href="/pid/">PID Controller Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code &amp; Barcode</a></li><li><a href="/mock-data/">Mock Data Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/curl/">cURL &amp; API Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li><li><a href="/css/">CSS Toolbox</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-image"></i>Image</div><ul class="footer-links"><li><a href="/image/">Image Converter, EXIF Viewer &amp; Palette Extractor</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer></body></html>

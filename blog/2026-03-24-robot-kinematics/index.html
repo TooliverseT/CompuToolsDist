@@ -1,5 +1,18 @@
 <!DOCTYPE html><html lang="en" data-theme="light"><head>
   <meta charset="utf-8">
+  <script>
+    (function () {
+      function normalizedHost() {
+        var h = (location.hostname || '').toLowerCase();
+        if (h.length >= 2 && h.charAt(0) === '[' && h.charAt(h.length - 1) === ']') {
+          h = h.slice(1, -1);
+        }
+        return h;
+      }
+      var allowed = ['www.compu-tools.com', 'compu-tools.com'];
+      window.__compuProductionSite = allowed.indexOf(normalizedHost()) !== -1;
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
   <meta name="naver-site-verification" content="457aba595da679106dd139e9a9116d1685df4a4b">
@@ -45,8 +58,8 @@
   
   
 <script type="module">
-import init, * as bindings from '/computools-b678366a9f8bada2.js';
-const wasm = await init({ module_or_path: '/computools-b678366a9f8bada2_bg.wasm' });
+import init, * as bindings from '/computools-4da26332a8180e9e.js';
+const wasm = await init({ module_or_path: '/computools-4da26332a8180e9e_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -112,26 +125,50 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
         return { timeZone, offset };
     }
   </script>
-  <!-- Google Funding Choices (ad recovery) -->
-  <script async="" src="https://fundingchoicesmessages.google.com/i/pub-9424100257975478?ers=1"></script>
-  <script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
-  <script src="/funding-choices-recovery.js"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script>
-
-  <!-- Google tag (gtag.js) -->
-  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <!-- Google Funding Choices / Analytics / AdSense: production host only -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    (function () {
+      if (!window.__compuProductionSite) return;
 
-    gtag('config', 'G-1G0CMRC310');
+      var fc = document.createElement('script');
+      fc.async = true;
+      fc.src = 'https://fundingchoicesmessages.google.com/i/pub-9424100257975478?ers=1';
+      document.head.appendChild(fc);
+
+      (function signalGooglefcPresent() {
+        if (!window.frames['googlefcPresent']) {
+          if (document.body) {
+            var iframe = document.createElement('iframe');
+            iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;';
+            iframe.style.display = 'none';
+            iframe.name = 'googlefcPresent';
+            document.body.appendChild(iframe);
+          } else {
+            setTimeout(signalGooglefcPresent, 0);
+          }
+        }
+      })();
+
+      var recovery = document.createElement('script');
+      recovery.src = '/funding-choices-recovery.js';
+      document.head.appendChild(recovery);
+
+      var gtagJs = document.createElement('script');
+      gtagJs.async = true;
+      gtagJs.src = 'https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310';
+      document.head.appendChild(gtagJs);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', 'G-1G0CMRC310');
+    })();
   </script>
-  <!-- AdSense: load after WASM remounts over prerendered HTML.
-       Head-async load fills snapshot <ins>, then Yew clears body, so
-       visible ads become a second (often unfilled) request. -->
+  <!-- AdSense: load after WASM remounts over prerendered HTML (production only). -->
   <script>
     (function () {
       function loadAdSense() {
+        if (!window.__compuProductionSite) return;
         if (window.__compuAdSenseLoaded) return;
         window.__compuAdSenseLoaded = true;
         var s = document.createElement('script');
@@ -144,7 +181,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-b678366a9f8bada2.js" crossorigin="anonymous" integrity="sha384-4z/EjJ2n3Y2tyDcfg/XR0ZwMmEIJVnxZ4uT1g3mM2seEPTfplRvjaA3aEvSMj+BW"><link rel="preload" href="/computools-b678366a9f8bada2_bg.wasm" crossorigin="anonymous" integrity="sha384-KOcAtRVRzCXxfDQW8/OtsyannxLYnuYtZi5EdB+JYlB9qqUtcn8O/SsLbposgP38" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-4da26332a8180e9e.js" crossorigin="anonymous" integrity="sha384-ulmYnkPdr+sACZPgfCFK5bG7z2OGUfF13/vRiaZyt1i6a81OEdMlodXM0fhoFIUv"><link rel="preload" href="/computools-4da26332a8180e9e_bg.wasm" crossorigin="anonymous" integrity="sha384-Rfx+XZbeNteo0eFnHQgF2M21zQjjtbKGEwn+aXcDxU9DSdnPKmza006UxSkgqTNz" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Mastering Robot Arm Kinematics: A Practical Guide to Forward Kinematics, Inverse Kinematics, and DH Parameters | CompuTools Blog">
   <meta name="twitter:description" content="A complete practical guide to understanding robot arm forward kinematics (FK) and inverse kinematics (IK) using DH parameters and the Jacobian matrix. Covers SCARA, 6-axis vertical articulated, and custom DH models — with step-by-step calculations you can verify instantly using a browser-based IK calculator and 3D robot arm simulator.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/robot-kinematics/robot_types_comparison.png">
@@ -538,9 +575,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
   font-family: MJXTEX-VB;
   src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
 }
-</style><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/input/tex/extensions/boldsymbol.js" charset="UTF-8"></script></head>
+</style><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/input/tex/extensions/boldsymbol.js" charset="UTF-8"></script></head>
 
-<body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="page-with-sidebar"><div class="page-main"><div class="home-wrapper"><div class="post-wrapper"><div class="post-metadata"><h1 class="post-title">Mastering Robot Arm Kinematics: A Practical Guide to Forward Kinematics, Inverse Kinematics, and DH Parameters</h1><div class="post-date">24 March 2026</div><div class="post-excerpt">A complete practical guide to understanding robot arm forward kinematics (FK) and inverse kinematics (IK) using DH parameters and the Jacobian matrix. Covers SCARA, 6-axis vertical articulated, and custom DH models — with step-by-step calculations you can verify instantly using a browser-based IK calculator and 3D robot arm simulator.</div><div class="post-tags"><div class="tag">Engineering</div></div></div><div class="ad-display-wrapper ad-multiflex"></div><div class="post-content"><p>Have you ever watched a robot arm in an industrial setting precisely pick up a component with fluid, seamless motion? Behind that elegance lies a mathematical framework called <strong>Kinematics</strong>. Calculating the end-effector (EE) position from each joint angle is called forward kinematics; working backwards from a desired position to find the joint angles is inverse kinematics. In this article, we explain DH parameters, the Jacobian matrix, and the concept of singularity with concrete examples, and introduce how to use the <a href="https://www.compu-tools.com/robot-kinematics/">Robot Arm FK/IK Calculator</a> — a tool you can run directly in your browser.</p>
+<body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="page-with-sidebar"><div class="page-main"><div class="home-wrapper"><div class="post-wrapper"><div class="post-metadata"><h1 class="post-title">Mastering Robot Arm Kinematics: A Practical Guide to Forward Kinematics, Inverse Kinematics, and DH Parameters</h1><div class="post-date">24 March 2026</div><div class="post-excerpt">A complete practical guide to understanding robot arm forward kinematics (FK) and inverse kinematics (IK) using DH parameters and the Jacobian matrix. Covers SCARA, 6-axis vertical articulated, and custom DH models — with step-by-step calculations you can verify instantly using a browser-based IK calculator and 3D robot arm simulator.</div><div class="post-tags"><div class="tag">Engineering</div></div></div><div class="post-content"><p>Have you ever watched a robot arm in an industrial setting precisely pick up a component with fluid, seamless motion? Behind that elegance lies a mathematical framework called <strong>Kinematics</strong>. Calculating the end-effector (EE) position from each joint angle is called forward kinematics; working backwards from a desired position to find the joint angles is inverse kinematics. In this article, we explain DH parameters, the Jacobian matrix, and the concept of singularity with concrete examples, and introduce how to use the <a href="https://www.compu-tools.com/robot-kinematics/">Robot Arm FK/IK Calculator</a> — a tool you can run directly in your browser.</p>
 <h2>Why Is Robot Kinematics Hard?</h2>
 <p>The most disorienting thing when first studying robot kinematics is that the formulas themselves seem simple, yet applying them in practice rarely goes as expected. When I first worked on path planning for a 6-axis vertical articulated robot, the forward kinematics came together quickly — but the inverse kinematics would sometimes spin joints by 1000 degrees, or diverge entirely for positions that were clearly reachable. The culprit turned out to be <strong>numerical instability near singularities</strong>, and that was the moment I understood that kinematics is far more than matrix multiplication.</p>
 <p>There are three main reasons robot kinematics is difficult. First, <strong>coordinate transformations stack sequentially</strong>. For a 6-DOF robot, you must multiply six 4×4 homogeneous transformation matrices in order to obtain the final EE pose. Second, <strong>inverse kinematics can yield multiple solutions or no solution at all</strong>. For the same target position, there may simultaneously exist an Elbow Up solution and an Elbow Down solution. Third, <strong>near singularities</strong>, the problem becomes numerically unstable, causing serious control issues.</p>
@@ -564,9 +601,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
   <em>DH parameter table example: 3-DOF planar robot. Each row defines one link; both revolute (Rev) and prismatic (Pri) joints can be represented.</em>
 </p>
 <p>The strength of DH parameters is that <strong>any serial robot structure can be expressed in the same format</strong>. SCARA, 6-axis vertical articulated, Cartesian robots, and even custom structures of your own design can all be described with a DH table. Universal Robots' publicly available <a href="https://www.universal-robots.com/articles/ur/application-installation/dh-parameters-for-calculations-of-kinematics-and-dynamics/">UR series DH parameter documentation</a> is an excellent reference for seeing how DH parameters are applied to real industrial robots.</p>
-<h2>Forward Kinematics (FK): Computing EE Pose from Joint Angles</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>Forward Kinematics (FK): Computing EE Pose from Joint Angles</h2>
 <p>Forward kinematics is the problem of <strong>finding the position and pose of the EE given the variables of each joint (θ or d)</strong>. Mathematically, it is completely solved by the matrix multiplication described above, and the solution always exists and is unique. The upper-left 3×3 submatrix of the resulting 4×4 matrix gives the rotation matrix (EE orientation), while the top three elements of the last column give the position vector (X, Y, Z).</p>
 <p>One important practical note: maintain consistent units for angles (radians vs. degrees) and lengths (mm vs. m). Mixing them causes unexpected scaling errors in the DH matrix computation.</p>
 <h3>FK Use Cases</h3>
@@ -610,15 +645,15 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
   <em>Manipulability ellipsoid: the left (good pose) allows free EE movement in all directions; the right (near singularity) makes movement in certain directions practically impossible.</em>
 </p>
 <p>In industrial settings, singularity issues can lead to serious accidents. If a robot's path is configured to pass near a singularity, joints may instantaneously rotate at extreme velocities, causing mechanical damage or collisions. For this reason, <a href="https://www.iso.org/standard/22244.html">ISO 9283</a> (Manipulating industrial robots — Performance criteria and related test methods) prescribes robot performance testing procedures and recommends singularity avoidance within the working space, serving as a benchmark for workplace safety design alongside functional safety standards such as IEC 62061 and ISO 13849.</p>
-<div class="ad-article-wrapper ad-article">
-                
-            </div><h2>Joint Limits and Practical IK</h2>
+<h2>Joint Limits and Practical IK</h2>
 <p>There is a significant gap between theoretical inverse kinematics and real-world application. The first problem you encounter is <strong>joint limits</strong>. Real robots have a mechanically defined range of motion for each joint (e.g., J1: ±180°, J2: -90° to +90°).</p>
 <p>If joint limits are not incorporated into the IK solver, you end up with poses that are mathematically valid but physically impossible. There are two main approaches to applying joint limits in numerical IK.</p>
 <p><strong>Clamping</strong>: At each iteration step, if a joint angle exceeds its limit, it is forced back to the boundary value. Simple to implement, but affects convergence speed.</p>
 <p><strong>Constrained optimization</strong>: Joint limits are formulated as inequality constraints and the problem is solved as a constrained optimization. Theoretically more accurate but significantly more complex to implement.</p>
 <p>Angle normalization is also important. Due to accumulated numerical error during iteration, joint angles can grow beyond the -180° to 180° range and reach values like 1000° or more. Applying <code>(θ + 180°) mod 360° − 180°</code> normalization at every step prevents this.</p>
-<h2>Kinematic Characteristics by Robot Type</h2>
+<div class="ad-article-wrapper ad-article">
+                
+            </div><h2>Kinematic Characteristics by Robot Type</h2>
 <h3>2-DOF / 3-DOF Planar Robots</h3>
 <p>These move only within a plane, so the Z coordinate is always 0. The inverse kinematics can be solved analytically using the law of cosines. The 3-DOF planar robot additionally controls the tool angle (φ). This is the best model to study first for educational purposes.</p>
 <h3>SCARA Robots</h3>
@@ -658,7 +693,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p><strong>Step 3: Inverse Kinematics and IK Drag</strong></p>
 <p>In the IK tab, entering target X, Y, Z values triggers automatic IK computation. Alternatively, you can drag the T marker (target position indicator) on the 3D canvas directly with the mouse. Hovering over the marker reveals a semi-transparent filled circle indicating it is draggable.</p>
 <p>Toggling the Jacobian panel button displays the numerical values of the 6×N Jacobian matrix for the current pose. The manipulability indicator bar turns red near singularities, providing an intuitive visual warning about the current pose's risk level.</p>
-<h2>Latest Trends in Robot Kinematics: Deep Learning IK, Collaborative Robots, and ROS 2</h2>
+<div class="ad-article-wrapper ad-article">
+                
+            </div><h2>Latest Trends in Robot Kinematics: Deep Learning IK, Collaborative Robots, and ROS 2</h2>
 <p>Once you understand the kinematics of each robot type, it is worth knowing how industry is evolving on top of these foundations. Kinematics is a decades-old field, but the way it is applied is changing rapidly.</p>
 <p>First, <strong>deep learning-based inverse kinematics</strong> is being actively researched. Training a neural network to learn complex IK mappings can yield solutions quickly without iterative computation. However, generalization outside the training data distribution and the challenge of enforcing joint limits remain open problems.</p>
 <p>Second, <strong>the proliferation of collaborative robots (cobots)</strong>. Cobots such as Universal Robots, FANUC CRX, and ABB GoFa operate in shared spaces with humans, which means kinematic computation must be integrated with real-time safety assessment. Collision detection, force control, and safety zone configuration all operate on top of kinematic calculations.</p>
@@ -687,4 +724,4 @@ When computing IK sequentially for the same target, the solution may abruptly sw
 <li><strong>MoveIt!</strong>, <a href="https://moveit.ai/">moveit.ai</a> — ROS-based robot motion planning framework with support for various IK plugins</li>
 <li><strong>ROS Wiki</strong>, <a href="https://wiki.ros.org/urdf">URDF</a> — Official documentation for the Unified Robot Description Format</li>
 </ol>
-</div><div class="ad-display-wrapper ad-common-display"></div></div></div></div><aside class="sidebar-right sidebar-right--ad-only"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper ad-sidebar"></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/hmac/">HMAC Generator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/text-codec/">Universal Text Codec</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/csv/">CSV / TSV Viewer &amp; Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/rotation-calculator/">3D Rotation Calculator</a></li><li><a href="/ieee754/">IEEE 754 Converter</a></li><li><a href="/endian/">Endian Converter</a></li><li><a href="/bitwise/">Binary &amp; Bitwise Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/i2c/">I2C Calculator</a></li><li><a href="/spi/">SPI Calculator</a></li><li><a href="/uart/">UART Calculator</a></li><li><a href="/can/">CAN Frame Analyzer</a></li><li><a href="/bit-mask/">Bit Mask Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/pwm-servo/">PWM &amp; Servo Calculator</a></li><li><a href="/subnet/">IP / Subnet Calculator</a></li><li><a href="/resistor/">Resistor Color Code</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK/Jacobian Calculator</a></li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a></li><li><a href="/hex-inspector/">Hex File Inspector</a></li><li><a href="/logic-gate/">Logic Gate &amp; Boolean Algebra</a></li><li><a href="/aerospace/">Aerospace Calculator</a></li><li><a href="/pid/">PID Controller Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code &amp; Barcode</a></li><li><a href="/mock-data/">Mock Data Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/curl/">cURL &amp; API Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li><li><a href="/css/">CSS Toolbox</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-image"></i>Image</div><ul class="footer-links"><li><a href="/image/">Image Converter, EXIF Viewer &amp; Palette Extractor</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer></body></html>
+</div></div></div></div><aside class="sidebar-right sidebar-right--ad-only"><div class="sidebar-sticky"><div class="sidebar-ad-space"></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/hmac/">HMAC Generator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/text-codec/">Universal Text Codec</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/csv/">CSV / TSV Viewer &amp; Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/rotation-calculator/">3D Rotation Calculator</a></li><li><a href="/ieee754/">IEEE 754 Converter</a></li><li><a href="/endian/">Endian Converter</a></li><li><a href="/bitwise/">Binary &amp; Bitwise Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/i2c/">I2C Calculator</a></li><li><a href="/spi/">SPI Calculator</a></li><li><a href="/uart/">UART Calculator</a></li><li><a href="/can/">CAN Frame Analyzer</a></li><li><a href="/bit-mask/">Bit Mask Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/pwm-servo/">PWM &amp; Servo Calculator</a></li><li><a href="/subnet/">IP / Subnet Calculator</a></li><li><a href="/resistor/">Resistor Color Code</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK/Jacobian Calculator</a></li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a></li><li><a href="/hex-inspector/">Hex File Inspector</a></li><li><a href="/logic-gate/">Logic Gate &amp; Boolean Algebra</a></li><li><a href="/aerospace/">Aerospace Calculator</a></li><li><a href="/pid/">PID Controller Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code &amp; Barcode</a></li><li><a href="/mock-data/">Mock Data Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/curl/">cURL &amp; API Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li><li><a href="/css/">CSS Toolbox</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-image"></i>Image</div><ul class="footer-links"><li><a href="/image/">Image Converter, EXIF Viewer &amp; Palette Extractor</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer></body></html>

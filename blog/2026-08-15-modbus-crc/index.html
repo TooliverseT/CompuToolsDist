@@ -1,5 +1,18 @@
 <!DOCTYPE html><html lang="en" data-theme="light"><head>
   <meta charset="utf-8">
+  <script>
+    (function () {
+      function normalizedHost() {
+        var h = (location.hostname || '').toLowerCase();
+        if (h.length >= 2 && h.charAt(0) === '[' && h.charAt(h.length - 1) === ']') {
+          h = h.slice(1, -1);
+        }
+        return h;
+      }
+      var allowed = ['www.compu-tools.com', 'compu-tools.com'];
+      window.__compuProductionSite = allowed.indexOf(normalizedHost()) !== -1;
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="google-site-verification" content="KpZe7BcO4gnoVTfjzF5rTVvcbsCPPCRocSrNgYdIYSU">
   <meta name="naver-site-verification" content="457aba595da679106dd139e9a9116d1685df4a4b">
@@ -45,8 +58,8 @@
   
   
 <script type="module">
-import init, * as bindings from '/computools-b678366a9f8bada2.js';
-const wasm = await init({ module_or_path: '/computools-b678366a9f8bada2_bg.wasm' });
+import init, * as bindings from '/computools-4da26332a8180e9e.js';
+const wasm = await init({ module_or_path: '/computools-4da26332a8180e9e_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -112,26 +125,50 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
         return { timeZone, offset };
     }
   </script>
-  <!-- Google Funding Choices (ad recovery) -->
-  <script async="" src="https://fundingchoicesmessages.google.com/i/pub-9424100257975478?ers=1"></script>
-  <script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
-  <script src="/funding-choices-recovery.js"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script>
-
-  <!-- Google tag (gtag.js) -->
-  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310"></script>
+  <!-- Google Funding Choices / Analytics / AdSense: production host only -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    (function () {
+      if (!window.__compuProductionSite) return;
 
-    gtag('config', 'G-1G0CMRC310');
+      var fc = document.createElement('script');
+      fc.async = true;
+      fc.src = 'https://fundingchoicesmessages.google.com/i/pub-9424100257975478?ers=1';
+      document.head.appendChild(fc);
+
+      (function signalGooglefcPresent() {
+        if (!window.frames['googlefcPresent']) {
+          if (document.body) {
+            var iframe = document.createElement('iframe');
+            iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;';
+            iframe.style.display = 'none';
+            iframe.name = 'googlefcPresent';
+            document.body.appendChild(iframe);
+          } else {
+            setTimeout(signalGooglefcPresent, 0);
+          }
+        }
+      })();
+
+      var recovery = document.createElement('script');
+      recovery.src = '/funding-choices-recovery.js';
+      document.head.appendChild(recovery);
+
+      var gtagJs = document.createElement('script');
+      gtagJs.async = true;
+      gtagJs.src = 'https://www.googletagmanager.com/gtag/js?id=G-1G0CMRC310';
+      document.head.appendChild(gtagJs);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', 'G-1G0CMRC310');
+    })();
   </script>
-  <!-- AdSense: load after WASM remounts over prerendered HTML.
-       Head-async load fills snapshot <ins>, then Yew clears body, so
-       visible ads become a second (often unfilled) request. -->
+  <!-- AdSense: load after WASM remounts over prerendered HTML (production only). -->
   <script>
     (function () {
       function loadAdSense() {
+        if (!window.__compuProductionSite) return;
         if (window.__compuAdSenseLoaded) return;
         window.__compuAdSenseLoaded = true;
         var s = document.createElement('script');
@@ -144,7 +181,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-b678366a9f8bada2.js" crossorigin="anonymous" integrity="sha384-4z/EjJ2n3Y2tyDcfg/XR0ZwMmEIJVnxZ4uT1g3mM2seEPTfplRvjaA3aEvSMj+BW"><link rel="preload" href="/computools-b678366a9f8bada2_bg.wasm" crossorigin="anonymous" integrity="sha384-KOcAtRVRzCXxfDQW8/OtsyannxLYnuYtZi5EdB+JYlB9qqUtcn8O/SsLbposgP38" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-4da26332a8180e9e.js" crossorigin="anonymous" integrity="sha384-ulmYnkPdr+sACZPgfCFK5bG7z2OGUfF13/vRiaZyt1i6a81OEdMlodXM0fhoFIUv"><link rel="preload" href="/computools-4da26332a8180e9e_bg.wasm" crossorigin="anonymous" integrity="sha384-Rfx+XZbeNteo0eFnHQgF2M21zQjjtbKGEwn+aXcDxU9DSdnPKmza006UxSkgqTNz" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Why Your Modbus CRC Keeps Failing: Algorithm Variants, Byte Order, and the Check Value | CompuTools Blog">
   <meta name="twitter:description" content="Most Modbus RTU CRC mismatches are not math bugs. They come from picking the wrong CRC-16 variant, reversing the two CRC bytes, or hashing the wrong slice of the frame. Start with the catalogue check value 0x4B37, then confirm CRC-16/MODBUS in a browser calculator.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/crc/modbus_frame_structure.png">
@@ -538,130 +575,6 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
   font-family: MJXTEX-VB;
   src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
 }
-</style><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script><script async="" src="https://fundingchoicesmessages.google.com/b/pub-9424100257975478"></script></head>
+</style></head>
 
-<body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="page-with-sidebar"><div class="page-main"><div class="home-wrapper"><div class="post-wrapper"><div class="post-metadata"><h1 class="post-title">Why Your Modbus CRC Keeps Failing: Algorithm Variants, Byte Order, and the Check Value</h1><div class="post-date">15 August 2026</div><div class="post-excerpt">Most Modbus RTU CRC mismatches are not math bugs. They come from picking the wrong CRC-16 variant, reversing the two CRC bytes, or hashing the wrong slice of the frame. This post walks through a debugging sequence you can reuse — starting with the catalogue check value 0x4B37 — and how to confirm CRC-16/MODBUS in a browser calculator.</div><div class="post-tags"><div class="tag">Security &amp; Hash</div></div></div><div class="ad-display-wrapper ad-multiflex"></div><div class="post-content"><p>A Modbus RTU slave that never answers is often not a broken UART, a wrong baud rate, or a mysterious silicon bug. The frame looks fine in a logic analyzer. Function code and register address match the spec. Then you notice the last two bytes: the CRC does not match what the device computed. That mismatch is the most common integrity failure in industrial serial work, and it is almost never because polynomial division itself is hard. If you need to reproduce a CRC-16/MODBUS result while you read, the <a href="/crc/">CRC Calculator</a> can compute the same catalogue-defined variant locally in the browser.</p>
-<p>This post is not a CRC primer. The polynomial picture and the Ethernet / CAN / 1-Wire landscape are already in <a href="/blog/2025-12-27-crc/">Data Integrity Verification with CRC</a>. The question here is narrower and more annoying: <strong>why do two implementations that both say "CRC-16" disagree on a Modbus frame, and how do you isolate the cause in a few minutes?</strong></p>
-<h2>Start With the Check Value, Not the Live Frame</h2>
-<p>Greg Cook's <a href="https://reveng.sourceforge.io/crc-catalogue/">Catalogue of parametrised CRC algorithms</a> treats every named CRC as a parameter set, not a marketing label. The parameters that actually change the output are width, generator polynomial (<code>poly</code>), initial register value (<code>init</code>), input reflection (<code>refin</code>), output reflection (<code>refout</code>), and final XOR (<code>xorout</code>). The catalogue also publishes a <strong>check</strong> value: the CRC of the nine ASCII bytes <code>123456789</code>. That single vector is the cheapest way to tell whether your code, library, or online tool is running the algorithm you think it is.</p>
-<p>For <strong>CRC-16/MODBUS</strong> the parameters are:</p>
-<div class="code-toolbar"><pre class="language-text" tabindex="0"><code class="language-text">width=16  poly=0x8005  init=0xFFFF
-refin=true  refout=true  xorout=0x0000
-check=0x4B37
-</code></pre><div class="toolbar"><div class="toolbar-item"><span>Plain text</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
-<p>If you feed <code>123456789</code> as ASCII (not as hex <code>31 32 33...</code> typed by hand unless you really mean those bytes) and you do <strong>not</strong> get <code>0x4B37</code>, stop. Do not debug the PLC, the transceiver, or the rest of the PDU yet. The calculator or the firmware routine is a different algorithm, no matter what the dropdown is labelled.</p>
-<!-- 그림: ASCII 문자열 "123456789"가 CRC-16/MODBUS 파라미터를 거쳐 check 값 0x4B37이 되는 한 줄 흐름. 입력 박스 → 파라미터(poly/init/refin) → 출력 0x4B37. 영어 라벨만. -->
-<p class="blog-image">
-  <img src="/blog/assets/crc/modbus_crc_check_vector.png" alt="Flow from ASCII input 123456789 through CRC-16/MODBUS parameters to the catalogue check value 0x4B37">
-</p>
-<p align="center">
-  <em>The catalogue check value is the CRC of ASCII "123456789". For CRC-16/MODBUS that result must be 0x4B37 before you trust the tool on a real frame.</em>
-</p>
-<p>Why does this catch so many bugs? Because the next-door neighbours of CRC-16/MODBUS look similar on paper. CRC-16/ARC uses the <strong>same polynomial and the same reflection</strong>, but <code>init=0x0000</code>. Its check value is <code>0xBB3D</code>. CRC-16/IBM-3740 (often sold in UIs as "CCITT-FALSE") uses <code>poly=0x1021</code>, <code>init=0xFFFF</code>, and <strong>no</strong> reflection; its check value is <code>0x29B1</code>. Pick either of those by accident and every Modbus frame you compute will be consistently wrong — which is worse than a random error, because the wrong CRC looks systematic and "implementation-like."</p>
-<h2>Same Name, Different Algorithm</h2>
-<p>Embedded datasheets, Stack Overflow answers, and vendor libraries all say "CRC-16." That string is not an algorithm. Ross Williams's <a href="http://www.ross.net/crc/download/crc_v3.txt">A Painless Guide to CRC Error Detection Algorithms</a> is still the document that makes the parameter list explicit; without it, two engineers can both be "correct" and still not interoperate.</p>
-<p>A compact comparison for the three mix-ups that show up in Modbus debugging:</p>
-<table><thead><tr><th>Catalogue name</th><th>poly</th><th>init</th><th>refin / refout</th><th>check</th></tr></thead><tbody>
-<tr><td>CRC-16/MODBUS</td><td><code>0x8005</code></td><td><code>0xFFFF</code></td><td>true / true</td><td><code>0x4B37</code></td></tr>
-<tr><td>CRC-16/ARC</td><td><code>0x8005</code></td><td><code>0x0000</code></td><td>true / true</td><td><code>0xBB3D</code></td></tr>
-<tr><td>CRC-16/IBM-3740</td><td><code>0x1021</code></td><td><code>0xFFFF</code></td><td>false / false</td><td><code>0x29B1</code></td></tr>
-</tbody></table>
-<p>The Modbus Application Protocol spec (<a href="https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf">V1.1b3, PDF</a>) describes the RTU frame and points implementers at CRC-16 with the reflected <code>0xA001</code> polynomial — that is CRC-16/MODBUS, not ARC and not CCITT-FALSE. The low-level bit loop you see in firmware is usually:</p>
-<div class="code-toolbar"><pre class="language-c" tabindex="0"><code class="language-c"><span class="token class-name">uint16_t</span> <span class="token function">crc16_modbus</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token class-name">uint8_t</span> <span class="token operator">*</span>data<span class="token punctuation">,</span> <span class="token class-name">size_t</span> len<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token class-name">uint16_t</span> crc <span class="token operator">=</span> <span class="token number">0xFFFF</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">size_t</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        crc <span class="token operator">^=</span> data<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> b <span class="token operator">&lt;</span> <span class="token number">8</span><span class="token punctuation">;</span> b<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>crc <span class="token operator">&amp;</span> <span class="token number">0x0001</span><span class="token punctuation">)</span>
-                crc <span class="token operator">=</span> <span class="token punctuation">(</span>crc <span class="token operator">&gt;&gt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token number">0xA001</span><span class="token punctuation">;</span> <span class="token comment">/* reflected 0x8005 */</span>
-            <span class="token keyword">else</span>
-                crc <span class="token operator">&gt;&gt;=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> crc<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre><div class="toolbar"><div class="toolbar-item"><span>C</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
-<p><code>0xA001</code> is not a different polynomial from <code>0x8005</code>. It is the bit-reversed form used when <code>refin</code>/<code>refout</code> are true and you shift <strong>right</strong>. If your code XORs <code>0x8005</code> while shifting <strong>left</strong>, you have silently switched families. The check value will not be <code>0x4B37</code>.</p>
-<!-- 그림: 세 알고리즘 행 비교 표. MODBUS / ARC / IBM-3740. init와 refin 칸을 색으로 구분하고 check 열을 강조. 영어만. -->
-<p class="blog-image">
-  <img src="/blog/assets/crc/modbus_crc_variant_table.png" alt="Table comparing CRC-16/MODBUS, CRC-16/ARC, and CRC-16/IBM-3740 parameters and check values">
-</p>
-<p align="center">
-  <em>Three 16-bit CRCs that get confused in Modbus work. Only CRC-16/MODBUS has check=0x4B37.</em>
-</p>
-<p>When you already know you need CRC rather than a checksum or SHA-256, <a href="/blog/2026-03-15-crc-comparison/">Checksum vs CRC vs Hash</a> covers the security boundary. For this article the trap is smaller: <strong>CRC was the right family, the wrong member.</strong></p>
-<h2>Byte Order on the Wire Is a Second Algorithm</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
-<p>Even after the 16-bit remainder is correct, Modbus RTU still has a packing rule. The CRC is appended <strong>low byte first</strong> (little-endian). A register value of <code>0xCDC5</code> becomes the two trailing bytes <code>C5 CD</code> on the UART.</p>
-<p>Take a Read Holding Registers request, slave <code>0x01</code>, starting at address <code>0</code>, quantity <code>10</code>:</p>
-<div class="code-toolbar"><pre class="language-text" tabindex="0"><code class="language-text">PDU (CRC not included):  01 03 00 00 00 0A
-CRC-16/MODBUS:           0xCDC5
-Bytes on the wire:       01 03 00 00 00 0A C5 CD
-</code></pre><div class="toolbar"><div class="toolbar-item"><span>Plain text</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
-<p>If your calculator shows <code>CDC5</code> and you append <code>CD C5</code> because that is how you would write a 16-bit hex constant in a comment, the slave computes a different remainder over a different byte string and stays silent. That is the same class of bug as sending <code>0x2B A1</code> when the device expected <code>A1 2B</code> — the story in <a href="/blog/2026-03-04-endian/">Understanding Endianness</a>. Network byte order is big-endian; Modbus CRC bytes are not.</p>
-<p class="blog-image">
-  <img src="/blog/assets/crc/modbus_frame_structure.png" alt="MODBUS RTU frame layout with device ID, function code, data bytes, and CRC-16 checksum shown in hexadecimal">
-</p>
-<p align="center">
-  <em>MODBUS RTU request layout. The CRC occupies the last two bytes, low byte first.</em>
-</p>
-<p>A practical check: if swapping the two CRC bytes makes the device answer, your polynomial path was already correct. You were fighting endianness, not CRC-16/ARC.</p>
-<p>The <a href="/endian/">Endian Converter</a> is useful when the same dump mixes 16-bit register values (Modbus register payload is big-endian) with a little-endian CRC trailer. Those two conventions live in one frame. Mixing them in your head is a reliable way to waste an afternoon.</p>
-<h2>Hash the PDU, Not the Whole Capture</h2>
-<p>The CRC covers <strong>slave address + PDU</strong>, and nothing after. Typical mistakes:</p>
-<ul>
-<li>Including the two CRC bytes in the input, then wondering why the remainder is not zero. (For this reflected CRC, a correctly appended frame does reduce to a known residue — but if you are comparing against <code>0x4B37</code>-style tools, you compute over the payload <strong>without</strong> the trailer.)</li>
-<li>Including UART framing, timestamps, or a hex-dump address column copied from a terminal.</li>
-<li>Dropping the slave address and hashing only the function code and data.</li>
-<li>Feeding a hex string as ASCII: typing <code>01 03</code> as the characters <code>0</code>, <code>1</code>, space, <code>0</code>, <code>3</code> instead of the bytes <code>0x01 0x03</code>.</li>
-</ul>
-<p>The last one is especially common with web calculators. Input mode matters. ASCII <code>"123456789"</code> is the check vector. A Modbus frame is <strong>hex bytes</strong>. If the tool's HEX mode still interprets spaces as ASCII 0x20, your remainder will include those spaces as extra data.</p>
-<p>Firmware that builds the frame in a buffer should CRC <code>buf[0 .. pdu_len)</code> and then write:</p>
-<div class="code-toolbar"><pre class="language-c" tabindex="0"><code class="language-c"><span class="token class-name">uint16_t</span> crc <span class="token operator">=</span> <span class="token function">crc16_modbus</span><span class="token punctuation">(</span>buf<span class="token punctuation">,</span> pdu_len<span class="token punctuation">)</span><span class="token punctuation">;</span>
-buf<span class="token punctuation">[</span>pdu_len<span class="token punctuation">]</span>     <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">uint8_t</span><span class="token punctuation">)</span><span class="token punctuation">(</span>crc <span class="token operator">&amp;</span> <span class="token number">0xFF</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment">/* low byte */</span>
-buf<span class="token punctuation">[</span>pdu_len <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">uint8_t</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">(</span>crc <span class="token operator">&gt;&gt;</span> <span class="token number">8</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">0xFF</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* high byte */</span>
-</code></pre><div class="toolbar"><div class="toolbar-item"><span>C</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
-<p>If you <code>memcpy</code> the <code>uint16_t</code> on a little-endian MCU, you often get the right order by accident. The same <code>memcpy</code> on a big-endian core, or a Python <code>struct.pack('&gt;H', crc)</code>, reverses it. Explicit byte stores are less clever and less wrong.</p>
-<h2>A Debugging Sequence That Usually Ends the Argument</h2>
-<p>When a capture and a calculator disagree, walk this list in order. Skipping to "rewrite the bit loop" is how the same bug survives a refactor.</p>
-<ol>
-<li><strong>Prove the algorithm.</strong> ASCII <code>123456789</code> → <code>0x4B37</code>. If not, change the named variant or the <code>init</code>/<code>refin</code> flags until it matches. Do not touch the field frame yet.</li>
-<li><strong>Prove the input encoding.</strong> Paste the PDU as hex bytes with no CRC trailer. Confirm the tool is in HEX mode, not ASCII.</li>
-<li><strong>Compare the 16-bit remainder</strong>, not the two on-wire bytes. If the remainder matches <code>0xCDC5</code> for <code>01 03 00 00 00 0A</code> and the device still NAKs, look at byte order next.</li>
-<li><strong>Swap the two CRC bytes</strong> in the transmitted frame once. If the slave answers, fix packing; leave the polynomial alone.</li>
-<li><strong>Check coverage.</strong> Address byte included? CRC bytes excluded? No extra <code>0x00</code> padding from a fixed-length buffer?</li>
-</ol>
-<!-- 그림: 5단계 디버깅 순서도. 1 Check 0x4B37 → 2 HEX input → 3 remainder → 4 swap CRC bytes → 5 coverage. 실패 시 어느 단계로 돌아가는지 화살표. 영어 라벨. -->
-<p class="blog-image">
-  <img src="/blog/assets/crc/modbus_crc_debug_flow.png" alt="Five-step flowchart for debugging a Modbus CRC mismatch from check value through byte order">
-</p>
-<p align="center">
-  <em>Isolate algorithm, encoding, remainder, on-wire byte order, then coverage. Most field failures die in steps 1 or 4.</em>
-</p>
-<p>A second frame for a sanity check, used in the earlier CRC guide: <code>01 03 00 00 00 02</code> should yield remainder <code>0x0BC4</code>, on the wire <code>C4 0B</code>. If one frame matches and the other does not, you are usually including a length-dependent pad or hashing past <code>pdu_len</code>.</p>
-<p>Lookup-table implementations deserve one extra look. A 256-entry table generated for CRC-16/ARC (<code>init</code> does not change the table, but people generate tables with the wrong poly or the unreflected <code>0x8005</code> left-shift method) will fail the check value even if the wrapper still says <code>0xFFFF</code>. The <a href="/crc-lookup-table/">CRC Lookup Table</a> generator is there specifically so the 256 constants you paste into C match the same catalogue row as the slow bit loop.</p>
-<h2>Confirming a Frame in the CRC Calculator</h2>
-<p>Open the <a href="/crc/">CRC Calculator</a>. You want three things on screen before you trust a field dump.</p>
-<p>Select <strong>CRC-16/MODBUS</strong> from the algorithm list — do not stop at the first "CRC-16" row. Set input to <strong>HEX</strong> and paste <code>01 03 00 00 00 0A</code> (spaces are fine if the tool treats them as separators). Read the remainder as hex. Then set <strong>byte order</strong> to little-endian so the copy-paste value is <code>C5 CD</code>, the order that actually goes on the RS-485 pair.</p>
-<p>The same input with CRC-16/ARC or CRC-16/IBM-3740 will produce a different remainder. That comparison is the point of a multi-algorithm calculator: you are not looking for a pretty UI, you are looking for the named row whose check value you already verified. Because the computation runs in WebAssembly in the browser, prototype firmware dumps do not have to leave the machine — the same local-processing argument as in <a href="/blog/2026-05-10-webassembly/">why WASM matters for browser calculators</a>.</p>
-<p>If you are implementing rather than only checking, run the check vector in your unit tests:</p>
-<div class="code-toolbar"><pre class="language-text" tabindex="0"><code class="language-text">crc16_modbus("123456789") == 0x4B37
-crc16_modbus(01 03 00 00 00 0A) == 0xCDC5
-</code></pre><div class="toolbar"><div class="toolbar-item"><span>Plain text</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
-<p>Those two asserts catch wrong poly, wrong init, wrong reflection, and (if you also pack the frame in the test) wrong endianness. They are cheaper than another hour on the bus analyzer.</p>
-<h2>What This Does Not Fix</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
-<p>A correct CRC does not mean the slave will do what you wanted. Illegal function, illegal address, and exception codes are application-layer failures with a <strong>valid</strong> CRC. Conversely, CRC is still only accidental-error detection: it will not stop someone who can rewrite both payload and remainder. Use it to get frames on and off the wire. Do not use it as a substitute for authentication.</p>
-<p>The reliable habit is boring. Name the catalogue row. Check <code>0x4B37</code>. Pack low byte first. Hash the PDU you think you hashed. After that, Modbus CRC almost never "keeps failing" — it was a different CRC, or the same CRC in the other byte order.</p>
-<h2>References</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
-<ol>
-<li><strong>Greg Cook</strong>, <a href="https://reveng.sourceforge.io/crc-catalogue/">Catalogue of parametrised CRC algorithms</a> — Parameter sets and check values, including CRC-16/MODBUS (<code>check=0x4B37</code>)</li>
-<li><strong>Ross Williams</strong>, <a href="http://www.ross.net/crc/download/crc_v3.txt">A Painless Guide to CRC Error Detection Algorithms</a> — Width, poly, init, refin, refout, xorout explained as an implementation contract</li>
-<li><strong>Modbus Organization</strong>, <a href="https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf">Modbus Application Protocol Specification V1.1b3</a> — RTU frame layout and CRC-16 appendix</li>
-<li><strong>Modbus Tools</strong>, <a href="https://www.modbustools.com/modbus.html">Modbus Protocol Description</a> — RTU framing and CRC placement used in field tools</li>
-</ol>
-</div><div class="ad-display-wrapper ad-common-display"></div></div></div></div><aside class="sidebar-right sidebar-right--ad-only"><div class="sidebar-sticky"><div class="sidebar-ad-space"><div class="ad-display-wrapper ad-sidebar"></div></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/hmac/">HMAC Generator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/text-codec/">Universal Text Codec</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/csv/">CSV / TSV Viewer &amp; Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/rotation-calculator/">3D Rotation Calculator</a></li><li><a href="/ieee754/">IEEE 754 Converter</a></li><li><a href="/endian/">Endian Converter</a></li><li><a href="/bitwise/">Binary &amp; Bitwise Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/i2c/">I2C Calculator</a></li><li><a href="/spi/">SPI Calculator</a></li><li><a href="/uart/">UART Calculator</a></li><li><a href="/can/">CAN Frame Analyzer</a></li><li><a href="/bit-mask/">Bit Mask Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/pwm-servo/">PWM &amp; Servo Calculator</a></li><li><a href="/subnet/">IP / Subnet Calculator</a></li><li><a href="/resistor/">Resistor Color Code</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK/Jacobian Calculator</a></li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a></li><li><a href="/hex-inspector/">Hex File Inspector</a></li><li><a href="/logic-gate/">Logic Gate &amp; Boolean Algebra</a></li><li><a href="/aerospace/">Aerospace Calculator</a></li><li><a href="/pid/">PID Controller Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code &amp; Barcode</a></li><li><a href="/mock-data/">Mock Data Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/curl/">cURL &amp; API Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li><li><a href="/css/">CSS Toolbox</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-image"></i>Image</div><ul class="footer-links"><li><a href="/image/">Image Converter, EXIF Viewer &amp; Palette Extractor</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer></body></html>
+<body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="page-with-sidebar"><div class="page-main"><div class="home-wrapper"><div class="post-wrapper"><div class="post-metadata"><h1 class="post-title"></h1><div class="post-date"></div><div class="post-excerpt"></div><div class="post-tags"></div></div><div class="post-content"></div></div></div></div><aside class="sidebar-right sidebar-right--ad-only"><div class="sidebar-sticky"><div class="sidebar-ad-space"></div></div></aside></div></div></div><footer class="site-footer"><div class="footer-top"><div class="footer-brand"><a href="/" class="footer-logo"><i class="fa-solid fa-toolbox"></i>CompuTools</a><p class="footer-tagline">Engineering Made Easy — Simplify your workflow with powerful conversion, encoding, and calculation tools.</p></div></div><div class="footer-sitemap"><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-shield-halved"></i>Security &amp; Hash</div><ul class="footer-links"><li><a href="/crc/">CRC Calculator</a></li><li><a href="/crc-lookup-table/">CRC Lookup Table</a></li><li><a href="/file-hash/">File Hash Calculator</a></li><li><a href="/hmac/">HMAC Generator</a></li><li><a href="/jwt/">JWT Encoder &amp; Decoder</a></li><li><a href="/otp/">TOTP Generator</a></li><li><a href="/tls-analyzer/">TLS Certificate Analyzer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-font"></i>Text &amp; Encoding</div><ul class="footer-links"><li><a href="/base32/">Base32 Encoder/Decoder</a></li><li><a href="/base64/">Base64 Encoder/Decoder</a></li><li><a href="/ascii/">ASCII Converter</a></li><li><a href="/text-codec/">Universal Text Codec</a></li><li><a href="/json/">JSON Formatter</a></li><li><a href="/html/">HTML Entity Converter</a></li><li><a href="/text-case/">Text Case Converter</a></li><li><a href="/regex/">Regex Tester</a></li><li><a href="/format-converter/">Format Converter</a></li><li><a href="/csv/">CSV / TSV Viewer &amp; Converter</a></li><li><a href="/diff/">Text Diff Comparator</a></li><li><a href="/markdown/">Markdown Editor</a></li><li><a href="/xml/">XML Formatter &amp; Viewer</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-calculator"></i>Mathematical</div><ul class="footer-links"><li><a href="/base/">Number Base Converter</a></li><li><a href="/quaternion/">3D Rotation Converter</a></li><li><a href="/unit-converter/">Unit Converter</a></li><li><a href="/rotation-visualizer/">3D Rotation Visualizer</a></li><li><a href="/rotation-calculator/">3D Rotation Calculator</a></li><li><a href="/ieee754/">IEEE 754 Converter</a></li><li><a href="/endian/">Endian Converter</a></li><li><a href="/bitwise/">Binary &amp; Bitwise Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-screwdriver-wrench"></i>Engineering</div><ul class="footer-links"><li><a href="/token/">LLM Token Calculator</a></li><li><a href="/i2c/">I2C Calculator</a></li><li><a href="/spi/">SPI Calculator</a></li><li><a href="/uart/">UART Calculator</a></li><li><a href="/can/">CAN Frame Analyzer</a></li><li><a href="/bit-mask/">Bit Mask Calculator</a></li><li><a href="/drone-calc/">Drone Calculator</a></li><li><a href="/pwm-servo/">PWM &amp; Servo Calculator</a></li><li><a href="/subnet/">IP / Subnet Calculator</a></li><li><a href="/resistor/">Resistor Color Code</a></li><li><a href="/bezier/">Bezier Curve Editor</a></li><li><a href="/robot-kinematics/">Robot Arm FK/IK/Jacobian Calculator</a></li><li><a href="/coordinate-converter/">Coordinate Frame Converter</a></li><li><a href="/hex-inspector/">Hex File Inspector</a></li><li><a href="/logic-gate/">Logic Gate &amp; Boolean Algebra</a></li><li><a href="/aerospace/">Aerospace Calculator</a></li><li><a href="/pid/">PID Controller Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-clock"></i>Time &amp; Date</div><ul class="footer-links"><li><a href="/unix-timestamp/">Unix Timestamp Converter</a></li><li><a href="/elapsed-time/">Elapsed Time Calculator</a></li><li><a href="/cron/">Cron Expression Parser</a></li><li><a href="/timestamp-log/">Log Timestamp Sorter</a></li><li><a href="/time-calculator/">Time Calculator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-wand-magic-sparkles"></i>Generators</div><ul class="footer-links"><li><a href="/uuid/">UUID Generator</a></li><li><a href="/password/">Password Generator</a></li><li><a href="/qrcode/">QR Code &amp; Barcode</a></li><li><a href="/mock-data/">Mock Data Generator</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-code"></i>Web Development</div><ul class="footer-links"><li><a href="/url/">URL Encoder/Decoder</a></li><li><a href="/color-converter/">Color Converter</a></li><li><a href="/curl/">cURL &amp; API Converter</a></li><li><a href="/http-code-gen/">HTTP Code Generator</a></li><li><a href="/css/">CSS Toolbox</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-image"></i>Image</div><ul class="footer-links"><li><a href="/image/">Image Converter, EXIF Viewer &amp; Palette Extractor</a></li></ul></div><div class="footer-column"><div class="footer-column-title"><i class="fa-solid fa-compass"></i>Quick Links</div><ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul><div class="footer-column-title footer-column-title-sub"><i class="fa-solid fa-scale-balanced"></i>Legal</div><ul class="footer-links"><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><div class="footer-copyright">© 2025 CompuTools. All rights reserved.</div><div class="footer-bottom-links"><span class="footer-made-with">Built with <i class="fa-solid fa-heart"></i> using Rust &amp; WebAssembly</span></div></div></footer></body></html>
