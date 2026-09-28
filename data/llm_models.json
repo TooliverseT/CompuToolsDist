@@ -1,5 +1,5 @@
 {
-  "catalog_as_of": "2026-09-25",
+  "catalog_as_of": "2026-09-28",
   "pricing_note": "Sourced from LiteLLM model_prices_and_context_window.json (see scripts/update_llm_models.py). Reference $/M; verify on provider dashboards.",
   "models": [
     {
@@ -735,11 +735,11 @@
       "heuristic_only": true
     },
     {
-      "id": "gemini-2.5-flash-native-audio-latest-cdcc9a923c",
+      "id": "gemini-2.5-flash-native-audio-latest-0c98c5dd50",
       "label": "gemini-2.5-flash-native-audio-latest",
       "provider": "Google",
-      "context_window": 1048576,
-      "context_display": "1M",
+      "context_window": 134144,
+      "context_display": "131K",
       "input_per_mtok_usd": 0.5,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 2.0,
@@ -963,11 +963,11 @@
       "heuristic_only": true
     },
     {
-      "id": "gemini-gemini-2.5-flash-native-audio-latest-bdcee5f7f2",
+      "id": "gemini-gemini-2.5-flash-native-audio-latest-f26feaf9a5",
       "label": "gemini/gemini-2.5-flash-native-audio-latest",
       "provider": "Google",
-      "context_window": 1048576,
-      "context_display": "1M",
+      "context_window": 134144,
+      "context_display": "131K",
       "input_per_mtok_usd": 0.5,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 2.0,

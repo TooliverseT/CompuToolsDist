@@ -58,8 +58,8 @@
   
   
 <script type="module">
-import init, * as bindings from '/computools-4da26332a8180e9e.js';
-const wasm = await init({ module_or_path: '/computools-4da26332a8180e9e_bg.wasm' });
+import init, * as bindings from '/computools-85d8543321e2ab15.js';
+const wasm = await init({ module_or_path: '/computools-85d8543321e2ab15_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -181,7 +181,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-4da26332a8180e9e.js" crossorigin="anonymous" integrity="sha384-ulmYnkPdr+sACZPgfCFK5bG7z2OGUfF13/vRiaZyt1i6a81OEdMlodXM0fhoFIUv"><link rel="preload" href="/computools-4da26332a8180e9e_bg.wasm" crossorigin="anonymous" integrity="sha384-Rfx+XZbeNteo0eFnHQgF2M21zQjjtbKGEwn+aXcDxU9DSdnPKmza006UxSkgqTNz" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-85d8543321e2ab15.js" crossorigin="anonymous" integrity="sha384-ZThQQw9pfeB/qaqBQSeCtDJe54uTiSR/uJsGIUUxMpk2Qh8rNQdRHT+R7klAG7r+"><link rel="preload" href="/computools-85d8543321e2ab15_bg.wasm" crossorigin="anonymous" integrity="sha384-WJHq2fKK/fhFZRqiwivxgETpyMdqYxXddHVfNqQnW6B50SNDadg0AvaaY2TJM+rU" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="The Mathematical Cause of Gimbal Lock and How to Avoid It: A Complete Guide to Euler Angles vs Quaternions | CompuTools Blog">
   <meta name="twitter:description" content="Gimbal Lock is a singularity phenomenon that occurs when representing 3D rotations using Euler angles. Having encountered this firsthand in drone control and robotic arm projects, this post analyzes the mathematical roots of the phenomenon from an SO(3) perspective and introduces Quaternion-based avoidance strategies proven in aerospace, robotics, and game development.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/rotation/gimbal_lock.png">
@@ -634,7 +634,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 </code></pre><div class="toolbar"><div class="toolbar-item"><span>Python</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
 <p>As <code>pitch</code> approaches ±90°, both arguments passed to <code>arctan2</code> approach zero. At that point, <code>atan2(0, 0)</code> is mathematically undefined, and accumulated floating-point errors cause Roll and Yaw values to blow up erratically.</p>
 <p>Returning to my robotic arm project: the fully vertically extended pose was exactly the Pitch ≈ 90° condition. The end effector's orientation error reached tens of degrees, and the controller responded by issuing commands to rotate joints hundreds of degrees in an attempt to compensate.</p>
-<h2>Avoidance Strategy 1: Switching to Quaternions</h2>
+<h2>Avoidance Strategy 1: Switching to Quaternions</h2><div class="ad-article-wrapper ad-article">
+                
+            </div>
 <p>The most fundamental solution is simply not to use Euler angles as the internal representation. <strong>Unit quaternions can represent the 3D rotation space SO(3) without singularities.</strong></p>
 <p>Mathematically, quaternions are defined on SU(2), which is the <strong>double cover</strong> of SO(3). That is, each rotation is represented by two quaternions, <span class="math-inline">$q$</span> and <span class="math-inline">$-q$</span>. This representation lives on the 4-dimensional unit sphere S³, which is a smooth manifold with no singularities anywhere — which is precisely why continuous differentiation is possible at any pose. Unlike Euler angles, quaternions have no coordinate singularities by construction.</p>
 <p>After switching to quaternions in the robotic arm project, the code became:</p>
@@ -659,7 +661,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p align="center">
   <em>SLERP (left) follows the shortest arc on the unit sphere. Euler interpolation (right) takes an abnormal detour near the singularity</em>
 </p>
-<h2>Avoidance Strategy 2: Singularity Detection and Path Replanning</h2>
+<div class="ad-article-wrapper ad-article">
+                
+            </div><h2>Avoidance Strategy 2: Singularity Detection and Path Replanning</h2>
 <p>In real-time control systems, switching the pose representation alone is sometimes insufficient. Input may arrive as Euler angles, or the system may need to interface with legacy components. In such cases, <strong>proactively detecting proximity to a singularity and replanning the path</strong> is an effective strategy.</p>
 <p>A common approach in aviation attitude control systems is to monitor the condition number of the Jacobian:</p>
 <div class="code-toolbar"><pre class="language-python" tabindex="0"><code class="language-python"><span class="token keyword">def</span> <span class="token function">check_singularity</span><span class="token punctuation">(</span>pitch_rad<span class="token punctuation">,</span> threshold<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -689,7 +693,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p>Transforming a vector with a rotation matrix requires just 9 multiplications and 6 additions:</p>
 <div class="math-block">$$\vec{p'} = R \cdot \vec{p}$$</div>
 <p>However, repeated matrix multiplication gradually breaks down orthogonality due to floating-point error accumulation. To prevent this, <a href="https://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt_process">Gram-Schmidt orthonormalization</a> must be applied periodically. This is why quaternions are preferred over matrices in practice — normalization for a quaternion costs just one square root: <span class="math-inline">$\sqrt{x^2+y^2+z^2+w^2}$</span>.</p>
-<h2>Experiencing Gimbal Lock with a Tool</h2>
+<div class="ad-article-wrapper ad-article">
+                
+            </div><h2>Experiencing Gimbal Lock with a Tool</h2>
 <p>The fastest way to see all of this in action is to plug in numbers yourself. The <a href="https://compu-tools.com/quaternion/">3D Rotation Transformation Tool</a> supports real-time conversion between quaternions, Euler angles, and rotation matrices, with results visualized immediately in an interactive 3D viewer.</p>
 <p>To experience Gimbal Lock directly:</p>
 <ol>
@@ -706,9 +712,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p align="center">
   <em>Gimbal Lock in the 3D Rotation Transformation Tool: with ZYX Euler at Pitch=90°, changing Roll and Yaw independently produces identical rotations</em>
 </p>
-<div class="ad-article-wrapper ad-article">
-                
-            </div><h2>Field-Specific Avoidance Strategies</h2>
+<h2>Field-Specific Avoidance Strategies</h2>
 <h3>Aerospace: Dual Representation Strategy</h3>
 <p>NASA's Space Shuttle attitude analysis system uses quaternions internally while displaying Euler angles only on the pilot interface. During the display conversion, the system always checks for proximity to singularities and remains ready to switch to an alternative representation.</p>
 <p>Commercial aircraft are trained to treat a pitch angle exceeding roughly ±70° as an Unusual Attitude, triggering special recovery procedures. This is also a safety margin designed so that human pilots can intervene before Gimbal Lock becomes an issue.</p>
@@ -739,16 +743,12 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
     <span class="token comment">// transform.eulerAngles = Vector3.Lerp(startEuler, endEuler, t);</span>
 <span class="token punctuation">}</span>
 </code></pre><div class="toolbar"><div class="toolbar-item"><span>C#</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
-<div class="ad-article-wrapper ad-article">
-                
-            </div><h2>Conclusion: Choosing the Right Representation Is Engineering</h2>
+<h2>Conclusion: Choosing the Right Representation Is Engineering</h2>
 <p>Gimbal Lock is a mathematical singularity. It is a topological inevitability of attempting to globally coordinate SO(3) with Euler angles, and no implementation optimization can resolve it at its root. There is only one way to avoid it: <strong>move to a representation space that has no such singularity.</strong></p>
 <p>Unit quaternions, as the double cover of SO(3), represent every pose without singularities. The notation <span class="math-inline">$w + xi + yj + zk$</span> may feel unfamiliar at first — but after losing days to Gimbal Lock, those four numbers start to feel like an elegant lifeline.</p>
 <p>Use Euler angles only for human-readable interfaces. For all internal computation and interpolation, always use quaternions or rotation matrices. This is the design principle validated over decades in aerospace, robotics, and game development alike.</p>
 <p>One final note: it's genuinely difficult to internalize these concepts without direct experimentation. Head to the <a href="https://compu-tools.com/quaternion/">3D Rotation Transformation Tool</a>, push the Pitch in Euler angles to 90°, then represent the same pose as a quaternion. The moment you see the difference with your own eyes, Gimbal Lock will no longer be an abstract theory.</p>
-<h2>References</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>References</h2>
 <ol>
 <li><strong>Diebel, J.</strong> <a href="https://www.astro.rug.nl/software/kapteyn-beta/_downloads/attitude.pdf">"Representing Attitude: Euler Angles, Unit Quaternions, and Rotation Vectors"</a>, Stanford University, 2006 — The most systematic reference for the mathematical relationships between Euler angles, quaternions, and rotation vectors. The ZYX Jacobian singularity derivation in §5.6 directly corresponds to the mathematical explanation in this post.</li>
 <li><strong>Shoemake, K.</strong> <a href="https://www.cs.cmu.edu/~kiranb/animation/p245-shoemake.pdf">"Animating Rotation with Quaternion Curves"</a>, SIGGRAPH 1985 — The paper that first introduced the SLERP concept to computer graphics.</li>

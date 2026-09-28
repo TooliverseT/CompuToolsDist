@@ -58,8 +58,8 @@
   
   
 <script type="module">
-import init, * as bindings from '/computools-4da26332a8180e9e.js';
-const wasm = await init({ module_or_path: '/computools-4da26332a8180e9e_bg.wasm' });
+import init, * as bindings from '/computools-85d8543321e2ab15.js';
+const wasm = await init({ module_or_path: '/computools-85d8543321e2ab15_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -181,7 +181,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-4da26332a8180e9e.js" crossorigin="anonymous" integrity="sha384-ulmYnkPdr+sACZPgfCFK5bG7z2OGUfF13/vRiaZyt1i6a81OEdMlodXM0fhoFIUv"><link rel="preload" href="/computools-4da26332a8180e9e_bg.wasm" crossorigin="anonymous" integrity="sha384-Rfx+XZbeNteo0eFnHQgF2M21zQjjtbKGEwn+aXcDxU9DSdnPKmza006UxSkgqTNz" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-85d8543321e2ab15.js" crossorigin="anonymous" integrity="sha384-ZThQQw9pfeB/qaqBQSeCtDJe54uTiSR/uJsGIUUxMpk2Qh8rNQdRHT+R7klAG7r+"><link rel="preload" href="/computools-85d8543321e2ab15_bg.wasm" crossorigin="anonymous" integrity="sha384-WJHq2fKK/fhFZRqiwivxgETpyMdqYxXddHVfNqQnW6B50SNDadg0AvaaY2TJM+rU" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Cron Expression Practical Guide: Special Character Combinations, Domain-Specific Examples, and Debugging Patterns | CompuTools Blog">
   <meta name="twitter:description" content="Cron Expression special character (*, ,, -, /, ?, L, W, #) combination rules and pitfalls, 30 real-world examples across system operations, data, backend, and CI/CD domains, plus misreading patterns and a debugging checklist — a practical Cron Expression reference you must know before deployment.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/cron/domain_schedule_clock.png">
@@ -578,9 +578,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 </style></head>
 
 <body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="page-with-sidebar"><div class="page-main"><div class="home-wrapper"><div class="post-wrapper"><div class="post-metadata"><h1 class="post-title">Cron Expression Practical Guide: Special Character Combinations, Domain-Specific Examples, and Debugging Patterns</h1><div class="post-date">14 March 2026</div><div class="post-excerpt">Cron Expression special character (*, ,, -, /, ?, L, W, #) combination rules and pitfalls, 30 real-world examples across system operations, data, backend, and CI/CD domains, plus misreading patterns and a debugging checklist — a practical Cron Expression reference you must know before deployment.</div><div class="post-tags"><div class="tag">Time &amp; Date</div></div></div><div class="post-content"><p>The history of Cron and the structural differences between Linux Cron and Quartz were covered in <a href="https://compu-tools.com/blog/2026-02-25-cron">The Complete Guide to Cron Expressions: Everything a Developer Must Know About Scheduling</a>. This post picks up from there. It focuses on the things that trip you up even after you know the syntax — how to combine special characters, which expressions suit which situations, and why the expression you wrote isn't behaving as intended. The goal is to learn Cron Expression practically through real-world examples across system operations, data pipelines, backend services, and CI/CD.</p>
-<h2>Special Character Combinations: Simpler Than They Look, But Full of Traps</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>Special Character Combinations: Simpler Than They Look, But Full of Traps</h2>
 <p>The four basic special characters (<code>*</code>, <code>,</code>, <code>-</code>, <code>/</code>) are familiar to everyone. The problem is combining them. There are expressions that look like they produce the same result but behave differently.</p>
 <h3><code>/</code> Step: The Starting Point Changes the Result</h3>
 <p><code>/</code> means "repeat every N intervals starting from the start value to the end of the field." <code>*/5</code> is the same as <code>0/5</code> — starting from 0 with an interval of 5, it fires at minutes 0, 5, 10, 15, ... But writing <code>3/5</code> gives 3, 8, 13, 18, ... — only the starting point differs; the end always fills up to the field's maximum value.</p>
@@ -609,9 +607,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p align="center">
   <em>Execution times that vary by special character combination: even at the same interval, results differ based on start point and range</em>
 </p>
-<div class="ad-article-wrapper ad-article">
-                
-            </div><h2>Quartz-Exclusive Special Characters: L, W,</h2>
+<h2>Quartz-Exclusive Special Characters: L, W,</h2>
 <p>Quartz supports additional special characters not found in Linux Cron. The <a href="http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html">Quartz official documentation</a> has detailed specs, but here are the essentials:</p>
 <p><strong><code>L</code> (Last)</strong> — Can be used in the day-of-month and day-of-week fields.</p>
 <div class="code-toolbar"><pre class="language-bash" tabindex="0"><code class="language-bash"><span class="token comment"># L in day-of-month: the last day of the month</span>
@@ -632,7 +628,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <span class="token number">0</span> <span class="token number">0</span> <span class="token number">20</span> ? * <span class="token number">6</span><span class="token comment">#3     # 8:00 PM on the third Friday of every month</span>
 </code></pre><div class="toolbar"><div class="toolbar-item"><span>Bash</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
 <p>The <code>#</code> expression is easy to misuse for "biweekly execution" requirements, but it actually means "the nth occurrence of that weekday," not "the nth week." If the 5th Friday (<code>6#5</code>) doesn't exist in a given month, that execution will be skipped — be careful.</p>
-<h2>Patterns That Are Easy to Misread</h2>
+<h2>Patterns That Are Easy to Misread</h2><div class="ad-article-wrapper ad-article">
+                
+            </div>
 <p>There are expressions that are syntactically correct but behave differently from intuition. Here are the patterns where mistakes tend to repeat.</p>
 <h3>day-of-month + day-of-week Specified Together: Linux vs Quartz Difference</h3>
 <p>In Linux Cron, specifying both fields creates an <strong>OR condition</strong>.</p>
@@ -667,7 +665,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <tr><td>6</td><td>FRI</td><td>Friday</td></tr>
 <tr><td>7</td><td>SAT</td><td>Saturday</td></tr>
 </tbody></table>
-<h2>Real-World Examples by Domain</h2>
+<h2>Real-World Examples by Domain</h2><div class="ad-article-wrapper ad-article">
+                
+            </div>
 <h3>1. System Operations &amp; Infrastructure</h3>
 <div class="code-toolbar"><pre class="language-bash" tabindex="0"><code class="language-bash"><span class="token comment"># --- Backups ---</span>
 <span class="token number">0</span> <span class="token number">2</span> * * *          <span class="token comment"># Full DB backup every day at 2:00 AM (most common pattern)</span>
@@ -752,7 +752,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p align="center">
   <em>Domain-specific schedule distribution: batch and operations tasks are typically concentrated between 1–4 AM, while service tasks are spread throughout business hours</em>
 </p>
-<h2>Quartz Real-World Examples: Spring @Scheduled</h2>
+<h2>Quartz Real-World Examples: Spring @Scheduled</h2><div class="ad-article-wrapper ad-article">
+                
+            </div>
 <p>Here are the most commonly used patterns when using <code>@Scheduled</code> in Spring, paired with their Linux Cron equivalents. Remember that in Quartz, the seconds field comes first.</p>
 <div class="code-toolbar"><pre class="language-java" tabindex="0"><code class="language-java"><span class="token comment">// Every day at midnight</span>
 <span class="token annotation punctuation">@Scheduled</span><span class="token punctuation">(</span>cron <span class="token operator">=</span> <span class="token string">"0 0 0 * * ?"</span><span class="token punctuation">)</span>       <span class="token comment">// Linux equivalent: 0 0 * * *</span>
@@ -811,9 +813,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <tr><td>Every hour during weekday business hours</td><td><code>0 9-17 * * 1-5</code></td><td><code>0 0 9-17 ? * MON-FRI</code></td></tr>
 <tr><td>First Monday of every month</td><td>Not possible with expression alone</td><td><code>0 0 9 ? * MON#1</code></td></tr>
 </tbody></table>
-<h2>Things That Are Impossible with Linux Cron Expressions Alone</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>Things That Are Impossible with Linux Cron Expressions Alone</h2>
 <p>The following requirements <strong>cannot be implemented with Linux Cron expressions alone</strong>. You'll need script conditions or a different scheduler.</p>
 <table><thead><tr><th>Requirement</th><th>Linux Cron</th><th>Workaround</th></tr></thead><tbody>
 <tr><td>Last day of the month</td><td>❌</td><td><code>date -d tomorrow +%d = 01</code> script condition</td></tr>

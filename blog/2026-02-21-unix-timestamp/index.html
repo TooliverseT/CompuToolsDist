@@ -58,8 +58,8 @@
   
   
 <script type="module">
-import init, * as bindings from '/computools-4da26332a8180e9e.js';
-const wasm = await init({ module_or_path: '/computools-4da26332a8180e9e_bg.wasm' });
+import init, * as bindings from '/computools-85d8543321e2ab15.js';
+const wasm = await init({ module_or_path: '/computools-85d8543321e2ab15_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -181,7 +181,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-4da26332a8180e9e.js" crossorigin="anonymous" integrity="sha384-ulmYnkPdr+sACZPgfCFK5bG7z2OGUfF13/vRiaZyt1i6a81OEdMlodXM0fhoFIUv"><link rel="preload" href="/computools-4da26332a8180e9e_bg.wasm" crossorigin="anonymous" integrity="sha384-Rfx+XZbeNteo0eFnHQgF2M21zQjjtbKGEwn+aXcDxU9DSdnPKmza006UxSkgqTNz" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-85d8543321e2ab15.js" crossorigin="anonymous" integrity="sha384-ZThQQw9pfeB/qaqBQSeCtDJe54uTiSR/uJsGIUUxMpk2Qh8rNQdRHT+R7klAG7r+"><link rel="preload" href="/computools-85d8543321e2ab15_bg.wasm" crossorigin="anonymous" integrity="sha384-WJHq2fKK/fhFZRqiwivxgETpyMdqYxXddHVfNqQnW6B50SNDadg0AvaaY2TJM+rU" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Everything About Unix Timestamps: A Developer's Guide to Handling Time as Numbers | CompuTools Blog">
   <meta name="twitter:description" content="Why is the Unix Epoch January 1, 1970? What happens when 32-bit timestamps overflow in 2038? From the historical origins of Unix time to the real-world complexities of timezones, DST, and millisecond handling — a deep dive for developers. Includes practical examples using a custom-built Unix timestamp converter tool.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/unix_timestamp/timezone_map.png">
@@ -578,7 +578,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 </style></head>
 
 <body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="page-with-sidebar"><div class="page-main"><div class="home-wrapper"><div class="post-wrapper"><div class="post-metadata"><h1 class="post-title">Everything About Unix Timestamps: A Developer's Guide to Handling Time as Numbers</h1><div class="post-date">21 February 2026</div><div class="post-excerpt">Why is the Unix Epoch January 1, 1970? What happens when 32-bit timestamps overflow in 2038? From the historical origins of Unix time to the real-world complexities of timezones, DST, and millisecond handling — a deep dive for developers. Includes practical examples using a custom-built Unix timestamp converter tool.</div><div class="post-tags"><div class="tag">Time &amp; Date</div></div></div><div class="post-content"><p>The way computer systems handle time is fundamentally different from how we read a calendar. We say "February 21, 2026 at 3:00 PM," but a computer represents that exact moment as a single integer. That integer is the <strong>Unix Timestamp</strong>. In this post, we'll explore the historical context, technical principles, and the real-world complexities developers encounter — all hidden behind what appears to be a simple number. If you'd like to follow along hands-on, try the <a href="https://compu-tools.com/unix-timestamp/">Unix Timestamp Converter</a> I built.</p>
-<h2>Why January 1, 1970? The Birth of the Epoch</h2>
+<h2>Why January 1, 1970? The Birth of the Epoch</h2><div class="ad-article-wrapper ad-article">
+                
+            </div>
 <p>When I first learned programming and studied what the <code>time()</code> function actually returns, a natural question came to mind: "Why 1970? That's not when computers were invented."</p>
 <p>The answer lies in the history of Unix. In 1969, Ken Thompson and Dennis Ritchie at AT&amp;T Bell Labs began developing the Unix operating system. To represent time internally, they defined a single integer as the number of seconds elapsed from a fixed reference point. That reference — close enough to be practical, round enough to be elegant — was set to <strong>January 1, 1970 at 00:00:00 UTC</strong>.</p>
 <p class="blog-image">
@@ -589,9 +591,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 </p>
 <p>According to the <a href="https://pubs.opengroup.org/onlinepubs/9699919799/">POSIX standard (IEEE Std 1003.1)</a>, a Unix timestamp is officially defined as "the number of seconds elapsed since the Epoch — January 1, 1970, 00:00:00 UTC." This deceptively simple definition has become the universal language of time across billions of devices worldwide.</p>
 <p>The original implementation used a 16-bit integer, but its range proved too limited and was quickly extended to 32 bits. That decision would leave behind a ticking time bomb — the Year 2038 Problem — which we'll explore later.</p>
-<div class="ad-article-wrapper ad-article">
-                
-            </div><h2>The Structure of a Timestamp: Elegance in Simplicity</h2>
+<h2>The Structure of a Timestamp: Elegance in Simplicity</h2>
 <p>The core beauty of Unix timestamps is their <strong>absolute simplicity</strong>. Representing all time as a single integer makes comparison, sorting, and arithmetic remarkably straightforward.</p>
 <div class="code-toolbar"><pre class="language-text" tabindex="0"><code class="language-text">Current time:  1740124800
 One hour later: 1740124800 + 3600   = 1740128400
@@ -618,9 +618,7 @@ time<span class="token punctuation">.</span><span class="token method function p
 <span class="token comment">// e.g. 1740124800  (10 digits)</span>
 </code></pre><div class="toolbar"><div class="toolbar-item"><span>JavaScript</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
 <p>A practical rule of thumb: a 13-digit number is almost certainly in milliseconds; a 10-digit number is in seconds. Early in my career, I passed a JavaScript-generated timestamp directly into server-side Python code without dividing by 1000. The resulting date calculations were completely wrong, and it took several frustrating hours to track down the cause — a single missing division.</p>
-<h2>Timezones and DST: The Real Complexity of Timestamps</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>Timezones and DST: The Real Complexity of Timestamps</h2>
 <p>Unix timestamps are always UTC. But the real world operates on timezones, and that's where many developers encounter unexpected bugs.</p>
 <h3>The IANA Timezone Database</h3>
 <p>The world contains more than 600 named timezones registered in the <a href="https://www.iana.org/time-zones">IANA (Internet Assigned Numbers Authority) Timezone Database</a>. A simple UTC±N offset is not enough — the database tracks historically changed timezone rules, Daylight Saving Time (DST) transition dates, and the fact that different countries apply DST differently.</p>
@@ -631,7 +629,9 @@ time<span class="token punctuation">.</span><span class="token method function p
 <p align="center">
   <em>World Timezone Map: DST Applied Regions (blue stripes), No-DST Fixed-Offset Regions (green), and Partial/Variable DST Regions (orange stripes)</em>
 </p>
-<h2>Practical Guide: Using the Unix Timestamp Converter</h2>
+<h2>Practical Guide: Using the Unix Timestamp Converter</h2><div class="ad-article-wrapper ad-article">
+                
+            </div>
 <p>When applying theory to real work, the <a href="https://compu-tools.com/unix-timestamp/">Unix Timestamp Converter</a> makes it easy to move quickly between timestamps and human-readable dates.</p>
 <h3>Example 1: Interpreting a Timestamp from an API Response</h3>
 <p>Converting a raw timestamp from a REST API response into a readable date:</p>
@@ -671,9 +671,7 @@ time<span class="token punctuation">.</span><span class="token method function p
 <p align="center">
   <em>Unix Timestamp Converter: Converting a scheduled datetime (America/New_York) to a Unix timestamp for deployment automation</em>
 </p>
-<h2>The Year 2038 Problem: History Repeating Itself</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>The Year 2038 Problem: History Repeating Itself</h2>
 <p>If you remember Y2K, the Year 2038 Problem will feel familiar — though technically, it is far more straightforward.</p>
 <p>The maximum value of a <strong>signed 32-bit integer</strong> is <code>2,147,483,647</code>. That value corresponds exactly to <strong>January 19, 2038 at 03:14:07 UTC</strong>. When a 32-bit system's clock reaches this point, the timestamp overflows into a negative number, and the interpreted date wraps back to <strong>December 13, 1901</strong>.</p>
 <div class="code-toolbar"><pre class="language-text" tabindex="0"><code class="language-text">2147483647  → 2038-01-19 03:14:07 UTC  (32-bit maximum)
@@ -698,7 +696,9 @@ time<span class="token punctuation">.</span><span class="token method function p
 <p><strong>Document the unit explicitly.</strong> Specify whether a timestamp field is in seconds or milliseconds in every function signature and API contract. Encoding the unit in the name — such as <code>created_at_ms</code> — is a simple, effective convention.</p>
 <p><strong>Test edge cases.</strong> DST transition times, year boundaries, and February 29 on leap years are where time-related logic most often breaks. Include these boundary values in automated tests.</p>
 <p><strong>Default to 64-bit.</strong> When designing new systems, use <code>int64</code> or <code>BIGINT</code> from the start to avoid the Year 2038 Problem entirely. In MySQL, the <code>TIMESTAMP</code> type is affected, but <code>DATETIME</code> and <code>BIGINT</code> are not.</p>
-<h2>Conclusion: The Philosophy of Time in a Single Number</h2>
+<h2>Conclusion: The Philosophy of Time in a Single Number</h2><div class="ad-article-wrapper ad-article">
+                
+            </div>
 <p>Unix timestamps began with a remarkably simple idea: "how many seconds have passed since a fixed point?" Everything follows from representing that answer as a single integer.</p>
 <p>But behind that simplicity lies decades of accumulated real-world complexity — timezones, DST transitions, leap seconds, seconds-versus-milliseconds confusion, and 32-bit overflow. Developers who understand these layers debug faster and build more robust systems than those who treat timestamps as opaque numbers.</p>
 <p>The next time you encounter <code>1740124800</code> in a log file, or need to interpret a timestamp from an API response, open the <a href="https://compu-tools.com/unix-timestamp/">Unix Timestamp Converter</a> and convert it directly. As you move back and forth between numbers and dates, the computer's model of time becomes intuitive rather than abstract.</p>

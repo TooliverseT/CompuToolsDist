@@ -58,8 +58,8 @@
   
   
 <script type="module">
-import init, * as bindings from '/computools-4da26332a8180e9e.js';
-const wasm = await init({ module_or_path: '/computools-4da26332a8180e9e_bg.wasm' });
+import init, * as bindings from '/computools-85d8543321e2ab15.js';
+const wasm = await init({ module_or_path: '/computools-85d8543321e2ab15_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -181,7 +181,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-4da26332a8180e9e.js" crossorigin="anonymous" integrity="sha384-ulmYnkPdr+sACZPgfCFK5bG7z2OGUfF13/vRiaZyt1i6a81OEdMlodXM0fhoFIUv"><link rel="preload" href="/computools-4da26332a8180e9e_bg.wasm" crossorigin="anonymous" integrity="sha384-Rfx+XZbeNteo0eFnHQgF2M21zQjjtbKGEwn+aXcDxU9DSdnPKmza006UxSkgqTNz" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-85d8543321e2ab15.js" crossorigin="anonymous" integrity="sha384-ZThQQw9pfeB/qaqBQSeCtDJe54uTiSR/uJsGIUUxMpk2Qh8rNQdRHT+R7klAG7r+"><link rel="preload" href="/computools-85d8543321e2ab15_bg.wasm" crossorigin="anonymous" integrity="sha384-WJHq2fKK/fhFZRqiwivxgETpyMdqYxXddHVfNqQnW6B50SNDadg0AvaaY2TJM+rU" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Mastering Robot Arm Kinematics: A Practical Guide to Forward Kinematics, Inverse Kinematics, and DH Parameters | CompuTools Blog">
   <meta name="twitter:description" content="A complete practical guide to understanding robot arm forward kinematics (FK) and inverse kinematics (IK) using DH parameters and the Jacobian matrix. Covers SCARA, 6-axis vertical articulated, and custom DH models — with step-by-step calculations you can verify instantly using a browser-based IK calculator and 3D robot arm simulator.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/robot-kinematics/robot_types_comparison.png">
@@ -581,7 +581,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <h2>Why Is Robot Kinematics Hard?</h2>
 <p>The most disorienting thing when first studying robot kinematics is that the formulas themselves seem simple, yet applying them in practice rarely goes as expected. When I first worked on path planning for a 6-axis vertical articulated robot, the forward kinematics came together quickly — but the inverse kinematics would sometimes spin joints by 1000 degrees, or diverge entirely for positions that were clearly reachable. The culprit turned out to be <strong>numerical instability near singularities</strong>, and that was the moment I understood that kinematics is far more than matrix multiplication.</p>
 <p>There are three main reasons robot kinematics is difficult. First, <strong>coordinate transformations stack sequentially</strong>. For a 6-DOF robot, you must multiply six 4×4 homogeneous transformation matrices in order to obtain the final EE pose. Second, <strong>inverse kinematics can yield multiple solutions or no solution at all</strong>. For the same target position, there may simultaneously exist an Elbow Up solution and an Elbow Down solution. Third, <strong>near singularities</strong>, the problem becomes numerically unstable, causing serious control issues.</p>
-<h2>Denavit–Hartenberg Parameters: The Starting Point of All Kinematics</h2>
+<div class="ad-article-wrapper ad-article">
+                
+            </div><h2>Denavit–Hartenberg Parameters: The Starting Point of All Kinematics</h2>
 <p>The most standard way to mathematically describe the structure of a robot arm is via <a href="https://en.wikipedia.org/wiki/Denavit%E2%80%93Hartenberg_parameters">Denavit–Hartenberg (DH) parameters</a>. Proposed by Denavit and Hartenberg in 1955, this representation defines each link using four parameters.</p>
 <table><thead><tr><th>Parameter</th><th>Symbol</th><th>Meaning</th></tr></thead><tbody>
 <tr><td>Link length</td><td>a</td><td>Length of the common normal between adjacent joint Z-axes</td></tr>
@@ -651,9 +653,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p><strong>Clamping</strong>: At each iteration step, if a joint angle exceeds its limit, it is forced back to the boundary value. Simple to implement, but affects convergence speed.</p>
 <p><strong>Constrained optimization</strong>: Joint limits are formulated as inequality constraints and the problem is solved as a constrained optimization. Theoretically more accurate but significantly more complex to implement.</p>
 <p>Angle normalization is also important. Due to accumulated numerical error during iteration, joint angles can grow beyond the -180° to 180° range and reach values like 1000° or more. Applying <code>(θ + 180°) mod 360° − 180°</code> normalization at every step prevents this.</p>
-<div class="ad-article-wrapper ad-article">
-                
-            </div><h2>Kinematic Characteristics by Robot Type</h2>
+<h2>Kinematic Characteristics by Robot Type</h2>
 <h3>2-DOF / 3-DOF Planar Robots</h3>
 <p>These move only within a plane, so the Z coordinate is always 0. The inverse kinematics can be solved analytically using the law of cosines. The 3-DOF planar robot additionally controls the tool angle (φ). This is the best model to study first for educational purposes.</p>
 <h3>SCARA Robots</h3>
@@ -667,9 +667,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p align="center">
   <em>Structural comparison by robot type. Each structure has distinct kinematic properties, leading to different application domains and IK solution methods.</em>
 </p>
-<div class="ad-article-wrapper ad-article">
+<h2>Using an Online IK Calculator: Calculate Directly in the Browser</h2><div class="ad-article-wrapper ad-article">
                 
-            </div><h2>Using an Online IK Calculator: Calculate Directly in the Browser</h2>
+            </div>
 <p>Once you understand the theory, the fastest way to solidify that understanding is to compute actual numbers yourself. The <a href="https://www.compu-tools.com/robot-kinematics/">Robot Arm FK/IK Calculator</a> is an <strong>online inverse kinematics calculator</strong> and <strong>3D robot arm simulator</strong> that runs directly in the browser with no installation required. You can enter DH parameters directly, verify forward kinematics using joint sliders, and input or drag a target position to solve inverse kinematics in real time.</p>
 <p><strong>Step 1: Robot Type and Unit Setup</strong></p>
 <p>In the Parameters tab, select a robot type (2-DOF planar, 3-DOF planar, SCARA, 4–6 axis articulated, or custom DH) and set link lengths and global units (mm/m/in, degrees/radians). In custom DH mode, you can specify the DOF (2–6) directly and enter a, d, α, θ offset, and joint type (revolute/prismatic) for each link.</p>
@@ -693,9 +693,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p><strong>Step 3: Inverse Kinematics and IK Drag</strong></p>
 <p>In the IK tab, entering target X, Y, Z values triggers automatic IK computation. Alternatively, you can drag the T marker (target position indicator) on the 3D canvas directly with the mouse. Hovering over the marker reveals a semi-transparent filled circle indicating it is draggable.</p>
 <p>Toggling the Jacobian panel button displays the numerical values of the 6×N Jacobian matrix for the current pose. The manipulability indicator bar turns red near singularities, providing an intuitive visual warning about the current pose's risk level.</p>
-<div class="ad-article-wrapper ad-article">
+<h2>Latest Trends in Robot Kinematics: Deep Learning IK, Collaborative Robots, and ROS 2</h2><div class="ad-article-wrapper ad-article">
                 
-            </div><h2>Latest Trends in Robot Kinematics: Deep Learning IK, Collaborative Robots, and ROS 2</h2>
+            </div>
 <p>Once you understand the kinematics of each robot type, it is worth knowing how industry is evolving on top of these foundations. Kinematics is a decades-old field, but the way it is applied is changing rapidly.</p>
 <p>First, <strong>deep learning-based inverse kinematics</strong> is being actively researched. Training a neural network to learn complex IK mappings can yield solutions quickly without iterative computation. However, generalization outside the training data distribution and the challenge of enforcing joint limits remain open problems.</p>
 <p>Second, <strong>the proliferation of collaborative robots (cobots)</strong>. Cobots such as Universal Robots, FANUC CRX, and ABB GoFa operate in shared spaces with humans, which means kinematic computation must be integrated with real-time safety assessment. Collision detection, force control, and safety zone configuration all operate on top of kinematic calculations.</p>
@@ -708,9 +708,9 @@ Occurs when J5 (the middle wrist joint) approaches 0°, causing the J4 and J6 ax
 When a target position is very close to the robot's maximum reach or corresponds to an elbow singularity, IK diverges. Workspace boundaries should be visualized during task planning and targets constrained to remain within the reachable region.</p>
 <p><strong>Problem 3: Joint Angle Discontinuity</strong>
 When computing IK sequentially for the same target, the solution may abruptly switch from Elbow Up to Elbow Down, causing a large jump in joint angles. Using the previous step's solution as the initial seed (current joint angle seed strategy) makes it easier to maintain continuity.</p>
-<div class="ad-article-wrapper ad-article">
+<h2>Closing: Kinematics Is the Language of Robotics</h2><div class="ad-article-wrapper ad-article">
                 
-            </div><h2>Closing: Kinematics Is the Language of Robotics</h2>
+            </div>
 <p>Understanding kinematics thoroughly is like learning the language in which you speak to robots. Forward kinematics reads the robot's current state; inverse kinematics instructs it to perform a desired motion; the Jacobian evaluates how safe and precise that motion is. DH parameters are the common grammar underlying all of this.</p>
 <p>I strongly recommend using the <a href="https://www.compu-tools.com/robot-kinematics/">Robot Arm FK/IK Calculator</a> alongside your theoretical study to compute real numbers. Enter your own robot structure in custom DH mode, set joint limits, and directly observe how IK converges. In the moment when the manipulability indicator bar turns red near a singularity, the equations in the textbook connect to physical intuition in a way that no lecture can replicate.</p>
 <h2>References</h2>
