@@ -1,5 +1,5 @@
 {
-  "catalog_as_of": "2026-09-28",
+  "catalog_as_of": "2026-10-05",
   "pricing_note": "Sourced from LiteLLM model_prices_and_context_window.json (see scripts/update_llm_models.py). Reference $/M; verify on provider dashboards.",
   "models": [
     {
@@ -387,8 +387,44 @@
       "fallback_bpe": "cl100k_base"
     },
     {
+      "id": "claude-sonnet-5-5-f60802edf7",
+      "label": "claude-sonnet-5-5",
+      "provider": "Anthropic",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 2.0,
+      "input_cached_per_mtok_usd": 0.2,
+      "output_per_mtok_usd": 10.0,
+      "pricing_url": "https://www.anthropic.com/pricing",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
       "id": "cohere-embed-v4.0-8fc84231a8",
       "label": "cohere/embed-v4.0",
+      "provider": "Cohere",
+      "context_window": 131072,
+      "context_display": "128K",
+      "input_per_mtok_usd": 0.12,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": 0.0,
+      "pricing_url": "https://cohere.com/pricing",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "cohere-embed-v5.0-fast-09536898b1",
+      "label": "cohere/embed-v5.0-fast",
+      "provider": "Cohere",
+      "context_window": 131072,
+      "context_display": "128K",
+      "input_per_mtok_usd": 0.08,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": 0.0,
+      "pricing_url": "https://cohere.com/pricing",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "cohere-embed-v5.0-pro-166de3d407",
+      "label": "cohere/embed-v5.0-pro",
       "provider": "Cohere",
       "context_window": 131072,
       "context_display": "128K",
@@ -891,11 +927,11 @@
       "heuristic_only": true
     },
     {
-      "id": "gemini-deep-research-pro-preview-12-2025-bc85cadcb3",
+      "id": "gemini-deep-research-pro-preview-12-2025-5457627bc5",
       "label": "gemini/deep-research-pro-preview-12-2025",
       "provider": "Google",
-      "context_window": 66560,
-      "context_display": "65K",
+      "context_window": 1048576,
+      "context_display": "1M",
       "input_per_mtok_usd": 2.0,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 12.0,
@@ -1215,11 +1251,11 @@
       "heuristic_only": true
     },
     {
-      "id": "gemini-gemini-3.5-transcribe-ab5289bf07",
+      "id": "gemini-gemini-3.5-transcribe-2d18329df3",
       "label": "gemini/gemini-3.5-transcribe",
       "provider": "Google",
-      "context_window": 0,
-      "context_display": "Unknown",
+      "context_window": 100352,
+      "context_display": "98K",
       "input_per_mtok_usd": 2.0,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 12.0,
@@ -1227,11 +1263,11 @@
       "heuristic_only": true
     },
     {
-      "id": "gemini-gemini-3.5-transcribe-live-058ad8f5cd",
+      "id": "gemini-gemini-3.5-transcribe-live-8fdaeb95d1",
       "label": "gemini/gemini-3.5-transcribe-live",
       "provider": "Google",
-      "context_window": 0,
-      "context_display": "Unknown",
+      "context_window": 134144,
+      "context_display": "131K",
       "input_per_mtok_usd": 3.5,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 21.0,
@@ -1491,11 +1527,11 @@
       "heuristic_only": true
     },
     {
-      "id": "gemini-gemini-robotics-er-2-streaming-preview-eab417ed21",
+      "id": "gemini-gemini-robotics-er-2-streaming-preview-3b7458677d",
       "label": "gemini/gemini-robotics-er-2-streaming-preview",
       "provider": "Google",
-      "context_window": 0,
-      "context_display": "Unknown",
+      "context_window": 134144,
+      "context_display": "131K",
       "input_per_mtok_usd": 1.0,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 5.0,
@@ -1599,11 +1635,11 @@
       "heuristic_only": true
     },
     {
-      "id": "gemini-lyria-3.5-ae0b2cf9b4",
+      "id": "gemini-lyria-3.5-702d701f26",
       "label": "gemini/lyria-3.5",
       "provider": "Google",
-      "context_window": 1048576,
-      "context_display": "1M",
+      "context_window": 134144,
+      "context_display": "131K",
       "input_per_mtok_usd": 0.0,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 0.0,
@@ -3416,6 +3452,19 @@
       "fallback_bpe": "o200k_base"
     },
     {
+      "id": "gpt-4o-mini-tts-2025-03-20-9054a0e80f",
+      "label": "gpt-4o-mini-tts-2025-03-20",
+      "provider": "OpenAI",
+      "context_window": 0,
+      "context_display": "Unknown",
+      "input_per_mtok_usd": 0.6,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": 10.0,
+      "pricing_url": "https://openai.com/api/pricing/",
+      "tiktoken_model": "gpt-4o-mini-tts-2025-03-20",
+      "fallback_bpe": "o200k_base"
+    },
+    {
       "id": "gpt-4o-mini-tts-2025-12-15-fa1c7e4139",
       "label": "gpt-4o-mini-tts-2025-12-15",
       "provider": "OpenAI",
@@ -4089,6 +4138,19 @@
       "output_per_mtok_usd": 10.0,
       "pricing_url": "https://openai.com/api/pricing/",
       "tiktoken_model": "gpt-6-sol",
+      "fallback_bpe": "o200k_base"
+    },
+    {
+      "id": "gpt-6.1-sol-90f08c0e0b",
+      "label": "gpt-6.1-sol",
+      "provider": "OpenAI",
+      "context_window": 944128,
+      "context_display": "922K",
+      "input_per_mtok_usd": 2.0,
+      "input_cached_per_mtok_usd": 0.1,
+      "output_per_mtok_usd": 10.0,
+      "pricing_url": "https://openai.com/api/pricing/",
+      "tiktoken_model": "gpt-6.1-sol",
       "fallback_bpe": "o200k_base"
     },
     {

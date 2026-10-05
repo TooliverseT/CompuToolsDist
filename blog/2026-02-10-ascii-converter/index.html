@@ -58,8 +58,8 @@
   
   
 <script type="module">
-import init, * as bindings from '/computools-85d8543321e2ab15.js';
-const wasm = await init({ module_or_path: '/computools-85d8543321e2ab15_bg.wasm' });
+import init, * as bindings from '/computools-d6afee058cd99940.js';
+const wasm = await init({ module_or_path: '/computools-d6afee058cd99940_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -181,7 +181,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-85d8543321e2ab15.js" crossorigin="anonymous" integrity="sha384-ZThQQw9pfeB/qaqBQSeCtDJe54uTiSR/uJsGIUUxMpk2Qh8rNQdRHT+R7klAG7r+"><link rel="preload" href="/computools-85d8543321e2ab15_bg.wasm" crossorigin="anonymous" integrity="sha384-WJHq2fKK/fhFZRqiwivxgETpyMdqYxXddHVfNqQnW6B50SNDadg0AvaaY2TJM+rU" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-d6afee058cd99940.js" crossorigin="anonymous" integrity="sha384-vKJ97FJ8hN7MjG4te+qw53RTp/xoLN78gu9kt14AFwHoLta3Z4SESBHs3uNEXU07"><link rel="preload" href="/computools-d6afee058cd99940_bg.wasm" crossorigin="anonymous" integrity="sha384-oEskJxwfDZNo9J1RNswAQMuTRgOyN8K3rXwyJDaJndJR7wyFDLWrA+G9XTyXrLyO" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Everything About ASCII Conversion: How Computers Understand Characters | CompuTools Blog">
   <meta name="twitter:description" content="From the historical background of ASCII (American Standard Code for Information Interchange) to modern programming practices, explore the core principles of how computers convert characters to numbers. Covers everything about ASCII conversion with real-world development experience, from network protocol debugging and serial communication to security vulnerabilities.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/ascii/ascii_converter_interface.png">
@@ -578,7 +578,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 </style></head>
 
 <body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="page-with-sidebar"><div class="page-main"><div class="home-wrapper"><div class="post-wrapper"><div class="post-metadata"><h1 class="post-title">Everything About ASCII Conversion: How Computers Understand Characters</h1><div class="post-date">10 February 2026</div><div class="post-excerpt">From the historical background of ASCII (American Standard Code for Information Interchange) to modern programming practices, explore the core principles of how computers convert characters to numbers. Covers everything about ASCII conversion with real-world development experience, from network protocol debugging and serial communication to security vulnerabilities.</div><div class="post-tags"><div class="tag">Text &amp; Encoding</div></div></div><div class="post-content"><p>Computers only understand numbers. Every character we type, every symbol, even emojis are stored internally as numbers. The most fundamental system for this conversion is <strong>ASCII (American Standard Code for Information Interchange)</strong>. This article will deeply explore everything from the history of ASCII to its practical applications in real programming scenarios and modern extensions. You can verify and practice the content in real-time through the <a href="https://compu-tools.com/ascii/">ASCII conversion tool</a> I created.</p>
-<h2>The Birth of ASCII: Legacy of the Teletype Era</h2>
+<h2>The Birth of ASCII: Legacy of the Teletype Era</h2><div class="ad-article-wrapper ad-article">
+                
+            </div>
 <p>When I first learned programming, I wondered why the character 'A' has exactly the value 65. The answer goes back to the 1960s.</p>
 <p>ASCII was established as a standard by the American Standards Association (ASA, now ANSI) in 1963 to solve the chaos in teleprinter communication at the time. Looking at the <a href="https://www.ascii-code.com/">official history of ASCII</a>, it was the product of international standardization efforts to solve problems caused by incompatible character encodings between different communication devices.</p>
 <p>Early ASCII was a 7-bit system capable of representing a total of 128 characters. Why exactly 7 bits? It was a design that considered the constraints of communication technology at the time and the parity bit (1 bit) for error detection. Using 7 bits for data and 1 bit for error detection out of 8 bits was efficient.</p>
@@ -718,9 +720,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <li><code>A</code> → <code>0b01000001</code></li>
 <li><code>a</code> → <code>0b01100001</code></li>
 </ul>
-<div class="ad-article-wrapper ad-article">
-                
-            </div><h2>Extended ASCII and Limitations: The Wall of Internationalization</h2>
+<h2>Extended ASCII and Limitations: The Wall of Internationalization</h2>
 <p>Since ASCII was an English-centric standard, it had limitations in representing other languages. 128 characters couldn't express characters from around the world.</p>
 <h3>Extended ASCII (128-255)</h3>
 <p>Using all 8 bits allows for an additional 128 characters. This is called <strong>Extended ASCII</strong> or <strong>High ASCII</strong>. The problem was that the allocation of these 128 characters was not standardized.</p>
@@ -733,9 +733,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <h3>The Emergence of UTF-8: A Solution for All Languages</h3>
 <p>What fundamentally solved the limitations of Extended ASCII is <strong>UTF-8</strong>. UTF-8 is perfectly compatible with ASCII (the first 128 code points are identical) while being able to represent all characters from around the world. Looking at the <a href="https://en.wikipedia.org/wiki/UTF-8#History">design principles of UTF-8</a>, you can see how important this compatibility was as a design goal.</p>
 <p>When I first worked on an internationalization (i18n) project, most issues with Korean, Chinese, and Japanese support were resolved just by switching to UTF-8. However, one thing to note is that while ASCII characters still occupy 1 byte in UTF-8, characters like Korean take up 3 bytes.</p>
-<div class="ad-article-wrapper ad-article">
-                
-            </div><h2>Performance and Optimization: A Practitioner's Perspective</h2>
+<h2>Performance and Optimization: A Practitioner's Perspective</h2>
 <p>The impact of ASCII conversion on performance varies depending on the type of application.</p>
 <h3>The Pitfall of String Processing</h3>
 <p>As a novice programmer, I wrote the following to do case-insensitive string comparison:</p>
@@ -757,7 +755,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <h3>Considerations in Real-Time Systems</h3>
 <p>In environments where real-time performance is critical, like embedded systems or game engines, ASCII conversion is also a target for optimization. In a game project I participated in, we significantly improved performance by pre-converting strings to hash values and only performing hash comparisons at runtime.</p>
 <p><a href="https://docs.unrealengine.com/5.0/en-US/fname-in-unreal-engine/">Unreal Engine's FName system</a> uses exactly this principle. It converts strings to unique integer IDs, making comparison operations O(1).</p>
-<h2>Conclusion: ASCII, the Alphabet of the Digital World</h2>
+<div class="ad-article-wrapper ad-article">
+                
+            </div><h2>Conclusion: ASCII, the Alphabet of the Digital World</h2>
 <p>ASCII is a standard that's over 60 years old, but it still operates at the most fundamental layer of computer systems today. It's the foundation of technologies we use every day: HTTP headers, email protocols, configuration files, command-line interfaces, and more.</p>
 <p>What I've learned from working on various projects over the years is that properly understanding ASCII makes debugging much easier. Many problems—strange byte values in network packets, file encoding issues, string processing bugs—ultimately originate at the ASCII level.</p>
 <p>Practice is the best learning method. Open the <a href="https://compu-tools.com/ascii/">ASCII conversion tool</a> and try converting strings you frequently use into various formats. When you can read hexadecimal dumps and binary patterns start making sense to you, you've understood the essence of ASCII.</p>
