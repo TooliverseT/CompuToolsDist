@@ -58,8 +58,8 @@
   
   
 <script type="module">
-import init, * as bindings from '/computools-d6afee058cd99940.js';
-const wasm = await init({ module_or_path: '/computools-d6afee058cd99940_bg.wasm' });
+import init, * as bindings from '/computools-57eb00e8bb9c29e1.js';
+const wasm = await init({ module_or_path: '/computools-57eb00e8bb9c29e1_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -181,7 +181,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-d6afee058cd99940.js" crossorigin="anonymous" integrity="sha384-vKJ97FJ8hN7MjG4te+qw53RTp/xoLN78gu9kt14AFwHoLta3Z4SESBHs3uNEXU07"><link rel="preload" href="/computools-d6afee058cd99940_bg.wasm" crossorigin="anonymous" integrity="sha384-oEskJxwfDZNo9J1RNswAQMuTRgOyN8K3rXwyJDaJndJR7wyFDLWrA+G9XTyXrLyO" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-57eb00e8bb9c29e1.js" crossorigin="anonymous" integrity="sha384-YuyjgHdfuT+GNy0LYbK1yJb2vAZbckcO48ljYKhVHb2ZRP2VWxbDBzSCVVcPRYfT"><link rel="preload" href="/computools-57eb00e8bb9c29e1_bg.wasm" crossorigin="anonymous" integrity="sha384-rU/o+qqeSj9zRHLUgW2v3HPDUFnAlZTTkSL5N4yFPZMknHlg2uj25jTnTO7cwiUF" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Why 0.1 + 0.2 ≠ 0.3: IEEE 754 Is Working as Designed | CompuTools Blog">
   <meta name="twitter:description" content="Unit test failing on 0.1 + 0.2 == 0.3? IEEE 754 binary floats, f32/f64 bit patterns, and practical fixes for billing, games, and embedded— with Python, C, and C++ examples.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/base/ieee754_structure.png">
@@ -580,9 +580,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="page-with-sidebar"><div class="page-main"><div class="home-wrapper"><div class="post-wrapper"><div class="post-metadata"><h1 class="post-title">Why 0.1 + 0.2 ≠ 0.3: IEEE 754 Is Working as Designed</h1><div class="post-date">18 September 2026</div><div class="post-excerpt">Ever had a unit test fail on 0.1 + 0.2 == 0.3? This post explains why IEEE 754 binary floating-point cannot store decimal 0.1 exactly, how f32/f64 bit patterns differ, and what to do in billing, games, and embedded systems—with math and code.</div><div class="post-tags"><div class="tag">Mathematical</div><div class="tag">Guide</div></div></div><div class="post-content"><p><strong>0.1 + 0.2 ≠ 0.3</strong> is not a language bug. It happens because <strong>IEEE 754 binary floating-point</strong> cannot represent most decimal fractions exactly in a finite number of bits. The “floating-point error” people mention starts right here—in the limits of the representation itself.</p>
 <p>The first time I hit this was on a web backend that summed cart totals with <code>float</code>. Logs showed <code>0.30000000000000004</code>, and QA filed a “one cent off” ticket. Code review came back with one line: use epsilon instead of <code>==</code>. Nobody could explain <strong>why 0.1 was already wrong before the addition</strong>. That was when it clicked: this is not a <code>printf</code> formatting issue. If you do not know the rules for <strong>storing reals in binary</strong>, you keep falling into the same trap.</p>
 <p>The fastest way to see how 0.1 is stored at the bit level is the <a href="https://compu-tools.com/ieee754/">IEEE 754 Converter</a>. Enter <code>0.1</code>, <code>0.2</code>, and <code>0.3</code>, then switch between f64 (double) and f32 (single) and compare the sign, exponent, and mantissa fields.</p>
-<div class="ad-article-wrapper ad-article">
-                
-            </div><h2>The Real Question Behind a “Broken” Test</h2>
+<h2>The Real Question Behind a “Broken” Test</h2>
 <p>In a Python REPL, <code>0.1 + 0.2 == 0.3</code> is <code>False</code>. The JavaScript console agrees. The same operation in C++ <code>double</code> does not match <code>0.3</code> at the bit level either. New hires often hear “floats are approximate” and stop there; in production the questions branch:</p>
 <ul>
 <li>Billing and finance: why do whole currency units drift?</li>
@@ -605,9 +603,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
   <em>How one f32 word splits into sign / exponent / mantissa—the starting point for reading register dumps</em>
 </p>
 <p>Goldberg’s classic <a href="https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">"What Every Computer Scientist Should Know About Floating-Point Arithmetic"</a> explains systematically how representation error propagates and blows up through <strong>catastrophic cancellation</strong>. “0.1 + 0.2” is practically the <strong>opening sentence</strong> of that textbook.</p>
-<h2>Reproduce in Code, Then Inspect Bits</h2><div class="ad-article-wrapper ad-article">
+<div class="ad-article-wrapper ad-article">
                 
-            </div>
+            </div><h2>Reproduce in Code, Then Inspect Bits</h2>
 <h3>Python</h3>
 <div class="code-toolbar"><pre class="language-python" tabindex="0"><code class="language-python">a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c <span class="token operator">=</span> <span class="token number">0.1</span><span class="token punctuation">,</span> <span class="token number">0.2</span><span class="token punctuation">,</span> <span class="token number">0.3</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token operator">+</span> b<span class="token punctuation">)</span>          <span class="token comment"># 0.30000000000000004</span>
@@ -677,7 +675,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p>The <a href="https://compu-tools.com/ieee754/">IEEE 754 Converter</a> runs f32 and f64 conversion in the browser. Enter decimal <code>0.1</code>, <code>0.2</code>, and <code>0.3</code> and compare the hex and binary tabs. When you type the sum of <code>0.1 + 0.2</code> directly, you can see visually why its 64-bit pattern differs from <code>0.3</code>—often starting with <strong>one or two mantissa bits</strong>.</p>
 <p>Special values—<code>NaN</code>, <code>Inf</code>, <code>-0</code>—are classified on the same screen. For sensor faults or post–divide-by-zero results, enter <code>nan</code>, <code>inf</code>, and <code>-0</code> in the converter first; then when a UART log shows something like <code>7FF8000000000000</code>, you can recognize it as a special value immediately.</p>
 <p>Because computation stays on the client, pasting internal protocol dumps or float strings that touch customer data does not add requests in the network tab—the same local WASM story as in <a href="https://compu-tools.com/blog/2026-05-10-webassembly/">Browser-Based Dev Tools and Local Processing</a>.</p>
-<h2>References</h2>
+<div class="ad-article-wrapper ad-article">
+                
+            </div><h2>References</h2>
 <ol>
 <li><strong>IEEE Computer Society.</strong> <a href="https://standards.ieee.org/standard/754-2019.html">IEEE Std 754-2019 – IEEE Standard for Floating-Point Arithmetic</a> — Normative definition of sign, exponent, significand, rounding modes, and special values.</li>
 <li><strong>Goldberg, D.</strong> <a href="https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">"What Every Computer Scientist Should Know About Floating-Point Arithmetic"</a>, ACM Computing Surveys, 1991 — Representation error, cancellation, and stable formula choice.</li>

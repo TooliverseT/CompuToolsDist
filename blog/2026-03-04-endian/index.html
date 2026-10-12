@@ -58,8 +58,8 @@
   
   
 <script type="module">
-import init, * as bindings from '/computools-d6afee058cd99940.js';
-const wasm = await init({ module_or_path: '/computools-d6afee058cd99940_bg.wasm' });
+import init, * as bindings from '/computools-57eb00e8bb9c29e1.js';
+const wasm = await init({ module_or_path: '/computools-57eb00e8bb9c29e1_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -181,7 +181,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-d6afee058cd99940.js" crossorigin="anonymous" integrity="sha384-vKJ97FJ8hN7MjG4te+qw53RTp/xoLN78gu9kt14AFwHoLta3Z4SESBHs3uNEXU07"><link rel="preload" href="/computools-d6afee058cd99940_bg.wasm" crossorigin="anonymous" integrity="sha384-oEskJxwfDZNo9J1RNswAQMuTRgOyN8K3rXwyJDaJndJR7wyFDLWrA+G9XTyXrLyO" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-57eb00e8bb9c29e1.js" crossorigin="anonymous" integrity="sha384-YuyjgHdfuT+GNy0LYbK1yJb2vAZbckcO48ljYKhVHb2ZRP2VWxbDBzSCVVcPRYfT"><link rel="preload" href="/computools-57eb00e8bb9c29e1_bg.wasm" crossorigin="anonymous" integrity="sha384-rU/o+qqeSj9zRHLUgW2v3HPDUFnAlZTTkSL5N4yFPZMknHlg2uj25jTnTO7cwiUF" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Understanding Endianness: Byte Order Defines Your System | CompuTools Blog">
   <meta name="twitter:description" content="A single byte order mismatch can cost you days of debugging. This article draws on real-world experience to thoroughly explain the difference between big endian and little endian, and why endianness is critical in networking, MODBUS, and CRC calculations.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/endian/big_little_endian_memory.png">
@@ -611,9 +611,9 @@ addr<span class="token punctuation">.</span>sin_port <span class="token operator
 <p>Every file format has its own endianness convention. PNG uses big endian; BMP uses little endian. Ignore this when parsing files directly and metadata like file size, width, and height will be read as entirely wrong values.</p>
 <h3>3. MODBUS and Industrial Protocols</h3>
 <p>The <a href="https://www.modbustools.com/modbus.html">MODBUS RTU protocol</a> is fundamentally big endian — with one exception: <strong>the CRC field is transmitted in little endian (LSB first)</strong>. Furthermore, how 32-bit registers are word-swapped can vary between devices, making endianness-related communication errors extremely common in industrial environments.</p>
-<div class="ad-article-wrapper ad-article">
+<h2>Why Endianness Is Critical in CRC Calculations</h2><div class="ad-article-wrapper ad-article">
                 
-            </div><h2>Why Endianness Is Critical in CRC Calculations</h2>
+            </div>
 <p>When computing a CRC checksum and inserting it into a communication frame, endianness is one of the most important factors to get right. For CRCs whose result spans two or more bytes — such as CRC-16 or CRC-32 — <strong>the order in which those bytes are placed in the frame</strong> completely determines whether the receiver's validation succeeds or fails.</p>
 <p>For example, if the CRC-16/MODBUS result is <code>0x2BA1</code>:</p>
 <ul>

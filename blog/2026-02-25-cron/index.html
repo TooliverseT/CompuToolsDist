@@ -58,8 +58,8 @@
   
   
 <script type="module">
-import init, * as bindings from '/computools-d6afee058cd99940.js';
-const wasm = await init({ module_or_path: '/computools-d6afee058cd99940_bg.wasm' });
+import init, * as bindings from '/computools-57eb00e8bb9c29e1.js';
+const wasm = await init({ module_or_path: '/computools-57eb00e8bb9c29e1_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -181,7 +181,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-d6afee058cd99940.js" crossorigin="anonymous" integrity="sha384-vKJ97FJ8hN7MjG4te+qw53RTp/xoLN78gu9kt14AFwHoLta3Z4SESBHs3uNEXU07"><link rel="preload" href="/computools-d6afee058cd99940_bg.wasm" crossorigin="anonymous" integrity="sha384-oEskJxwfDZNo9J1RNswAQMuTRgOyN8K3rXwyJDaJndJR7wyFDLWrA+G9XTyXrLyO" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-57eb00e8bb9c29e1.js" crossorigin="anonymous" integrity="sha384-YuyjgHdfuT+GNy0LYbK1yJb2vAZbckcO48ljYKhVHb2ZRP2VWxbDBzSCVVcPRYfT"><link rel="preload" href="/computools-57eb00e8bb9c29e1_bg.wasm" crossorigin="anonymous" integrity="sha384-rU/o+qqeSj9zRHLUgW2v3HPDUFnAlZTTkSL5N4yFPZMknHlg2uj25jTnTO7cwiUF" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="The Complete Guide to Cron Expressions: Everything a Developer Must Know About Scheduling | CompuTools Blog">
   <meta name="twitter:description" content="Why does Linux Cron have exactly 5 fields? What's the real difference between Linux Cron and Quartz? From basic syntax to timezone pitfalls and real-world edge cases — a deep-dive scheduling guide for DevOps engineers and backend developers. Includes a walkthrough of a custom-built Cron parser tool.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/cron/linux_vs_quartz_fields.png">
@@ -588,9 +588,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
   <em>The History of Cron: From Bell Labs (mid-1970s) to Cloud-Native Scheduling (present)</em>
 </p>
 <p>Cron is far from an obsolete Unix relic. Its concepts remain foundational to modern infrastructure. AWS Lambda's EventBridge Scheduler, GitHub Actions' <code>schedule</code> trigger, Kubernetes' CronJob resource, Spring Framework's <code>@Scheduled</code> annotation — all of them use Cron expressions as their scheduling language. A concept nearly half a century old still breathes at the heart of cloud-native environments.</p>
-<div class="ad-article-wrapper ad-article">
-                
-            </div><h2>Five Asterisks: Anatomy of Linux Cron Syntax</h2>
+<h2>Five Asterisks: Anatomy of Linux Cron Syntax</h2>
 <p>Linux Cron is built on five fields.</p>
 <div class="code-toolbar"><pre class="language-text" tabindex="0"><code class="language-text">┌───────────── minute (0-59)
 │ ┌─────────── hour (0-23)
@@ -712,7 +710,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p align="center">
   <em>Quartz mode validation: Confirming that Linux Cron's <code>0 9 * * 1-5</code> and Quartz's <code>0 0 9 ? * MON-FRI</code> produce identical execution times</em>
 </p>
-<h2>Real-World Problems and Solutions</h2>
+<h2>Real-World Problems and Solutions</h2><div class="ad-article-wrapper ad-article">
+                
+            </div>
 <h3>Problem 1: Scheduling the Last Day of Every Month</h3>
 <p>February has 28 days (29 in a leap year), some months have 30, others 31 — which means "the last day of every month" cannot be expressed directly in standard Linux Cron syntax. Setting <code>0 0 31 * *</code> simply won't run in months with fewer than 31 days (February, April, June, September, November).</p>
 <p>The most common workaround is checking the date inside the script itself.</p>
@@ -728,9 +728,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p>The <code>-n</code> flag makes the lock non-blocking — if the lock is already held by a running instance, the new invocation exits immediately. In Kubernetes, <code>concurrencyPolicy: Forbid</code> on a CronJob serves the same purpose.</p>
 <h3>Problem 3: Handling Missed Jobs After a Restart</h3>
 <p>When a server restart or Cron daemon downtime causes scheduled jobs to be skipped, you need to decide whether to run the missed jobs or skip them. Traditional Linux Cron defaults to skipping. Anacron can run missed jobs after a restart, but it isn't suitable for schedules with minute-level or finer precision. If catch-up execution is a hard requirement, it's worth evaluating Quartz's <code>MisfireInstruction</code> settings or a full workflow orchestrator like Apache Airflow.</p>
-<h2>Cron and the Modern Scheduling Ecosystem</h2><div class="ad-article-wrapper ad-article">
+<div class="ad-article-wrapper ad-article">
                 
-            </div>
+            </div><h2>Cron and the Modern Scheduling Ecosystem</h2>
 <p>Understanding which Cron dialect each platform uses prevents a whole category of subtle bugs.</p>
 <ul>
 <li><strong>AWS EventBridge</strong>: Uses a Quartz-like 6-field format but is not identical. The day-of-week field accepts 1–7 or SUN–SAT (1 = Sunday; 0 is not supported), and a year field is available. Consult the <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-rule-schedule.html">official documentation</a>.</li>
@@ -739,9 +739,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <li><strong>Spring <code>@Scheduled</code></strong>: Quartz Cron 6-field format. Timezone can be specified via the <code>zone</code> attribute.</li>
 </ul>
 <p>Because each platform applies its own subtle variations, always cross-reference the platform's official documentation and verify results with an actual parser tool before deploying.</p>
-<div class="ad-article-wrapper ad-article">
+<h2>Pro Tips: How to Handle Cron Safely</h2><div class="ad-article-wrapper ad-article">
                 
-            </div><h2>Pro Tips: How to Handle Cron Safely</h2>
+            </div>
 <p><strong>Always validate with a tool.</strong> No matter how carefully you reason through an expression mentally, the actual execution times can still surprise you. Entering the expression into a tool like the <a href="https://compu-tools.com/cron/">Cron Expression Parser</a> and visually confirming 10–20 upcoming execution times should be a mandatory pre-deployment step.</p>
 <p><strong>Store in UTC, display in local time.</strong> Just as with Unix timestamps, defining Cron schedules in UTC and running servers on UTC eliminates an entire class of DST-related incidents at the architectural level.</p>
 <p><strong>Distribute execution times.</strong> Concentrating all Cron jobs at <code>0 * * * *</code> (the top of every hour) creates sudden spikes in server load. Intentionally spreading jobs across different minutes — <code>7 * * * *</code>, <code>23 * * * *</code> — smooths out resource usage.</p>

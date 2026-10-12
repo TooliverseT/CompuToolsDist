@@ -58,8 +58,8 @@
   
   
 <script type="module">
-import init, * as bindings from '/computools-d6afee058cd99940.js';
-const wasm = await init({ module_or_path: '/computools-d6afee058cd99940_bg.wasm' });
+import init, * as bindings from '/computools-57eb00e8bb9c29e1.js';
+const wasm = await init({ module_or_path: '/computools-57eb00e8bb9c29e1_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -181,7 +181,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-d6afee058cd99940.js" crossorigin="anonymous" integrity="sha384-vKJ97FJ8hN7MjG4te+qw53RTp/xoLN78gu9kt14AFwHoLta3Z4SESBHs3uNEXU07"><link rel="preload" href="/computools-d6afee058cd99940_bg.wasm" crossorigin="anonymous" integrity="sha384-oEskJxwfDZNo9J1RNswAQMuTRgOyN8K3rXwyJDaJndJR7wyFDLWrA+G9XTyXrLyO" as="fetch" type="application/wasm"><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+<link rel="modulepreload" href="/computools-57eb00e8bb9c29e1.js" crossorigin="anonymous" integrity="sha384-YuyjgHdfuT+GNy0LYbK1yJb2vAZbckcO48ljYKhVHb2ZRP2VWxbDBzSCVVcPRYfT"><link rel="preload" href="/computools-57eb00e8bb9c29e1_bg.wasm" crossorigin="anonymous" integrity="sha384-rU/o+qqeSj9zRHLUgW2v3HPDUFnAlZTTkSL5N4yFPZMknHlg2uj25jTnTO7cwiUF" as="fetch" type="application/wasm"><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
 .CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
 .CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
 .CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
@@ -574,7 +574,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 
 <body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="page-with-sidebar"><div class="page-main"><div class="home-wrapper"><div class="post-wrapper"><div class="post-metadata"><h1 class="post-title">Browser-Based Dev Tools: Why WebAssembly and Local Processing Actually Matter</h1><div class="post-date">10 May 2026</div><div class="post-excerpt">Do you actually know what "processed locally" means when you're picking an online dev tool? Here's a breakdown of how WebAssembly changed the browser calculator landscape — and why, for everything from CRC calculations to 3D rotation transforms, you should care whether a tool phones home or not.</div><div class="post-tags"><div class="tag">Guide</div></div></div><div class="post-content"><p>When you're using an online dev tool, you've probably had this thought at least once: "This site isn't sending my JWT token off to some server, right?" That's a fair thing to wonder. Most web-based encoders, decoders, and calculators send whatever you paste into them to an external server for processing. Open the network tab and check — you might be surprised how many tools do exactly that.</p>
 <p>This post uses <a href="/">CompuTools</a>'s browser-based dev tool suite as a jumping-off point to explain how WebAssembly (WASM) has changed the way online calculators work, and what that actually means in practice. This isn't a usage manual — it's about the technology itself and how to make better decisions when choosing tools.</p>
-<h2>What "Processed in the Browser" Actually Means</h2>
+<div class="ad-article-wrapper ad-article">
+                
+            </div><h2>What "Processed in the Browser" Actually Means</h2>
 <p>Even if a website says "all processing happens locally," there are two things worth verifying before you take that at face value.</p>
 <p>First: <strong>is the calculation JavaScript-based or WASM-based?</strong> Hash functions and CRC calculations implemented in JavaScript can run entirely in the browser, but they come with performance limits and you'd need to separately verify the implementation's correctness. WebAssembly lets you compile code written in systems languages like C, Rust, or Go and run it at near-native speed inside the browser. The bigger deal here is that you can pull in well-established, battle-tested libraries rather than reimplementing algorithms from scratch.</p>
 <p>Second: <strong>which features actually need a server?</strong> Parsing a TLS certificate or analyzing headers for an external URL requires the browser to connect to the target server directly — you can't do that fully locally. But CRC checksums, Base64 encoding, quaternion-to-matrix conversions, and JWT payload decoding are all pure math. No server needed, period.</p>
@@ -584,7 +586,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p><strong>Performance</strong>: It's roughly 5–20× faster than JavaScript for numerical operations. When you're computing SHA-256 hashes or CRC-64 checksums over files that are several megabytes, you feel that difference. The reason CompuTools's CRC Calculator can handle drag-and-drop of 10 MB files is precisely because WASM makes that practical.</p>
 <p><strong>Code reuse</strong>: You can compile existing, verified library code as-is. CRC algorithms, for example, need to exactly match the parameters defined in Greg Cook's <a href="https://reveng.sourceforge.io/crc-catalogue/">CRC Algorithm Catalogue</a> — poly, init, refin, refout, xorout, check, residue — or you'll get wrong answers. Rust's <code>crc</code> crate provides an implementation validated against that catalogue's test vectors, and WASM lets you bring that implementation straight into the browser.</p>
 <p>Write your own CRC-32 in JavaScript and you're one subtle mistake away from getting the wrong table generation, botching the bit reflection, or applying XOR in the wrong order. Catching those bugs requires comparing against a reference implementation anyway.</p>
-<h2>Three Situations Where Local Processing Actually Matters</h2>
+<div class="ad-article-wrapper ad-article">
+                
+            </div><h2>Three Situations Where Local Processing Actually Matters</h2>
 <h3>1. Debugging Sensitive Tokens and Keys</h3>
 <p>JWT debugging is the clearest example. A JWT is made up of three parts — header, payload, and signature — and the payload carries things like user IDs, permissions, and expiration times. In production, you'll often run into a situation where you need to figure out why a token is being rejected. Pasting that token into a random external site is, in many organizations, a security policy violation.</p>
 <p>A WASM-based JWT decoder means your input never leaves the browser, so that concern goes away. Same for HMAC signature verification, where you have to input a secret key — local processing matters for exactly the same reason.</p>
@@ -595,14 +599,12 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <h3>3. 3D Rotation Transforms and Coordinate System Debugging</h3>
 <p>In game engines, robotics, and 3D graphics work, transform errors between quaternions, Euler angles, and rotation matrices are notoriously hard to track down. ROS defaults to ZYX-order Euler angles. Unity uses YXZ. Three.js defaults to XYZ. And the same quaternion value means something completely different depending on whether the component order is x,y,z,w or w,x,y,z.</p>
 <p>When you're debugging this kind of thing, you end up pasting quaternion values from a robot arm or camera IMU into an online tool. If that data is the internal state of an unreleased system, sending it somewhere external is a problem. That's why the <a href="/quaternion/">3D Rotation Converter</a> closes the loop inside the browser with WASM — rotation matrix orthogonality checks, quaternion normalization, all of it.</p>
-<h2>The Misconception: "WASM = Automatically Safe"</h2><div class="ad-article-wrapper ad-article">
+<div class="ad-article-wrapper ad-article">
                 
-            </div>
+            </div><h2>The Misconception: "WASM = Automatically Safe"</h2>
 <p>One thing worth being clear about: just because a tool uses WASM doesn't mean every feature runs locally. A TLS analyzer that checks certificate chains for external domains has to open a TCP connection to those servers — there's no way around that. You have to evaluate each feature independently: which parts are local, which parts have external dependencies.</p>
 <p>There's also the theoretical possibility that a WASM module contains malicious code. For open-source tools you can audit the source and build pipeline directly. For closed-source tools, about the best you can do is monitor the network tab. Full trust only comes from building and running the code yourself.</p>
-<h2>What to Check When Picking a Browser Calculator</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>What to Check When Picking a Browser Calculator</h2>
 <p>To summarize, here are the questions worth asking when choosing an online tool that'll touch sensitive data:</p>
 <ul>
 <li><strong>Does the network tab stay empty?</strong> This is the most direct check.</li>
@@ -615,9 +617,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p>The CRC tool supports 113 algorithms from CRC-3 through CRC-64 with a filter to find what you need quickly. It accepts hex, binary, decimal, and octal input, and lets you copy output in whatever combination of endianness and prefix style you need. For protocol implementation work, the recommended approach is to verify against CRC-16/MODBUS's check value (<code>0x4B37</code>) before applying the algorithm to real data.</p>
 <p>For quaternion and Euler angle conversions, the <a href="/quaternion/">3D Rotation Converter</a> lets you set rotation order and angle units and copy results directly into your code. Rotation matrix orthogonality checks and quaternion normalization are all handled inside the browser.</p>
 <p>Getting in the habit of asking "where does the computation actually happen" — especially when your data is sensitive — is a small thing that cuts out unnecessary risk.</p>
-<h2>References</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>References</h2>
 <ol>
 <li><strong>WebAssembly Community Group</strong>, <a href="https://webassembly.github.io/spec/core/">WebAssembly Specification</a> — Official specification for the WebAssembly bytecode format and execution model</li>
 <li><strong>W3C</strong>, <a href="https://www.w3.org/TR/wasm-web-api/">WebAssembly Web API</a> — W3C Recommendation for the browser WebAssembly API (2019)</li>

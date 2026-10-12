@@ -1,5 +1,5 @@
 {
-  "catalog_as_of": "2026-10-05",
+  "catalog_as_of": "2026-10-12",
   "pricing_note": "Sourced from LiteLLM model_prices_and_context_window.json (see scripts/update_llm_models.py). Reference $/M; verify on provider dashboards.",
   "models": [
     {
@@ -195,6 +195,18 @@
       "fallback_bpe": "cl100k_base"
     },
     {
+      "id": "claude-haiku-5-5-b68c5b44b4",
+      "label": "claude-haiku-5-5",
+      "provider": "Anthropic",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 0.1,
+      "input_cached_per_mtok_usd": 0.01,
+      "output_per_mtok_usd": 0.5,
+      "pricing_url": "https://www.anthropic.com/pricing",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
       "id": "claude-mythos-5-8a9b84c118",
       "label": "claude-mythos-5",
       "provider": "Anthropic",
@@ -339,11 +351,11 @@
       "fallback_bpe": "cl100k_base"
     },
     {
-      "id": "claude-sonnet-4-5-d45713c0dd",
+      "id": "claude-sonnet-4-5-d713c2ec3d",
       "label": "claude-sonnet-4-5",
       "provider": "Anthropic",
-      "context_window": 1048576,
-      "context_display": "1M",
+      "context_window": 204800,
+      "context_display": "200K",
       "input_per_mtok_usd": 3.0,
       "input_cached_per_mtok_usd": 0.3,
       "output_per_mtok_usd": 15.0,
@@ -351,11 +363,11 @@
       "fallback_bpe": "cl100k_base"
     },
     {
-      "id": "claude-sonnet-4-5-20250929-13285aabc4",
+      "id": "claude-sonnet-4-5-20250929-c6268fd46c",
       "label": "claude-sonnet-4-5-20250929",
       "provider": "Anthropic",
-      "context_window": 1048576,
-      "context_display": "1M",
+      "context_window": 204800,
+      "context_display": "200K",
       "input_per_mtok_usd": 3.0,
       "input_cached_per_mtok_usd": 0.3,
       "output_per_mtok_usd": 15.0,
@@ -393,7 +405,7 @@
       "context_window": 1048576,
       "context_display": "1M",
       "input_per_mtok_usd": 2.0,
-      "input_cached_per_mtok_usd": 0.2,
+      "input_cached_per_mtok_usd": 0.1,
       "output_per_mtok_usd": 10.0,
       "pricing_url": "https://www.anthropic.com/pricing",
       "fallback_bpe": "cl100k_base"
@@ -903,11 +915,11 @@
       "heuristic_only": true
     },
     {
-      "id": "gemini-deep-research-max-preview-04-2026-afe65288b2",
+      "id": "gemini-deep-research-max-preview-04-2026-ae5746b142",
       "label": "gemini/deep-research-max-preview-04-2026",
       "provider": "Google",
-      "context_window": 134144,
-      "context_display": "131K",
+      "context_window": 1048576,
+      "context_display": "1M",
       "input_per_mtok_usd": 2.0,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 12.0,
@@ -915,11 +927,11 @@
       "heuristic_only": true
     },
     {
-      "id": "gemini-deep-research-preview-04-2026-02aca5b280",
+      "id": "gemini-deep-research-preview-04-2026-edc14e746d",
       "label": "gemini/deep-research-preview-04-2026",
       "provider": "Google",
-      "context_window": 134144,
-      "context_display": "131K",
+      "context_window": 1048576,
+      "context_display": "1M",
       "input_per_mtok_usd": 2.0,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 12.0,
@@ -1475,6 +1487,18 @@
       "input_per_mtok_usd": 0.5,
       "input_cached_per_mtok_usd": null,
       "output_per_mtok_usd": 2.0,
+      "pricing_url": "https://ai.google.dev/pricing",
+      "heuristic_only": true
+    },
+    {
+      "id": "gemini-gemini-nano-banana-2.1-8140eea3a0",
+      "label": "gemini/gemini-nano-banana-2.1",
+      "provider": "Google",
+      "context_window": 134144,
+      "context_display": "131K",
+      "input_per_mtok_usd": 1.5,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": 7.5,
       "pricing_url": "https://ai.google.dev/pricing",
       "heuristic_only": true
     },
@@ -2171,6 +2195,30 @@
       "input_per_mtok_usd": 0.5,
       "input_cached_per_mtok_usd": 0.05,
       "output_per_mtok_usd": 1.5,
+      "pricing_url": "https://mistral.ai/pricing/",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "mistral-mistral-large-4-5144bfa0cb",
+      "label": "mistral/mistral-large-4",
+      "provider": "Mistral AI",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 0.68,
+      "input_cached_per_mtok_usd": 0.07,
+      "output_per_mtok_usd": 2.09,
+      "pricing_url": "https://mistral.ai/pricing/",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "mistral-mistral-large-4-0-0cee58cc44",
+      "label": "mistral/mistral-large-4-0",
+      "provider": "Mistral AI",
+      "context_window": 1048576,
+      "context_display": "1M",
+      "input_per_mtok_usd": 0.68,
+      "input_cached_per_mtok_usd": 0.07,
+      "output_per_mtok_usd": 2.09,
       "pricing_url": "https://mistral.ai/pricing/",
       "fallback_bpe": "cl100k_base"
     },
@@ -4528,6 +4576,19 @@
       "output_per_mtok_usd": null,
       "pricing_url": "https://openai.com/api/pricing/",
       "tiktoken_model": "gpt-realtime-whisper",
+      "fallback_bpe": "o200k_base"
+    },
+    {
+      "id": "gpt-rosalind-discovery-754b095626",
+      "label": "gpt-rosalind-discovery",
+      "provider": "OpenAI",
+      "context_window": 0,
+      "context_display": "Unknown",
+      "input_per_mtok_usd": 5.0,
+      "input_cached_per_mtok_usd": 0.5,
+      "output_per_mtok_usd": 25.0,
+      "pricing_url": "https://openai.com/api/pricing/",
+      "tiktoken_model": "gpt-rosalind-discovery",
       "fallback_bpe": "o200k_base"
     },
     {

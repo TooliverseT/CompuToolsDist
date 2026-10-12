@@ -58,8 +58,8 @@
   
   
 <script type="module">
-import init, * as bindings from '/computools-d6afee058cd99940.js';
-const wasm = await init({ module_or_path: '/computools-d6afee058cd99940_bg.wasm' });
+import init, * as bindings from '/computools-57eb00e8bb9c29e1.js';
+const wasm = await init({ module_or_path: '/computools-57eb00e8bb9c29e1_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -181,7 +181,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-d6afee058cd99940.js" crossorigin="anonymous" integrity="sha384-vKJ97FJ8hN7MjG4te+qw53RTp/xoLN78gu9kt14AFwHoLta3Z4SESBHs3uNEXU07"><link rel="preload" href="/computools-d6afee058cd99940_bg.wasm" crossorigin="anonymous" integrity="sha384-oEskJxwfDZNo9J1RNswAQMuTRgOyN8K3rXwyJDaJndJR7wyFDLWrA+G9XTyXrLyO" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-57eb00e8bb9c29e1.js" crossorigin="anonymous" integrity="sha384-YuyjgHdfuT+GNy0LYbK1yJb2vAZbckcO48ljYKhVHb2ZRP2VWxbDBzSCVVcPRYfT"><link rel="preload" href="/computools-57eb00e8bb9c29e1_bg.wasm" crossorigin="anonymous" integrity="sha384-rU/o+qqeSj9zRHLUgW2v3HPDUFnAlZTTkSL5N4yFPZMknHlg2uj25jTnTO7cwiUF" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Understanding 3D Rotation: A Practical Guide to Quaternions, Euler Angles, and Rotation Matrices | CompuTools Blog">
   <meta name="twitter:description" content="A comprehensive guide to the three fundamental 3D rotation representations—Quaternions, Euler Angles, and Rotation Matrices. Learn how to solve Gimbal Lock, implement SLERP interpolation, and apply these concepts in game development, robotics, and AR/VR applications with practical optimization strategies.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/rotation/rotation_concept.png">
@@ -578,7 +578,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 </style></head>
 
 <body><div class="navbar-wrapper"><div class="navbar-container"><div class="navbar-main"><a href="/" class="navbar-content">CompuTools</a><div class="navbar-content subtitle"><a href="/blog" class="subtitle-content">Blog</a><a href="/about" class="subtitle-content">About</a><a href="/contact" class="subtitle-content">Contact</a></div><div class="navbar-icons"><button class="icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button class="icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button></div></div></div></div><div class="floating-icons"><button title="Search Tools" class="floating-icon-btn search-btn"><i class="fa-solid fa-search"></i></button><button title="Toggle Theme" class="floating-icon-btn toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i></button><button title="Scroll to Top" class="floating-icon-btn scroll-btn"><i class="fa-solid fa-angle-up"></i></button></div><div class="main-wrapper"><div class="main-content"><div class="page-with-sidebar"><div class="page-main"><div class="home-wrapper"><div class="post-wrapper"><div class="post-metadata"><h1 class="post-title">Understanding 3D Rotation: A Practical Guide to Quaternions, Euler Angles, and Rotation Matrices</h1><div class="post-date">21 January 2026</div><div class="post-excerpt">A comprehensive guide to the three fundamental 3D rotation representations—Quaternions, Euler Angles, and Rotation Matrices. Learn how to solve Gimbal Lock, implement SLERP interpolation, and apply these concepts in game development, robotics, and AR/VR applications with practical optimization strategies.</div><div class="post-tags"><div class="tag">Mathematical</div></div></div><div class="post-content"><p>Rotating objects in 3D space. It sounds simple enough, but this is actually one of the most fundamental yet challenging problems in modern 3D technology. The reason game characters move smoothly, drones fly stably, and robotic arms precisely grasp objects all comes down to handling rotation transformations correctly. In this article, we'll explore the three core rotation representations, the real-world problems you'll encounter, and how to solve them. If you want to calculate and visualize rotation transformations yourself, check out the <a href="https://compu-tools.com/quaternion/">3D Rotation Converter tool</a>.</p>
-<h2>The Beginning: Why Is Rotation So Complicated?</h2>
+<div class="ad-article-wrapper ad-article">
+                
+            </div><h2>The Beginning: Why Is Rotation So Complicated?</h2>
 <p>When I first started 3D programming, I thought rotation was simply a matter of "rotate 30 degrees around X, then 45 degrees around Y." But when I implemented inverse kinematics for a robotic arm in a real project, reality hit hard. The arm worked perfectly in simulation, but in the real environment, it would suddenly jitter or rotate in unexpected directions when reaching certain poses. After days of debugging, I discovered the culprit: <strong>Gimbal Lock</strong>—a fundamental limitation of certain rotation representations.</p>
 <p>This experience taught me an important lesson. 3D rotation isn't just about three angles—<strong>the mathematical representation you choose completely determines stability, performance, and implementation complexity</strong>.</p>
 <p class="blog-image">
@@ -587,9 +589,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p align="center">
   <em>The basic concept of 3D rotation: Reference coordinate axes (red, green, blue) and the transformed axes (X', Y', Z') after rotation</em>
 </p>
-<h2>First Encounter: The Intuitive Appeal and Hidden Pitfalls of Euler Angles</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>First Encounter: The Intuitive Appeal and Hidden Pitfalls of Euler Angles</h2>
 <p><strong>Euler Angles</strong> are typically the first rotation representation developers encounter. Open any 3D software like Blender, Unity, or Maya, and the first thing you'll see are Rotation X, Y, Z input fields. This intuitiveness makes them seem like the perfect choice for beginners.</p>
 <h3>An Intuitive Representation</h3>
 <p>Think about an aircraft's orientation:</p>
@@ -681,9 +681,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p align="center">
   <em>Geometric interpretation of a rotation matrix: The three column vectors represent the X', Y', Z' axis directions after rotation</em>
 </p>
-<div class="ad-article-wrapper ad-article">
-                
-            </div><h2>Practical Application: Converting Between the Three Representations</h2>
+<h2>Practical Application: Converting Between the Three Representations</h2>
 <p>Now that you understand the theory, you need to know how to convert and apply them in practice. Working with different libraries and frameworks across projects made me realize just how important conversion is.</p>
 <h3>Mathematical Foundation of Conversions</h3>
 <p><strong>Euler Angles to Quaternion</strong> (ZYX order):</p>
@@ -846,7 +844,9 @@ node<span class="token punctuation">.</span>rotation <span class="token operator
 <li><strong>Internal computation</strong>: Quaternion (stable, fast)</li>
 <li><strong>GPU transfer</strong>: Matrix (hardware optimized)</li>
 </ul>
-<h2>Conclusion: A Guide to Making the Right Choice</h2>
+<div class="ad-article-wrapper ad-article">
+                
+            </div><h2>Conclusion: A Guide to Making the Right Choice</h2>
 <p>3D rotation isn't just about memorizing mathematical formulas—it's an engineering judgment call about selecting the right tool for each situation. From my experience:</p>
 <p><strong>Use Euler Angles when</strong>:</p>
 <ul>
