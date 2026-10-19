@@ -58,8 +58,8 @@
   
   
 <script type="module">
-import init, * as bindings from '/computools-57eb00e8bb9c29e1.js';
-const wasm = await init({ module_or_path: '/computools-57eb00e8bb9c29e1_bg.wasm' });
+import init, * as bindings from '/computools-19fa91619b912bf5.js';
+const wasm = await init({ module_or_path: '/computools-19fa91619b912bf5_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -181,7 +181,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-57eb00e8bb9c29e1.js" crossorigin="anonymous" integrity="sha384-YuyjgHdfuT+GNy0LYbK1yJb2vAZbckcO48ljYKhVHb2ZRP2VWxbDBzSCVVcPRYfT"><link rel="preload" href="/computools-57eb00e8bb9c29e1_bg.wasm" crossorigin="anonymous" integrity="sha384-rU/o+qqeSj9zRHLUgW2v3HPDUFnAlZTTkSL5N4yFPZMknHlg2uj25jTnTO7cwiUF" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-19fa91619b912bf5.js" crossorigin="anonymous" integrity="sha384-ozv6XNxsvOBXTtGrcahUZ4l7HoY2BWZ+IccndWQnFC/eCyl8u/XRpLq+HuLsARan"><link rel="preload" href="/computools-19fa91619b912bf5_bg.wasm" crossorigin="anonymous" integrity="sha384-QTvpcE71BKeryQv6sS/kpjeO38WtqJC0KkdSk9wX2Tc8QezkiubItirGno6WZl7H" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Everything About Unix Timestamps: A Developer's Guide to Handling Time as Numbers | CompuTools Blog">
   <meta name="twitter:description" content="Why is the Unix Epoch January 1, 1970? What happens when 32-bit timestamps overflow in 2038? From the historical origins of Unix time to the real-world complexities of timezones, DST, and millisecond handling — a deep dive for developers. Includes practical examples using a custom-built Unix timestamp converter tool.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/unix_timestamp/timezone_map.png">
@@ -589,9 +589,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 </p>
 <p>According to the <a href="https://pubs.opengroup.org/onlinepubs/9699919799/">POSIX standard (IEEE Std 1003.1)</a>, a Unix timestamp is officially defined as "the number of seconds elapsed since the Epoch — January 1, 1970, 00:00:00 UTC." This deceptively simple definition has become the universal language of time across billions of devices worldwide.</p>
 <p>The original implementation used a 16-bit integer, but its range proved too limited and was quickly extended to 32 bits. That decision would leave behind a ticking time bomb — the Year 2038 Problem — which we'll explore later.</p>
-<h2>The Structure of a Timestamp: Elegance in Simplicity</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>The Structure of a Timestamp: Elegance in Simplicity</h2>
 <p>The core beauty of Unix timestamps is their <strong>absolute simplicity</strong>. Representing all time as a single integer makes comparison, sorting, and arithmetic remarkably straightforward.</p>
 <div class="code-toolbar"><pre class="language-text" tabindex="0"><code class="language-text">Current time:  1740124800
 One hour later: 1740124800 + 3600   = 1740128400
@@ -629,9 +627,7 @@ time<span class="token punctuation">.</span><span class="token method function p
 <p align="center">
   <em>World Timezone Map: DST Applied Regions (blue stripes), No-DST Fixed-Offset Regions (green), and Partial/Variable DST Regions (orange stripes)</em>
 </p>
-<div class="ad-article-wrapper ad-article">
-                
-            </div><h2>Practical Guide: Using the Unix Timestamp Converter</h2>
+<h2>Practical Guide: Using the Unix Timestamp Converter</h2>
 <p>When applying theory to real work, the <a href="https://compu-tools.com/unix-timestamp/">Unix Timestamp Converter</a> makes it easy to move quickly between timestamps and human-readable dates.</p>
 <h3>Example 1: Interpreting a Timestamp from an API Response</h3>
 <p>Converting a raw timestamp from a REST API response into a readable date:</p>
@@ -679,12 +675,16 @@ time<span class="token punctuation">.</span><span class="token method function p
             → interpreted as 1901-12-13 20:45:52 UTC
 </code></pre><div class="toolbar"><div class="toolbar-item"><span>Plain text</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
 <p>As noted by <a href="https://www.openbsd.org/">OpenBSD security advisories</a>, this is not just a legacy code problem. Embedded systems, industrial control equipment, and network device firmware with long update cycles face real risk. The solution is well-established: <strong>64-bit timestamps</strong> extend the representable range to roughly <strong>292 billion years</strong>. The Linux kernel began transitioning 32-bit platforms to 64-bit <code>time_t</code> starting around 2012 (<a href="https://kernelnewbies.org/y2038">Linux kernel time64_t transition</a>), and modern 64-bit systems are already safe. The converter tool featured in this post also uses 64-bit integers internally and is not affected by this problem.</p>
-<h2>Leap Seconds: Why Unix Timestamps Aren't Perfect</h2>
+<div class="ad-article-wrapper ad-article">
+                
+            </div><h2>Leap Seconds: Why Unix Timestamps Aren't Perfect</h2>
 <p>There is one lesser-known fact about Unix timestamps: they <strong>ignore leap seconds</strong>.</p>
 <p>Earth's rotation is not perfectly constant, causing a gradual divergence between astronomical time (UT1) and atomic-clock-based Coordinated Universal Time (UTC). To correct this, the <a href="https://www.iers.org/">International Earth Rotation and Reference Systems Service (IERS)</a> periodically inserts one-second adjustments called leap seconds. From 1972 through 2024, 27 leap seconds have been added in total.</p>
 <p>Unix timestamps treat every day as exactly 86,400 seconds. When a leap second is inserted, the timestamp either repeats the same value twice (leap smearing) or skips it entirely, depending on the system's implementation. This can cause subtle discrepancies in cross-system time synchronization.</p>
 <p>For most applications, a 27-second drift is insignificant. But for financial trading systems, scientific instrumentation, or any domain requiring sub-second precision across distributed systems, this distinction matters.</p>
-<h2>Timestamp Formats and International Standards</h2>
+<h2>Timestamp Formats and International Standards</h2><div class="ad-article-wrapper ad-article">
+                
+            </div>
 <p>When developers exchange date and time data, two standards have emerged as the dominant choices.</p>
 <h3>ISO 8601: Readable by Humans and Machines Alike</h3>
 <p><a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> is the international standard for representing dates and times, defining formats like <code>2026-02-21T15:30:00+09:00</code>. Its key advantage is that it embeds timezone offset information, and crucially, <strong>alphabetical string sorting and chronological sorting produce identical results</strong> — which makes it especially safe to use in logs and databases without additional parsing.</p>

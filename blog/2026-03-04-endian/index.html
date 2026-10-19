@@ -58,8 +58,8 @@
   
   
 <script type="module">
-import init, * as bindings from '/computools-57eb00e8bb9c29e1.js';
-const wasm = await init({ module_or_path: '/computools-57eb00e8bb9c29e1_bg.wasm' });
+import init, * as bindings from '/computools-19fa91619b912bf5.js';
+const wasm = await init({ module_or_path: '/computools-19fa91619b912bf5_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -181,7 +181,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-57eb00e8bb9c29e1.js" crossorigin="anonymous" integrity="sha384-YuyjgHdfuT+GNy0LYbK1yJb2vAZbckcO48ljYKhVHb2ZRP2VWxbDBzSCVVcPRYfT"><link rel="preload" href="/computools-57eb00e8bb9c29e1_bg.wasm" crossorigin="anonymous" integrity="sha384-rU/o+qqeSj9zRHLUgW2v3HPDUFnAlZTTkSL5N4yFPZMknHlg2uj25jTnTO7cwiUF" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-19fa91619b912bf5.js" crossorigin="anonymous" integrity="sha384-ozv6XNxsvOBXTtGrcahUZ4l7HoY2BWZ+IccndWQnFC/eCyl8u/XRpLq+HuLsARan"><link rel="preload" href="/computools-19fa91619b912bf5_bg.wasm" crossorigin="anonymous" integrity="sha384-QTvpcE71BKeryQv6sS/kpjeO38WtqJC0KkdSk9wX2Tc8QezkiubItirGno6WZl7H" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Understanding Endianness: Byte Order Defines Your System | CompuTools Blog">
   <meta name="twitter:description" content="A single byte order mismatch can cost you days of debugging. This article draws on real-world experience to thoroughly explain the difference between big endian and little endian, and why endianness is critical in networking, MODBUS, and CRC calculations.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/endian/big_little_endian_memory.png">
@@ -594,7 +594,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <h3>Little Endian</h3>
 <p><strong>The least significant byte (LSB) is stored at the lowest memory address first.</strong> <code>0x12345678</code> is stored as <code>78 → 56 → 34 → 12</code>.</p>
 <p>This is the approach used by Intel x86, x86-64, and ARM (in its default configuration) — the architectures that power the vast majority of modern PCs and smartphones. Storing the low byte at the lowest address offers structural advantages for certain arithmetic operations.</p>
-<h2>Why Do Both Conventions Coexist?</h2>
+<div class="ad-article-wrapper ad-article">
+                
+            </div><h2>Why Do Both Conventions Coexist?</h2>
 <p>Historically, the two approaches evolved independently in different camps. In 1980, Danny Cohen formally raised the debate in his paper <a href="https://www.ietf.org/rfc/ien/ien137.txt">"On Holy Wars and a Plea for Peace"</a>, drawing an analogy to Jonathan Swift's <em>Gulliver's Travels</em>, where wars are fought over which end of a boiled egg to crack first. His point: this is not a question of which side is superior, but a difference in design philosophy.</p>
 <p>Most modern processors today support <strong>Bi-Endian</strong> mode, allowing software to select either convention. The ARM architecture, starting from ARMv3, is a prominent example.</p>
 <div class="ad-article-wrapper ad-article">
@@ -611,9 +613,7 @@ addr<span class="token punctuation">.</span>sin_port <span class="token operator
 <p>Every file format has its own endianness convention. PNG uses big endian; BMP uses little endian. Ignore this when parsing files directly and metadata like file size, width, and height will be read as entirely wrong values.</p>
 <h3>3. MODBUS and Industrial Protocols</h3>
 <p>The <a href="https://www.modbustools.com/modbus.html">MODBUS RTU protocol</a> is fundamentally big endian — with one exception: <strong>the CRC field is transmitted in little endian (LSB first)</strong>. Furthermore, how 32-bit registers are word-swapped can vary between devices, making endianness-related communication errors extremely common in industrial environments.</p>
-<h2>Why Endianness Is Critical in CRC Calculations</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>Why Endianness Is Critical in CRC Calculations</h2>
 <p>When computing a CRC checksum and inserting it into a communication frame, endianness is one of the most important factors to get right. For CRCs whose result spans two or more bytes — such as CRC-16 or CRC-32 — <strong>the order in which those bytes are placed in the frame</strong> completely determines whether the receiver's validation succeeds or fails.</p>
 <p>For example, if the CRC-16/MODBUS result is <code>0x2BA1</code>:</p>
 <ul>
@@ -629,9 +629,7 @@ addr<span class="token punctuation">.</span>sin_port <span class="token operator
 <p align="center">
   <em>CRC Tool displaying CRC-16/MODBUS results in both big endian and little endian. The byte order reversal is clearly visible.</em>
 </p>
-<h2>Practical Tips for Working with Endianness</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>Practical Tips for Working with Endianness</h2>
 <h3>Use Your Language's Built-In Facilities</h3>
 <p>Every major language provides standard tools for endian conversion. Using them is safer and more readable than rolling your own bit-manipulation logic.</p>
 <div class="code-toolbar"><pre class="language-python" tabindex="0"><code class="language-python"><span class="token keyword">import</span> struct
@@ -661,7 +659,9 @@ little <span class="token operator">=</span> struct<span class="token punctuatio
 <h2>Closing Thoughts</h2>
 <p>Endianness can seem like a trivial convention, but when two systems from different worlds exchange data and that convention breaks down, everything falls apart. In environments where devices from different manufacturers and architectures coexist — IoT sensors, industrial controllers, network equipment — a solid understanding of endianness is an essential skill.</p>
 <p>After losing days to that first MODBUS communication bug, I now check byte order first whenever I design or analyze a protocol. Errors that arise at the intersection of CRC and endianness are especially hard to reproduce and diagnose. Tools like the <a href="https://compu-tools.com/crc/">CRC Tool</a>, which let you flip endian settings and instantly see the effect on results, can dramatically speed up that diagnosis.</p>
-<h2>References and Further Reading</h2>
+<div class="ad-article-wrapper ad-article">
+                
+            </div><h2>References and Further Reading</h2>
 <ol>
 <li><strong>Danny Cohen</strong>, <a href="https://www.ietf.org/rfc/ien/ien137.txt">"On Holy Wars and a Plea for Peace"</a>, IEN 137, 1980 — The foundational paper that sparked the endianness debate. Later published in IEEE Computer Magazine (1981).</li>
 <li><strong>IETF RFC 1700</strong>, <a href="https://www.rfc-editor.org/rfc/rfc1700">"Assigned Numbers"</a> — Defines network byte order (big endian) as the standard. Superseded by RFC 3232.</li>
