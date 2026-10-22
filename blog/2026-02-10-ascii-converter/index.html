@@ -52,7 +52,7 @@
   <link rel="stylesheet" href="/blog-f23a3bb80f479d48.css" integrity="sha384-c3dt63AsK8M6ZHn+eK8h1RFxDEJ5IZUBbyCiudZJvKljeoXcA/+xUXGdhsCllR0L">
   <link rel="stylesheet" href="/post-2e723b9c5f9d836.css" integrity="sha384-rp1Uy2Xnit6dSlc6rARjclpCGH3d2COKiL+b0Fd+XbN4dPsfZS8CyT3++HgGHuEy">
   <link rel="stylesheet" href="/preview-547653d0635ba40b.css" integrity="sha384-UgbZLraNaMqEDYnTcTt0A4t933klm27lD8ZMg+MVaqZ2nESYFxtGjmtHtDlyZxgi">
-  <link rel="stylesheet" href="/ad-a8a72315d064c16f.css" integrity="sha384-SIhCbMtz1UDCKhR3FQnQjVe75r9yKEPojUXndDKp10Q58yUkSq9sWTuhQqt48IIV">
+  <link rel="stylesheet" href="/ad-8ce1e404c5c5ee12.css" integrity="sha384-/weq6Ezs6U/sbHwbEqGbYEC9glDISlamw4jeSnXH+oMcv3qaJiDE14M6oDkhtYvC">
   <link rel="stylesheet" href="/prism-369edf9ff4bdc730.css" integrity="sha384-sYBMrlwB6EIFh9oheoO1AeU2vsy+LvTPlvwj780EnjW4U9oHlH1pkerXjJ1qCvSX">
   
   
@@ -61,8 +61,8 @@
   
   
 <script type="module">
-import init, * as bindings from '/computools-5b55d4c7cbd57251.js';
-const wasm = await init({ module_or_path: '/computools-5b55d4c7cbd57251_bg.wasm' });
+import init, * as bindings from '/computools-965f137b2d21098b.js';
+const wasm = await init({ module_or_path: '/computools-965f137b2d21098b_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -187,7 +187,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-5b55d4c7cbd57251.js" crossorigin="anonymous" integrity="sha384-lHyHBxI4mCsPieYescYNgzrFdjP9G3LK51CbJ5FJoCJEhFetw7I2UEjkkb42SCZw"><link rel="preload" href="/computools-5b55d4c7cbd57251_bg.wasm" crossorigin="anonymous" integrity="sha384-UWUvQuh+NTCZP6VwfaIPuglWk8+X7ayY2TrOcgYCTMxtPQozyC7itAwhj09zpWrV" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-965f137b2d21098b.js" crossorigin="anonymous" integrity="sha384-xd22uovowO/Z0Fgha5JVbv5xPErvmP3FyFxMpB1uZHCAWTCKtWVjQo5ZL7UKR5ta"><link rel="preload" href="/computools-965f137b2d21098b_bg.wasm" crossorigin="anonymous" integrity="sha384-VEwLHUj8u+y0Vb9OG6u0Mibvf2nD3giATL5Oi0AxQZmc9t9pYzY3YjhVZCKkIn3J" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Everything About ASCII Conversion: How Computers Understand Characters | CompuTools Blog">
   <meta name="twitter:description" content="From the historical background of ASCII (American Standard Code for Information Interchange) to modern programming practices, explore the core principles of how computers convert characters to numbers. Covers everything about ASCII conversion with real-world development experience, from network protocol debugging and serial communication to security vulnerabilities.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/ascii/ascii_converter_interface.png">
@@ -594,9 +594,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p align="center">
   <em>Historical Development of the ASCII Standard: From the Teletype Era to Modern Computing</em>
 </p>
-<div class="ad-article-wrapper ad-article">
-                
-            </div><h2>Structure of the ASCII Table: Control Characters and Printable Characters</h2>
+<h2>Structure of the ASCII Table: Control Characters and Printable Characters</h2>
 <p>The ASCII table is broadly divided into three regions. Understanding this structure clarifies many programming situations.</p>
 <h3>Control Characters (0-31): Invisible Commands</h3>
 <p>When I first learned C, I was curious why <code>\n</code> (newline) and <code>\t</code> (tab) were treated specially. These are all escape representations of <strong>Control Characters</strong>.</p>
@@ -621,7 +619,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p align="center">
   <em>Structural Classification of the ASCII Table: Control Characters, Numbers, Uppercase Letters, Lowercase Letters, Symbols</em>
 </p>
-<h2>Real-World Use Cases: Protocols and Data Processing</h2>
+<h2>Real-World Use Cases: Protocols and Data Processing</h2><div class="ad-article-wrapper ad-article">
+                
+            </div>
 <p>ASCII goes beyond simply representing characters—it has become the foundation of countless communication protocols and data formats.</p>
 <h3>Experience 1: HTTP Protocol Debugging</h3>
 <p>Early in web development, I encountered a strange bug while implementing a REST API. JSON data in POST requests was intermittently failing to parse. After analyzing packets with Wireshark, I found that some clients were sending only <code>LF</code> instead of <code>CRLF</code> for line breaks, and the server parser wasn't handling this properly.</p>

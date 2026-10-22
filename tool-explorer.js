@@ -72,16 +72,17 @@
         if (production || preview) {
           const wrapper = node('div', 'tool-related-infeed');
           wrapper.append(node('span', 'tool-related-ad-label', 'Advertisement'));
+          wrapper.dataset.adPlacement = 'related-tools';
           if (production) {
             const ins = node('ins', 'compu-ad-slot');
-            ins.style.display = 'block';
+            ins.style.display = 'inline-block';
+            ins.style.width = '172px';
+            ins.style.height = '50px';
             ins.dataset.adClient = 'ca-pub-9424100257975478';
-            ins.dataset.adSlot = '4515949448';
-            ins.dataset.adFormat = 'fluid';
-            ins.dataset.adLayoutKey = '-hv-f+2e-23-1h';
+            ins.dataset.adSlot = '1792164551';
             wrapper.append(ins);
           } else {
-            wrapper.append(node('div', 'tool-related-infeed-preview', 'In-feed ad preview'));
+            wrapper.append(node('div', 'tool-related-infeed-preview', 'Display ad preview · 1792164551 (172×50)'));
           }
           container.append(wrapper);
         }

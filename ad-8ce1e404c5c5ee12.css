@@ -3384,8 +3384,11 @@ html[data-theme=dark] {
   border-top: 1px solid var(--color-third);
   border-bottom: 1px solid var(--color-third);
 }
-.tool-related-infeed ins {
-  width: 100%;
+.tool-related-infeed ins.compu-ad-slot,
+.tool-related-infeed ins.adsbygoogle {
+  display: inline-block;
+  width: 172px;
+  height: 50px;
 }
 .tool-related-infeed .tool-related-ad-label {
   display: block;
@@ -3397,11 +3400,13 @@ html[data-theme=dark] {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 110px;
-  padding: 10px;
+  width: 172px;
+  min-height: 50px;
+  padding: 6px;
   border: 1px dashed var(--console-border);
   color: var(--color-subfont);
-  font-size: 11px;
+  font-size: 10px;
+  line-height: 1.35;
   text-align: center;
 }
 
