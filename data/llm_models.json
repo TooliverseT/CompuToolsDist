@@ -1,5 +1,5 @@
 {
-  "catalog_as_of": "2026-10-19",
+  "catalog_as_of": "2026-10-22",
   "pricing_note": "Sourced from LiteLLM model_prices_and_context_window.json (see scripts/update_llm_models.py). Reference $/M; verify on provider dashboards.",
   "models": [
     {
@@ -767,6 +767,18 @@
       "input_per_mtok_usd": 1.32,
       "input_cached_per_mtok_usd": 0.04,
       "output_per_mtok_usd": 3.96,
+      "pricing_url": "https://www.deepseek.com/",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "deepseek-search-6513f37bf1",
+      "label": "deepseek/search",
+      "provider": "DeepSeek",
+      "context_window": 0,
+      "context_display": "Unknown",
+      "input_per_mtok_usd": null,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": null,
       "pricing_url": "https://www.deepseek.com/",
       "fallback_bpe": "cl100k_base"
     },
@@ -1791,6 +1803,18 @@
       "heuristic_only": true
     },
     {
+      "id": "meta-muse-image-1.0-6e38dc2ae7",
+      "label": "meta/muse-image-1.0",
+      "provider": "Meta",
+      "context_window": 0,
+      "context_display": "Unknown",
+      "input_per_mtok_usd": null,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": null,
+      "pricing_url": "https://ai.meta.com/",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
       "id": "meta-muse-spark-1.1-b154617ddd",
       "label": "meta/muse-spark-1.1",
       "provider": "Meta",
@@ -1871,6 +1895,18 @@
       "input_per_mtok_usd": 4.0,
       "input_cached_per_mtok_usd": 0.2,
       "output_per_mtok_usd": 20.0,
+      "pricing_url": "https://ai.meta.com/",
+      "fallback_bpe": "cl100k_base"
+    },
+    {
+      "id": "meta-sam-3.1-a9c4160c50",
+      "label": "meta/sam-3.1",
+      "provider": "Meta",
+      "context_window": 0,
+      "context_display": "Unknown",
+      "input_per_mtok_usd": null,
+      "input_cached_per_mtok_usd": null,
+      "output_per_mtok_usd": null,
       "pricing_url": "https://ai.meta.com/",
       "fallback_bpe": "cl100k_base"
     },

@@ -10,11 +10,21 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+cli
 code {
 	font-family: 'JetBrains Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 	font-size: 87.5%;
-	color: #FFFBE9 !important;
+	color: var(--color-font) !important;
 	word-wrap: break-word;
 	padding: 2px 5px 2px 5px;
 	border-radius: 5px;
-	background-color: #AD8B73;
+	background-color: var(--console-panel, var(--color-second));
+}
+
+html[data-theme="dark"] pre[class*="language-"] {
+	background: #172733;
+}
+html[data-theme="dark"] :is(.token.comment, .token.block-comment, .token.prolog, .token.doctype, .token.cdata) {
+	color: #b7c8d4;
+}
+html[data-theme="dark"] .token.function-name {
+	color: #91c8ff;
 }
 
 code[class*="language-"],
