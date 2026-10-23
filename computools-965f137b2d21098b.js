@@ -268,26 +268,6 @@ function wasm_bindgen_bce0d0a630cf0f7b___convert__closures_____invoke___web_sys_
     wasm.wasm_bindgen_bce0d0a630cf0f7b___convert__closures_____invoke___web_sys_aa435b06462fb69b___features__gen_TouchEvent__TouchEvent_____(arg0, arg1, arg2);
 }
 
-function wasm_bindgen_bce0d0a630cf0f7b___convert__closures_____invoke___web_sys_aa435b06462fb69b___features__gen_MouseEvent__MouseEvent_____(arg0, arg1, arg2) {
-    wasm.wasm_bindgen_bce0d0a630cf0f7b___convert__closures_____invoke___web_sys_aa435b06462fb69b___features__gen_MouseEvent__MouseEvent_____(arg0, arg1, arg2);
-}
-
-function wasm_bindgen_bce0d0a630cf0f7b___convert__closures_____invoke_______1_(arg0, arg1) {
-    wasm.wasm_bindgen_bce0d0a630cf0f7b___convert__closures_____invoke_______1_(arg0, arg1);
-}
-
-function wasm_bindgen_bce0d0a630cf0f7b___convert__closures_____invoke___wasm_bindgen_bce0d0a630cf0f7b___JsValue_____(arg0, arg1, arg2) {
-    wasm.wasm_bindgen_bce0d0a630cf0f7b___convert__closures_____invoke___wasm_bindgen_bce0d0a630cf0f7b___JsValue_____(arg0, arg1, arg2);
-}
-
-function wasm_bindgen_bce0d0a630cf0f7b___convert__closures________invoke___web_sys_aa435b06462fb69b___features__gen_Event__Event______3_(arg0, arg1, arg2) {
-    wasm.wasm_bindgen_bce0d0a630cf0f7b___convert__closures________invoke___web_sys_aa435b06462fb69b___features__gen_Event__Event______3_(arg0, arg1, arg2);
-}
-
-function wasm_bindgen_bce0d0a630cf0f7b___convert__closures________invoke___web_sys_aa435b06462fb69b___features__gen_Event__Event______2_(arg0, arg1, arg2) {
-    wasm.wasm_bindgen_bce0d0a630cf0f7b___convert__closures________invoke___web_sys_aa435b06462fb69b___features__gen_Event__Event______2_(arg0, arg1, arg2);
-}
-
 function wasm_bindgen_bce0d0a630cf0f7b___convert__closures________invoke___web_sys_aa435b06462fb69b___features__gen_Event__Event______1_(arg0, arg1, arg2) {
     wasm.wasm_bindgen_bce0d0a630cf0f7b___convert__closures________invoke___web_sys_aa435b06462fb69b___features__gen_Event__Event______1_(arg0, arg1, arg2);
 }
@@ -296,8 +276,28 @@ function wasm_bindgen_bce0d0a630cf0f7b___convert__closures_____invoke______(arg0
     wasm.wasm_bindgen_bce0d0a630cf0f7b___convert__closures_____invoke______(arg0, arg1);
 }
 
+function wasm_bindgen_bce0d0a630cf0f7b___convert__closures_____invoke_______1_(arg0, arg1) {
+    wasm.wasm_bindgen_bce0d0a630cf0f7b___convert__closures_____invoke_______1_(arg0, arg1);
+}
+
+function wasm_bindgen_bce0d0a630cf0f7b___convert__closures________invoke___web_sys_aa435b06462fb69b___features__gen_Event__Event______2_(arg0, arg1, arg2) {
+    wasm.wasm_bindgen_bce0d0a630cf0f7b___convert__closures________invoke___web_sys_aa435b06462fb69b___features__gen_Event__Event______2_(arg0, arg1, arg2);
+}
+
+function wasm_bindgen_bce0d0a630cf0f7b___convert__closures_____invoke___web_sys_aa435b06462fb69b___features__gen_MouseEvent__MouseEvent_____(arg0, arg1, arg2) {
+    wasm.wasm_bindgen_bce0d0a630cf0f7b___convert__closures_____invoke___web_sys_aa435b06462fb69b___features__gen_MouseEvent__MouseEvent_____(arg0, arg1, arg2);
+}
+
 function wasm_bindgen_bce0d0a630cf0f7b___convert__closures________invoke___web_sys_aa435b06462fb69b___features__gen_Event__Event_____(arg0, arg1, arg2) {
     wasm.wasm_bindgen_bce0d0a630cf0f7b___convert__closures________invoke___web_sys_aa435b06462fb69b___features__gen_Event__Event_____(arg0, arg1, arg2);
+}
+
+function wasm_bindgen_bce0d0a630cf0f7b___convert__closures________invoke___web_sys_aa435b06462fb69b___features__gen_Event__Event______3_(arg0, arg1, arg2) {
+    wasm.wasm_bindgen_bce0d0a630cf0f7b___convert__closures________invoke___web_sys_aa435b06462fb69b___features__gen_Event__Event______3_(arg0, arg1, arg2);
+}
+
+function wasm_bindgen_bce0d0a630cf0f7b___convert__closures_____invoke___wasm_bindgen_bce0d0a630cf0f7b___JsValue_____(arg0, arg1, arg2) {
+    wasm.wasm_bindgen_bce0d0a630cf0f7b___convert__closures_____invoke___wasm_bindgen_bce0d0a630cf0f7b___JsValue_____(arg0, arg1, arg2);
 }
 
 function wasm_bindgen_bce0d0a630cf0f7b___convert__closures_____invoke___wasm_bindgen_bce0d0a630cf0f7b___JsValue__wasm_bindgen_bce0d0a630cf0f7b___JsValue_____(arg0, arg1, arg2, arg3) {

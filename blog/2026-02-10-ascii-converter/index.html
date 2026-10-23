@@ -52,7 +52,7 @@
   <link rel="stylesheet" href="/blog-f23a3bb80f479d48.css" integrity="sha384-c3dt63AsK8M6ZHn+eK8h1RFxDEJ5IZUBbyCiudZJvKljeoXcA/+xUXGdhsCllR0L">
   <link rel="stylesheet" href="/post-2e723b9c5f9d836.css" integrity="sha384-rp1Uy2Xnit6dSlc6rARjclpCGH3d2COKiL+b0Fd+XbN4dPsfZS8CyT3++HgGHuEy">
   <link rel="stylesheet" href="/preview-547653d0635ba40b.css" integrity="sha384-UgbZLraNaMqEDYnTcTt0A4t933klm27lD8ZMg+MVaqZ2nESYFxtGjmtHtDlyZxgi">
-  <link rel="stylesheet" href="/ad-8ce1e404c5c5ee12.css" integrity="sha384-/weq6Ezs6U/sbHwbEqGbYEC9glDISlamw4jeSnXH+oMcv3qaJiDE14M6oDkhtYvC">
+  <link rel="stylesheet" href="/ad-a98c4f2400fca19.css" integrity="sha384-ePjRnZguGKte4MsEldecoU9xugyvZkYdkKXpiAZe/+1Q4kk1+J6C/+GGEfiwzL0B">
   <link rel="stylesheet" href="/prism-369edf9ff4bdc730.css" integrity="sha384-sYBMrlwB6EIFh9oheoO1AeU2vsy+LvTPlvwj780EnjW4U9oHlH1pkerXjJ1qCvSX">
   
   
@@ -187,7 +187,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-965f137b2d21098b.js" crossorigin="anonymous" integrity="sha384-xd22uovowO/Z0Fgha5JVbv5xPErvmP3FyFxMpB1uZHCAWTCKtWVjQo5ZL7UKR5ta"><link rel="preload" href="/computools-965f137b2d21098b_bg.wasm" crossorigin="anonymous" integrity="sha384-VEwLHUj8u+y0Vb9OG6u0Mibvf2nD3giATL5Oi0AxQZmc9t9pYzY3YjhVZCKkIn3J" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-965f137b2d21098b.js" crossorigin="anonymous" integrity="sha384-QRmX21OpqSY1Ou59WlAza0M5cqr8wR3Ml1je43B7AP1iOhU7jbnUMgFnd4jik9aD"><link rel="preload" href="/computools-965f137b2d21098b_bg.wasm" crossorigin="anonymous" integrity="sha384-CjdTQtJIVhrX0worBft5fz3g7UPV7rmSzsbA7KpP4op+Mnfsx7TBUxAj6N8NvfZ3" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Everything About ASCII Conversion: How Computers Understand Characters | CompuTools Blog">
   <meta name="twitter:description" content="From the historical background of ASCII (American Standard Code for Information Interchange) to modern programming practices, explore the core principles of how computers convert characters to numbers. Covers everything about ASCII conversion with real-world development experience, from network protocol debugging and serial communication to security vulnerabilities.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/ascii/ascii_converter_interface.png">
@@ -640,9 +640,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p align="center">
   <em>ASCII-Based Serial Communication: Readability and Debugging Convenience</em>
 </p>
-<h2>ASCII Conversion Tool Usage Guide</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>ASCII Conversion Tool Usage Guide</h2>
 <p>Now that you understand the theory, let's see how to apply this in actual work. The <a href="https://compu-tools.com/ascii/">ASCII conversion tool</a> supports various conversion scenarios.</p>
 <h3>Practice 1: Convert String to Hexadecimal (Network Packet Analysis)</h3>
 <p>In network programming, when analyzing packet data, you often need to check strings as hexadecimal values.</p>
@@ -726,9 +724,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <li><code>A</code> → <code>0b01000001</code></li>
 <li><code>a</code> → <code>0b01100001</code></li>
 </ul>
-<div class="ad-article-wrapper ad-article">
-                
-            </div><h2>Extended ASCII and Limitations: The Wall of Internationalization</h2>
+<h2>Extended ASCII and Limitations: The Wall of Internationalization</h2>
 <p>Since ASCII was an English-centric standard, it had limitations in representing other languages. 128 characters couldn't express characters from around the world.</p>
 <h3>Extended ASCII (128-255)</h3>
 <p>Using all 8 bits allows for an additional 128 characters. This is called <strong>Extended ASCII</strong> or <strong>High ASCII</strong>. The problem was that the allocation of these 128 characters was not standardized.</p>
@@ -741,7 +737,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <h3>The Emergence of UTF-8: A Solution for All Languages</h3>
 <p>What fundamentally solved the limitations of Extended ASCII is <strong>UTF-8</strong>. UTF-8 is perfectly compatible with ASCII (the first 128 code points are identical) while being able to represent all characters from around the world. Looking at the <a href="https://en.wikipedia.org/wiki/UTF-8#History">design principles of UTF-8</a>, you can see how important this compatibility was as a design goal.</p>
 <p>When I first worked on an internationalization (i18n) project, most issues with Korean, Chinese, and Japanese support were resolved just by switching to UTF-8. However, one thing to note is that while ASCII characters still occupy 1 byte in UTF-8, characters like Korean take up 3 bytes.</p>
-<h2>Performance and Optimization: A Practitioner's Perspective</h2>
+<h2>Performance and Optimization: A Practitioner's Perspective</h2><div class="ad-article-wrapper ad-article">
+                
+            </div>
 <p>The impact of ASCII conversion on performance varies depending on the type of application.</p>
 <h3>The Pitfall of String Processing</h3>
 <p>As a novice programmer, I wrote the following to do case-insensitive string comparison:</p>
@@ -763,7 +761,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <h3>Considerations in Real-Time Systems</h3>
 <p>In environments where real-time performance is critical, like embedded systems or game engines, ASCII conversion is also a target for optimization. In a game project I participated in, we significantly improved performance by pre-converting strings to hash values and only performing hash comparisons at runtime.</p>
 <p><a href="https://docs.unrealengine.com/5.0/en-US/fname-in-unreal-engine/">Unreal Engine's FName system</a> uses exactly this principle. It converts strings to unique integer IDs, making comparison operations O(1).</p>
-<h2>Conclusion: ASCII, the Alphabet of the Digital World</h2>
+<h2>Conclusion: ASCII, the Alphabet of the Digital World</h2><div class="ad-article-wrapper ad-article">
+                
+            </div>
 <p>ASCII is a standard that's over 60 years old, but it still operates at the most fundamental layer of computer systems today. It's the foundation of technologies we use every day: HTTP headers, email protocols, configuration files, command-line interfaces, and more.</p>
 <p>What I've learned from working on various projects over the years is that properly understanding ASCII makes debugging much easier. Many problems—strange byte values in network packets, file encoding issues, string processing bugs—ultimately originate at the ASCII level.</p>
 <p>Practice is the best learning method. Open the <a href="https://compu-tools.com/ascii/">ASCII conversion tool</a> and try converting strings you frequently use into various formats. When you can read hexadecimal dumps and binary patterns start making sense to you, you've understood the essence of ASCII.</p>

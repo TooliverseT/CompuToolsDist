@@ -52,7 +52,7 @@
   <link rel="stylesheet" href="/blog-f23a3bb80f479d48.css" integrity="sha384-c3dt63AsK8M6ZHn+eK8h1RFxDEJ5IZUBbyCiudZJvKljeoXcA/+xUXGdhsCllR0L">
   <link rel="stylesheet" href="/post-2e723b9c5f9d836.css" integrity="sha384-rp1Uy2Xnit6dSlc6rARjclpCGH3d2COKiL+b0Fd+XbN4dPsfZS8CyT3++HgGHuEy">
   <link rel="stylesheet" href="/preview-547653d0635ba40b.css" integrity="sha384-UgbZLraNaMqEDYnTcTt0A4t933klm27lD8ZMg+MVaqZ2nESYFxtGjmtHtDlyZxgi">
-  <link rel="stylesheet" href="/ad-8ce1e404c5c5ee12.css" integrity="sha384-/weq6Ezs6U/sbHwbEqGbYEC9glDISlamw4jeSnXH+oMcv3qaJiDE14M6oDkhtYvC">
+  <link rel="stylesheet" href="/ad-a98c4f2400fca19.css" integrity="sha384-ePjRnZguGKte4MsEldecoU9xugyvZkYdkKXpiAZe/+1Q4kk1+J6C/+GGEfiwzL0B">
   <link rel="stylesheet" href="/prism-369edf9ff4bdc730.css" integrity="sha384-sYBMrlwB6EIFh9oheoO1AeU2vsy+LvTPlvwj780EnjW4U9oHlH1pkerXjJ1qCvSX">
   
   
@@ -187,7 +187,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-965f137b2d21098b.js" crossorigin="anonymous" integrity="sha384-xd22uovowO/Z0Fgha5JVbv5xPErvmP3FyFxMpB1uZHCAWTCKtWVjQo5ZL7UKR5ta"><link rel="preload" href="/computools-965f137b2d21098b_bg.wasm" crossorigin="anonymous" integrity="sha384-VEwLHUj8u+y0Vb9OG6u0Mibvf2nD3giATL5Oi0AxQZmc9t9pYzY3YjhVZCKkIn3J" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-965f137b2d21098b.js" crossorigin="anonymous" integrity="sha384-QRmX21OpqSY1Ou59WlAza0M5cqr8wR3Ml1je43B7AP1iOhU7jbnUMgFnd4jik9aD"><link rel="preload" href="/computools-965f137b2d21098b_bg.wasm" crossorigin="anonymous" integrity="sha384-CjdTQtJIVhrX0worBft5fz3g7UPV7rmSzsbA7KpP4op+Mnfsx7TBUxAj6N8NvfZ3" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Mastering Robot Arm Kinematics: A Practical Guide to Forward Kinematics, Inverse Kinematics, and DH Parameters | CompuTools Blog">
   <meta name="twitter:description" content="A complete practical guide to understanding robot arm forward kinematics (FK) and inverse kinematics (IK) using DH parameters and the Jacobian matrix. Covers SCARA, 6-axis vertical articulated, and custom DH models — with step-by-step calculations you can verify instantly using a browser-based IK calculator and 3D robot arm simulator.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/robot-kinematics/robot_types_comparison.png">
@@ -587,7 +587,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <h2>Why Is Robot Kinematics Hard?</h2>
 <p>The most disorienting thing when first studying robot kinematics is that the formulas themselves seem simple, yet applying them in practice rarely goes as expected. When I first worked on path planning for a 6-axis vertical articulated robot, the forward kinematics came together quickly — but the inverse kinematics would sometimes spin joints by 1000 degrees, or diverge entirely for positions that were clearly reachable. The culprit turned out to be <strong>numerical instability near singularities</strong>, and that was the moment I understood that kinematics is far more than matrix multiplication.</p>
 <p>There are three main reasons robot kinematics is difficult. First, <strong>coordinate transformations stack sequentially</strong>. For a 6-DOF robot, you must multiply six 4×4 homogeneous transformation matrices in order to obtain the final EE pose. Second, <strong>inverse kinematics can yield multiple solutions or no solution at all</strong>. For the same target position, there may simultaneously exist an Elbow Up solution and an Elbow Down solution. Third, <strong>near singularities</strong>, the problem becomes numerically unstable, causing serious control issues.</p>
-<h2>Denavit–Hartenberg Parameters: The Starting Point of All Kinematics</h2>
+<h2>Denavit–Hartenberg Parameters: The Starting Point of All Kinematics</h2><div class="ad-article-wrapper ad-article">
+                
+            </div>
 <p>The most standard way to mathematically describe the structure of a robot arm is via <a href="https://en.wikipedia.org/wiki/Denavit%E2%80%93Hartenberg_parameters">Denavit–Hartenberg (DH) parameters</a>. Proposed by Denavit and Hartenberg in 1955, this representation defines each link using four parameters.</p>
 <table><thead><tr><th>Parameter</th><th>Symbol</th><th>Meaning</th></tr></thead><tbody>
 <tr><td>Link length</td><td>a</td><td>Length of the common normal between adjacent joint Z-axes</td></tr>
@@ -607,15 +609,15 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
   <em>DH parameter table example: 3-DOF planar robot. Each row defines one link; both revolute (Rev) and prismatic (Pri) joints can be represented.</em>
 </p>
 <p>The strength of DH parameters is that <strong>any serial robot structure can be expressed in the same format</strong>. SCARA, 6-axis vertical articulated, Cartesian robots, and even custom structures of your own design can all be described with a DH table. Universal Robots' publicly available <a href="https://www.universal-robots.com/articles/ur/application-installation/dh-parameters-for-calculations-of-kinematics-and-dynamics/">UR series DH parameter documentation</a> is an excellent reference for seeing how DH parameters are applied to real industrial robots.</p>
-<div class="ad-article-wrapper ad-article">
-                
-            </div><h2>Forward Kinematics (FK): Computing EE Pose from Joint Angles</h2>
+<h2>Forward Kinematics (FK): Computing EE Pose from Joint Angles</h2>
 <p>Forward kinematics is the problem of <strong>finding the position and pose of the EE given the variables of each joint (θ or d)</strong>. Mathematically, it is completely solved by the matrix multiplication described above, and the solution always exists and is unique. The upper-left 3×3 submatrix of the resulting 4×4 matrix gives the rotation matrix (EE orientation), while the top three elements of the last column give the position vector (X, Y, Z).</p>
 <p>One important practical note: maintain consistent units for angles (radians vs. degrees) and lengths (mm vs. m). Mixing them causes unexpected scaling errors in the DH matrix computation.</p>
 <h3>FK Use Cases</h3>
 <p><strong>Education and verification</strong>: When checking simulation results against hand calculations. For example, compute the EE position for a 2-DOF planar robot at θ₁=30°, θ₂=45° directly via DH matrices and compare against the simulator output.</p>
 <p><strong>Path planning</strong>: When performing joint-space linear interpolation and tracking the actual EE trajectory. A straight line in joint space traces a curve in Cartesian space.</p>
-<h2>Inverse Kinematics (IK): Back-Calculating Joint Angles from a Target Position</h2>
+<div class="ad-article-wrapper ad-article">
+                
+            </div><h2>Inverse Kinematics (IK): Back-Calculating Joint Angles from a Target Position</h2>
 <p>Inverse kinematics is the problem of <strong>finding the joint angles that achieve a desired EE position (and orientation)</strong>. Unlike forward kinematics, there may be multiple solutions, no solution at all, and the problem is numerically far more demanding. Solution methods fall into two broad categories.</p>
 <p class="blog-image">
   <img src="/blog/assets/robot-kinematics/ik_elbow_up_down.png" alt="Two IK solutions reaching the same target position shown side by side. Left: Elbow Up — elbow pointing upward. Right: Elbow Down — elbow pointing downward. Both configurations reach the same end-effector position.">
@@ -637,9 +639,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <li><strong>Random initial values</strong>: Broadens the search space when multiple solutions exist</li>
 </ul>
 <p>In practice, a <strong>multi-seed</strong> strategy — computing solutions from several initial values and selecting the one with the smallest position error — is frequently used.</p>
-<div class="ad-article-wrapper ad-article">
+<h2>Jacobian Matrix and Singularity: The Most Critical Concept</h2><div class="ad-article-wrapper ad-article">
                 
-            </div><h2>Jacobian Matrix and Singularity: The Most Critical Concept</h2>
+            </div>
 <p>The <a href="https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant">Jacobian matrix</a> is a central tool in robot kinematics. Mathematically, it is a 6×N matrix that linearly relates EE velocity to joint velocity (6 rows: 3 for linear velocity + 3 for angular velocity; N: number of joints):</p>
 <div class="math-block">$$\dot{x} = J(\theta) \dot{\theta}$$</div>
 <p>The Jacobian has two key applications.</p>
@@ -655,9 +657,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
   <em>Manipulability ellipsoid: the left (good pose) allows free EE movement in all directions; the right (near singularity) makes movement in certain directions practically impossible.</em>
 </p>
 <p>In industrial settings, singularity issues can lead to serious accidents. If a robot's path is configured to pass near a singularity, joints may instantaneously rotate at extreme velocities, causing mechanical damage or collisions. For this reason, <a href="https://www.iso.org/standard/22244.html">ISO 9283</a> (Manipulating industrial robots — Performance criteria and related test methods) prescribes robot performance testing procedures and recommends singularity avoidance within the working space, serving as a benchmark for workplace safety design alongside functional safety standards such as IEC 62061 and ISO 13849.</p>
-<div class="ad-article-wrapper ad-article">
-                
-            </div><h2>Joint Limits and Practical IK</h2>
+<h2>Joint Limits and Practical IK</h2>
 <p>There is a significant gap between theoretical inverse kinematics and real-world application. The first problem you encounter is <strong>joint limits</strong>. Real robots have a mechanically defined range of motion for each joint (e.g., J1: ±180°, J2: -90° to +90°).</p>
 <p>If joint limits are not incorporated into the IK solver, you end up with poses that are mathematically valid but physically impossible. There are two main approaches to applying joint limits in numerical IK.</p>
 <p><strong>Clamping</strong>: At each iteration step, if a joint angle exceeds its limit, it is forced back to the boundary value. Simple to implement, but affects convergence speed.</p>
@@ -706,9 +706,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p>First, <strong>deep learning-based inverse kinematics</strong> is being actively researched. Training a neural network to learn complex IK mappings can yield solutions quickly without iterative computation. However, generalization outside the training data distribution and the challenge of enforcing joint limits remain open problems.</p>
 <p>Second, <strong>the proliferation of collaborative robots (cobots)</strong>. Cobots such as Universal Robots, FANUC CRX, and ABB GoFa operate in shared spaces with humans, which means kinematic computation must be integrated with real-time safety assessment. Collision detection, force control, and safety zone configuration all operate on top of kinematic calculations.</p>
 <p>Third, <strong>the maturation of the ROS 2 and MoveIt 2 ecosystem</strong> is standardizing kinematic libraries. <a href="https://moveit.ai/">MoveIt!</a> supports a variety of IK plugins including IKFast, KDL, and TRAC-IK, and can use robot models described in URDF (<a href="https://wiki.ros.org/urdf">ROS URDF documentation</a>) directly.</p>
-<div class="ad-article-wrapper ad-article">
+<h2>Practical IK Problems for 6-Axis Robots: Singularity, Workspace Limits, and Joint Discontinuity</h2><div class="ad-article-wrapper ad-article">
                 
-            </div><h2>Practical IK Problems for 6-Axis Robots: Singularity, Workspace Limits, and Joint Discontinuity</h2>
+            </div>
 <p>Here are three problems that frequently arise when implementing pick-and-place tasks with a 6-axis robot.</p>
 <p><strong>Problem 1: Wrist Singularity</strong>
 Occurs when J5 (the middle wrist joint) approaches 0°, causing the J4 and J6 axes to align. In this configuration, rotations of J4 and J6 produce identical EE orientation changes, making it impossible to determine their absolute angles independently — the Jacobian loses rank. The solution is to avoid paths that pass through the 0° neighborhood of J5; if unavoidable, apply a small offset to J5 to move away from the singularity.</p>

@@ -71,7 +71,6 @@
         const preview = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname) && new URLSearchParams(location.search).get('previewAds') === '1';
         if (production || preview) {
           const wrapper = node('div', 'tool-related-infeed');
-          wrapper.append(node('span', 'tool-related-ad-label', 'Advertisement'));
           wrapper.dataset.adPlacement = 'related-tools';
           if (production) {
             const ins = node('ins', 'compu-ad-slot');

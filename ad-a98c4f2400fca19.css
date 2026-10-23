@@ -3390,12 +3390,6 @@ html[data-theme=dark] {
   width: 172px;
   height: 50px;
 }
-.tool-related-infeed .tool-related-ad-label {
-  display: block;
-  margin-bottom: 6px;
-  color: var(--color-subfont);
-  font-size: 10px;
-}
 .tool-related-infeed .tool-related-infeed-preview {
   display: flex;
   align-items: center;

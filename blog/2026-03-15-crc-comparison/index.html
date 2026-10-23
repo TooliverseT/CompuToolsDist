@@ -52,7 +52,7 @@
   <link rel="stylesheet" href="/blog-f23a3bb80f479d48.css" integrity="sha384-c3dt63AsK8M6ZHn+eK8h1RFxDEJ5IZUBbyCiudZJvKljeoXcA/+xUXGdhsCllR0L">
   <link rel="stylesheet" href="/post-2e723b9c5f9d836.css" integrity="sha384-rp1Uy2Xnit6dSlc6rARjclpCGH3d2COKiL+b0Fd+XbN4dPsfZS8CyT3++HgGHuEy">
   <link rel="stylesheet" href="/preview-547653d0635ba40b.css" integrity="sha384-UgbZLraNaMqEDYnTcTt0A4t933klm27lD8ZMg+MVaqZ2nESYFxtGjmtHtDlyZxgi">
-  <link rel="stylesheet" href="/ad-8ce1e404c5c5ee12.css" integrity="sha384-/weq6Ezs6U/sbHwbEqGbYEC9glDISlamw4jeSnXH+oMcv3qaJiDE14M6oDkhtYvC">
+  <link rel="stylesheet" href="/ad-a98c4f2400fca19.css" integrity="sha384-ePjRnZguGKte4MsEldecoU9xugyvZkYdkKXpiAZe/+1Q4kk1+J6C/+GGEfiwzL0B">
   <link rel="stylesheet" href="/prism-369edf9ff4bdc730.css" integrity="sha384-sYBMrlwB6EIFh9oheoO1AeU2vsy+LvTPlvwj780EnjW4U9oHlH1pkerXjJ1qCvSX">
   
   
@@ -187,7 +187,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-965f137b2d21098b.js" crossorigin="anonymous" integrity="sha384-xd22uovowO/Z0Fgha5JVbv5xPErvmP3FyFxMpB1uZHCAWTCKtWVjQo5ZL7UKR5ta"><link rel="preload" href="/computools-965f137b2d21098b_bg.wasm" crossorigin="anonymous" integrity="sha384-VEwLHUj8u+y0Vb9OG6u0Mibvf2nD3giATL5Oi0AxQZmc9t9pYzY3YjhVZCKkIn3J" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-965f137b2d21098b.js" crossorigin="anonymous" integrity="sha384-QRmX21OpqSY1Ou59WlAza0M5cqr8wR3Ml1je43B7AP1iOhU7jbnUMgFnd4jik9aD"><link rel="preload" href="/computools-965f137b2d21098b_bg.wasm" crossorigin="anonymous" integrity="sha384-CjdTQtJIVhrX0worBft5fz3g7UPV7rmSzsbA7KpP4op+Mnfsx7TBUxAj6N8NvfZ3" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Checksum vs CRC vs Hash: Which Should You Use for Data Integrity Verification? | CompuTools Blog">
   <meta name="twitter:description" content="Checksum, CRC, and cryptographic hashes (SHA-256, MD5) are all tools for verifying data integrity, but their design goals and security strength are fundamentally different. This post compares the mathematical principles and real-world use cases of each algorithm, and provides clear criteria for choosing the right one for your situation.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/crc/algorithm_comparison_table.png">
@@ -663,9 +663,9 @@ sha256_hash2 <span class="token operator">=</span> hashlib<span class="token pun
 <p>The SHA-2 family (SHA-256, SHA-512) is currently considered secure, but NIST additionally standardized SHA-3 (based on the Keccak algorithm) in 2015 (Keccak was selected through the SHA-3 competition in 2012). SHA-3 has a completely different internal structure from SHA-2, providing strategic independence — even if a theoretical weakness were discovered in SHA-2, SHA-3 would remain unaffected.</p>
 <p>For password storage specifically, using SHA-256 alone is insufficient. Because it is vulnerable to GPU-based parallel attacks, it must be used alongside intentionally compute-intensive <strong>key derivation functions (KDFs)</strong> such as <strong>bcrypt</strong>, <strong>Argon2</strong>, or <strong>scrypt</strong>.</p>
 <p><strong>Post-Quantum Cryptography</strong> is actively being discussed in preparation for advances in quantum computing. For hash functions, the quantum <strong>Grover's algorithm</strong> roughly halves effective security strength. For example, SHA-256 provides 128-bit security against classical computers, but drops to approximately 64-bit under Grover's algorithm. The proposed countermeasure is to double the output length (SHA-512, SHA3-512) — SHA-512 maintains 128-bit security strength even in a quantum environment.</p>
-<h2>CRC vs MD5: Why Can't CRC Be Used for Security?</h2><div class="ad-article-wrapper ad-article">
+<div class="ad-article-wrapper ad-article">
                 
-            </div>
+            </div><h2>CRC vs MD5: Why Can't CRC Be Used for Security?</h2>
 <p>In practice, the two are sometimes conflated or people wonder, "Isn't CRC good enough?" Understanding the fundamental difference between the two algorithms answers this question definitively.</p>
 <p><strong>CRC was never designed with security in mind.</strong> The output of CRC-32 is only 32 bits (approximately 4.3 billion possible values), and because the generator polynomial and algorithm are public, an attacker can mathematically reverse-engineer a way to manipulate data while preserving the target CRC value. This is called <strong>CRC forgery</strong> — meaning a maliciously modified file can have the same CRC value as the original.</p>
 <p>MD5, on the other hand, has a 128-bit output and a one-way compression structure designed to make inversion computationally infeasible. Of course, as explained above, MD5 is also vulnerable to collision attacks, so SHA-256 should be used for security purposes.</p>
@@ -676,12 +676,12 @@ MD5:    128-bit output  →  not reversible  →  collision vulnerability △
 SHA-256: 256-bit output  →  not reversible  →  currently secure ✓
 </code></pre><div class="toolbar"><div class="toolbar-item"><span>Plain text</span></div><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div>
 <p>In summary, CRC is a tool for catching accidental errors such as <strong>channel noise or physical damage</strong>, while cryptographic hashes are tools for stopping <strong>attackers with intent</strong>. The two serve fundamentally different purposes, so they should be understood as complementary rather than interchangeable.</p>
-<h2>Conclusion: Purpose Determines the Tool</h2>
-<p>Using SHA-256 for error detection in an embedded communication frame is an excessive waste of resources. Conversely, verifying the integrity of a software distribution file with only CRC is a serious security hole. <strong>The key is to first understand the security properties each algorithm guarantees — not just its name — and then choose the one that fits your situation.</strong></p>
-<p>If you need a CRC calculation tool or want to verify a CRC implementation, check out <a href="https://compu-tools.com/crc/">CRC Tool</a>. It lets you instantly compare multiple algorithms against the same input, helping you identify the exact algorithm your protocol specification requires.</p>
 <div class="ad-article-wrapper ad-article">
                 
-            </div><h2>References</h2>
+            </div><h2>Conclusion: Purpose Determines the Tool</h2>
+<p>Using SHA-256 for error detection in an embedded communication frame is an excessive waste of resources. Conversely, verifying the integrity of a software distribution file with only CRC is a serious security hole. <strong>The key is to first understand the security properties each algorithm guarantees — not just its name — and then choose the one that fits your situation.</strong></p>
+<p>If you need a CRC calculation tool or want to verify a CRC implementation, check out <a href="https://compu-tools.com/crc/">CRC Tool</a>. It lets you instantly compare multiple algorithms against the same input, helping you identify the exact algorithm your protocol specification requires.</p>
+<h2>References</h2>
 <ol>
 <li><strong>R. Rivest</strong>, <a href="https://www.rfc-editor.org/rfc/rfc1321.html">"The MD5 Message-Digest Algorithm"</a>, RFC 1321, IETF, April 1992.</li>
 <li><strong>S. Turner, L. Chen</strong>, <a href="https://www.rfc-editor.org/rfc/rfc6151">"Updated Security Considerations for the MD5 Message-Digest and the HMAC-MD5 Algorithms"</a>, RFC 6151, IETF, March 2011 — The document that formally codified MD5's security vulnerabilities and usage restrictions.</li>

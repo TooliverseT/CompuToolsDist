@@ -52,7 +52,7 @@
   <link rel="stylesheet" href="/blog-f23a3bb80f479d48.css" integrity="sha384-c3dt63AsK8M6ZHn+eK8h1RFxDEJ5IZUBbyCiudZJvKljeoXcA/+xUXGdhsCllR0L">
   <link rel="stylesheet" href="/post-2e723b9c5f9d836.css" integrity="sha384-rp1Uy2Xnit6dSlc6rARjclpCGH3d2COKiL+b0Fd+XbN4dPsfZS8CyT3++HgGHuEy">
   <link rel="stylesheet" href="/preview-547653d0635ba40b.css" integrity="sha384-UgbZLraNaMqEDYnTcTt0A4t933klm27lD8ZMg+MVaqZ2nESYFxtGjmtHtDlyZxgi">
-  <link rel="stylesheet" href="/ad-8ce1e404c5c5ee12.css" integrity="sha384-/weq6Ezs6U/sbHwbEqGbYEC9glDISlamw4jeSnXH+oMcv3qaJiDE14M6oDkhtYvC">
+  <link rel="stylesheet" href="/ad-a98c4f2400fca19.css" integrity="sha384-ePjRnZguGKte4MsEldecoU9xugyvZkYdkKXpiAZe/+1Q4kk1+J6C/+GGEfiwzL0B">
   <link rel="stylesheet" href="/prism-369edf9ff4bdc730.css" integrity="sha384-sYBMrlwB6EIFh9oheoO1AeU2vsy+LvTPlvwj780EnjW4U9oHlH1pkerXjJ1qCvSX">
   
   
@@ -187,7 +187,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
       if (window.wasmBindings) loadAdSense();
     })();
   </script>
-<link rel="modulepreload" href="/computools-965f137b2d21098b.js" crossorigin="anonymous" integrity="sha384-xd22uovowO/Z0Fgha5JVbv5xPErvmP3FyFxMpB1uZHCAWTCKtWVjQo5ZL7UKR5ta"><link rel="preload" href="/computools-965f137b2d21098b_bg.wasm" crossorigin="anonymous" integrity="sha384-VEwLHUj8u+y0Vb9OG6u0Mibvf2nD3giATL5Oi0AxQZmc9t9pYzY3YjhVZCKkIn3J" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
+<link rel="modulepreload" href="/computools-965f137b2d21098b.js" crossorigin="anonymous" integrity="sha384-QRmX21OpqSY1Ou59WlAza0M5cqr8wR3Ml1je43B7AP1iOhU7jbnUMgFnd4jik9aD"><link rel="preload" href="/computools-965f137b2d21098b_bg.wasm" crossorigin="anonymous" integrity="sha384-CjdTQtJIVhrX0worBft5fz3g7UPV7rmSzsbA7KpP4op+Mnfsx7TBUxAj6N8NvfZ3" as="fetch" type="application/wasm"><meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Mastering Base32 Encoding and Decoding: From 2FA Secrets to File Encoding | CompuTools Blog">
   <meta name="twitter:description" content="Why Base32 is used in 2FA and TOTP instead of Base64, what distinguishes the three variants—Standard, Hex, and Crockford—and where unexpected pitfalls like DST conflicts lurk. We dive into the world of binary encoding alongside a hands-on Base32 encoder/decoder tool built from scratch.">
   <meta name="twitter:image" content="https://www.compu-tools.com/blog/assets/base32/base32_encoding_process.png">
@@ -596,7 +596,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p align="center">
   <em>Base64 vs Base32: Base32 accepts greater overhead in exchange for case-insensitivity and minimal character ambiguity.</em>
 </p>
-<h2>The Encoding Principle: Slicing into 5-Bit Groups and Mapping to 32 Characters</h2>
+<div class="ad-article-wrapper ad-article">
+                
+            </div><h2>The Encoding Principle: Slicing into 5-Bit Groups and Mapping to 32 Characters</h2>
 <p>To truly understand Base32, you need to follow the conversion process at the bit level. The core idea is that <strong>5 bytes (40 bits) map to 8 Base32 characters</strong>, because each Base32 character represents 5 bits (2⁵ = 32).</p>
 <p>Let's trace through encoding the string "Hi" in Standard Base32.</p>
 <div class="code-toolbar"><pre class="language-text" tabindex="0"><code class="language-text">'H' = 0x48 = 01001000
@@ -613,9 +615,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <p align="center">
   <em>Step-by-step Base32 encoding: splitting input bytes into 5-bit groups and mapping each to one of 32 characters.</em>
 </p>
-<h2>Three Faces of Base32: Standard, Hex, and Crockford</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>Three Faces of Base32: Standard, Hex, and Crockford</h2>
 <p>The fact that Base32 is not a single standard often causes confusion in practice. The same input can produce different outputs depending on which variant is used.</p>
 <h3>Standard Base32 (RFC 4648)</h3>
 <p>The most widely used variant, defined in <a href="https://www.rfc-editor.org/rfc/rfc4648#section-6">RFC 4648 §6</a>. Its alphabet is <code>A–Z</code> (values 0–25) and <code>2–7</code> (values 26–31). The digits 0, 1, 8, and 9 are absent — in practice, only six digits (2–7) are used to represent the 32 values. The digits 0, 1, and 8 were excluded because they can be confused with the letters O, I, and B.</p>
@@ -632,7 +632,9 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <tr><td>Ambiguous char handling</td><td>Limited</td><td>❌</td><td>✅ (auto-converts)</td></tr>
 <tr><td>Primary use cases</td><td>TOTP, 2FA</td><td>DB indexing, identifiers</td><td>Human-input tokens, coupons</td></tr>
 </tbody></table>
-<h2>Base32 in Practice: From 2FA to File Encoding</h2>
+<h2>Base32 in Practice: From 2FA to File Encoding</h2><div class="ad-article-wrapper ad-article">
+                
+            </div>
 <h3>TOTP and 2FA Secret Keys</h3>
 <p>The most common place to encounter Base32 in the wild is undoubtedly <strong>Time-based One-Time Passwords (TOTP)</strong>, defined in <a href="https://www.rfc-editor.org/rfc/rfc6238">RFC 6238</a>. TOTP generates a 6-digit OTP by combining a secret key shared between server and client with the current timestamp. The standard representation format for this secret key is Standard Base32.</p>
 <p>Why Base32? Because secret keys may need to be entered manually by users, or written down when QR code scanning isn't available. A format like Base64 — with <code>+</code>, <code>/</code>, and mixed case — would cause frequent input errors. Standard Base32's uppercase-only, digit-only character set dramatically reduces these mistakes.</p>
@@ -693,9 +695,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 <li>Click Add Output three times → add Standard, Hex, and Crockford respectively</li>
 <li>Identify which variant produces meaningful text</li>
 </ol>
-<h2>The Padding Dilemma: Should You Include <code>=</code>?</h2><div class="ad-article-wrapper ad-article">
-                
-            </div>
+<h2>The Padding Dilemma: Should You Include <code>=</code>?</h2>
 <p>Padding handling is a surprisingly common source of real-world issues. RFC 4648 recommends padding but does not require it, and the right choice depends on context.</p>
 <p><strong>When padding is necessary:</strong></p>
 <ul>
